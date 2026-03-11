@@ -361,6 +361,25 @@ const TimelineSection = () => {
                               <p className="text-sm text-muted-foreground leading-relaxed pt-1">
                                 {event.description}
                               </p>
+                              {event.image && (
+                                <motion.div
+                                  initial={{ opacity: 0, scale: 0.95 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: 0.1, duration: 0.3 }}
+                                  className="mt-4 rounded-2xl overflow-hidden border border-border/30 cursor-pointer"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setLightboxImage({ src: event.image!, alt: event.imageAlt || "" });
+                                  }}
+                                >
+                                  <img
+                                    src={event.image}
+                                    alt={event.imageAlt || ""}
+                                    className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-500"
+                                    loading="lazy"
+                                  />
+                                </motion.div>
+                              )}
                               {event.press && <PressCard press={event.press} />}
                             </motion.div>
                           ) : (
