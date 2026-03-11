@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Recycle, Heart, Users, Leaf } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-community.jpg";
 
 const chips = [
   { label: "Youth-led", icon: Users },
