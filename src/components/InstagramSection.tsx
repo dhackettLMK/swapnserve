@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Instagram, ExternalLink } from "lucide-react";
 
 const posts = [
-  { id: 1, href: "#", color: "from-primary/30 to-accent/20" },
-  { id: 2, href: "#", color: "from-secondary/30 to-primary/20" },
-  { id: 3, href: "#", color: "from-accent/20 to-secondary/30" },
-  { id: 4, href: "#", color: "from-primary/20 to-secondary/20" },
-  { id: 5, href: "#", color: "from-secondary/20 to-accent/30" },
-  { id: 6, href: "#", color: "from-accent/30 to-primary/20" },
+  { id: "DMQVwn4tUHz", type: "reel", url: "https://www.instagram.com/reel/DMQVwn4tUHz/" },
+  { id: "DL8O-OZtMnk", type: "p", url: "https://www.instagram.com/p/DL8O-OZtMnk/" },
+  { id: "DNFmMOlNxWQ", type: "p", url: "https://www.instagram.com/p/DNFmMOlNxWQ/" },
+  { id: "DNn26q1NHPK", type: "p", url: "https://www.instagram.com/p/DNn26q1NHPK/" },
+  { id: "DOD9-AAjRfS", type: "p", url: "https://www.instagram.com/p/DOD9-AAjRfS/" },
+  { id: "DVrUwdxjamw", type: "p", url: "https://www.instagram.com/p/DVrUwdxjamw/" },
 ];
 
 const InstagramSection = () => {
@@ -41,28 +41,28 @@ const InstagramSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {posts.map((post, i) => (
-            <motion.a
+            <motion.div
               key={post.id}
-              href={post.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.4 }}
-              whileHover={{ scale: 1.04, y: -4 }}
-              whileTap={{ scale: 0.97 }}
-              className="group relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br border border-border/50 shadow-sm hover:shadow-lg transition-shadow"
+              transition={{ delay: i * 0.08, duration: 0.45, type: "spring", stiffness: 120 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="rounded-3xl overflow-hidden bg-card border border-border/50 shadow-sm hover:shadow-xl transition-shadow"
             >
-              {/* Gradient placeholder — replace with real images later */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${post.color}`} />
-              <div className="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-70 transition-opacity">
-                <Instagram size={32} className="text-foreground" />
+              <div className="w-full aspect-square relative">
+                <iframe
+                  src={`https://www.instagram.com/${post.type}/${post.id}/embed/`}
+                  className="absolute inset-0 w-full h-full border-0 rounded-3xl"
+                  allowTransparency
+                  scrolling="no"
+                  loading="lazy"
+                  title={`Instagram post ${post.id}`}
+                />
               </div>
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors rounded-2xl" />
-            </motion.a>
+            </motion.div>
           ))}
         </div>
 
@@ -71,7 +71,7 @@ const InstagramSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="text-center mt-8"
+          className="text-center mt-10"
         >
           <motion.a
             href="https://www.instagram.com/swapandserve/"
