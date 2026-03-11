@@ -290,9 +290,6 @@ const TimelineSection = () => {
               const Icon = event.icon;
               const isRight = i % 2 !== 0;
 
-              // Check if there's a photo to show after this event
-              const photoAfter = floatingPhotos.find((p) => p.afterIndex === i);
-
               return (
                 <div key={i}>
                   {i > 0 && <CurveConnector fromRight={i % 2 === 0} />}
