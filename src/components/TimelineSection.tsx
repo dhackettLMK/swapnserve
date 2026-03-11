@@ -9,6 +9,8 @@ type TimelineEvent = {
   title: string;
   description: string;
   icon: React.ElementType;
+  image?: string;
+  imageAlt?: string;
   press?: {
     outlet: string;
     headline: string;
