@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, X } from "lucide-react";
+import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, Mic, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
 import websummitPhoto from "@/assets/websummit-photo.jpg";
 
