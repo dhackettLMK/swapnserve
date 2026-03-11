@@ -23,7 +23,7 @@ const HeroSection = () => {
           aria-hidden="true"
         />
         {/* Dark overlay with gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/80 via-foreground/70 to-foreground/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/75 to-primary/90" />
         {/* Color accent overlays */}
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 via-transparent to-secondary/10" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/8 rounded-full blur-[120px]" />

@@ -190,7 +190,7 @@ const SiteHeader = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
-              className="md:hidden absolute top-full left-3 right-3 mt-2 rounded-2xl bg-foreground/95 backdrop-blur-xl border border-primary-foreground/[0.06] shadow-2xl overflow-hidden"
+              className="md:hidden absolute top-full left-3 right-3 mt-2 rounded-2xl bg-primary/95 backdrop-blur-xl border border-white/[0.1] shadow-2xl overflow-hidden"
             >
               <nav className="p-4 space-y-1" aria-label="Mobile navigation">
                 {navLinks.map((link, i) => (
