@@ -117,29 +117,6 @@ const events: TimelineEvent[] = [
   },
 ];
 
-// Photos placed between specific timeline items (after index N)
-const floatingPhotos: {
-  afterIndex: number;
-  src: string;
-  alt: string;
-  caption: string;
-  side: "left" | "right";
-}[] = [
-  {
-    afterIndex: 3, // After "Web Summit Scholarship"
-    src: websummitPhoto,
-    alt: "David Hackett at Web Summit with his Scholar badge",
-    caption: "David at Web Summit, Lisbon",
-    side: "right",
-  },
-  {
-    afterIndex: 5, // After "Exciting New Collaborations"
-    src: teamPhoto,
-    alt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
-    caption: "The team & partners",
-    side: "left",
-  },
-];
 
 const PressCard = ({ press }: { press: NonNullable<TimelineEvent["press"]> }) => (
   <motion.a
@@ -313,9 +290,6 @@ const TimelineSection = () => {
               const Icon = event.icon;
               const isRight = i % 2 !== 0;
 
-              // Check if there's a photo to show after this event
-              const photoAfter = floatingPhotos.find((p) => p.afterIndex === i);
-
               return (
                 <div key={i}>
                   {i > 0 && <CurveConnector fromRight={i % 2 === 0} />}
@@ -430,18 +404,6 @@ const TimelineSection = () => {
                     </motion.div>
                   </motion.div>
 
-                  {/* Inline photo placed after the relevant milestone */}
-                  {photoAfter && (
-                    <InlinePhoto
-                      src={photoAfter.src}
-                      alt={photoAfter.alt}
-                      caption={photoAfter.caption}
-                      side={photoAfter.side}
-                      onImageClick={() =>
-                        setLightboxImage({ src: photoAfter.src, alt: photoAfter.alt })
-                      }
-                    />
-                  )}
                 </div>
               );
             })}
