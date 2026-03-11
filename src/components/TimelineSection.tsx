@@ -9,8 +9,6 @@ type TimelineEvent = {
   title: string;
   description: string;
   icon: React.ElementType;
-  image?: string;
-  imageAlt?: string;
   press?: {
     outlet: string;
     headline: string;
@@ -140,6 +138,46 @@ const CurveConnector = ({ fromRight }: { fromRight: boolean }) => (
   </svg>
 );
 
+const FloatingPhoto = ({
+  src,
+  alt,
+  caption,
+  side,
+  topPercent,
+  rotation,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+  side: "left" | "right";
+  topPercent: string;
+  rotation: string;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.7, ease: "easeOut" }}
+    className={`hidden md:block absolute ${side === "right" ? "right-0" : "left-0"} w-[20%] z-10`}
+    style={{ top: topPercent }}
+  >
+    <motion.div
+      whileHover={{ rotate: 0, scale: 1.03 }}
+      className={`rounded-2xl overflow-hidden shadow-lg border border-border/30 ${rotation} transition-transform duration-500`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-auto object-cover"
+        loading="lazy"
+      />
+    </motion.div>
+    <p className="text-[10px] text-muted-foreground mt-2 text-center italic">
+      {caption}
+    </p>
+  </motion.div>
+);
+
 const TimelineSection = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
@@ -164,7 +202,25 @@ const TimelineSection = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto relative">
+          {/* Floating accent photos in the whitespace */}
+          <FloatingPhoto
+            src={presentationPhoto}
+            alt="David Hackett and Shalom Obiakor presenting Swap'n'Serve to an audience"
+            caption="Presenting across Europe"
+            side="right"
+            topPercent="20%"
+            rotation="rotate-2"
+          />
+          <FloatingPhoto
+            src={teamPhoto}
+            alt="The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing"
+            caption="The team & partners"
+            side="left"
+            topPercent="62%"
+            rotation="-rotate-2"
+          />
+
           {events.map((event, i) => {
             const isExpanded = expandedIndex === i;
             const Icon = event.icon;
@@ -213,24 +269,6 @@ const TimelineSection = () => {
                         : "border-border/40 bg-background hover:shadow-lg hover:border-border"
                     }`}
                   >
-                    {/* Photo banner */}
-                    {event.image && (
-                      <motion.div
-                        className="relative w-full overflow-hidden"
-                        style={{ maxHeight: isExpanded ? "220px" : "140px" }}
-                        animate={{ maxHeight: isExpanded ? 220 : 140 }}
-                        transition={{ duration: 0.35 }}
-                      >
-                        <img
-                          src={event.image}
-                          alt={event.imageAlt || ""}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-                      </motion.div>
-                    )}
-
                     <div className="p-5 md:p-6">
                       <span
                         className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
