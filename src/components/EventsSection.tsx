@@ -57,10 +57,10 @@ const EventsSection = () => {
               </p>
             </div>
             <a
-              href="https://example.com/volunteer"
+              href="https://www.gofundme.com/f/swapnserve-2"
               className="inline-flex items-center rounded-full border border-primary bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
-              Get Notified
+              Make a Donation
             </a>
           </motion.div>
 
