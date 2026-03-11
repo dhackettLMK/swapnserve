@@ -88,7 +88,7 @@ const SiteHeader = () => {
 
             {/* Desktop nav — floating pill with glow */}
             <nav className="hidden lg:flex items-center gap-3" aria-label="Main navigation">
-              <div className="relative flex items-center gap-0.5 rounded-full border border-primary-foreground/[0.08] bg-primary-foreground/[0.04] px-1 py-1">
+              <div className="relative flex items-center gap-0.5 rounded-full border border-white/[0.15] bg-white/[0.08] px-1 py-1">
                 {navLinks.map((link) => {
                   const isActive = activeSection === link.href;
                   return (
