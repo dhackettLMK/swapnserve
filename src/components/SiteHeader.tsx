@@ -152,7 +152,7 @@ const SiteHeader = () => {
 
             {/* Mobile toggle */}
             <motion.button
-              className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-primary-foreground/10 bg-primary-foreground/[0.05] text-primary-foreground"
+              className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.08] text-primary-foreground"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               whileTap={{ scale: 0.9 }}
