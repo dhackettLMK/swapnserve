@@ -55,6 +55,13 @@ const events: TimelineEvent[] = [
     highlight: true,
     description:
       "David Hackett's work with Swap'n'Serve earns him a prestigious Web Summit scholarship, bringing him to one of the world's largest tech conferences in Lisbon. The experience opens doors to new connections, collaborators, and ideas — proving that grassroots community work can resonate on a global stage.",
+    press: {
+      outlet: "Irish Independent",
+      headline: "Meet the Limerick student with a keen eye for AI who has just secured Web Summit invite",
+      excerpt:
+        "A Limerick student with a passion for AI and community impact has secured an invite to Web Summit, one of the world's largest technology conferences.",
+      url: "https://www.independent.ie/regionals/limerick/news/meet-the-limerick-student-with-a-keen-eye-for-ai-who-has-just-secured-web-summit-invite/a949833630.html",
+    },
   },
   {
     date: "March 2026",
