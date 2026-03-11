@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 
 const SiteFooter = () => {
@@ -6,7 +7,6 @@ const SiteFooter = () => {
     <footer className="bg-primary py-12 md:py-16" role="contentinfo">
       <div className="container">
         <div className="grid md:grid-cols-3 gap-8 mb-10">
-          {/* Brand */}
           <div>
             <a href="#" className="inline-block">
               <img src={logo} alt="Swap'n'Serve logo" className="h-12 w-auto brightness-0 invert" />
@@ -17,7 +17,6 @@ const SiteFooter = () => {
             </p>
           </div>
 
-          {/* Quick links */}
           <div>
             <h3 className="text-sm font-semibold text-primary-foreground mb-3">Quick Links</h3>
             <nav aria-label="Footer navigation" className="space-y-2">
@@ -29,18 +28,18 @@ const SiteFooter = () => {
                 { label: "Volunteer", href: "#volunteer" },
                 { label: "FAQ", href: "#faq" },
               ].map((link) => (
-                <a
+                <motion.a
                   key={link.href}
                   href={link.href}
+                  whileHover={{ x: 4 }}
                   className="block text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
                 >
                   {link.label}
-                </a>
+                </motion.a>
               ))}
             </nav>
           </div>
 
-          {/* Contact */}
           <div>
             <h3 className="text-sm font-semibold text-primary-foreground mb-3">Get in Touch</h3>
             <div className="space-y-2 text-sm text-primary-foreground/60">
@@ -48,21 +47,21 @@ const SiteFooter = () => {
               <p>Location: Limerick, Ireland</p>
               <div className="flex gap-3 mt-4">
                 {["Facebook", "Instagram", "Twitter"].map((s) => (
-                  <a
+                  <motion.a
                     key={s}
                     href="#"
-                    className="text-primary-foreground/40 hover:text-primary-foreground transition-colors text-sm"
+                    whileHover={{ y: -2 }}
+                    className="rounded-full bg-primary-foreground/10 px-4 py-2 text-xs font-medium text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/15 transition-colors"
                     aria-label={`Visit our ${s} page`}
                   >
                     {s}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Disclaimer & privacy */}
         <div className="border-t border-primary-foreground/10 pt-8">
           <p className="text-xs text-primary-foreground/40 leading-relaxed max-w-3xl">
             <strong>Disclaimer:</strong> Swap'n'Serve is an independent community initiative. Listing
