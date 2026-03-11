@@ -48,8 +48,8 @@ const SiteHeader = () => {
         initial={false}
         animate={{
           backgroundColor: scrolled
-            ? "hsla(20, 10%, 12%, 0.92)"
-            : "hsla(20, 10%, 12%, 0)",
+            ? "hsla(152, 42%, 32%, 0.95)"
+            : "hsla(152, 42%, 32%, 0)",
           backdropFilter: scrolled ? "blur(20px)" : "blur(0px)",
         }}
         transition={{ duration: 0.4 }}
