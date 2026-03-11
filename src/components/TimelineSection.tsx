@@ -73,7 +73,7 @@ const events: TimelineEvent[] = [
     icon: Award,
     highlight: true,
     description:
-      "While waiting for a taxi in the rain outside Web Summit, David met Gina Schinkel, founder of Driftawave. Impressed by his drive and AI skills, she invited him to attend the Tekpon AI Summit in Bucharest on a premium ticket. 'It's crazy to think how much my life has changed in a year and that there are people who believe in me enough to fly me to these amazing countries,' David said.",
+      "David's community work with Swap'n'Serve helped earn him a place as one of 50 Irish students selected for Web Summit — and it was there, waiting for a taxi in the rain, that he met Gina Schinkel of Driftawave. Struck by his drive and impressed by his AI and systems engineering skills, she invited him to attend the Tekpon AI Summit in Bucharest on a premium ticket. What started as a local clothing swap had opened doors to an international stage.",
     press: {
       outlet: "Irish Independent",
       headline: "Limerick student lands premium invite to Romania's Tekpon AI Summit",
