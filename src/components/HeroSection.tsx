@@ -16,11 +16,11 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src={heroBg}
-          alt="Folded clothes prepared for a community redistribution event"
+          alt="The Swap'n'Serve volunteer team at a community event in Limerick"
           className="h-full w-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/78 to-primary/88" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/75 to-primary/90" />
       </div>
 
       <div className="container relative z-10 flex min-h-screen items-center pt-28 pb-16 md:pt-32">
@@ -50,9 +50,9 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8 max-w-2xl text-base leading-relaxed text-primary-foreground/90 md:text-lg"
           >
-            Swap'n'Serve is a Limerick-based community initiative redistributing clean, usable
-            clothing to families and individuals—no questions asked. Founded by David Hackett, we
-            focus on sustainability, dignity, and neighbour-to-neighbour support.
+            Swap'n'Serve is a Limerick-based community initiative that redistributes clean,
+            usable clothing to families and individuals, no questions asked. Founded by
+            David Hackett, we focus on sustainability, dignity, and neighbour-to-neighbour support.
           </motion.p>
 
           <motion.div
@@ -66,13 +66,20 @@ const HeroSection = () => {
             </Button>
             <a
               href="#events"
-              className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-primary-foreground/35 bg-primary-foreground/10 px-6 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/18"
+              className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-primary-foreground/35 bg-primary-foreground/10 px-6 py-3 text-base font-semibold text-primary-foreground transition-all hover:bg-primary-foreground/20 hover:scale-[1.02] active:scale-[0.98]"
             >
               Donate Clothes
             </a>
           </motion.div>
 
-          <p className="mb-8 text-sm text-primary-foreground/80">Takes 2 minutes. No experience needed.</p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mb-8 text-sm text-primary-foreground/70"
+          >
+            Takes 2 minutes. No experience needed.
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -80,14 +87,18 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-wrap gap-2"
           >
-            {chips.map((chip) => (
-              <span
+            {chips.map((chip, i) => (
+              <motion.span
                 key={chip.label}
-                className="inline-flex items-center gap-1.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 + i * 0.08 }}
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90 cursor-default"
               >
                 <chip.icon size={13} />
                 {chip.label}
-              </span>
+              </motion.span>
             ))}
           </motion.div>
         </div>

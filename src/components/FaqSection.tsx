@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -8,11 +9,11 @@ import {
 const faqs = [
   {
     q: "What is Swap'n'Serve?",
-    a: "Swap'n'Serve is a community-led clothing redistribution initiative based in Limerick. We collect clean, usable clothing and redistribute it to families and individuals who can use it—free of charge and with no questions asked.",
+    a: "Swap'n'Serve is a community-led clothing redistribution initiative based in Limerick. We collect clean, usable clothing and redistribute it to families and individuals who can use it, free of charge and with no questions asked.",
   },
   {
     q: "Who can attend the swap events?",
-    a: "Anyone. Our events are open to all members of the community. There's no sign-up, no paperwork, and no eligibility check. You simply come along and take what you need.",
+    a: "Anyone. Our events are open to all members of the community. There is no sign-up, no paperwork, and no eligibility check. You simply come along and take what you need.",
   },
   {
     q: "Is Swap'n'Serve a registered charity?",
@@ -20,19 +21,19 @@ const faqs = [
   },
   {
     q: "What kind of clothing can I donate?",
-    a: "We accept clean, wearable clothing of all sizes—including shoes, coats, school uniforms, and children's clothing. Items should be in good condition, ready to be worn.",
+    a: "We accept clean, wearable clothing of all sizes, including shoes, coats, school uniforms, and children's clothing. Items should be in good condition, ready to be worn.",
   },
   {
     q: "How can I volunteer?",
-    a: "Click the 'Sign Up to Volunteer' button on this page. You'll be taken to a short form that takes about 2 minutes to complete. No prior experience is required.",
+    a: "Click the 'Sign Up to Volunteer' button on this page. You will be taken to a short form that takes about 2 minutes to complete. No prior experience is required.",
   },
   {
     q: "Do you collect personal data?",
-    a: "We collect only the minimum information needed to coordinate volunteers (e.g., name, contact details, and availability). We never share your data with third parties.",
+    a: "We collect only the minimum information needed to coordinate volunteers (for example, name, contact details, and availability). We never share your data with third parties.",
   },
   {
     q: "How can my school or organisation get involved?",
-    a: "We'd love to partner with you! Reach out via our contact details in the footer, and we'll arrange a conversation about how we can collaborate.",
+    a: "We would love to partner with you! Reach out via our contact details in the footer, and we will arrange a conversation about how we can collaborate.",
   },
 ];
 
@@ -40,30 +41,46 @@ const FaqSection = () => {
   return (
     <section id="faq" className="py-20 md:py-28 bg-card">
       <div className="container">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
+            Questions
+          </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Got questions? We've got answers.
+            Got questions? We have got answers.
           </p>
-        </div>
+        </motion.div>
 
         <div className="max-w-2xl mx-auto">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, i) => (
-              <AccordionItem
+              <motion.div
                 key={i}
-                value={`faq-${i}`}
-                className="bg-background rounded-lg border border-border px-5"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
               >
-                <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline py-4">
-                  {faq.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
-                  {faq.a}
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem
+                  value={`faq-${i}`}
+                  className="rounded-2xl border border-border bg-background px-5 overflow-hidden"
+                >
+                  <AccordionTrigger className="text-left text-base font-medium text-foreground hover:no-underline py-4">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </div>

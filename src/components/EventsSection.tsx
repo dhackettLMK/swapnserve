@@ -1,5 +1,5 @@
+import { motion } from "framer-motion";
 import { CalendarDays, MapPin, Clock, CheckCircle2, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const acceptedItems = [
   "Clean, wearable clothing (all sizes)",
@@ -13,61 +13,96 @@ const EventsSection = () => {
   return (
     <section id="events" className="py-20 md:py-28">
       <div className="container">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
+            Get Involved
+          </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
             Events & Donations
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             Find out when our next event is happening and how you can donate.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Upcoming event card */}
-          <div className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5"
+          >
             <h3 className="text-xl font-display font-bold text-foreground mb-4 flex items-center gap-2">
-              <CalendarDays size={20} className="text-secondary" />
+              <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
+                <CalendarDays size={18} className="text-secondary" />
+              </div>
               Upcoming Event
             </h3>
-            <div className="bg-muted rounded-lg p-5 mb-4">
+            <div className="rounded-2xl bg-muted p-5 mb-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                 <Info size={16} />
                 <span className="italic">Details to be announced</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                We're planning our next clothing swap event. Follow us on social media or check
+                We are planning our next clothing swap event. Follow us on social media or check
                 back here for updates on dates and locations.
               </p>
             </div>
-            <Button variant="hero-outline" size="sm" asChild>
-              <a href="https://example.com/volunteer">Get Notified</a>
-            </Button>
-          </div>
+            <a
+              href="https://example.com/volunteer"
+              className="inline-flex items-center rounded-full border border-primary bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Get Notified
+            </a>
+          </motion.div>
 
-          {/* Donation info */}
-          <div className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5"
+          >
             <h3 className="text-xl font-display font-bold text-foreground mb-4 flex items-center gap-2">
-              <MapPin size={20} className="text-secondary" />
+              <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
+                <MapPin size={18} className="text-secondary" />
+              </div>
               Donate Clothes
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Drop-off points are arranged in the weeks leading up to each event. Contact us to
+              Drop-off points are arranged in the weeks leading up to each event. Get in touch to
               find the nearest collection point or to arrange a pickup for larger donations.
             </p>
 
             <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-              <Clock size={16} className="text-primary" />
+              <Clock size={14} className="text-primary" />
               What We Accept
             </h4>
-            <ul className="space-y-2">
-              {acceptedItems.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+            <ul className="space-y-2.5">
+              {acceptedItems.map((item, i) => (
+                <motion.li
+                  key={item}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
                   <CheckCircle2 size={16} className="text-success shrink-0 mt-0.5" />
                   {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

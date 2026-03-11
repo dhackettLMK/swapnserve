@@ -1,41 +1,64 @@
+import { motion } from "framer-motion";
 import { Handshake } from "lucide-react";
 
 const PartnersSection = () => {
   return (
     <section id="partners" className="py-20 md:py-28">
       <div className="container">
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
+            Together
+          </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
             Community Partners
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             We work alongside schools, local organisations, and community groups across Limerick.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="max-w-3xl mx-auto bg-card rounded-xl border border-border p-8 md:p-12 text-center">
-          <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto rounded-3xl border border-border bg-card p-8 md:p-12 text-center"
+        >
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-6"
+          >
             <Handshake size={32} className="text-primary" />
-          </div>
-          <p className="text-muted-foreground mb-4">
+          </motion.div>
+          <p className="text-muted-foreground mb-6">
             Partner logos and details will be displayed here as collaborations are confirmed. If
-            your school or organisation would like to support Swap'n'Serve, we'd love to hear from
+            your school or organisation would like to support Swap'n'Serve, we would love to hear from
             you.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {["School Partner", "Community Org", "Local Brand", "Youth Group"].map((name) => (
-              <div
+          <div className="flex flex-wrap justify-center gap-3">
+            {["School Partner", "Community Org", "Local Brand", "Youth Group"].map((name, i) => (
+              <motion.div
                 key={name}
-                className="px-6 py-3 rounded-lg bg-muted text-sm text-muted-foreground font-medium"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                whileHover={{ scale: 1.06 }}
+                className="rounded-full bg-muted px-5 py-2.5 text-sm text-muted-foreground font-medium cursor-default"
               >
                 {name}
-              </div>
+              </motion.div>
             ))}
           </div>
           <p className="text-xs text-muted-foreground/60 mt-6 italic">
             Listing as a partner does not imply formal endorsement or affiliation.
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
