@@ -3,7 +3,7 @@ import logo from "@/assets/logo.png";
 
 const SiteFooter = () => {
   return (
-    <footer className="bg-foreground py-12 md:py-16" role="contentinfo">
+    <footer className="bg-primary py-12 md:py-16" role="contentinfo">
       <div className="container">
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           {/* Brand */}

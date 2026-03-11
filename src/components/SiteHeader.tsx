@@ -48,8 +48,8 @@ const SiteHeader = () => {
         initial={false}
         animate={{
           backgroundColor: scrolled
-            ? "hsla(20, 10%, 12%, 0.92)"
-            : "hsla(20, 10%, 12%, 0)",
+            ? "hsla(152, 42%, 32%, 0.95)"
+            : "hsla(152, 42%, 32%, 0)",
           backdropFilter: scrolled ? "blur(20px)" : "blur(0px)",
         }}
         transition={{ duration: 0.4 }}
@@ -88,7 +88,7 @@ const SiteHeader = () => {
 
             {/* Desktop nav — floating pill with glow */}
             <nav className="hidden lg:flex items-center gap-3" aria-label="Main navigation">
-              <div className="relative flex items-center gap-0.5 rounded-full border border-primary-foreground/[0.08] bg-primary-foreground/[0.04] px-1 py-1">
+              <div className="relative flex items-center gap-0.5 rounded-full border border-white/[0.15] bg-white/[0.08] px-1 py-1">
                 {navLinks.map((link) => {
                   const isActive = activeSection === link.href;
                   return (
@@ -152,7 +152,7 @@ const SiteHeader = () => {
 
             {/* Mobile toggle */}
             <motion.button
-              className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-primary-foreground/10 bg-primary-foreground/[0.05] text-primary-foreground"
+              className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.08] text-primary-foreground"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               whileTap={{ scale: 0.9 }}
@@ -182,7 +182,7 @@ const SiteHeader = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="md:hidden fixed inset-0 top-[72px] bg-foreground/60 backdrop-blur-sm"
+              className="md:hidden fixed inset-0 top-[72px] bg-primary/60 backdrop-blur-sm"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
@@ -190,7 +190,7 @@ const SiteHeader = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
-              className="md:hidden absolute top-full left-3 right-3 mt-2 rounded-2xl bg-foreground/95 backdrop-blur-xl border border-primary-foreground/[0.06] shadow-2xl overflow-hidden"
+              className="md:hidden absolute top-full left-3 right-3 mt-2 rounded-2xl bg-primary/95 backdrop-blur-xl border border-white/[0.1] shadow-2xl overflow-hidden"
             >
               <nav className="p-4 space-y-1" aria-label="Mobile navigation">
                 {navLinks.map((link, i) => (
