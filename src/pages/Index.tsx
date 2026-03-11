@@ -1,13 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import SiteHeader from "@/components/SiteHeader";
+import HeroSection from "@/components/HeroSection";
+import HowItWorks from "@/components/HowItWorks";
+import ImpactSnapshot from "@/components/ImpactSnapshot";
+import TimelineSection from "@/components/TimelineSection";
+import EventsSection from "@/components/EventsSection";
+import VolunteerRoles from "@/components/VolunteerRoles";
+import PartnersSection from "@/components/PartnersSection";
+import FaqSection from "@/components/FaqSection";
+import CtaBanner from "@/components/CtaBanner";
+import SiteFooter from "@/components/SiteFooter";
+import MobileCta from "@/components/MobileCta";
+import BackToTop from "@/components/BackToTop";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <a href="#main-content" className="skip-to-content">
+        Skip to content
+      </a>
+      <SiteHeader />
+      <main id="main-content">
+        <HeroSection />
+        <HowItWorks />
+        <ImpactSnapshot />
+        <TimelineSection />
+        <EventsSection />
+        <VolunteerRoles />
+        <PartnersSection />
+        <FaqSection />
+        <CtaBanner />
+      </main>
+      <SiteFooter />
+      <MobileCta />
+      <BackToTop />
+    </>
   );
 };
 
