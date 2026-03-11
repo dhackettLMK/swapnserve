@@ -1,12 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award } from "lucide-react";
+import teamPhoto from "@/assets/team-photo.jpg";
+import presentationPhoto from "@/assets/presentation-photo.jpg";
 
 type TimelineEvent = {
   date: string;
   title: string;
   description: string;
   icon: React.ElementType;
+  image?: string;
+  imageAlt?: string;
   press?: {
     outlet: string;
     headline: string;
@@ -50,6 +54,8 @@ const events: TimelineEvent[] = [
     date: "Late 2025",
     title: "International Recognition",
     icon: Award,
+    image: presentationPhoto,
+    imageAlt: "David Hackett and Shalom Obiakor presenting Swap'n'Serve to an audience",
     description:
       "David receives invitations to speak about the project across Europe, from Portugal to Romania, sharing the Swap'n'Serve model with communities abroad.",
   },
@@ -58,6 +64,8 @@ const events: TimelineEvent[] = [
     title: "Exciting New Collaborations",
     icon: MapPin,
     highlight: true,
+    image: teamPhoto,
+    imageAlt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
     description:
       "Swap'n'Serve partners with local brands Fior Jewellery and Van Rossum Clothing for its second event. The project expands its vision to better integrate Limerick's diverse communities.",
     press: {
@@ -114,7 +122,6 @@ const PressCard = ({ press }: { press: NonNullable<TimelineEvent["press"]> }) =>
   </motion.a>
 );
 
-/* Curved SVG connector between two stops */
 const CurveConnector = ({ fromRight }: { fromRight: boolean }) => (
   <svg
     viewBox="0 0 800 80"
@@ -169,17 +176,13 @@ const TimelineSection = () => {
 
             return (
               <div key={i}>
-                {/* Curved connector line */}
                 {i > 0 && <CurveConnector fromRight={i % 2 === 0} />}
-
-                {/* Mobile connector */}
                 {i > 0 && (
                   <div className="md:hidden flex justify-center -my-1">
                     <div className="w-px h-8 bg-gradient-to-b from-primary/20 to-primary/5" />
                   </div>
                 )}
 
-                {/* Event row */}
                 <motion.div
                   initial={{ opacity: 0, x: isRight ? 40 : -40 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -208,59 +211,79 @@ const TimelineSection = () => {
                     layout
                     onClick={() => setExpandedIndex(isExpanded ? null : i)}
                     whileHover={{ y: -3 }}
-                    className={`cursor-pointer w-full md:w-[45%] rounded-3xl border p-5 md:p-6 transition-all ${
+                    className={`cursor-pointer w-full md:w-[45%] rounded-3xl border overflow-hidden transition-all ${
                       isExpanded
                         ? "border-primary/20 shadow-xl shadow-primary/5 bg-background"
                         : "border-border/40 bg-background hover:shadow-lg hover:border-border"
                     }`}
                   >
-                    <span
-                      className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
-                        event.highlight
-                          ? "text-secondary bg-secondary/10"
-                          : "text-primary bg-primary/10"
-                      }`}
-                    >
-                      {event.date}
-                    </span>
+                    {/* Photo banner */}
+                    {event.image && (
+                      <motion.div
+                        className="relative w-full overflow-hidden"
+                        style={{ maxHeight: isExpanded ? "220px" : "140px" }}
+                        animate={{ maxHeight: isExpanded ? 220 : 140 }}
+                        transition={{ duration: 0.35 }}
+                      >
+                        <img
+                          src={event.image}
+                          alt={event.imageAlt || ""}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                      </motion.div>
+                    )}
 
-                    <h3 className="text-lg font-display font-bold text-foreground mb-1">
-                      {event.title}
-                    </h3>
+                    <div className="p-5 md:p-6">
+                      <span
+                        className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
+                          event.highlight
+                            ? "text-secondary bg-secondary/10"
+                            : "text-primary bg-primary/10"
+                        }`}
+                      >
+                        {event.date}
+                      </span>
 
-                    <AnimatePresence initial={false}>
-                      {isExpanded ? (
-                        <motion.div
-                          key="content"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: "easeInOut" }}
-                          className="overflow-hidden"
-                        >
-                          <p className="text-sm text-muted-foreground leading-relaxed pt-1">
-                            {event.description}
-                          </p>
-                          {event.press && <PressCard press={event.press} />}
-                        </motion.div>
-                      ) : (
-                        <motion.p
-                          key="hint"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          className="text-xs text-primary/70 font-medium mt-1.5 flex items-center gap-1.5"
-                        >
-                          <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
-                          Tap to read more
-                          {event.press && (
-                            <>
-                              <span className="inline-block w-1 h-1 rounded-full bg-secondary/50" />
-                              <span className="text-secondary font-bold">Press coverage</span>
-                            </>
-                          )}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
+                      <h3 className="text-lg font-display font-bold text-foreground mb-1">
+                        {event.title}
+                      </h3>
+
+                      <AnimatePresence initial={false}>
+                        {isExpanded ? (
+                          <motion.div
+                            key="content"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.35, ease: "easeInOut" }}
+                            className="overflow-hidden"
+                          >
+                            <p className="text-sm text-muted-foreground leading-relaxed pt-1">
+                              {event.description}
+                            </p>
+                            {event.press && <PressCard press={event.press} />}
+                          </motion.div>
+                        ) : (
+                          <motion.p
+                            key="hint"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="text-xs text-primary/70 font-medium mt-1.5 flex items-center gap-1.5"
+                          >
+                            <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
+                            Tap to read more
+                            {event.press && (
+                              <>
+                                <span className="inline-block w-1 h-1 rounded-full bg-secondary/50" />
+                                <span className="text-secondary font-bold">Press coverage</span>
+                              </>
+                            )}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </motion.div>
                 </motion.div>
               </div>
