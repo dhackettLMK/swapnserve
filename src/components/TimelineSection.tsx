@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, Mic, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
 import websummitPhoto from "@/assets/websummit-photo.jpg";
+import speakingPhoto from "@/assets/speaking-photo.jpg";
 
 type TimelineEvent = {
   date: string;
@@ -55,6 +56,8 @@ const events: TimelineEvent[] = [
     title: "Guest Speaker at NUIG & TUS",
     icon: Mic,
     highlight: true,
+    image: speakingPhoto,
+    imageAlt: "David presenting Swap'n'Serve to students at a university lecture",
     description:
       "David is invited as a guest speaker at NUI Galway and TUS, sharing the Swap'n'Serve story and his journey in community-led entrepreneurship. Speaking to students and faculty, he shows how a simple idea born in Limerick can inspire action far beyond the city.",
   },
