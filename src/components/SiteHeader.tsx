@@ -82,7 +82,7 @@ const SiteHeader = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <nav className="md:hidden bg-card border-t border-border px-6 py-4 space-y-3" aria-label="Mobile navigation">
+        <nav className="md:hidden bg-primary border-t border-primary-foreground/10 px-6 py-4 space-y-3" aria-label="Mobile navigation">
           {navLinks.map((link) => (
             <a
               key={link.href}
