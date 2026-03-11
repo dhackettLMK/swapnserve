@@ -44,12 +44,12 @@ const SiteHeader = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-card/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled ? "bg-primary shadow-md" : "bg-primary/95"
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <a href="#" className="flex items-center gap-2">
-          <img src={logo} alt="Swap'n'Serve logo" className="h-10 md:h-12 w-auto" />
+          <img src={logo} alt="Swap'n'Serve logo" className="h-10 md:h-12 w-auto brightness-0 invert" />
         </a>
 
         {/* Desktop nav */}
@@ -58,14 +58,14 @@ const SiteHeader = () => {
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                activeSection === link.href ? "text-primary" : "text-muted-foreground"
+              className={`text-sm font-medium transition-colors hover:text-accent ${
+                activeSection === link.href ? "text-accent" : "text-primary-foreground/70"
               }`}
             >
               {link.label}
             </a>
           ))}
-          <Button variant="hero" size="sm" asChild>
+          <Button variant="cta" size="sm" asChild>
             <a href="https://example.com/volunteer">Sign Up</a>
           </Button>
         </nav>
