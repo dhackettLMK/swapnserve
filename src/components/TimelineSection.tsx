@@ -55,6 +55,8 @@ const events: TimelineEvent[] = [
     title: "Web Summit Scholarship",
     icon: Award,
     highlight: true,
+    image: websummitPhoto,
+    imageAlt: "David Hackett at Web Summit with his Scholar badge",
     description:
       "David Hackett's work with Swap'n'Serve earns him a prestigious Web Summit scholarship, bringing him to one of the world's largest tech conferences in Lisbon. The experience opens doors to new connections, collaborators, and ideas — proving that grassroots community work can resonate on a global stage.",
     press: {
