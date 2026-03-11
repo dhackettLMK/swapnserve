@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, X } from "lucide-react";
+import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, Mic, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
 import websummitPhoto from "@/assets/websummit-photo.jpg";
 
@@ -49,6 +49,14 @@ const events: TimelineEvent[] = [
         "A new community-based project organised by a group of Limerick young people, has set out with one clear goal: to give back and help those in need, no questions asked.",
       url: "https://www.ilovelimerick.ie/swap-n-serve-community-project/",
     },
+  },
+  {
+    date: "Autumn 2025",
+    title: "Guest Speaker at NUIG & TUS",
+    icon: Mic,
+    highlight: true,
+    description:
+      "David is invited as a guest speaker at NUI Galway and TUS, sharing the Swap'n'Serve story and his journey in community-led entrepreneurship. Speaking to students and faculty, he shows how a simple idea born in Limerick can inspire action far beyond the city.",
   },
   {
     date: "Late 2025",
@@ -115,14 +123,14 @@ const floatingPhotos: {
   side: "left" | "right";
 }[] = [
   {
-    afterIndex: 3, // After "Web Summit Scholarship"
+    afterIndex: 4, // After "Web Summit Scholarship"
     src: websummitPhoto,
     alt: "David Hackett at Web Summit with his Scholar badge",
     caption: "David at Web Summit, Lisbon",
     side: "right",
   },
   {
-    afterIndex: 5, // After "Exciting New Collaborations"
+    afterIndex: 6, // After "Exciting New Collaborations"
     src: teamPhoto,
     alt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
     caption: "The team & partners",
