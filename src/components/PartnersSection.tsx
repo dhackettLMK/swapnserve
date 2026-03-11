@@ -3,8 +3,10 @@ import { Handshake } from "lucide-react";
 
 const PartnersSection = () => {
   return (
-    <section id="partners" className="py-20 md:py-28">
-      <div className="container">
+    <section id="partners" className="py-20 md:py-28 bg-primary/5 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]" />
+
+      <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,7 +29,7 @@ const PartnersSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto rounded-3xl border border-border bg-card p-8 md:p-12 text-center"
+          className="max-w-3xl mx-auto rounded-3xl border border-primary/15 bg-card p-8 md:p-12 text-center shadow-sm"
         >
           <motion.div
             whileHover={{ scale: 1.1, rotate: 5 }}
@@ -49,7 +51,7 @@ const PartnersSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
                 whileHover={{ scale: 1.06 }}
-                className="rounded-full bg-muted px-5 py-2.5 text-sm text-muted-foreground font-medium cursor-default"
+                className="rounded-full bg-primary/10 px-5 py-2.5 text-sm text-primary font-medium cursor-default"
               >
                 {name}
               </motion.div>
