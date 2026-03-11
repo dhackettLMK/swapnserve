@@ -93,7 +93,7 @@ const SiteHeader = () => {
               {link.label}
             </a>
           ))}
-          <Button variant="hero" className="w-full mt-2" asChild>
+          <Button variant="cta" className="w-full mt-2" asChild>
             <a href="https://example.com/volunteer">Sign Up to Volunteer</a>
           </Button>
         </nav>
