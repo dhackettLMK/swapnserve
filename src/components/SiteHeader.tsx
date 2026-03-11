@@ -72,7 +72,7 @@ const SiteHeader = () => {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 text-foreground"
+          className="md:hidden p-2 text-primary-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
