@@ -65,10 +65,10 @@ const HeroSection = () => {
               <a href="https://example.com/volunteer">Sign Up to Volunteer</a>
             </Button>
             <a
-              href="#events"
+              href="https://www.gofundme.com/f/swapnserve-2"
               className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-primary-foreground/35 bg-primary-foreground/10 px-6 py-3 text-base font-semibold text-primary-foreground transition-all hover:bg-primary-foreground/20 hover:scale-[1.02] active:scale-[0.98]"
             >
-              Donate Clothes
+              Make a Donation
             </a>
           </motion.div>
 

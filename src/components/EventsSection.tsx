@@ -76,32 +76,18 @@ const EventsSection = () => {
               <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
                 <MapPin size={18} className="text-secondary" />
               </div>
-              Donate Clothes
+              Make a Donation
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Drop-off points are arranged in the weeks leading up to each event. Get in touch to
-              find the nearest collection point or to arrange a pickup for larger donations.
+              Support our work by making a donation through our GoFundMe. Every contribution helps us continue redistributing clothing to families in need.
             </p>
 
-            <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-              <Clock size={14} className="text-primary" />
-              What We Accept
-            </h4>
-            <ul className="space-y-2.5">
-              {acceptedItems.map((item, i) => (
-                <motion.li
-                  key={item}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="flex items-start gap-2 text-sm text-muted-foreground"
-                >
-                  <CheckCircle2 size={16} className="text-success shrink-0 mt-0.5" />
-                  {item}
-                </motion.li>
-              ))}
-            </ul>
+            <a
+              href="https://www.gofundme.com/f/swapnserve-2"
+              className="inline-flex items-center rounded-full border border-primary bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Donate on GoFundMe
+            </a>
           </motion.div>
         </div>
       </div>
