@@ -73,7 +73,7 @@ const events: TimelineEvent[] = [
     icon: Award,
     highlight: true,
     description:
-      "After catching the attention of Tekpon founder Alexandru Stan at Web Summit, David receives a premium invite to the Tekpon AI Summit in Bucharest, Romania. A chance encounter turns into a global opportunity — proof that grassroots community work opens extraordinary doors.",
+      "While waiting for a taxi in the rain outside Web Summit, David met Gina Schinkel, founder of Driftawave. Impressed by his drive and AI skills, she invited him to attend the Tekpon AI Summit in Bucharest on a premium ticket. 'It's crazy to think how much my life has changed in a year and that there are people who believe in me enough to fly me to these amazing countries,' David said.",
     press: {
       outlet: "Irish Independent",
       headline: "Limerick student lands premium invite to Romania's Tekpon AI Summit",
