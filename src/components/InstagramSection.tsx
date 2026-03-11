@@ -55,15 +55,18 @@ const InstagramSection = () => {
               transition={{ delay: i * 0.08, duration: 0.5, type: "spring", stiffness: 100, damping: 15 }}
               className="rounded-2xl overflow-hidden border border-border/40 shadow-sm bg-card"
             >
-              <iframe
-                src={getEmbedUrl(post)}
-                className="w-full border-0"
-                style={{ minHeight: 480 }}
-                allowTransparency
-                allow="encrypted-media"
-                loading="lazy"
-                title={`Instagram ${post.type} ${post.id}`}
-              />
+              <div className="overflow-hidden" style={{ height: 480 }}>
+                <iframe
+                  src={getEmbedUrl(post)}
+                  className="w-full border-0"
+                  style={{ height: 800, marginTop: -1 }}
+                  scrolling="no"
+                  allowTransparency
+                  allow="encrypted-media"
+                  loading="lazy"
+                  title={`Instagram ${post.type} ${post.id}`}
+                />
+              </div>
             </motion.div>
           ))}
         </div>
