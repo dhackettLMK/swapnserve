@@ -404,18 +404,6 @@ const TimelineSection = () => {
                     </motion.div>
                   </motion.div>
 
-                  {/* Inline photo placed after the relevant milestone */}
-                  {photoAfter && (
-                    <InlinePhoto
-                      src={photoAfter.src}
-                      alt={photoAfter.alt}
-                      caption={photoAfter.caption}
-                      side={photoAfter.side}
-                      onImageClick={() =>
-                        setLightboxImage({ src: photoAfter.src, alt: photoAfter.alt })
-                      }
-                    />
-                  )}
                 </div>
               );
             })}
