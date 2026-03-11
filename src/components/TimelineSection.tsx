@@ -54,8 +54,6 @@ const events: TimelineEvent[] = [
     date: "Late 2025",
     title: "International Recognition",
     icon: Award,
-    image: presentationPhoto,
-    imageAlt: "David Hackett and Shalom Obiakor presenting Swap'n'Serve to an audience",
     description:
       "David receives invitations to speak about the project across Europe, from Portugal to Romania, sharing the Swap'n'Serve model with communities abroad.",
   },
@@ -64,8 +62,6 @@ const events: TimelineEvent[] = [
     title: "Exciting New Collaborations",
     icon: MapPin,
     highlight: true,
-    image: teamPhoto,
-    imageAlt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
     description:
       "Swap'n'Serve partners with local brands Fior Jewellery and Van Rossum Clothing for its second event. The project expands its vision to better integrate Limerick's diverse communities.",
     press: {
