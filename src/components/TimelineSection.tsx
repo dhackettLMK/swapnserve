@@ -50,10 +50,10 @@ const events: TimelineEvent[] = [
   },
   {
     date: "Late 2025",
-    title: "International Recognition",
+    title: "Web Summit & International Recognition",
     icon: Award,
     description:
-      "David receives invitations to speak about the project across Europe, from Portugal to Romania, sharing the Swap'n'Serve model with communities abroad.",
+      "Swap'n'Serve is selected to present at Web Summit, one of the world's largest tech conferences. David receives further invitations to speak across Europe, from Portugal to Romania, sharing the Swap'n'Serve model with communities abroad.",
   },
   {
     date: "March 2026",
