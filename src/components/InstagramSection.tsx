@@ -1,49 +1,98 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, ExternalLink, Play, Heart, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Instagram, ExternalLink, Play, Heart, Image } from "lucide-react";
 
 const posts = [
   {
     id: "DMQVwn4tUHz",
-    type: "reel",
+    type: "reel" as const,
     url: "https://www.instagram.com/reel/DMQVwn4tUHz/",
-    embedUrl: "https://www.instagram.com/reel/DMQVwn4tUHz/embed/captioned/",
+    caption: "Community in action 🎬",
   },
   {
     id: "DL8O-OZtMnk",
-    type: "p",
+    type: "post" as const,
     url: "https://www.instagram.com/p/DL8O-OZtMnk/",
-    embedUrl: "https://www.instagram.com/p/DL8O-OZtMnk/embed/captioned/",
+    caption: "Swap day highlights ✨",
   },
   {
     id: "DNFmMOlNxWQ",
-    type: "p",
+    type: "post" as const,
     url: "https://www.instagram.com/p/DNFmMOlNxWQ/",
-    embedUrl: "https://www.instagram.com/p/DNFmMOlNxWQ/embed/captioned/",
+    caption: "Making a difference together 💚",
   },
   {
     id: "DNn26q1NHPK",
-    type: "p",
+    type: "post" as const,
     url: "https://www.instagram.com/p/DNn26q1NHPK/",
-    embedUrl: "https://www.instagram.com/p/DNn26q1NHPK/embed/captioned/",
+    caption: "Volunteers at work 🙌",
   },
   {
     id: "DOD9-AAjRfS",
-    type: "p",
+    type: "post" as const,
     url: "https://www.instagram.com/p/DOD9-AAjRfS/",
-    embedUrl: "https://www.instagram.com/p/DOD9-AAjRfS/embed/captioned/",
+    caption: "Building community 🤝",
   },
   {
     id: "DVrUwdxjamw",
-    type: "p",
+    type: "post" as const,
     url: "https://www.instagram.com/p/DVrUwdxjamw/",
-    embedUrl: "https://www.instagram.com/p/DVrUwdxjamw/embed/captioned/",
+    caption: "Swap'n'Serve moments 🌿",
   },
 ];
 
-const InstagramSection = () => {
-  const [activePost, setActivePost] = useState<string | null>(null);
+const InstagramCard = ({ post, index }: { post: (typeof posts)[0]; index: number }) => (
+  <motion.a
+    href={post.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{
+      delay: index * 0.08,
+      duration: 0.5,
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+    }}
+    whileHover={{ y: -8, scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    className="group relative block rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 via-card to-secondary/10 border border-border/40 shadow-sm hover:shadow-2xl transition-all duration-300 aspect-square"
+  >
+    {/* Background pattern */}
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-20 h-20 rounded-full bg-primary/5 group-hover:bg-primary/10 transition-colors duration-500 flex items-center justify-center">
+        {post.type === "reel" ? (
+          <Play size={32} className="text-primary/40 group-hover:text-primary/70 transition-colors ml-1" />
+        ) : (
+          <Image size={32} className="text-primary/40 group-hover:text-primary/70 transition-colors" />
+        )}
+      </div>
+    </div>
 
+    {/* Bottom info bar */}
+    <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-background/90 via-background/50 to-transparent">
+      <div className="flex items-center gap-2 mb-1.5">
+        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[hsl(330,80%,60%)] via-[hsl(270,60%,55%)] to-[hsl(30,90%,55%)] flex items-center justify-center">
+          <Instagram size={12} className="text-white" />
+        </div>
+        <span className="text-xs font-semibold text-foreground">@swapandserve</span>
+      </div>
+      <p className="text-xs text-muted-foreground">{post.caption}</p>
+    </div>
+
+    {/* Hover overlay */}
+    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+      <span className="inline-flex items-center gap-2 rounded-full bg-background/90 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-foreground shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+        {post.type === "reel" ? <Play size={16} /> : <Heart size={16} />}
+        View on Instagram
+        <ExternalLink size={14} className="text-muted-foreground" />
+      </span>
+    </div>
+  </motion.a>
+);
+
+const InstagramSection = () => {
   return (
     <section id="instagram" className="py-20 md:py-28 overflow-hidden">
       <div className="container">
@@ -71,55 +120,9 @@ const InstagramSection = () => {
         </motion.div>
 
         {/* Post Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-4xl mx-auto">
           {posts.map((post, i) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                delay: i * 0.08,
-                duration: 0.5,
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
-              }}
-              whileHover={{ y: -8 }}
-              className="group relative rounded-3xl overflow-hidden bg-card border border-border/40 shadow-sm hover:shadow-2xl transition-all duration-300"
-            >
-              {/* Embed Container */}
-              <div className="relative w-full" style={{ paddingBottom: post.type === "reel" ? "125%" : "120%" }}>
-                <iframe
-                  src={post.embedUrl}
-                  className="absolute inset-0 w-full h-full border-0"
-                  allowTransparency
-                  scrolling="no"
-                  loading="lazy"
-                  title={`SwapNServe Instagram post`}
-                  style={{
-                    borderRadius: "1.5rem",
-                    overflow: "hidden",
-                  }}
-                />
-
-                {/* Hover overlay with link */}
-                <motion.a
-                  href={post.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 z-10 flex items-end justify-center pb-6 bg-gradient-to-t from-foreground/60 via-transparent to-transparent rounded-3xl"
-                >
-                  <span className="inline-flex items-center gap-2 rounded-full bg-background/90 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-foreground shadow-lg">
-                    {post.type === "reel" ? <Play size={16} /> : <Heart size={16} />}
-                    View on Instagram
-                    <ExternalLink size={14} className="text-muted-foreground" />
-                  </span>
-                </motion.a>
-              </div>
-            </motion.div>
+            <InstagramCard key={post.id} post={post} index={i} />
           ))}
         </div>
 
