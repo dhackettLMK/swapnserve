@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award } from "lucide-react";
+import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
 import presentationPhoto from "@/assets/presentation-photo.jpg";
 
@@ -79,6 +79,30 @@ const events: TimelineEvent[] = [
   },
 ];
 
+// Photos placed between specific timeline items (after index N)
+const floatingPhotos: {
+  afterIndex: number;
+  src: string;
+  alt: string;
+  caption: string;
+  side: "left" | "right";
+}[] = [
+  {
+    afterIndex: 3, // After "International Recognition"
+    src: presentationPhoto,
+    alt: "David Hackett and Shalom Obiakor presenting Swap'n'Serve to an audience",
+    caption: "Presenting across Europe",
+    side: "right",
+  },
+  {
+    afterIndex: 4, // After "Exciting New Collaborations"
+    src: teamPhoto,
+    alt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
+    caption: "The team & partners",
+    side: "left",
+  },
+];
+
 const PressCard = ({ press }: { press: NonNullable<TimelineEvent["press"]> }) => (
   <motion.a
     href={press.url}
@@ -138,194 +162,247 @@ const CurveConnector = ({ fromRight }: { fromRight: boolean }) => (
   </svg>
 );
 
-const FloatingPhoto = ({
+const Lightbox = ({
+  src,
+  alt,
+  onClose,
+}: {
+  src: string;
+  alt: string;
+  onClose: () => void;
+}) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.25 }}
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 cursor-pointer"
+    onClick={onClose}
+  >
+    <motion.button
+      onClick={onClose}
+      className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full bg-background/20 hover:bg-background/40 flex items-center justify-center text-white transition-colors z-10"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <X size={20} />
+    </motion.button>
+    <motion.img
+      initial={{ scale: 0.85, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.85, opacity: 0 }}
+      transition={{ duration: 0.3, type: "spring", stiffness: 200, damping: 22 }}
+      src={src}
+      alt={alt}
+      className="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain"
+      onClick={(e) => e.stopPropagation()}
+    />
+  </motion.div>
+);
+
+const InlinePhoto = ({
   src,
   alt,
   caption,
   side,
-  topPercent,
-  rotation,
+  onImageClick,
 }: {
   src: string;
   alt: string;
   caption: string;
   side: "left" | "right";
-  topPercent: string;
-  rotation: string;
+  onImageClick: () => void;
 }) => (
   <motion.div
-    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    transition={{ duration: 0.7, ease: "easeOut" }}
-    className={`hidden md:block absolute ${side === "right" ? "right-0" : "left-0"} w-[20%] z-10`}
-    style={{ top: topPercent }}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-40px" }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    className={`flex ${side === "right" ? "md:justify-end" : "md:justify-start"} justify-center py-4`}
   >
-    <motion.div
-      whileHover={{ rotate: 0, scale: 1.03 }}
-      className={`rounded-2xl overflow-hidden shadow-lg border border-border/30 ${rotation} transition-transform duration-500`}
-    >
-      <img
-        src={src}
-        alt={alt}
-        className="w-full h-auto object-cover"
-        loading="lazy"
-      />
-    </motion.div>
-    <p className="text-[10px] text-muted-foreground mt-2 text-center italic">
-      {caption}
-    </p>
+    <div className={`w-[85%] md:w-[38%] ${side === "right" ? "md:mr-[4%]" : "md:ml-[4%]"}`}>
+      <motion.div
+        whileHover={{ scale: 1.02, rotate: 0 }}
+        whileTap={{ scale: 0.98 }}
+        onClick={onImageClick}
+        className={`rounded-2xl overflow-hidden shadow-lg border border-border/30 cursor-pointer ${
+          side === "right" ? "rotate-1" : "-rotate-1"
+        } hover:rotate-0 transition-transform duration-500 hover:shadow-xl`}
+      >
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-auto object-cover"
+          loading="lazy"
+        />
+      </motion.div>
+      <p className="text-[11px] text-muted-foreground mt-2.5 text-center italic">
+        {caption}
+      </p>
+    </div>
   </motion.div>
 );
 
 const TimelineSection = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
   return (
-    <section id="timeline" className="py-20 md:py-28 bg-card overflow-hidden">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
-            Our Story
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            The Journey So Far
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            From a conversation between friends to a movement covered by national press.
-          </p>
-        </motion.div>
+    <>
+      <section id="timeline" className="py-20 md:py-28 bg-card overflow-hidden">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
+              Our Story
+            </span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              The Journey So Far
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+              From a conversation between friends to a movement covered by national press.
+            </p>
+          </motion.div>
 
-        <div className="max-w-5xl mx-auto relative">
-          {/* Floating accent photos in the whitespace */}
-          <FloatingPhoto
-            src={presentationPhoto}
-            alt="David Hackett and Shalom Obiakor presenting Swap'n'Serve to an audience"
-            caption="Presenting across Europe"
-            side="right"
-            topPercent="20%"
-            rotation="rotate-2"
-          />
-          <FloatingPhoto
-            src={teamPhoto}
-            alt="The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing"
-            caption="The team & partners"
-            side="left"
-            topPercent="62%"
-            rotation="-rotate-2"
-          />
+          <div className="max-w-5xl mx-auto">
+            {events.map((event, i) => {
+              const isExpanded = expandedIndex === i;
+              const Icon = event.icon;
+              const isRight = i % 2 !== 0;
 
-          {events.map((event, i) => {
-            const isExpanded = expandedIndex === i;
-            const Icon = event.icon;
-            const isRight = i % 2 !== 0;
+              // Check if there's a photo to show after this event
+              const photoAfter = floatingPhotos.find((p) => p.afterIndex === i);
 
-            return (
-              <div key={i}>
-                {i > 0 && <CurveConnector fromRight={i % 2 === 0} />}
-                {i > 0 && (
-                  <div className="md:hidden flex justify-center -my-1">
-                    <div className="w-px h-8 bg-gradient-to-b from-primary/20 to-primary/5" />
-                  </div>
-                )}
-
-                <motion.div
-                  initial={{ opacity: 0, x: isRight ? 40 : -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.55, delay: i * 0.06, type: "spring", stiffness: 70, damping: 16 }}
-                  className={`relative flex flex-col md:flex-row items-center gap-4 md:gap-8 ${
-                    isRight ? "md:flex-row-reverse" : ""
-                  }`}
-                >
-                  {/* Icon marker */}
-                  <motion.div
-                    whileHover={{ scale: 1.15, rotate: 8 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setExpandedIndex(isExpanded ? null : i)}
-                    className={`shrink-0 cursor-pointer w-14 h-14 rounded-2xl flex items-center justify-center shadow-md transition-all ${
-                      event.highlight
-                        ? "bg-secondary text-secondary-foreground shadow-secondary/20"
-                        : "bg-primary/10 text-primary"
-                    }`}
-                  >
-                    <Icon size={22} />
-                  </motion.div>
-
-                  {/* Content card */}
-                  <motion.div
-                    layout
-                    onClick={() => setExpandedIndex(isExpanded ? null : i)}
-                    whileHover={{ y: -3 }}
-                    className={`cursor-pointer w-full md:w-[45%] rounded-3xl border overflow-hidden transition-all ${
-                      isExpanded
-                        ? "border-primary/20 shadow-xl shadow-primary/5 bg-background"
-                        : "border-border/40 bg-background hover:shadow-lg hover:border-border"
-                    }`}
-                  >
-                    <div className="p-5 md:p-6">
-                      <span
-                        className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
-                          event.highlight
-                            ? "text-secondary bg-secondary/10"
-                            : "text-primary bg-primary/10"
-                        }`}
-                      >
-                        {event.date}
-                      </span>
-
-                      <h3 className="text-lg font-display font-bold text-foreground mb-1">
-                        {event.title}
-                      </h3>
-
-                      <AnimatePresence initial={false}>
-                        {isExpanded ? (
-                          <motion.div
-                            key="content"
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                            className="overflow-hidden"
-                          >
-                            <p className="text-sm text-muted-foreground leading-relaxed pt-1">
-                              {event.description}
-                            </p>
-                            {event.press && <PressCard press={event.press} />}
-                          </motion.div>
-                        ) : (
-                          <motion.p
-                            key="hint"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-xs text-primary/70 font-medium mt-1.5 flex items-center gap-1.5"
-                          >
-                            <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
-                            Tap to read more
-                            {event.press && (
-                              <>
-                                <span className="inline-block w-1 h-1 rounded-full bg-secondary/50" />
-                                <span className="text-secondary font-bold">Press coverage</span>
-                              </>
-                            )}
-                          </motion.p>
-                        )}
-                      </AnimatePresence>
+              return (
+                <div key={i}>
+                  {i > 0 && <CurveConnector fromRight={i % 2 === 0} />}
+                  {i > 0 && (
+                    <div className="md:hidden flex justify-center -my-1">
+                      <div className="w-px h-8 bg-gradient-to-b from-primary/20 to-primary/5" />
                     </div>
+                  )}
+
+                  <motion.div
+                    initial={{ opacity: 0, x: isRight ? 40 : -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.55, delay: i * 0.06, type: "spring", stiffness: 70, damping: 16 }}
+                    className={`relative flex flex-col md:flex-row items-center gap-4 md:gap-8 ${
+                      isRight ? "md:flex-row-reverse" : ""
+                    }`}
+                  >
+                    {/* Icon marker */}
+                    <motion.div
+                      whileHover={{ scale: 1.15, rotate: 8 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => setExpandedIndex(isExpanded ? null : i)}
+                      className={`shrink-0 cursor-pointer w-14 h-14 rounded-2xl flex items-center justify-center shadow-md transition-all ${
+                        event.highlight
+                          ? "bg-secondary text-secondary-foreground shadow-secondary/20"
+                          : "bg-primary/10 text-primary"
+                      }`}
+                    >
+                      <Icon size={22} />
+                    </motion.div>
+
+                    {/* Content card */}
+                    <motion.div
+                      layout
+                      onClick={() => setExpandedIndex(isExpanded ? null : i)}
+                      whileHover={{ y: -3 }}
+                      className={`cursor-pointer w-full md:w-[45%] rounded-3xl border overflow-hidden transition-all ${
+                        isExpanded
+                          ? "border-primary/20 shadow-xl shadow-primary/5 bg-background"
+                          : "border-border/40 bg-background hover:shadow-lg hover:border-border"
+                      }`}
+                    >
+                      <div className="p-5 md:p-6">
+                        <span
+                          className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
+                            event.highlight
+                              ? "text-secondary bg-secondary/10"
+                              : "text-primary bg-primary/10"
+                          }`}
+                        >
+                          {event.date}
+                        </span>
+
+                        <h3 className="text-lg font-display font-bold text-foreground mb-1">
+                          {event.title}
+                        </h3>
+
+                        <AnimatePresence initial={false}>
+                          {isExpanded ? (
+                            <motion.div
+                              key="content"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.35, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <p className="text-sm text-muted-foreground leading-relaxed pt-1">
+                                {event.description}
+                              </p>
+                              {event.press && <PressCard press={event.press} />}
+                            </motion.div>
+                          ) : (
+                            <motion.p
+                              key="hint"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              className="text-xs text-primary/70 font-medium mt-1.5 flex items-center gap-1.5"
+                            >
+                              <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
+                              Tap to read more
+                              {event.press && (
+                                <>
+                                  <span className="inline-block w-1 h-1 rounded-full bg-secondary/50" />
+                                  <span className="text-secondary font-bold">Press coverage</span>
+                                </>
+                              )}
+                            </motion.p>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </div>
-            );
-          })}
+
+                  {/* Inline photo placed after the relevant milestone */}
+                  {photoAfter && (
+                    <InlinePhoto
+                      src={photoAfter.src}
+                      alt={photoAfter.alt}
+                      caption={photoAfter.caption}
+                      side={photoAfter.side}
+                      onImageClick={() =>
+                        setLightboxImage({ src: photoAfter.src, alt: photoAfter.alt })
+                      }
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Lightbox overlay */}
+      <AnimatePresence>
+        {lightboxImage && (
+          <Lightbox
+            src={lightboxImage.src}
+            alt={lightboxImage.alt}
+            onClose={() => setLightboxImage(null)}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
