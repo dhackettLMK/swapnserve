@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
-import presentationPhoto from "@/assets/presentation-photo.jpg";
+import websummitPhoto from "@/assets/websummit-photo.jpg";
 
 type TimelineEvent = {
   date: string;
@@ -96,10 +96,10 @@ const floatingPhotos: {
   side: "left" | "right";
 }[] = [
   {
-    afterIndex: 3, // After "International Recognition"
-    src: presentationPhoto,
-    alt: "David Hackett and Shalom Obiakor presenting Swap'n'Serve to an audience",
-    caption: "Presenting across Europe",
+    afterIndex: 3, // After "Web Summit Scholarship"
+    src: websummitPhoto,
+    alt: "David Hackett at Web Summit with his Scholar badge",
+    caption: "David at Web Summit, Lisbon",
     side: "right",
   },
   {
