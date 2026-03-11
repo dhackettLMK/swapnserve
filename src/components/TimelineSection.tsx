@@ -1,38 +1,118 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award } from "lucide-react";
 
-const events = [
+type TimelineEvent = {
+  date: string;
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  press?: {
+    outlet: string;
+    headline: string;
+    excerpt: string;
+    url: string;
+  };
+  highlight?: boolean;
+};
+
+const events: TimelineEvent[] = [
   {
     date: "Early 2025",
-    title: "The Idea Takes Shape",
+    title: "The Idea Takes Root",
+    icon: Sparkles,
     description:
-      "David Hackett and a small group of Limerick locals begin organising around a simple idea: clothing should not go to waste when neighbours need it.",
+      "David Hackett and a small group of Limerick locals begin organising around a simple idea: clothing should not go to waste when neighbours need it. Inspired by community and sustainability, Swap'n'Serve is born.",
   },
   {
     date: "June 2025",
-    title: "Donation Network Launches",
+    title: "Donations Start Flowing",
+    icon: Users,
     description:
-      "Schools and local organisations begin collecting clean, wearable clothing in the weeks leading up to the first public event.",
+      "Schools and local organisations begin collecting clean, wearable clothing. Drop-off points open at Abundant Life Christian Church on Henry Street. The community response is immediate.",
   },
   {
     date: "August 2025",
-    title: "First Public Swap & Giveaway",
+    title: "First Public Swap and Giveaway",
+    icon: Calendar,
+    highlight: true,
     description:
-      "Swap'n'Serve holds its inaugural clothing swap and giveaway in Limerick. Families and individuals attend freely, no questions asked.",
+      "On August 30th, Swap'n'Serve holds its inaugural clothing giveaway at Abundant Life Christian Church. Over 1,000 items donated, around 300 people attend, including Limerick Mayor John Moran. Everything is free, no questions asked.",
+    press: {
+      outlet: "I Love Limerick",
+      headline: "Swap N Serve community project gives back to those in need",
+      excerpt:
+        "A new community-based project organised by a group of Limerick young people, has set out with one clear goal: to give back and help those in need, no questions asked.",
+      url: "https://www.ilovelimerick.ie/swap-n-serve-community-project/",
+    },
   },
   {
-    date: "Autumn 2025",
-    title: "Partnerships Grow",
+    date: "Late 2025",
+    title: "International Recognition",
+    icon: Award,
     description:
-      "Collaborations form with local brands and community partners, expanding reach and building a more sustainable collection network.",
+      "David receives invitations to speak about the project across Europe, from Portugal to Romania, sharing the Swap'n'Serve model with communities abroad.",
   },
   {
-    date: "2026",
-    title: "Swap'n'Serve Continues",
+    date: "March 2026",
+    title: "Exciting New Collaborations",
+    icon: MapPin,
+    highlight: true,
     description:
-      "Fundraising and planning are underway for the next chapter, with bigger events and broader community engagement on the horizon.",
+      "Swap'n'Serve partners with local brands Fior Jewellery and Van Rossum Clothing for its second event. The project expands its vision to better integrate Limerick's diverse communities, including Asian and Muslim communities.",
+    press: {
+      outlet: "Irish Independent",
+      headline: "Limerick entrepreneur brings back charity project Swap'n'Serve in exciting collaboration",
+      excerpt:
+        "David Hackett is preparing for the second instalment of Swap'n'Serve, a community-led charity event aimed at tackling fast fashion, boosting sustainability and building stronger ties in Limerick city.",
+      url: "https://www.independent.ie/regionals/limerick/news/limerick-entrepreneur-brings-back-charity-project-swapnserve-in-exciting-collaboration-with-two-local-brands/a2079616764.html",
+    },
+  },
+  {
+    date: "April 2026",
+    title: "Second Event at Abundant Life",
+    icon: Calendar,
+    description:
+      "The next Swap'n'Serve takes place on Saturday, April 11th, at Abundant Life Christian Church on Henry Street. Clothing sold for just one euro per item, with all remaining stock distributed equally among partner charities.",
   },
 ];
+
+const PressCard = ({ press }: { press: NonNullable<TimelineEvent["press"]> }) => (
+  <motion.a
+    href={press.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.15 }}
+    whileHover={{ scale: 1.02, y: -2 }}
+    whileTap={{ scale: 0.98 }}
+    className="mt-4 block rounded-2xl bg-primary/5 border border-primary/10 p-4 transition-all hover:bg-primary/8 hover:border-primary/20 hover:shadow-md group"
+  >
+    <div className="flex items-start gap-3">
+      <div className="shrink-0 mt-0.5 w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+        <Newspaper size={16} className="text-primary" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
+            {press.outlet}
+          </span>
+          <ExternalLink
+            size={12}
+            className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+          />
+        </div>
+        <p className="text-sm font-semibold text-foreground leading-snug mb-1">
+          {press.headline}
+        </p>
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+          {press.excerpt}
+        </p>
+      </div>
+    </div>
+  </motion.a>
+);
 
 const TimelineSection = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -51,59 +131,105 @@ const TimelineSection = () => {
             Our Story
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Our Journey
+            The Journey So Far
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            From a conversation to a movement. Here is how Swap'n'Serve has grown.
+            From a conversation between friends to a movement covered by national press.
           </p>
         </motion.div>
 
         <div className="relative max-w-3xl mx-auto">
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/30 via-primary/20 to-transparent md:-translate-x-px" />
+          {/* Timeline line */}
+          <div className="absolute left-7 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-transparent md:-translate-x-px" />
 
           {events.map((event, i) => {
             const isExpanded = expandedIndex === i;
+            const Icon = event.icon;
+            const isLeft = i % 2 === 0;
+
             return (
               <motion.div
-                key={event.date}
+                key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative flex items-start mb-10 last:mb-0 ${
-                  i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className={`relative flex items-start mb-8 last:mb-0 ${
+                  isLeft ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
               >
-                {/* Animated dot */}
+                {/* Dot with icon */}
                 <motion.div
-                  whileHover={{ scale: 1.5 }}
-                  className="absolute left-6 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-card -translate-x-1/2 mt-2 z-10 cursor-pointer"
+                  whileHover={{ scale: 1.3 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => setExpandedIndex(isExpanded ? null : i)}
-                />
+                  className={`absolute left-7 md:left-1/2 -translate-x-1/2 z-10 cursor-pointer w-10 h-10 rounded-full flex items-center justify-center border-4 border-card transition-colors ${
+                    event.highlight
+                      ? "bg-secondary text-secondary-foreground shadow-lg shadow-secondary/20"
+                      : "bg-primary text-primary-foreground"
+                  }`}
+                >
+                  <Icon size={16} />
+                </motion.div>
 
                 {/* Content card */}
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
+                  layout
                   onClick={() => setExpandedIndex(isExpanded ? null : i)}
-                  className={`ml-12 md:ml-0 md:w-[calc(50%-2.5rem)] cursor-pointer rounded-2xl border border-border bg-background p-5 transition-shadow hover:shadow-lg hover:shadow-primary/5 ${
-                    i % 2 === 0 ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"
-                  }`}
+                  whileHover={{ scale: 1.01 }}
+                  className={`ml-16 md:ml-0 md:w-[calc(50%-3rem)] cursor-pointer rounded-3xl border bg-background p-5 md:p-6 transition-all ${
+                    isExpanded
+                      ? "border-primary/20 shadow-lg shadow-primary/5"
+                      : "border-border/60 hover:shadow-md hover:border-primary/10"
+                  } ${isLeft ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"}`}
                 >
-                  <span className="inline-block text-xs font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full mb-2">
+                  <span
+                    className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
+                      event.highlight
+                        ? "text-secondary bg-secondary/10"
+                        : "text-primary bg-primary/10"
+                    }`}
+                  >
                     {event.date}
                   </span>
-                  <h3 className="text-lg font-display font-bold text-foreground mb-1">{event.title}</h3>
-                  <motion.div
-                    initial={false}
-                    animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="text-sm text-muted-foreground leading-relaxed pt-1">{event.description}</p>
-                  </motion.div>
-                  {!isExpanded && (
-                    <p className="text-xs text-primary font-medium mt-1">Tap to read more</p>
-                  )}
+                  <h3 className="text-lg font-display font-bold text-foreground mb-1">
+                    {event.title}
+                  </h3>
+
+                  <AnimatePresence initial={false}>
+                    {isExpanded ? (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-sm text-muted-foreground leading-relaxed pt-1">
+                          {event.description}
+                        </p>
+                        {event.press && <PressCard press={event.press} />}
+                      </motion.div>
+                    ) : (
+                      <motion.p
+                        key="hint"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-xs text-primary/70 font-medium mt-1 flex items-center gap-1"
+                        style={{ justifyContent: isLeft ? "flex-end" : "flex-start" }}
+                      >
+                        <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
+                        Tap to read more
+                        {event.press && (
+                          <>
+                            <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
+                            <span className="text-secondary font-bold">Press coverage</span>
+                          </>
+                        )}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               </motion.div>
             );
