@@ -123,14 +123,14 @@ const floatingPhotos: {
   side: "left" | "right";
 }[] = [
   {
-    afterIndex: 3, // After "Web Summit Scholarship"
+    afterIndex: 4, // After "Web Summit Scholarship"
     src: websummitPhoto,
     alt: "David Hackett at Web Summit with his Scholar badge",
     caption: "David at Web Summit, Lisbon",
     side: "right",
   },
   {
-    afterIndex: 5, // After "Exciting New Collaborations"
+    afterIndex: 6, // After "Exciting New Collaborations"
     src: teamPhoto,
     alt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
     caption: "The team & partners",
