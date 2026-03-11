@@ -182,7 +182,7 @@ const SiteHeader = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="md:hidden fixed inset-0 top-[72px] bg-foreground/60 backdrop-blur-sm"
+              className="md:hidden fixed inset-0 top-[72px] bg-primary/60 backdrop-blur-sm"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
