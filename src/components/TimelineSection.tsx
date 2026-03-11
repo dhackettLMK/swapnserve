@@ -59,7 +59,7 @@ const events: TimelineEvent[] = [
     icon: MapPin,
     highlight: true,
     description:
-      "Swap'n'Serve partners with local brands Fior Jewellery and Van Rossum Clothing for its second event. The project expands its vision to better integrate Limerick's diverse communities, including Asian and Muslim communities.",
+      "Swap'n'Serve partners with local brands Fior Jewellery and Van Rossum Clothing for its second event. The project expands its vision to better integrate Limerick's diverse communities.",
     press: {
       outlet: "Irish Independent",
       headline: "Limerick entrepreneur brings back charity project Swap'n'Serve in exciting collaboration",
@@ -87,7 +87,7 @@ const PressCard = ({ press }: { press: NonNullable<TimelineEvent["press"]> }) =>
     transition={{ delay: 0.15 }}
     whileHover={{ scale: 1.02, y: -2 }}
     whileTap={{ scale: 0.98 }}
-    className="mt-4 block rounded-2xl bg-primary/5 border border-primary/10 p-4 transition-all hover:bg-primary/8 hover:border-primary/20 hover:shadow-md group"
+    className="mt-4 block rounded-2xl bg-primary/5 border border-primary/10 p-4 transition-all hover:bg-primary/8 hover:border-primary/20 hover:shadow-md group text-left"
   >
     <div className="flex items-start gap-3">
       <div className="shrink-0 mt-0.5 w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -118,7 +118,7 @@ const TimelineSection = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   return (
-    <section id="timeline" className="py-20 md:py-28 bg-card">
+    <section id="timeline" className="py-20 md:py-28 bg-card overflow-hidden">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -138,100 +138,167 @@ const TimelineSection = () => {
           </p>
         </motion.div>
 
-        <div className="relative max-w-3xl mx-auto">
-          {/* Timeline line */}
-          <div className="absolute left-7 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-primary/20 to-transparent md:-translate-x-px" />
+        {/* Road Timeline */}
+        <div className="max-w-5xl mx-auto relative">
+          {/* SVG Road - visible on md+ */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="roadGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.25" />
+                <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+              </linearGradient>
+            </defs>
+          </svg>
 
           {events.map((event, i) => {
             const isExpanded = expandedIndex === i;
             const Icon = event.icon;
-            const isLeft = i % 2 === 0;
+            const isRight = i % 2 !== 0;
 
             return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className={`relative flex items-start mb-8 last:mb-0 ${
-                  isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                }`}
-              >
-                {/* Dot with icon */}
-                <motion.div
-                  whileHover={{ scale: 1.3 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setExpandedIndex(isExpanded ? null : i)}
-                  className={`absolute left-7 md:left-1/2 -translate-x-1/2 z-10 cursor-pointer w-10 h-10 rounded-full flex items-center justify-center border-4 border-card transition-colors ${
-                    event.highlight
-                      ? "bg-secondary text-secondary-foreground shadow-lg shadow-secondary/20"
-                      : "bg-primary text-primary-foreground"
-                  }`}
-                >
-                  <Icon size={16} />
-                </motion.div>
+              <div key={i} className="relative">
+                {/* Curved road connector between stops */}
+                {i < events.length - 1 && (
+                  <div className="hidden md:block absolute left-0 right-0" style={{ top: "100%", height: "3rem", zIndex: 0 }}>
+                    <svg
+                      viewBox="0 0 800 60"
+                      className="w-full h-full"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      {/* Road surface */}
+                      <path
+                        d={
+                          isRight
+                            ? "M 600 0 C 600 30, 200 30, 200 60"
+                            : "M 200 0 C 200 30, 600 30, 600 60"
+                        }
+                        fill="none"
+                        stroke="hsl(var(--primary))"
+                        strokeOpacity="0.12"
+                        strokeWidth="40"
+                        strokeLinecap="round"
+                      />
+                      {/* Centre dashes */}
+                      <path
+                        d={
+                          isRight
+                            ? "M 600 0 C 600 30, 200 30, 200 60"
+                            : "M 200 0 C 200 30, 600 30, 600 60"
+                        }
+                        fill="none"
+                        stroke="hsl(var(--primary))"
+                        strokeOpacity="0.3"
+                        strokeWidth="2"
+                        strokeDasharray="8 8"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </div>
+                )}
 
-                {/* Content card */}
+                {/* Mobile road connector */}
+                {i < events.length - 1 && (
+                  <div className="md:hidden flex justify-center py-2">
+                    <div className="w-px h-10 border-l-2 border-dashed border-primary/20" />
+                  </div>
+                )}
+
+                {/* Event Row */}
                 <motion.div
-                  layout
-                  onClick={() => setExpandedIndex(isExpanded ? null : i)}
-                  whileHover={{ scale: 1.01 }}
-                  className={`ml-16 md:ml-0 md:w-[calc(50%-3rem)] cursor-pointer rounded-3xl border bg-background p-5 md:p-6 transition-all ${
-                    isExpanded
-                      ? "border-primary/20 shadow-lg shadow-primary/5"
-                      : "border-border/60 hover:shadow-md hover:border-primary/10"
-                  } ${isLeft ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"}`}
+                  initial={{ opacity: 0, x: isRight ? 40 : -40, y: 20 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, delay: i * 0.06, type: "spring", stiffness: 80, damping: 18 }}
+                  className={`relative flex flex-col md:flex-row items-center gap-4 md:gap-6 ${
+                    isRight ? "md:flex-row-reverse" : ""
+                  }`}
+                  style={{ zIndex: 1 }}
                 >
-                  <span
-                    className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
+                  {/* Milestone marker */}
+                  <motion.div
+                    whileHover={{ scale: 1.2, rotate: 10 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setExpandedIndex(isExpanded ? null : i)}
+                    className={`shrink-0 cursor-pointer w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border-4 border-card shadow-lg transition-all ${
                       event.highlight
-                        ? "text-secondary bg-secondary/10"
-                        : "text-primary bg-primary/10"
+                        ? "bg-secondary text-secondary-foreground shadow-secondary/25"
+                        : "bg-primary text-primary-foreground shadow-primary/15"
                     }`}
                   >
-                    {event.date}
-                  </span>
-                  <h3 className="text-lg font-display font-bold text-foreground mb-1">
-                    {event.title}
-                  </h3>
+                    <Icon size={22} />
+                  </motion.div>
 
-                  <AnimatePresence initial={false}>
-                    {isExpanded ? (
-                      <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-sm text-muted-foreground leading-relaxed pt-1">
-                          {event.description}
-                        </p>
-                        {event.press && <PressCard press={event.press} />}
-                      </motion.div>
-                    ) : (
-                      <motion.p
-                        key="hint"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-xs text-primary/70 font-medium mt-1 flex items-center gap-1"
-                        style={{ justifyContent: isLeft ? "flex-end" : "flex-start" }}
-                      >
-                        <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
-                        Tap to read more
-                        {event.press && (
-                          <>
-                            <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
-                            <span className="text-secondary font-bold">Press coverage</span>
-                          </>
-                        )}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
+                  {/* Content card */}
+                  <motion.div
+                    layout
+                    onClick={() => setExpandedIndex(isExpanded ? null : i)}
+                    whileHover={{ y: -4, scale: 1.01 }}
+                    className={`cursor-pointer w-full md:w-[42%] rounded-3xl border p-5 md:p-6 transition-all ${
+                      isExpanded
+                        ? "border-primary/20 shadow-xl shadow-primary/8 bg-background"
+                        : "border-border/50 bg-background hover:shadow-lg hover:border-primary/10"
+                    }`}
+                  >
+                    {/* Date badge */}
+                    <span
+                      className={`inline-block text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 ${
+                        event.highlight
+                          ? "text-secondary bg-secondary/10"
+                          : "text-primary bg-primary/10"
+                      }`}
+                    >
+                      {event.date}
+                    </span>
+
+                    <h3 className="text-lg font-display font-bold text-foreground mb-1">
+                      {event.title}
+                    </h3>
+
+                    <AnimatePresence initial={false}>
+                      {isExpanded ? (
+                        <motion.div
+                          key="content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-sm text-muted-foreground leading-relaxed pt-1">
+                            {event.description}
+                          </p>
+                          {event.press && <PressCard press={event.press} />}
+                        </motion.div>
+                      ) : (
+                        <motion.p
+                          key="hint"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="text-xs text-primary/70 font-medium mt-1.5 flex items-center gap-1.5"
+                        >
+                          <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
+                          Tap to read more
+                          {event.press && (
+                            <>
+                              <span className="inline-block w-1 h-1 rounded-full bg-secondary/50" />
+                              <span className="text-secondary font-bold">Press coverage</span>
+                            </>
+                          )}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+
+                {/* Spacer for road curves */}
+                {i < events.length - 1 && <div className="hidden md:block h-12" />}
+              </div>
             );
           })}
         </div>
