@@ -50,10 +50,11 @@ const events: TimelineEvent[] = [
   },
   {
     date: "Late 2025",
-    title: "Web Summit & International Recognition",
+    title: "Web Summit Scholarship",
     icon: Award,
+    highlight: true,
     description:
-      "Swap'n'Serve is selected to present at Web Summit, one of the world's largest tech conferences. David receives further invitations to speak across Europe, from Portugal to Romania, sharing the Swap'n'Serve model with communities abroad.",
+      "David Hackett's work with Swap'n'Serve earns him a prestigious Web Summit scholarship, bringing him to one of the world's largest tech conferences in Lisbon. The experience opens doors to new connections, collaborators, and ideas — proving that grassroots community work can resonate on a global stage.",
   },
   {
     date: "March 2026",
