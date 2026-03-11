@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const SiteFooter = () => {
   return (

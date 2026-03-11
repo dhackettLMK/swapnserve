@@ -48,8 +48,8 @@ const SiteHeader = () => {
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="font-display text-xl md:text-2xl font-bold text-primary">
-          Swap<span className="text-secondary">'n'</span>Serve
+        <a href="#" className="flex items-center gap-2">
+          <img src={logo} alt="Swap'n'Serve logo" className="h-10 md:h-12 w-auto" />
         </a>
 
         {/* Desktop nav */}
