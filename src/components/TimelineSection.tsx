@@ -68,6 +68,21 @@ const events: TimelineEvent[] = [
     },
   },
   {
+    date: "Early 2026",
+    title: "Tekpon AI Summit Invite",
+    icon: Award,
+    highlight: true,
+    description:
+      "After catching the attention of Tekpon founder Alexandru Stan at Web Summit, David receives a premium invite to the Tekpon AI Summit in Bucharest, Romania. A chance encounter turns into a global opportunity — proof that grassroots community work opens extraordinary doors.",
+    press: {
+      outlet: "Irish Independent",
+      headline: "Limerick student lands premium invite to Romania's Tekpon AI Summit",
+      excerpt:
+        "A Limerick student has landed a premium invite to Romania's Tekpon AI Summit after a chance encounter at Web Summit. 'It's crazy to think how much my life has changed.'",
+      url: "https://www.independent.ie/regionals/limerick/news/limerick-student-lands-premium-invite-to-romanias-tekpon-ai-summit-its-crazy-to-think-how-much-my-life-has-changed/a460097414.html",
+    },
+  },
+  {
     date: "March 2026",
     title: "Exciting New Collaborations",
     icon: MapPin,
@@ -107,7 +122,7 @@ const floatingPhotos: {
     side: "right",
   },
   {
-    afterIndex: 4, // After "Exciting New Collaborations"
+    afterIndex: 5, // After "Exciting New Collaborations"
     src: teamPhoto,
     alt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
     caption: "The team & partners",
