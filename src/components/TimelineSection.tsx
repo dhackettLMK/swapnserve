@@ -122,7 +122,7 @@ const floatingPhotos: {
     side: "right",
   },
   {
-    afterIndex: 4, // After "Exciting New Collaborations"
+    afterIndex: 5, // After "Exciting New Collaborations"
     src: teamPhoto,
     alt: "The Swap'n'Serve team alongside partners Fior Jewellery and Van Rossum Clothing",
     caption: "The team & partners",
