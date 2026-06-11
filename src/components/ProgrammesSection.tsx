@@ -64,7 +64,7 @@ const Confetti = () => {
         left: Math.random() * 100,
         delay: Math.random() * 4,
         duration: 4 + Math.random() * 3,
-        color: ["accent", "secondary", "primary-foreground"][i % 3],
+        color: ["hsl(var(--accent))", "hsl(var(--secondary))", "hsl(0 0% 100%)"][i % 3],
         size: 4 + Math.random() * 4,
       })),
     []
@@ -74,8 +74,14 @@ const Confetti = () => {
       {pieces.map((p, i) => (
         <motion.span
           key={i}
-          className={`absolute rounded-sm bg-${p.color}`}
-          style={{ left: `${p.left}%`, width: p.size, height: p.size, top: "100%" }}
+          className="absolute rounded-sm"
+          style={{
+            left: `${p.left}%`,
+            width: p.size,
+            height: p.size,
+            top: "100%",
+            backgroundColor: p.color,
+          }}
           animate={{ y: [-0, -320], opacity: [0, 1, 0], rotate: [0, 360] }}
           transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeOut" }}
         />
