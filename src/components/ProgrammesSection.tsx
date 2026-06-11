@@ -489,37 +489,7 @@ const ProgrammesSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {/* Flagship: Clothing Swap */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ y: -6, transition: { duration: 0.25 } }}
-            className="relative rounded-3xl border border-border bg-card p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5 overflow-hidden"
-          >
-            <div className="absolute top-5 right-5 inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-secondary">
-              Flagship Event
-            </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
-              <Shirt size={26} className="text-primary" />
-            </div>
-            <h3 className="text-2xl font-section font-bold text-foreground mb-3">
-              The Clothing Swap
-            </h3>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              Our flagship event. We gather clean, usable clothing from across Limerick and
-              redistribute it to families and individuals, no questions asked. A simple,
-              respectful exchange rooted in dignity and circular fashion.
-            </p>
-            <a
-              href="#how-it-works"
-              className="inline-flex items-center rounded-full border border-primary bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
-            >
-              See how it works
-            </a>
-          </motion.div>
-
+          <FlagshipCard />
           <CupCard />
           <HackathonCard />
         </div>
