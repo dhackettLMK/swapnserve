@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Newspaper, ExternalLink, Calendar, MapPin, Users, Lightbulb, Award, Mic, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
-import websummitPhoto from "@/assets/websummit-photo.jpg";
 import speakingPhoto from "@/assets/speaking-photo.jpg";
 
 type TimelineEvent = {
