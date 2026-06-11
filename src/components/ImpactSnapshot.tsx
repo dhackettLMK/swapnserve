@@ -35,7 +35,7 @@ const ImpactSnapshot = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
