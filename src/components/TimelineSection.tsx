@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Newspaper, ExternalLink, Calendar, MapPin, Users, Lightbulb, Award, Mic, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
-import websummitPhoto from "@/assets/websummit-photo.jpg";
 import speakingPhoto from "@/assets/speaking-photo.jpg";
 
 type TimelineEvent = {
@@ -49,23 +48,6 @@ const events: TimelineEvent[] = [
       excerpt:
         "A new community-based project organised by a group of Limerick young people, has set out with one clear goal: to give back and help those in need, no questions asked.",
       url: "https://www.ilovelimerick.ie/swap-n-serve-community-project/",
-    },
-  },
-  {
-    date: "Late 2025",
-    title: "Web Summit Scholarship",
-    icon: Award,
-    highlight: true,
-    image: websummitPhoto,
-    imageAlt: "David Hackett at Web Summit with his Scholar badge",
-    description:
-      "David Hackett's work with Swap'n'Serve earns him a prestigious Web Summit scholarship, bringing him to one of the world's largest tech conferences in Lisbon. The experience opens doors to new connections, collaborators, and ideas, proving that grassroots community work can resonate on a global stage.",
-    press: {
-      outlet: "Irish Independent",
-      headline: "Meet the Limerick student with a keen eye for AI who has just secured Web Summit invite",
-      excerpt:
-        "A Limerick student with a passion for AI and community impact has secured an invite to Web Summit, one of the world's largest technology conferences.",
-      url: "https://www.independent.ie/regionals/limerick/news/meet-the-limerick-student-with-a-keen-eye-for-ai-who-has-just-secured-web-summit-invite/a949833630.html",
     },
   },
   {
