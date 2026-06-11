@@ -1,13 +1,5 @@
 import { motion } from "framer-motion";
-import { CalendarDays, MapPin, Clock, CheckCircle2, Info } from "lucide-react";
-
-const acceptedItems = [
-  "Clean, wearable clothing (all sizes)",
-  "Shoes in good condition",
-  "Coats, jackets, and warm layers",
-  "School uniforms",
-  "Baby and children's clothing",
-];
+import { MapPin } from "lucide-react";
 
 const EventsSection = () => {
   return (
@@ -31,39 +23,7 @@ const EventsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5"
-          >
-            <h3 className="text-xl font-section font-bold text-foreground mb-4 flex items-center gap-2">
-              <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
-                <CalendarDays size={18} className="text-secondary" />
-              </div>
-              Upcoming Event
-            </h3>
-            <div className="rounded-2xl bg-muted p-5 mb-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                <Info size={16} />
-                <span className="italic">Details to be announced</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                We are planning our next clothing swap event. Follow us on social media or check
-                back here for updates on dates and locations.
-              </p>
-            </div>
-            <a
-              href="https://www.gofundme.com/f/swapnserve-2"
-              className="inline-flex items-center rounded-full border border-primary bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Make a Donation
-            </a>
-          </motion.div>
-
+        <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
