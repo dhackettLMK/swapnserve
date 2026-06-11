@@ -16,11 +16,11 @@ const CtaBanner = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground mb-6">
-            Ready to Make a Difference?
+            Lend a Hand in Limerick.
           </h2>
           <p className="text-lg text-primary-foreground/80 max-w-xl mx-auto mb-8">
-            Whether you have an hour or a day, your time and energy can help families across
-            Limerick. Join the Swap'n'Serve volunteer team today.
+            Whether you have an hour or a day, your time supports families across the city. Join
+            the Swap'n'Serve volunteer team.
           </p>
           <motion.a
             href="https://example.com/volunteer"
@@ -31,9 +31,6 @@ const CtaBanner = () => {
             Sign Up to Volunteer
             <ArrowRight size={20} />
           </motion.a>
-          <p className="text-sm text-primary-foreground/60 mt-4">
-            Takes 2 minutes. No experience needed.
-          </p>
         </motion.div>
       </div>
     </section>

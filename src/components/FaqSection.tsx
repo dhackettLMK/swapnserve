@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "How can my school or organisation get involved?",
-    a: "We would love to partner with you! Reach out via our contact details in the footer, and we will arrange a conversation about how we can collaborate.",
+    a: "We welcome partnerships with schools, community groups, and local organisations. Reach out via our contact details in the footer and we will arrange a conversation about how we can collaborate.",
   },
 ];
 
@@ -59,7 +59,7 @@ const FaqSection = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-white/70 text-lg max-w-xl mx-auto">
-            Got questions? We have got answers.
+            Answers to the things we are asked most often.
           </p>
         </motion.div>
 

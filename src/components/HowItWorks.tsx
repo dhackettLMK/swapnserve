@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Package, Shirt, HandHeart, Sparkles, Repeat } from "lucide-react";
+import { Package, Shirt, HandHeart, Users, Repeat } from "lucide-react";
 
 const steps = [
   {
@@ -18,7 +18,7 @@ const steps = [
     description: "At our swap events, anyone can pick up what they need. No sign-up, no paperwork, no questions asked.",
   },
   {
-    icon: Sparkles,
+    icon: Users,
     title: "Empower",
     description: "We engage young people as volunteers, building confidence, skills, and a sense of purpose.",
   },

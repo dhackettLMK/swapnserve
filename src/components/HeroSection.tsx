@@ -31,7 +31,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5 }}
             className="mb-5 inline-flex rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground/90"
           >
-            Community Initiative · Limerick
+            Limerick Community Nonprofit
           </motion.p>
 
           <motion.h1
@@ -73,14 +73,7 @@ const HeroSection = () => {
             </a>
           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mb-8 text-sm text-primary-foreground/70"
-          >
-            Takes 2 minutes. No experience needed.
-          </motion.p>
+          <div className="mb-8" />
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}

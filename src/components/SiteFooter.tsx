@@ -84,10 +84,8 @@ const SiteFooter = () => {
             <strong>Privacy:</strong> We collect only the minimum personal information needed to
             coordinate volunteers and events. Your data is never sold or shared with third parties.
           </p>
-          <div className="flex items-center gap-1 text-xs text-primary-foreground/30 mt-6">
-            <span>© {new Date().getFullYear()} Swap'n'Serve. Made with</span>
-            <Heart size={12} className="text-secondary" />
-            <span>in Limerick.</span>
+          <div className="text-xs text-primary-foreground/30 mt-6">
+            © {new Date().getFullYear()} Swap'n'Serve, Limerick.
           </div>
         </div>
       </div>
