@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import { Shirt, Users, School, Recycle } from "lucide-react";
+import { Shirt, Users, School, Recycle, Heart } from "lucide-react";
 
 const metrics = [
-  { icon: Shirt, value: "1,200+", label: "Items Redistributed" },
-  { icon: Users, value: "50+", label: "Active Volunteers" },
-  { icon: School, value: "10+", label: "Partner Schools" },
-  { icon: Recycle, value: "500 kg", label: "Textile Waste Diverted" },
+  { icon: Shirt, value: "4,000+", label: "Items Redistributed" },
+  { icon: Users, value: "75+", label: "Active Volunteers" },
+  { icon: School, value: "5", label: "Partner Schools" },
+  { icon: Recycle, value: "1,200+ kg", label: "Textile Waste Diverted" },
+  { icon: Heart, value: "10+", label: "Local Charities Supported" },
 ];
 
 const ImpactSnapshot = () => {
@@ -34,7 +35,7 @@ const ImpactSnapshot = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
