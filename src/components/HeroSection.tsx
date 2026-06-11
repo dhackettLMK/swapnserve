@@ -40,8 +40,8 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-6 text-balance font-display text-4xl font-bold leading-tight text-primary-foreground sm:text-5xl md:text-6xl"
           >
-            Clothes Find New Homes.
-            <span className="block text-primary-foreground">Communities Grow Stronger.</span>
+            A Nonprofit for the
+            <span className="block text-primary-foreground">Betterment of Limerick City.</span>
           </motion.h1>
 
           <motion.p
@@ -50,8 +50,9 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8 max-w-2xl text-base leading-relaxed text-primary-foreground/90 md:text-lg"
           >
-            Swap'n'Serve is a Limerick-based community initiative that redistributes clean,
-            usable clothing to families and individuals, no questions asked. Founded by
+            Swap'n'Serve is a Limerick-based nonprofit organisation working to strengthen our
+            city through community-led programmes. Our flagship Clothing Swap redistributes
+            clean, usable clothing to families and individuals, no questions asked. Founded by
             David Hackett, we focus on sustainability, dignity, and neighbour-to-neighbour support.
           </motion.p>
 
