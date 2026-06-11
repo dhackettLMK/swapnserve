@@ -35,7 +35,7 @@ const ImpactSnapshot = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-6">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
@@ -44,18 +44,30 @@ const ImpactSnapshot = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
               whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-              className="rounded-3xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 text-center shadow-sm cursor-default transition-shadow hover:shadow-lg hover:shadow-white/5"
+              className={`rounded-3xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 text-center shadow-sm cursor-default transition-shadow hover:shadow-lg hover:shadow-white/5 ${
+                i === 0
+                  ? "col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col justify-center items-center bg-white/15"
+                  : "lg:col-span-2"
+              }`}
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                className="w-12 h-12 mx-auto rounded-2xl bg-white/15 flex items-center justify-center mb-4"
+                className={`mx-auto rounded-2xl bg-white/15 flex items-center justify-center mb-4 ${
+                  i === 0 ? "w-16 h-16 lg:w-20 lg:h-20" : "w-12 h-12"
+                }`}
               >
-                <m.icon size={24} className="text-white" />
+                <m.icon size={i === 0 ? 36 : 24} className="text-white" />
               </motion.div>
-              <div className="text-3xl md:text-4xl font-section font-bold text-white mb-1">
+              <div
+                className={`font-section font-bold text-white mb-1 ${
+                  i === 0 ? "text-5xl lg:text-6xl" : "text-3xl md:text-4xl"
+                }`}
+              >
                 {m.value}
               </div>
-              <div className="text-sm font-medium text-white/80">{m.label}</div>
+              <div className={`font-medium text-white/80 ${i === 0 ? "text-base" : "text-sm"}`}>
+                {m.label}
+              </div>
             </motion.div>
           ))}
         </div>
