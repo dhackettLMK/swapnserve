@@ -17,7 +17,7 @@ const PartnersSection = () => {
           <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Together
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
             Community Partners
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">

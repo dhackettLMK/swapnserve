@@ -15,7 +15,7 @@ const ProgrammesSection = () => {
           <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Our Programmes
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
             Built for the Betterment of Limerick
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
@@ -40,7 +40,7 @@ const ProgrammesSection = () => {
             <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
               <Shirt size={26} className="text-primary" />
             </div>
-            <h3 className="text-2xl font-display font-bold text-foreground mb-3">
+            <h3 className="text-2xl font-section font-bold text-foreground mb-3">
               The Clothing Swap
             </h3>
             <p className="text-muted-foreground leading-relaxed mb-6">
@@ -72,7 +72,7 @@ const ProgrammesSection = () => {
               <div className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
                 <Trophy size={26} className="text-accent" />
               </div>
-              <h3 className="text-2xl font-display font-bold text-primary-foreground mb-1">
+              <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
                 Swap'n'Serve Cup
               </h3>
               <p
@@ -120,7 +120,7 @@ const ProgrammesSection = () => {
               <div className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
                 <Code size={26} className="text-accent" />
               </div>
-              <h3 className="text-2xl font-display font-bold text-primary-foreground mb-1">
+              <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
                 Swap'n'Serve Hackathon
               </h3>
               <p

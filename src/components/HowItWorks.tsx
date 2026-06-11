@@ -43,7 +43,7 @@ const HowItWorks = () => {
           <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             The Process
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
             How It Works
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
@@ -70,7 +70,7 @@ const HowItWorks = () => {
                 <step.icon size={26} className="text-primary" />
               </motion.div>
               <div className="text-xs font-semibold text-secondary mb-1 tracking-wide">Step {i + 1}</div>
-              <h3 className="text-lg font-display font-bold text-foreground mb-2">{step.title}</h3>
+              <h3 className="text-lg font-section font-bold text-foreground mb-2">{step.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
