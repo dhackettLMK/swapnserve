@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 
 const EventsSection = () => {
   return (
-    <section id="events" className="py-20 md:py-28">
+    <section id="donate" className="py-20 md:py-28">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -13,13 +13,13 @@ const EventsSection = () => {
           className="text-center mb-16"
         >
           <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
-            Get Involved
+            Support Us
           </span>
           <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
-            Events & Donations
+            Want to Donate?
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Find out when our next event is happening and how you can donate.
+            Your contribution helps us keep going. Every euro goes toward redistributing clothing to families in need across Limerick.
           </p>
         </motion.div>
 

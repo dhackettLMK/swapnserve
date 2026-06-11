@@ -24,7 +24,7 @@ const SiteFooter = () => {
                 { label: "How It Works", href: "#how-it-works" },
                 { label: "Our Impact", href: "#impact" },
                 { label: "Our Journey", href: "#timeline" },
-                { label: "Events & Donations", href: "#events" },
+                { label: "Donate", href: "#donate" },
                 { label: "Volunteer", href: "#volunteer" },
                 { label: "FAQ", href: "#faq" },
               ].map((link) => (
