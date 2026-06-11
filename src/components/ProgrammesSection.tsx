@@ -1,5 +1,318 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Code } from "lucide-react";
+import { Shirt, Trophy, Code, Terminal } from "lucide-react";
+import { useMemo } from "react";
+
+/* -------------------------------------------------------------------------- */
+/*  Swap'n'Serve Cup — world-cup inspired stadium card                        */
+/* -------------------------------------------------------------------------- */
+
+const StadiumBackdrop = () => (
+  <svg
+    viewBox="0 0 400 300"
+    className="absolute inset-0 w-full h-full opacity-[0.12] pointer-events-none"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    {/* Pitch outline */}
+    <rect x="20" y="40" width="360" height="220" rx="6" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" />
+    {/* Halfway line */}
+    <line x1="200" y1="40" x2="200" y2="260" stroke="hsl(var(--accent))" strokeWidth="1.5" />
+    {/* Centre circle */}
+    <circle cx="200" cy="150" r="42" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" />
+    <circle cx="200" cy="150" r="2" fill="hsl(var(--accent))" />
+    {/* Penalty boxes */}
+    <rect x="20" y="95" width="55" height="110" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" />
+    <rect x="325" y="95" width="55" height="110" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" />
+    {/* Goal boxes */}
+    <rect x="20" y="125" width="20" height="50" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" />
+    <rect x="360" y="125" width="20" height="50" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" />
+  </svg>
+);
+
+const Spotlight = ({ delay }: { delay: number }) => (
+  <motion.div
+    aria-hidden="true"
+    className="absolute -top-32 left-1/2 w-[120%] h-[140%] pointer-events-none"
+    style={{
+      background:
+        "radial-gradient(ellipse 25% 60% at center top, hsl(var(--accent) / 0.22), transparent 70%)",
+      transformOrigin: "50% 0%",
+    }}
+    animate={{ rotate: [-18, 18, -18] }}
+    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay }}
+  />
+);
+
+const Football = () => (
+  <motion.div
+    className="absolute top-6 right-6 text-3xl select-none pointer-events-none drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)]"
+    initial={{ y: 0, rotate: 0 }}
+    animate={{ y: [0, -10, 0], rotate: [0, 360] }}
+    transition={{
+      y: { duration: 1.6, repeat: Infinity, ease: "easeInOut" },
+      rotate: { duration: 4, repeat: Infinity, ease: "linear" },
+    }}
+  >
+    ⚽
+  </motion.div>
+);
+
+const Confetti = () => {
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 12 }).map((_, i) => ({
+        left: Math.random() * 100,
+        delay: Math.random() * 4,
+        duration: 4 + Math.random() * 3,
+        color: ["hsl(var(--accent))", "hsl(var(--secondary))", "hsl(0 0% 100%)"][i % 3],
+        size: 4 + Math.random() * 4,
+      })),
+    []
+  );
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+      {pieces.map((p, i) => (
+        <motion.span
+          key={i}
+          className="absolute rounded-sm"
+          style={{
+            left: `${p.left}%`,
+            width: p.size,
+            height: p.size,
+            top: "100%",
+            backgroundColor: p.color,
+          }}
+          animate={{ y: [-0, -320], opacity: [0, 1, 0], rotate: [0, 360] }}
+          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeOut" }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const CupCard = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: 0.1 }}
+    whileHover={{ y: -6, transition: { duration: 0.25 } }}
+    className="group relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary via-primary to-[hsl(152_50%_22%)] p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/30 overflow-hidden"
+  >
+    <StadiumBackdrop />
+    <Spotlight delay={0} />
+    <Spotlight delay={2} />
+    <Confetti />
+    <Football />
+
+    <div className="relative">
+      <motion.div
+        className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5"
+        whileHover={{ rotate: [0, -8, 8, 0], scale: 1.05 }}
+        transition={{ duration: 0.6 }}
+      >
+        <Trophy size={26} className="text-accent drop-shadow-[0_0_8px_hsl(var(--accent)/0.6)]" />
+      </motion.div>
+
+      <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
+        Swap'n'Serve Cup
+      </h3>
+
+      <div className="flex items-center gap-2 mb-4">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+        </span>
+        <p
+          className="text-sm font-semibold uppercase tracking-[0.18em]"
+          style={{ color: "hsl(var(--accent))" }}
+        >
+          Coming Soon
+        </p>
+      </div>
+
+      <p className="text-primary-foreground/85 leading-relaxed mb-4">
+        A community football tournament with a €1,000 prize pot, bringing Limerick
+        together on the pitch.
+      </p>
+      <p className="text-primary-foreground/75 leading-relaxed mb-6">
+        Beyond the final whistle, we'll be installing permanent goals into the local
+        community, so neighbours of every age can keep enjoying the game long after
+        the trophy is lifted.
+      </p>
+
+      <div className="flex flex-wrap gap-2">
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent"
+        >
+          <Trophy size={11} /> €1,000 prize
+        </motion.span>
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
+        >
+          Permanent goals installed
+        </motion.span>
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
+        >
+          For the whole community
+        </motion.span>
+      </div>
+    </div>
+  </motion.div>
+);
+
+/* -------------------------------------------------------------------------- */
+/*  Swap'n'Serve Hackathon — terminal / matrix-rain card                      */
+/* -------------------------------------------------------------------------- */
+
+const MatrixRain = () => {
+  const columns = useMemo(() => {
+    const chars = "10{}<>/=;_$#01ABCDEF".split("");
+    return Array.from({ length: 14 }).map((_, i) => ({
+      left: (i / 14) * 100 + Math.random() * 3,
+      duration: 6 + Math.random() * 6,
+      delay: Math.random() * 5,
+      glyphs: Array.from({ length: 18 }).map(
+        () => chars[Math.floor(Math.random() * chars.length)]
+      ),
+    }));
+  }, []);
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.18] group-hover:opacity-[0.35] transition-opacity duration-500">
+      {columns.map((col, i) => (
+        <motion.div
+          key={i}
+          className="absolute -top-1/2 font-mono text-[11px] leading-[1.1] text-accent whitespace-pre"
+          style={{ left: `${col.left}%` }}
+          animate={{ y: ["0%", "220%"] }}
+          transition={{
+            duration: col.duration,
+            repeat: Infinity,
+            ease: "linear",
+            delay: col.delay,
+          }}
+        >
+          {col.glyphs.map((g, j) => (
+            <div
+              key={j}
+              style={{ opacity: 1 - j / col.glyphs.length }}
+            >
+              {g}
+            </div>
+          ))}
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+const Cursor = () => (
+  <motion.span
+    aria-hidden="true"
+    className="inline-block w-[7px] h-[14px] bg-accent ml-1 align-middle"
+    animate={{ opacity: [1, 0, 1] }}
+    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+  />
+);
+
+const HackathonCard = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: 0.2 }}
+    whileHover={{ y: -6, transition: { duration: 0.25 } }}
+    className="group relative rounded-3xl border border-accent/30 bg-gradient-to-br from-[hsl(152_45%_18%)] via-primary to-primary/90 p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/30 overflow-hidden"
+  >
+    <MatrixRain />
+
+    {/* Scanline overlay */}
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 pointer-events-none opacity-30 mix-blend-overlay"
+      style={{
+        backgroundImage:
+          "repeating-linear-gradient(0deg, hsl(var(--accent) / 0.08) 0px, hsl(var(--accent) / 0.08) 1px, transparent 1px, transparent 3px)",
+      }}
+    />
+
+    {/* Corner brackets — terminal chrome */}
+    {(["top-3 left-3", "top-3 right-3", "bottom-3 left-3", "bottom-3 right-3"] as const).map(
+      (pos, i) => (
+        <div
+          key={i}
+          aria-hidden="true"
+          className={`absolute ${pos} w-3 h-3 border-accent/60 ${
+            i === 0
+              ? "border-l border-t"
+              : i === 1
+              ? "border-r border-t"
+              : i === 2
+              ? "border-l border-b"
+              : "border-r border-b"
+          }`}
+        />
+      )
+    )}
+
+    <div className="relative">
+      <motion.div
+        className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5"
+        whileHover={{ rotate: [0, -4, 4, -2, 2, 0] }}
+        transition={{ duration: 0.4 }}
+      >
+        <Code size={26} className="text-accent drop-shadow-[0_0_8px_hsl(var(--accent)/0.6)]" />
+      </motion.div>
+
+      <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1 group-hover:[text-shadow:_2px_0_0_hsl(var(--accent)/0.8),_-2px_0_0_hsl(var(--secondary)/0.6)] transition-all">
+        Swap'n'Serve Hackathon
+      </h3>
+
+      <div className="font-mono text-[12px] text-accent/90 mb-4 flex items-center">
+        <Terminal size={12} className="mr-1.5" />
+        <span className="opacity-70">$</span>
+        <span className="ml-1.5">status --coming-soon</span>
+        <Cursor />
+      </div>
+
+      <p className="text-primary-foreground/85 leading-relaxed mb-4">
+        A hands-on tech event bringing Limerick's builders and problem-solvers together
+        to create tools that serve our city.
+      </p>
+      <p className="text-primary-foreground/75 leading-relaxed mb-6">
+        We're partnering with a YC-backed company founded right here in Limerick City,
+        giving participants mentorship from founders who started where they stand.
+      </p>
+
+      <div className="flex flex-wrap gap-2">
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-[11px] font-semibold text-accent"
+        >
+          <span className="opacity-70">{"</>"}</span> YC-backed partner
+        </motion.span>
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 font-mono text-[11px] font-medium text-primary-foreground/90"
+        >
+          Limerick-founded
+        </motion.span>
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 font-mono text-[11px] font-medium text-primary-foreground/90"
+        >
+          Open to all skill levels
+        </motion.span>
+      </div>
+    </div>
+  </motion.div>
+);
+
+/* -------------------------------------------------------------------------- */
 
 const ProgrammesSection = () => {
   return (
@@ -56,100 +369,8 @@ const ProgrammesSection = () => {
             </a>
           </motion.div>
 
-          {/* Swap'n'Serve Cup */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            whileHover={{ y: -6, transition: { duration: 0.25 } }}
-            className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary to-primary/90 p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/20 overflow-hidden"
-          >
-            <div className="absolute -top-16 -right-16 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-20 -left-10 w-56 h-56 bg-secondary/10 rounded-full blur-3xl" />
-
-            <div className="relative">
-              <div className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
-                <Trophy size={26} className="text-accent" />
-              </div>
-              <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
-                Swap'n'Serve Cup
-              </h3>
-              <p
-                className="text-sm font-semibold uppercase tracking-[0.18em] mb-4"
-                style={{ color: "hsl(var(--accent))" }}
-              >
-                Coming Soon
-              </p>
-              <p className="text-primary-foreground/85 leading-relaxed mb-4">
-                A community football tournament with a €1,000 prize pot, bringing Limerick
-                together on the pitch.
-              </p>
-              <p className="text-primary-foreground/75 leading-relaxed mb-6">
-                Beyond the final whistle, we'll be installing permanent goals into the local
-                community, so neighbours of every age can keep enjoying the game long after
-                the trophy is lifted.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent">
-                  €1,000 prize
-                </span>
-                <span className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90">
-                  Permanent goals installed
-                </span>
-                <span className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90">
-                  For the whole community
-                </span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Swap'n'Serve Hackathon */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ y: -6, transition: { duration: 0.25 } }}
-            className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary to-primary/90 p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/20 overflow-hidden"
-          >
-            <div className="absolute -top-16 -right-16 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-20 -left-10 w-56 h-56 bg-secondary/10 rounded-full blur-3xl" />
-
-            <div className="relative">
-              <div className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
-                <Code size={26} className="text-accent" />
-              </div>
-              <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
-                Swap'n'Serve Hackathon
-              </h3>
-              <p
-                className="text-sm font-semibold uppercase tracking-[0.18em] mb-4"
-                style={{ color: "hsl(var(--accent))" }}
-              >
-                Coming Soon
-              </p>
-              <p className="text-primary-foreground/85 leading-relaxed mb-4">
-                A hands-on tech event bringing Limerick's builders and problem-solvers together
-                to create tools that serve our city.
-              </p>
-              <p className="text-primary-foreground/75 leading-relaxed mb-6">
-                We're partnering with a YC-backed company founded right here in Limerick City,
-                giving participants mentorship from founders who started where they stand.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent">
-                  YC-backed partner
-                </span>
-                <span className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90">
-                  Limerick-founded
-                </span>
-                <span className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90">
-                  Open to all skill levels
-                </span>
-              </div>
-            </div>
-          </motion.div>
+          <CupCard />
+          <HackathonCard />
         </div>
       </div>
     </section>
