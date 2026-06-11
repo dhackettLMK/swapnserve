@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         display: ["var(--font-display)"],
+        section: ["var(--font-section)"],
         body: ["var(--font-body)"],
       },
       colors: {

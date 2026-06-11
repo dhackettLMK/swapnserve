@@ -55,7 +55,7 @@ const FaqSection = () => {
           <span className="inline-block rounded-full bg-white/15 text-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Questions
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-white mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-white/70 text-lg max-w-xl mx-auto">

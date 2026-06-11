@@ -243,7 +243,7 @@ const TimelineSection = () => {
             <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
               Our Story
             </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
               The Journey So Far
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
@@ -311,7 +311,7 @@ const TimelineSection = () => {
                           {event.date}
                         </span>
 
-                        <h3 className="text-lg font-display font-bold text-foreground mb-1">
+                        <h3 className="text-lg font-section font-bold text-foreground mb-1">
                           {event.title}
                         </h3>
 

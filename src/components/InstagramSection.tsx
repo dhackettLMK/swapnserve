@@ -36,7 +36,7 @@ const InstagramSection = () => {
             <Instagram size={18} className="text-[hsl(330,80%,60%)]" />
             @SwapNServe
           </motion.div>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
             Latest from Our Feed
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">

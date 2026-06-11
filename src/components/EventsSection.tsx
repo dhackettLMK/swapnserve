@@ -23,7 +23,7 @@ const EventsSection = () => {
           <span className="inline-block rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Get Involved
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
             Events & Donations
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
@@ -38,9 +38,9 @@ const EventsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5"
+            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5"
           >
-            <h3 className="text-xl font-display font-bold text-foreground mb-4 flex items-center gap-2">
+            <h3 className="text-xl font-section font-bold text-foreground mb-4 flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
                 <CalendarDays size={18} className="text-secondary" />
               </div>
@@ -70,9 +70,9 @@ const EventsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5"
+            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5"
           >
-            <h3 className="text-xl font-display font-bold text-foreground mb-4 flex items-center gap-2">
+            <h3 className="text-xl font-section font-bold text-foreground mb-4 flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
                 <MapPin size={18} className="text-secondary" />
               </div>

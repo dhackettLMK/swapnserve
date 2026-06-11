@@ -26,7 +26,7 @@ const ImpactSnapshot = () => {
           <span className="inline-block rounded-full bg-white/15 text-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Making a Difference
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-white mb-4">
             Our Impact So Far
           </h2>
           <p className="text-white/70 text-lg max-w-xl mx-auto">
@@ -51,7 +51,7 @@ const ImpactSnapshot = () => {
               >
                 <m.icon size={24} className="text-white" />
               </motion.div>
-              <div className="text-3xl md:text-4xl font-display font-bold text-white mb-1">
+              <div className="text-3xl md:text-4xl font-section font-bold text-white mb-1">
                 {m.value}
               </div>
               <div className="text-sm font-medium text-white/80">{m.label}</div>

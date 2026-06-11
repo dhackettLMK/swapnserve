@@ -15,7 +15,7 @@ const CtaBanner = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground mb-6">
+          <h2 className="text-3xl md:text-5xl font-section font-bold text-primary-foreground mb-6">
             Lend a Hand in Limerick.
           </h2>
           <p className="text-lg text-primary-foreground/80 max-w-xl mx-auto mb-8">

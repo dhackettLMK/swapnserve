@@ -51,7 +51,7 @@ const VolunteerRoles = () => {
           <span className="inline-block rounded-full bg-white/15 text-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Join the Team
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-white mb-4">
             Volunteer With Us
           </h2>
           <p className="text-white/70 text-lg max-w-xl mx-auto">
@@ -68,7 +68,7 @@ const VolunteerRoles = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="group rounded-3xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 cursor-default transition-shadow hover:shadow-lg hover:shadow-white/5"
+              className="group rounded-3xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 cursor-default hover-lift hover:shadow-lg hover:shadow-white/5"
             >
               <motion.div
                 whileHover={{ rotate: [0, -6, 6, 0] }}
@@ -77,7 +77,7 @@ const VolunteerRoles = () => {
               >
                 <role.icon size={24} className="text-white" />
               </motion.div>
-              <h3 className="text-lg font-display font-bold text-white mb-1">{role.title}</h3>
+              <h3 className="text-lg font-section font-bold text-white mb-1">{role.title}</h3>
               <div className="flex items-center gap-1.5 text-xs text-white/60 mb-3">
                 <Clock size={12} />
                 {role.time}
