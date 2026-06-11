@@ -51,21 +51,6 @@ const events: TimelineEvent[] = [
     },
   },
   {
-    date: "Early 2026",
-    title: "Tekpon AI Summit Invite",
-    icon: Award,
-    highlight: true,
-    description:
-      "David's community work with Swap'n'Serve helped earn him a place as one of 50 Irish students selected for Web Summit, and it was there, waiting for a taxi in the rain, that he met Gina Schinkel of Driftawave. Struck by his drive and impressed by his AI and systems engineering skills, she invited him to attend the Tekpon AI Summit in Bucharest on a premium ticket. What started as a local clothing swap had opened doors to an international stage.",
-    press: {
-      outlet: "Irish Independent",
-      headline: "Limerick student lands premium invite to Romania's Tekpon AI Summit",
-      excerpt:
-        "A Limerick student has landed a premium invite to Romania's Tekpon AI Summit after a chance encounter at Web Summit. 'It's crazy to think how much my life has changed.'",
-      url: "https://www.independent.ie/regionals/limerick/news/limerick-student-lands-premium-invite-to-romanias-tekpon-ai-summit-its-crazy-to-think-how-much-my-life-has-changed/a460097414.html",
-    },
-  },
-  {
     date: "March 2026",
     title: "Exciting New Collaborations",
     icon: MapPin,
