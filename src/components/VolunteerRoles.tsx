@@ -68,7 +68,7 @@ const VolunteerRoles = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="group rounded-3xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 cursor-default transition-shadow hover:shadow-lg hover:shadow-white/5"
+              className="group rounded-3xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 cursor-default hover-lift hover:shadow-lg hover:shadow-white/5"
             >
               <motion.div
                 whileHover={{ rotate: [0, -6, 6, 0] }}

@@ -32,7 +32,7 @@ const ProgrammesSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -6, transition: { duration: 0.25 } }}
-            className="relative rounded-3xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5 overflow-hidden"
+            className="relative rounded-3xl border border-border bg-card p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5 overflow-hidden"
           >
             <div className="absolute top-5 right-5 inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-secondary">
               Flagship Event
@@ -63,7 +63,7 @@ const ProgrammesSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             whileHover={{ y: -6, transition: { duration: 0.25 } }}
-            className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary to-primary/90 p-8 shadow-sm transition-shadow hover:shadow-xl hover:shadow-primary/20 overflow-hidden"
+            className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary to-primary/90 p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/20 overflow-hidden"
           >
             <div className="absolute -top-16 -right-16 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-20 -left-10 w-56 h-56 bg-secondary/10 rounded-full blur-3xl" />
@@ -111,7 +111,7 @@ const ProgrammesSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             whileHover={{ y: -6, transition: { duration: 0.25 } }}
-            className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary to-primary/90 p-8 shadow-sm transition-shadow hover:shadow-xl hover:shadow-primary/20 overflow-hidden"
+            className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary to-primary/90 p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/20 overflow-hidden"
           >
             <div className="absolute -top-16 -right-16 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-20 -left-10 w-56 h-56 bg-secondary/10 rounded-full blur-3xl" />

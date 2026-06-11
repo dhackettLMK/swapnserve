@@ -60,7 +60,7 @@ const HowItWorks = () => {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              className="group flex flex-col items-center text-center rounded-3xl bg-background border border-border p-6 cursor-default transition-shadow hover:shadow-lg hover:shadow-primary/5"
+              className="group flex flex-col items-center text-center rounded-3xl bg-background border border-border p-6 cursor-default hover-lift hover:shadow-lg hover:shadow-primary/5"
             >
               <motion.div
                 whileHover={{ rotate: [0, -8, 8, 0] }}

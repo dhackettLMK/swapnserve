@@ -38,7 +38,7 @@ const EventsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5"
+            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5"
           >
             <h3 className="text-xl font-section font-bold text-foreground mb-4 flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
@@ -70,7 +70,7 @@ const EventsSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5"
+            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5"
           >
             <h3 className="text-xl font-section font-bold text-foreground mb-4 flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center">
