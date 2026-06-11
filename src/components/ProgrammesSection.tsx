@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Sparkles } from "lucide-react";
+import { Shirt, Trophy, Code, Sparkles } from "lucide-react";
 
 const ProgrammesSection = () => {
   return (
@@ -24,7 +24,7 @@ const ProgrammesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {/* Flagship: Clothing Swap */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -100,6 +100,53 @@ const ProgrammesSection = () => {
                 </span>
                 <span className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90">
                   For the whole community
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Swap'n'Serve Hackathon */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ y: -6, transition: { duration: 0.25 } }}
+            className="relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary to-primary/90 p-8 shadow-sm transition-shadow hover:shadow-xl hover:shadow-primary/20 overflow-hidden"
+          >
+            <div className="absolute -top-16 -right-16 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-10 w-56 h-56 bg-secondary/10 rounded-full blur-3xl" />
+
+            <div className="relative">
+              <div className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5">
+                <Code size={26} className="text-accent" />
+              </div>
+              <h3 className="text-2xl font-display font-bold text-primary-foreground mb-1">
+                Swap'n'Serve Hackathon
+              </h3>
+              <p
+                className="text-sm font-semibold uppercase tracking-[0.18em] mb-4"
+                style={{ color: "hsl(var(--accent))" }}
+              >
+                Coming Soon
+              </p>
+              <p className="text-primary-foreground/85 leading-relaxed mb-4">
+                A hands-on tech event bringing Limerick's builders and problem-solvers together
+                to create tools that serve our city.
+              </p>
+              <p className="text-primary-foreground/75 leading-relaxed mb-6">
+                We're partnering with a YC-backed company founded right here in Limerick City,
+                giving participants mentorship from founders who started where they stand.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent">
+                  YC-backed partner
+                </span>
+                <span className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90">
+                  Limerick-founded
+                </span>
+                <span className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90">
+                  Open to all skill levels
                 </span>
               </div>
             </div>
