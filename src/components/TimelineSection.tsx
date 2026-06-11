@@ -56,7 +56,7 @@ const events: TimelineEvent[] = [
     icon: MapPin,
     highlight: true,
     description:
-      "Swap'n'Serve partners with local brands Fior Jewellery and Van Rossum Clothing for its second event. The project expands its vision to better integrate Limerick's diverse communities.",
+      "Swap'n'Serve partners with local brands Fior Jewellery and Van Rossum Clothing for its second event & Careline moving and storage help with the logistics of the event campaign. The project expands its vision to better integrate Limerick's diverse communities.",
     press: {
       outlet: "Irish Independent",
       headline: "Limerick entrepreneur brings back charity project Swap'n'Serve in exciting collaboration",
