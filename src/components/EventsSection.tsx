@@ -1,13 +1,5 @@
 import { motion } from "framer-motion";
-import { CalendarDays, MapPin, Clock, CheckCircle2, Info } from "lucide-react";
-
-const acceptedItems = [
-  "Clean, wearable clothing (all sizes)",
-  "Shoes in good condition",
-  "Coats, jackets, and warm layers",
-  "School uniforms",
-  "Baby and children's clothing",
-];
+import { MapPin } from "lucide-react";
 
 const EventsSection = () => {
   return (
@@ -33,13 +25,6 @@ const EventsSection = () => {
 
         <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm hover-lift hover:shadow-lg hover:shadow-primary/5"
-          >
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
