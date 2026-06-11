@@ -51,7 +51,6 @@ const events: TimelineEvent[] = [
     },
   },
   {
-  {
     date: "Early 2026",
     title: "Tekpon AI Summit Invite",
     icon: Award,
