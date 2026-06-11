@@ -8,7 +8,7 @@ const roles = [
     title: "Sorting Volunteer",
     time: "2 to 4 hours per event",
     description: "Help sort and organise donated clothing before swap events.",
-    requirements: "No experience needed. Just bring energy!",
+    requirements: "No experience needed. Open to anyone over 16.",
   },
   {
     icon: Users,
@@ -102,9 +102,6 @@ const VolunteerRoles = () => {
           >
             Sign Up to Volunteer
           </motion.a>
-          <p className="text-sm text-white/50 mt-3">
-            Takes 2 minutes. No experience needed.
-          </p>
         </motion.div>
       </div>
     </section>

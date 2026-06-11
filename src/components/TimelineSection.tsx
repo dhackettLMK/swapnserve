@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Newspaper, ExternalLink, Calendar, MapPin, Users, Sparkles, Award, Mic, X } from "lucide-react";
+import { Newspaper, ExternalLink, Calendar, MapPin, Users, Lightbulb, Award, Mic, X } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
 import websummitPhoto from "@/assets/websummit-photo.jpg";
 import speakingPhoto from "@/assets/speaking-photo.jpg";
@@ -25,7 +25,7 @@ const events: TimelineEvent[] = [
   {
     date: "Early 2025",
     title: "The Idea Takes Root",
-    icon: Sparkles,
+    icon: Lightbulb,
     description:
       "David Hackett and a small group of Limerick locals begin organising around a simple idea: clothing should not go to waste when neighbours need it. Inspired by community and sustainability, Swap'n'Serve is born.",
   },
@@ -59,7 +59,7 @@ const events: TimelineEvent[] = [
     image: websummitPhoto,
     imageAlt: "David Hackett at Web Summit with his Scholar badge",
     description:
-      "David Hackett's work with Swap'n'Serve earns him a prestigious Web Summit scholarship, bringing him to one of the world's largest tech conferences in Lisbon. The experience opens doors to new connections, collaborators, and ideas — proving that grassroots community work can resonate on a global stage.",
+      "David Hackett's work with Swap'n'Serve earns him a prestigious Web Summit scholarship, bringing him to one of the world's largest tech conferences in Lisbon. The experience opens doors to new connections, collaborators, and ideas, proving that grassroots community work can resonate on a global stage.",
     press: {
       outlet: "Irish Independent",
       headline: "Meet the Limerick student with a keen eye for AI who has just secured Web Summit invite",
@@ -74,7 +74,7 @@ const events: TimelineEvent[] = [
     icon: Award,
     highlight: true,
     description:
-      "David's community work with Swap'n'Serve helped earn him a place as one of 50 Irish students selected for Web Summit — and it was there, waiting for a taxi in the rain, that he met Gina Schinkel of Driftawave. Struck by his drive and impressed by his AI and systems engineering skills, she invited him to attend the Tekpon AI Summit in Bucharest on a premium ticket. What started as a local clothing swap had opened doors to an international stage.",
+      "David's community work with Swap'n'Serve helped earn him a place as one of 50 Irish students selected for Web Summit, and it was there, waiting for a taxi in the rain, that he met Gina Schinkel of Driftawave. Struck by his drive and impressed by his AI and systems engineering skills, she invited him to attend the Tekpon AI Summit in Bucharest on a premium ticket. What started as a local clothing swap had opened doors to an international stage.",
     press: {
       outlet: "Irish Independent",
       headline: "Limerick student lands premium invite to Romania's Tekpon AI Summit",
@@ -390,11 +390,11 @@ const TimelineSection = () => {
                               className="text-xs text-primary/70 font-medium mt-1.5 flex items-center gap-1.5"
                             >
                               <span className="inline-block w-1 h-1 rounded-full bg-primary/50" />
-                              Tap to read more
+                              Read more
                               {event.press && (
                                 <>
                                   <span className="inline-block w-1 h-1 rounded-full bg-secondary/50" />
-                                  <span className="text-secondary font-bold">Press coverage</span>
+                                  <span className="text-secondary font-semibold">Press coverage</span>
                                 </>
                               )}
                             </motion.p>

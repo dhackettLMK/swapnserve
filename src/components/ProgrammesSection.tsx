@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Code, Sparkles } from "lucide-react";
+import { Shirt, Trophy, Code } from "lucide-react";
 
 const ProgrammesSection = () => {
   return (
@@ -34,8 +34,7 @@ const ProgrammesSection = () => {
             whileHover={{ y: -6, transition: { duration: 0.25 } }}
             className="relative rounded-3xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/5 overflow-hidden"
           >
-            <div className="absolute top-5 right-5 inline-flex items-center gap-1 rounded-full bg-secondary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-secondary">
-              <Sparkles size={12} />
+            <div className="absolute top-5 right-5 inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-secondary">
               Flagship Event
             </div>
             <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">

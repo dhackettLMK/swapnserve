@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Shirt, Users, School, Recycle } from "lucide-react";
 
 const metrics = [
-  { icon: Shirt, value: "1,200+", label: "Items Redistributed", note: "placeholder" },
-  { icon: Users, value: "50+", label: "Active Volunteers", note: "placeholder" },
-  { icon: School, value: "10+", label: "Partner Schools", note: "placeholder" },
-  { icon: Recycle, value: "500 kg", label: "Textile Waste Diverted", note: "placeholder" },
+  { icon: Shirt, value: "1,200+", label: "Items Redistributed" },
+  { icon: Users, value: "50+", label: "Active Volunteers" },
+  { icon: School, value: "10+", label: "Partner Schools" },
+  { icon: Recycle, value: "500 kg", label: "Textile Waste Diverted" },
 ];
 
 const ImpactSnapshot = () => {
@@ -55,7 +55,6 @@ const ImpactSnapshot = () => {
                 {m.value}
               </div>
               <div className="text-sm font-medium text-white/80">{m.label}</div>
-              <div className="text-xs text-white/40 mt-1 italic">({m.note})</div>
             </motion.div>
           ))}
         </div>
