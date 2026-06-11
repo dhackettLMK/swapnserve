@@ -67,13 +67,13 @@ const events: TimelineEvent[] = [
   },
   {
     date: "March 2026",
-    title: "Guest Speaker at NUIG & TUS",
+    title: "Guest Speakers at NUIG & TUS",
     icon: Mic,
     highlight: true,
     image: speakingPhoto,
-    imageAlt: "David presenting Swap'n'Serve to students at a university lecture",
+    imageAlt: "David and Shalom presenting Swap'n'Serve to students at a university lecture",
     description:
-      "David is invited as a guest speaker at NUI Galway and TUS, sharing the Swap'n'Serve story and his journey in community-led entrepreneurship. Speaking to students and faculty, he shows how a simple idea born in Limerick can inspire action far beyond the city.",
+      "David & Shalom are invited as guest speakers at NUI Galway and TUS, sharing the Swap'n'Serve story and their journey in community-led entrepreneurship. Speaking to students and faculty.",
   },
   {
     date: "April 2026",
