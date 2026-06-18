@@ -486,8 +486,8 @@ const ProgrammesSection = () => {
             Built for the Betterment of Limerick
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Swap'n'Serve is a nonprofit organisation running community programmes that put
-            dignity, sustainability, and neighbourhood pride first.
+            One umbrella, three pillars. Each programme bridges a different layer of
+            Limerick — grassroots, talent and civic leadership — under one mission.
           </p>
         </motion.div>
 
