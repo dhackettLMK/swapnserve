@@ -121,7 +121,7 @@ const FlagshipCard = () => (
     <WarmGlow />
 
     <div className="absolute top-5 right-5 inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-secondary border border-secondary/20">
-      Flagship Event
+      Coming Soon
     </div>
 
     <div className="relative">
@@ -133,15 +133,25 @@ const FlagshipCard = () => (
         <Shirt size={26} className="text-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]" />
       </motion.div>
 
-      <h3 className="text-2xl font-section font-bold text-foreground mb-3">
-        The Clothing Event
+      <h3 className="text-2xl font-section font-bold text-foreground mb-1">
+        Swap'N'Serve 3
       </h3>
 
+      <div className="flex items-center gap-2 mb-4">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+        </span>
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-secondary">
+          Coming Soon
+        </p>
+      </div>
+
       <p className="text-muted-foreground leading-relaxed mb-6">
-        Our flagship. Quality donated clothing from across Limerick, sorted by a team of
-        volunteers and offered at €1 per item or free where appropriate. No sign-up, no
-        means testing. Every leftover piece is shared with local charities so nothing
-        goes to waste.
+        Our flagship clothing redistribution event. Quality donated clothing from
+        across Limerick, sorted by volunteers and offered at €1 per item or free
+        where appropriate. No sign-up, no means testing. Every leftover piece is
+        shared with local charities so nothing goes to waste.
       </p>
 
       <a
@@ -492,9 +502,9 @@ const ProgrammesSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          <FlagshipCard />
           <CupCard />
           <HackathonCard />
+          <FlagshipCard />
         </div>
       </div>
     </section>
