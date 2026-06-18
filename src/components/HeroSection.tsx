@@ -31,7 +31,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5 }}
             className="mb-5 inline-flex rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground/90"
           >
-            Limerick Community Nonprofit
+            Limerick Grassroots Organisation · CLG Pending
           </motion.p>
 
           <motion.h1
@@ -40,7 +40,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-6 text-balance font-display text-4xl font-bold leading-tight text-primary-foreground sm:text-5xl md:text-6xl"
           >
-            A Nonprofit for the
+            An umbrella for the
             <span className="block text-primary-foreground">Betterment of Limerick City.</span>
           </motion.h1>
 
@@ -50,10 +50,12 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8 max-w-2xl text-base leading-relaxed text-primary-foreground/90 md:text-lg"
           >
-            Swap'n'Serve is a Limerick-based nonprofit organisation working to strengthen our
-            city through community-led programmes. Our flagship Clothing Swap redistributes
-            clean, usable clothing to families and individuals, no questions asked. Founded by
-            David Hackett, we focus on sustainability, dignity, and neighbour-to-neighbour support.
+            Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025 by
+            David Hackett. On the surface we are a community clothing event. Underneath, we
+            are an umbrella for upskilling, financial relief, circular textiles and breaking
+            down the antisocial barriers that hold our city back. Quality clothing for €1 or
+            free, opportunities for everyone regardless of background, and a culture where
+            hate is not tolerated in any form.
           </motion.p>
 
           <motion.div
