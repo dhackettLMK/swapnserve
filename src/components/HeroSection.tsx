@@ -4,10 +4,10 @@ import { Recycle, Heart, Users, Leaf } from "lucide-react";
 import heroBg from "@/assets/hero-community.jpg";
 
 const chips = [
-  { label: "Youth-led", icon: Users },
-  { label: "Circular fashion", icon: Recycle },
-  { label: "Limerick community", icon: Heart },
-  { label: "Dignity-first", icon: Leaf },
+  { label: "Youth-led, Limerick-born", icon: Users },
+  { label: "Circular textiles", icon: Recycle },
+  { label: "Aligned with UN SDG 12", icon: Leaf },
+  { label: "No cost. No sign-up. No questions.", icon: Heart },
 ];
 
 const HeroSection = () => {
