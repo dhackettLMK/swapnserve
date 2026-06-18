@@ -134,13 +134,14 @@ const FlagshipCard = () => (
       </motion.div>
 
       <h3 className="text-2xl font-section font-bold text-foreground mb-3">
-        The Clothing Swap
+        The Clothing Event
       </h3>
 
       <p className="text-muted-foreground leading-relaxed mb-6">
-        Our flagship event. We gather clean, usable clothing from across Limerick and
-        redistribute it to families and individuals, no questions asked. A simple,
-        respectful exchange rooted in dignity and circular fashion.
+        Our flagship. Quality donated clothing from across Limerick, sorted by a team of
+        volunteers and offered at €1 per item or free where appropriate. No sign-up, no
+        means testing. Every leftover piece is shared with local charities so nothing
+        goes to waste.
       </p>
 
       <a
