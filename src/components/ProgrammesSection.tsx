@@ -432,12 +432,14 @@ const HackathonCard = () => (
       </div>
 
       <p className="text-primary-foreground/85 leading-relaxed mb-4">
-        A hands-on tech event bringing Limerick's builders and problem-solvers together
-        to create tools that serve our city.
+        Teams build digital solutions to real problems facing Limerick, then pitch to
+        a panel of judges for a cash prize. A genuine pathway for the city's most
+        ambitious to develop skills, meet decision-makers and turn ideas into
+        something tangible.
       </p>
       <p className="text-primary-foreground/75 leading-relaxed mb-6">
-        We're partnering with a YC-backed company founded right here in Limerick City,
-        giving participants mentorship from founders who started where they stand.
+        Hosted at The Engine, Limerick's Local Enterprise Office, to catalyse a
+        renewed culture of entrepreneurship in the city.
       </p>
 
       <div className="flex flex-wrap gap-2">
@@ -445,13 +447,13 @@ const HackathonCard = () => (
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-[11px] font-semibold text-accent"
         >
-          <span className="opacity-70">{"</>"}</span> YC-backed partner
+          <span className="opacity-70">{"</>"}</span> Real Limerick problems
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 font-mono text-[11px] font-medium text-primary-foreground/90"
         >
-          Limerick-founded
+          Hosted at The Engine
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
