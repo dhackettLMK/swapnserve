@@ -43,7 +43,7 @@ const SiteFooter = () => {
           <div>
             <h3 className="text-sm font-semibold text-primary-foreground mb-3">Get in Touch</h3>
             <div className="space-y-2 text-sm text-primary-foreground/60">
-              <p>Email: hello@swapnserve.ie</p>
+              <p>Email: swapnserve@gmail.com</p>
               <p>Location: Limerick, Ireland</p>
               <div className="flex gap-3 mt-4">
                 <motion.a
