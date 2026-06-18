@@ -34,7 +34,7 @@ const steps = [
     icon: Users,
     title: "Upskill",
     description:
-      "Volunteers gain real experience in event management, social media, partnerships, public speaking and leadership — opportunities Limerick has historically lacked.",
+      "Volunteers gain real experience in event management, social media, partnerships, public speaking and leadership, opportunities Limerick has historically lacked.",
     accent: "from-primary/15 to-primary/5",
     iconBg: "bg-primary/10",
     iconColor: "text-primary",
@@ -43,7 +43,7 @@ const steps = [
     icon: Repeat,
     title: "Share the Leftovers",
     description:
-      "Every remaining item is distributed equally amongst 10+ local Limerick charities. Nothing is sent to landfill — every piece serves someone.",
+      "Every remaining item is distributed equally amongst 10+ local Limerick charities. Nothing is sent to landfill. Every piece serves someone.",
     accent: "from-secondary/15 to-secondary/5",
     iconBg: "bg-secondary/10",
     iconColor: "text-secondary",
