@@ -298,19 +298,19 @@ const CupCard = () => (
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent"
         >
-          <Trophy size={11} /> €1,000 prize
+          <Trophy size={11} /> €1,000 prize pot
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
         >
-          Permanent goals installed
+          5-a-side · World Cup format
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
         >
-          For the whole community
+          Funds the next clothing event
         </motion.span>
       </div>
     </div>
