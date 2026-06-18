@@ -99,11 +99,45 @@ const WarmGlow = () => (
     aria-hidden="true"
     className="absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none opacity-0 group-hover:opacity-40 transition-opacity duration-700"
     style={{
-      background: "radial-gradient(circle, hsl(var(--secondary) / 0.35), transparent 70%)",
+      background: "radial-gradient(circle, hsl(var(--accent) / 0.45), transparent 70%)",
     }}
     animate={{ scale: [1, 1.15, 1] }}
     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
   />
+);
+
+const SweepingSpotlight = () => (
+  <motion.div
+    aria-hidden="true"
+    className="absolute inset-0 pointer-events-none overflow-hidden"
+    initial={{ opacity: 0 }}
+    whileHover={{ opacity: 1 }}
+    transition={{ duration: 0.6 }}
+  >
+    <motion.div
+      className="absolute top-0 h-full w-[40%] blur-2xl"
+      style={{
+        background: "linear-gradient(90deg, transparent, hsl(var(--accent) / 0.25), transparent)",
+      }}
+      animate={{ left: ["-40%", "100%"] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
+    />
+  </motion.div>
+);
+
+const FloatingHanger = ({ delay, left, duration }: { delay: number; left: string; duration: number }) => (
+  <motion.div
+    className="absolute pointer-events-none opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+    style={{ left, top: "15%" }}
+    animate={{ y: [0, -12, 0], rotate: [0, 4, -4, 0] }}
+    transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}
+  >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M6 9l6-3 6 3" />
+      <path d="M12 6V3" />
+      <path d="M6 9v10a2 2 0 002 2h8a2 2 0 002-2V9" />
+    </svg>
+  </motion.div>
 );
 
 const FlagshipCard = () => (
