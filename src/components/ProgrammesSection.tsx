@@ -134,13 +134,14 @@ const FlagshipCard = () => (
       </motion.div>
 
       <h3 className="text-2xl font-section font-bold text-foreground mb-3">
-        The Clothing Swap
+        The Clothing Event
       </h3>
 
       <p className="text-muted-foreground leading-relaxed mb-6">
-        Our flagship event. We gather clean, usable clothing from across Limerick and
-        redistribute it to families and individuals, no questions asked. A simple,
-        respectful exchange rooted in dignity and circular fashion.
+        Our flagship. Quality donated clothing from across Limerick, sorted by a team of
+        volunteers and offered at €1 per item or free where appropriate. No sign-up, no
+        means testing. Every leftover piece is shared with local charities so nothing
+        goes to waste.
       </p>
 
       <a
@@ -283,13 +284,13 @@ const CupCard = () => (
       </div>
 
       <p className="text-primary-foreground/85 leading-relaxed mb-4">
-        A community football tournament with a €1,000 prize pot, bringing Limerick
-        together on the pitch.
+        A 5-a-side community football tournament with a €1,000 prize pot, run World
+        Cup-style from group stage to final. Built to unite the city across every
+        background and fund the next clothing event.
       </p>
       <p className="text-primary-foreground/75 leading-relaxed mb-6">
-        Beyond the final whistle, we'll be installing permanent goals into the local
-        community, so neighbours of every age can keep enjoying the game long after
-        the trophy is lifted.
+        Teams register 7 players at €10 a head, with BBQ-style food on the day. All
+        proceeds feed directly into Swap'n'Serve 3.
       </p>
 
       <div className="flex flex-wrap gap-2">
@@ -297,19 +298,19 @@ const CupCard = () => (
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent"
         >
-          <Trophy size={11} /> €1,000 prize
+          <Trophy size={11} /> €1,000 prize pot
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
         >
-          Permanent goals installed
+          5-a-side · World Cup format
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
         >
-          For the whole community
+          Funds the next clothing event
         </motion.span>
       </div>
     </div>
@@ -431,12 +432,14 @@ const HackathonCard = () => (
       </div>
 
       <p className="text-primary-foreground/85 leading-relaxed mb-4">
-        A hands-on tech event bringing Limerick's builders and problem-solvers together
-        to create tools that serve our city.
+        Teams build digital solutions to real problems facing Limerick, then pitch to
+        a panel of judges for a cash prize. A genuine pathway for the city's most
+        ambitious to develop skills, meet decision-makers and turn ideas into
+        something tangible.
       </p>
       <p className="text-primary-foreground/75 leading-relaxed mb-6">
-        We're partnering with a YC-backed company founded right here in Limerick City,
-        giving participants mentorship from founders who started where they stand.
+        Hosted at The Engine, Limerick's Local Enterprise Office, to catalyse a
+        renewed culture of entrepreneurship in the city.
       </p>
 
       <div className="flex flex-wrap gap-2">
@@ -444,13 +447,13 @@ const HackathonCard = () => (
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-[11px] font-semibold text-accent"
         >
-          <span className="opacity-70">{"</>"}</span> YC-backed partner
+          <span className="opacity-70">{"</>"}</span> Real Limerick problems
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 font-mono text-[11px] font-medium text-primary-foreground/90"
         >
-          Limerick-founded
+          Hosted at The Engine
         </motion.span>
         <motion.span
           whileHover={{ scale: 1.06 }}
@@ -483,8 +486,8 @@ const ProgrammesSection = () => {
             Built for the Betterment of Limerick
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Swap'n'Serve is a nonprofit organisation running community programmes that put
-            dignity, sustainability, and neighbourhood pride first.
+            One umbrella, three pillars. Each programme bridges a different layer of
+            Limerick — grassroots, talent and civic leadership — under one mission.
           </p>
         </motion.div>
 

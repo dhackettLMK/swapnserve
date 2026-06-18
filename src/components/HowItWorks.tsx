@@ -25,25 +25,25 @@ const steps = [
     icon: HandHeart,
     title: "Redistribute",
     description:
-      "At our swap events, anyone can pick up what they need. No sign-up, no paperwork, no questions asked.",
+      "At the event, quality clothing is offered at €1 per item or free where appropriate. No sign-up, no means testing, no questions asked.",
     accent: "from-accent/20 to-accent/5",
     iconBg: "bg-accent/15",
     iconColor: "text-accent-foreground",
   },
   {
     icon: Users,
-    title: "Empower",
+    title: "Upskill",
     description:
-      "We engage young people as volunteers, building confidence, skills, and a sense of purpose.",
+      "Volunteers gain real experience in event management, social media, partnerships, public speaking and leadership — opportunities Limerick has historically lacked.",
     accent: "from-primary/15 to-primary/5",
     iconBg: "bg-primary/10",
     iconColor: "text-primary",
   },
   {
     icon: Repeat,
-    title: "Repeat & Grow",
+    title: "Share the Leftovers",
     description:
-      "Each event strengthens the cycle: more donors, more volunteers, more families supported.",
+      "Every remaining item is distributed equally amongst 10+ local Limerick charities. Nothing is sent to landfill — every piece serves someone.",
     accent: "from-secondary/15 to-secondary/5",
     iconBg: "bg-secondary/10",
     iconColor: "text-secondary",

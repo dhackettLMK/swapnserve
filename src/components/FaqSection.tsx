@@ -9,31 +9,39 @@ import {
 const faqs = [
   {
     q: "What is Swap'n'Serve?",
-    a: "Swap'n'Serve is a community-led clothing redistribution initiative based in Limerick. We collect clean, usable clothing and redistribute it to families and individuals who can use it, free of charge and with no questions asked.",
+    a: "Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025 by David Hackett. On the surface we are a community clothing event where quality items are offered for €1 or free. Underneath, we are an umbrella for upskilling, financial relief, circular textiles and tackling antisocial tension across the city.",
   },
   {
-    q: "Who can attend the swap events?",
-    a: "Anyone. Our events are open to all members of the community. There is no sign-up, no paperwork, and no eligibility check. You simply come along and take what you need.",
+    q: "Who can attend the clothing events?",
+    a: "Anyone. Our events are open to every member of the community regardless of socioeconomic background, race, age, gender or experience. There is no sign-up, no paperwork, no means testing. You come along and take what you need.",
   },
   {
     q: "Is Swap'n'Serve a registered charity?",
-    a: "Swap'n'Serve is a community initiative. We operate transparently and are exploring formal structures as we grow. For now, we function as a grassroots volunteer-driven project.",
+    a: "Swap'n'Serve is currently a grassroots organisation with CLG (Company Limited by Guarantee) registration pending. Charitable status is part of our 12-month roadmap. Until then we operate transparently as a fully volunteer-driven project based at 54 Henry Street, Limerick.",
   },
   {
     q: "What kind of clothing can I donate?",
-    a: "We accept clean, wearable clothing of all sizes, including shoes, coats, school uniforms, and children's clothing. Items should be in good condition, ready to be worn.",
+    a: "Clean, wearable clothing of all sizes — including shoes, coats, school uniforms and children's clothing. Items should be in good condition and ready to be worn. We have also received donations ranging from suits and dresses to official Munster training gear.",
+  },
+  {
+    q: "What happens to leftover clothing after an event?",
+    a: "Nothing goes to waste. All leftover items are distributed equally amongst over 10 local Limerick charities, including Saint Vincent de Paul, Self Help Africa, Irish Cancer Society, Enable Ireland and the Sue Ryder Foundation. Every piece serves someone before going anywhere else.",
+  },
+  {
+    q: "How does this address fast fashion?",
+    a: "Ireland discards around 110,000 tonnes of textiles every year, and the average Irish person produces more than 53 kg of textile waste annually — over double the EU average. By removing every financial barrier, we make the sustainable choice the default rather than the privilege. Our work aligns directly with the EU Strategy for Sustainable and Circular Textiles and UN Sustainable Development Goal 12.",
   },
   {
     q: "How can I volunteer?",
-    a: "Click the 'Sign Up to Volunteer' button on this page. You will be taken to a short form that takes about 2 minutes to complete. No prior experience is required.",
+    a: "Head to the 'Want to Volunteer?' section above and fill out the short form, or email us directly at swapnserve@gmail.com. No prior experience is required — past volunteers have come from secondary schools, colleges and across the city.",
   },
   {
     q: "Do you collect personal data?",
-    a: "We collect only the minimum information needed to coordinate volunteers (for example, name, contact details, and availability). We never share your data with third parties.",
+    a: "We collect only the minimum information needed to coordinate volunteers and donations (for example, name, contact details and availability). We never share your data with third parties.",
   },
   {
-    q: "How can my school or organisation get involved?",
-    a: "We welcome partnerships with schools, community groups, and local organisations. Reach out via our contact details in the footer and we will arrange a conversation about how we can collaborate.",
+    q: "How can my school, business or organisation get involved?",
+    a: "We actively partner with schools, colleges, churches and local businesses across Limerick — past partners include Villiers, Crescent College Comprehensive SJ, TUS, the University of Limerick, Fior Jewellery, Van Rossum Clothing and Careline Moving & Storage. Reach out via the contact details in the footer to start a conversation.",
   },
 ];
 

@@ -19,7 +19,9 @@ const EventsSection = () => {
             Want to Donate?
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Your contribution helps us keep going. Every euro goes toward redistributing clothing to families in need across Limerick.
+            Swap'n'Serve runs on a €0 budget and a community of volunteers. Donations
+            cover storage, logistics and the next event, so quality clothing keeps
+            reaching the people of Limerick.
           </p>
         </motion.div>
 
@@ -39,7 +41,8 @@ const EventsSection = () => {
               Make a Donation
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Support our work by making a donation through our GoFundMe. Every contribution helps us continue redistributing clothing to families in need.
+              Support our work through our GoFundMe. Every contribution funds storage,
+              event logistics and the next chapter of Swap'n'Serve in Limerick.
             </p>
 
             <a
