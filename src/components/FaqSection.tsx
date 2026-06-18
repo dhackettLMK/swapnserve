@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "What kind of clothing can I donate?",
-    a: "Clean, wearable clothing of all sizes — including shoes, coats, school uniforms and children's clothing. Items should be in good condition and ready to be worn. We have also received donations ranging from suits and dresses to official Munster training gear.",
+    a: "Clean, wearable clothing of all sizes, including shoes, coats, school uniforms and children's clothing. Items should be in good condition and ready to be worn. We have also received donations ranging from suits and dresses to official Munster training gear.",
   },
   {
     q: "What happens to leftover clothing after an event?",
@@ -29,11 +29,11 @@ const faqs = [
   },
   {
     q: "How does this address fast fashion?",
-    a: "Ireland discards around 110,000 tonnes of textiles every year, and the average Irish person produces more than 53 kg of textile waste annually — over double the EU average. By removing every financial barrier, we make the sustainable choice the default rather than the privilege. Our work aligns directly with the EU Strategy for Sustainable and Circular Textiles and UN Sustainable Development Goal 12.",
+    a: "Ireland discards around 110,000 tonnes of textiles every year, and the average Irish person produces more than 53 kg of textile waste annually, over double the EU average. By removing every financial barrier, we make the sustainable choice the default rather than the privilege. Our work aligns directly with the EU Strategy for Sustainable and Circular Textiles and UN Sustainable Development Goal 12.",
   },
   {
     q: "How can I volunteer?",
-    a: "Head to the 'Want to Volunteer?' section above and fill out the short form, or email us directly at swapnserve@gmail.com. No prior experience is required — past volunteers have come from secondary schools, colleges and across the city.",
+    a: "Head to the 'Want to Volunteer?' section above and fill out the short form, or email us directly at swapnserve@gmail.com. No prior experience is required. Past volunteers have come from secondary schools, colleges and across the city.",
   },
   {
     q: "Do you collect personal data?",
@@ -41,7 +41,7 @@ const faqs = [
   },
   {
     q: "How can my school, business or organisation get involved?",
-    a: "We actively partner with schools, colleges, churches and local businesses across Limerick — past partners include Villiers, Crescent College Comprehensive SJ, TUS, the University of Limerick, Fior Jewellery, Van Rossum Clothing and Careline Moving & Storage. Reach out via the contact details in the footer to start a conversation.",
+    a: "We actively partner with schools, colleges, churches and local businesses across Limerick. Past partners include Villiers, Crescent College Comprehensive SJ, TUS, the University of Limerick, Fior Jewellery, Van Rossum Clothing and Careline Moving & Storage. Reach out via the contact details in the footer to start a conversation.",
   },
 ];
 

@@ -3,7 +3,7 @@ import { Shirt, Trophy, Code, Terminal, ArrowLeftRight } from "lucide-react";
 import { useMemo } from "react";
 
 /* -------------------------------------------------------------------------- */
-/*  Clothing Flagship — boutique / wardrobe card                              */
+/*  Clothing Flagship - boutique / wardrobe card                              */
 /* -------------------------------------------------------------------------- */
 
 const WardrobeBackdrop = () => (
@@ -205,7 +205,7 @@ const FlagshipCard = () => (
 );
 
 /* -------------------------------------------------------------------------- */
-/*  Swap'n'Serve Cup — world-cup inspired stadium card                        */
+/*  Swap'n'Serve Cup - world-cup inspired stadium card                        */
 /* -------------------------------------------------------------------------- */
 
 const StadiumBackdrop = () => (
@@ -368,7 +368,7 @@ const CupCard = () => (
 );
 
 /* -------------------------------------------------------------------------- */
-/*  Swap'n'Serve Hackathon — terminal / matrix-rain card                      */
+/*  Swap'n'Serve Hackathon - terminal / matrix-rain card                      */
 /* -------------------------------------------------------------------------- */
 
 const MatrixRain = () => {
@@ -442,7 +442,7 @@ const HackathonCard = () => (
       }}
     />
 
-    {/* Corner brackets — terminal chrome */}
+    {/* Corner brackets - terminal chrome */}
     {(["top-3 left-3", "top-3 right-3", "bottom-3 left-3", "bottom-3 right-3"] as const).map(
       (pos, i) => (
         <div
@@ -537,7 +537,7 @@ const ProgrammesSection = () => {
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             One umbrella, three pillars. Each programme bridges a different layer of
-            Limerick — grassroots, talent and civic leadership — under one mission.
+            Limerick - grassroots, talent and civic leadership - under one mission.
           </p>
         </motion.div>
 
