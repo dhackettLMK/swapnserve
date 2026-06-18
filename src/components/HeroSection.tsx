@@ -31,7 +31,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5 }}
             className="mb-5 inline-flex rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground/90"
           >
-            Limerick Grassroots Organisation · CLG Pending
+            LIMERICK GRASSROOTS ORGANISATION ·
           </motion.p>
 
           <motion.h1
