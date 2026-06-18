@@ -31,7 +31,8 @@ const ImpactSnapshot = () => {
             Our Impact So Far
           </h2>
           <p className="text-white/70 text-lg max-w-xl mx-auto">
-            Numbers tell part of the story. Behind each one are real people and real change.
+            Two events in. Aligned with the EU Strategy for Sustainable and Circular
+            Textiles and UN SDG 12. Built by Limerick, for Limerick.
           </p>
         </motion.div>
 
