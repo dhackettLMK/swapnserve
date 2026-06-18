@@ -284,13 +284,13 @@ const CupCard = () => (
       </div>
 
       <p className="text-primary-foreground/85 leading-relaxed mb-4">
-        A community football tournament with a €1,000 prize pot, bringing Limerick
-        together on the pitch.
+        A 5-a-side community football tournament with a €1,000 prize pot, run World
+        Cup-style from group stage to final. Built to unite the city across every
+        background and fund the next clothing event.
       </p>
       <p className="text-primary-foreground/75 leading-relaxed mb-6">
-        Beyond the final whistle, we'll be installing permanent goals into the local
-        community, so neighbours of every age can keep enjoying the game long after
-        the trophy is lifted.
+        Teams register 7 players at €10 a head, with BBQ-style food on the day. All
+        proceeds feed directly into Swap'n'Serve 3.
       </p>
 
       <div className="flex flex-wrap gap-2">
