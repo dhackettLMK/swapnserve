@@ -19,7 +19,9 @@ const EventsSection = () => {
             Want to Donate?
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Your contribution helps us keep going. Every euro goes toward redistributing clothing to families in need across Limerick.
+            Swap'n'Serve runs on a €0 budget and a community of volunteers. Donations
+            cover storage, logistics and the next event, so quality clothing keeps
+            reaching the people of Limerick.
           </p>
         </motion.div>
 
