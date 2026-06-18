@@ -41,7 +41,8 @@ const EventsSection = () => {
               Make a Donation
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Support our work by making a donation through our GoFundMe. Every contribution helps us continue redistributing clothing to families in need.
+              Support our work through our GoFundMe. Every contribution funds storage,
+              event logistics and the next chapter of Swap'n'Serve in Limerick.
             </p>
 
             <a
