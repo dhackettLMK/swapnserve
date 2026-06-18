@@ -147,50 +147,56 @@ const FlagshipCard = () => (
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
     whileHover={{ y: -6, transition: { duration: 0.25 } }}
-    className="group relative rounded-3xl border border-border bg-gradient-to-br from-card via-card to-[hsl(var(--secondary)_/_0.08)] p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-secondary/10 overflow-hidden"
+    className="group relative rounded-3xl border border-accent/30 bg-gradient-to-br from-primary via-primary to-[hsl(152_50%_22%)] p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/30 overflow-hidden"
   >
     <WardrobeBackdrop />
     <FloatingGarments />
     <SwapFlow />
     <WarmGlow />
+    <SweepingSpotlight />
+    <FloatingHanger delay={0} left="10%" duration={5} />
+    <FloatingHanger delay={1.5} left="85%" duration={6} />
+    <FloatingHanger delay={3} left="50%" duration={7} />
 
-    <div className="absolute top-5 right-5 inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-secondary border border-secondary/20">
+    <div className="absolute top-5 right-5 inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent border border-accent/30">
       Coming Soon
     </div>
 
     <div className="relative">
       <motion.div
-        className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5"
+        className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5"
         whileHover={{ rotate: [0, -6, 6, -3, 3, 0], scale: 1.05 }}
         transition={{ duration: 0.6 }}
       >
-        <Shirt size={26} className="text-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]" />
+        <Shirt size={26} className="text-accent drop-shadow-[0_0_8px_hsl(var(--accent)/0.6)]" />
       </motion.div>
 
-      <h3 className="text-2xl font-section font-bold text-foreground mb-1">
+      <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
         Swap'N'Serve 3
       </h3>
 
       <div className="flex items-center gap-2 mb-4">
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
         </span>
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-secondary">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
           Coming Soon
         </p>
       </div>
 
-      <p className="text-muted-foreground leading-relaxed mb-6">
+      <p className="text-primary-foreground/85 leading-relaxed mb-4">
         Our flagship clothing redistribution event. Quality donated clothing from
         across Limerick, sorted by volunteers and offered at €1 per item or free
-        where appropriate. No sign-up, no means testing. Every leftover piece is
-        shared with local charities so nothing goes to waste.
+        where appropriate. No sign-up, no means testing.
+      </p>
+      <p className="text-primary-foreground/75 leading-relaxed mb-6">
+        Every leftover piece is shared with local charities so nothing goes to waste.
       </p>
 
       <a
         href="#how-it-works"
-        className="inline-flex items-center rounded-full border border-primary bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
+        className="inline-flex items-center rounded-full border border-accent bg-accent/10 px-5 py-2.5 text-sm font-semibold text-accent transition-all hover:bg-accent hover:text-primary hover:scale-[1.02] active:scale-[0.98]"
       >
         See how it works
       </a>
