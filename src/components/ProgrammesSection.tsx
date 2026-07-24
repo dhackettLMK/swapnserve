@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Code, Terminal, ArrowLeftRight } from "lucide-react";
+import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight } from "lucide-react";
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 
 /* -------------------------------------------------------------------------- */
 /*  Clothing Flagship - boutique / wardrobe card                              */
@@ -329,7 +330,7 @@ const CupCard = () => (
           className="text-sm font-semibold uppercase tracking-[0.18em]"
           style={{ color: "hsl(var(--accent))" }}
         >
-          Coming Soon
+          Registration Open
         </p>
       </div>
 
@@ -362,6 +363,21 @@ const CupCard = () => (
         >
           Funds the next clothing event
         </motion.span>
+      </div>
+
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <Link
+          to="/cup"
+          className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-accent-foreground shadow-lg transition-transform hover:scale-105"
+        >
+          Register your team <ArrowRight size={16} />
+        </Link>
+        <Link
+          to="/cup/tournament"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-foreground/90 underline-offset-4 hover:text-primary-foreground hover:underline"
+        >
+          View the tournament
+        </Link>
       </div>
     </div>
   </motion.div>

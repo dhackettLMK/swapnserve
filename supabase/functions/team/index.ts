@@ -117,13 +117,17 @@ Deno.serve(async (req) => {
         .maybeSingle();
       if (!team) return json({ error: "This invite link is not valid." }, 404);
 
-      const { error } = await supabase.from("players").insert({
-        team_id: team.id,
-        full_name: fullName,
-        email,
-        phone,
-        is_captain: false,
-      });
+      const { data: inserted, error } = await supabase
+        .from("players")
+        .insert({
+          team_id: team.id,
+          full_name: fullName,
+          email,
+          phone,
+          is_captain: false,
+        })
+        .select("id")
+        .single();
       if (error) {
         if (error.code === "23505") return json({ error: "You're already on this team." }, 409);
         // Roster-full trigger raises a plain exception.
@@ -134,7 +138,7 @@ Deno.serve(async (req) => {
       }
 
       await recomputeTeamStatus(supabase, team.id);
-      return json({ ok: true });
+      return json({ ok: true, player_id: inserted.id });
     }
 
     if (action === "get") {
