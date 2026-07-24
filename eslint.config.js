@@ -5,7 +5,9 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  // Supabase Edge Functions run on Deno (URL imports, Deno globals) and are
+  // typechecked by the Supabase CLI, not this frontend ESLint config.
+  { ignores: ["dist", "supabase/functions/**"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],

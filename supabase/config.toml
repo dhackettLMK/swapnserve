@@ -1,0 +1,23 @@
+# Supabase CLI config for the Swap'n'Serve Cup.
+# Replace project_id with your project ref (Supabase → Project Settings → General),
+# or run `supabase link --project-ref <ref>` which manages linking for you.
+project_id = "your-project-ref"
+
+# The Stripe webhook is called by Stripe, not the browser, so it must NOT
+# require a Supabase JWT. Stripe's signature (STRIPE_WEBHOOK_SECRET) authenticates it.
+[functions.stripe-webhook]
+verify_jwt = false
+
+# The remaining functions are invoked from the browser with the anon key and do
+# their own authorisation (manage/invite tokens, or the ADMIN_TOKEN secret).
+[functions.team]
+verify_jwt = false
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.tournament]
+verify_jwt = false
+
+[functions.admin]
+verify_jwt = false

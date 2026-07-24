@@ -1,0 +1,401 @@
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { Loader2, Lock, RefreshCw, Shuffle, Trophy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import CupLayout from "@/components/cup/CupLayout";
+import { ConfigNotice, KitDot, StatusBadge } from "@/components/cup/CupUi";
+import { BracketView } from "@/components/cup/TournamentView";
+import { isSupabaseConfigured } from "@/lib/supabase";
+import { cupApi } from "@/lib/cupApi";
+import { formatEuros } from "@/lib/teamStatus";
+import type { CupMatch } from "@/lib/cupTypes";
+
+const TOKEN_KEY = "cup_admin_token";
+
+function MatchRow({
+  match,
+  token,
+  teamName,
+}: {
+  match: CupMatch;
+  token: string;
+  teamName: (id: string | null) => string;
+}) {
+  const qc = useQueryClient();
+  const [home, setHome] = useState(match.home_goals?.toString() ?? "");
+  const [away, setAway] = useState(match.away_goals?.toString() ?? "");
+
+  const save = useMutation({
+    mutationFn: () =>
+      cupApi.admin.recordMatch(token, {
+        match_id: match.id,
+        home_goals: Number(home),
+        away_goals: Number(away),
+      }),
+    onSuccess: () => {
+      toast.success("Result saved");
+      qc.invalidateQueries({ queryKey: ["cup-tournament"] });
+      qc.invalidateQueries({ queryKey: ["cup-admin"] });
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const ready = match.home_team_id && match.away_team_id;
+
+  return (
+    <div className="flex items-center gap-2 py-2 text-sm">
+      <span className="flex-1 text-right">{teamName(match.home_team_id)}</span>
+      <Input
+        type="number"
+        min={0}
+        value={home}
+        onChange={(e) => setHome(e.target.value)}
+        className="h-8 w-14 text-center"
+        disabled={!ready}
+      />
+      <span className="text-muted-foreground">–</span>
+      <Input
+        type="number"
+        min={0}
+        value={away}
+        onChange={(e) => setAway(e.target.value)}
+        className="h-8 w-14 text-center"
+        disabled={!ready}
+      />
+      <span className="flex-1">{teamName(match.away_team_id)}</span>
+      <Button
+        size="sm"
+        variant="outline"
+        disabled={!ready || home === "" || away === "" || save.isPending}
+        onClick={() => save.mutate()}
+      >
+        {save.isPending ? <Loader2 className="animate-spin" size={14} /> : "Save"}
+      </Button>
+    </div>
+  );
+}
+
+function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => void }) {
+  const qc = useQueryClient();
+  const [groupSize, setGroupSize] = useState("4");
+  const [qualifiers, setQualifiers] = useState("2");
+
+  const list = useQuery({ queryKey: ["cup-admin"], queryFn: () => cupApi.admin.list(token) });
+  const tournament = useQuery({ queryKey: ["cup-tournament"], queryFn: () => cupApi.tournament() });
+
+  const teamName = (id: string | null) =>
+    id ? tournament.data?.teams[id]?.name ?? "Unknown" : "TBD";
+
+  const refresh = () => {
+    qc.invalidateQueries({ queryKey: ["cup-admin"] });
+    qc.invalidateQueries({ queryKey: ["cup-tournament"] });
+  };
+
+  const genGroups = useMutation({
+    mutationFn: () =>
+      cupApi.admin.generateGroups(token, {
+        group_size: Number(groupSize),
+        qualifiers_per_group: Number(qualifiers),
+      }),
+    onSuccess: () => {
+      toast.success("Groups drawn");
+      refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const genKnockout = useMutation({
+    mutationFn: () => cupApi.admin.generateKnockout(token),
+    onSuccess: () => {
+      toast.success("Knockout bracket generated");
+      refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const reset = useMutation({
+    mutationFn: () => cupApi.admin.reset(token),
+    onSuccess: () => {
+      toast.success("Tournament reset");
+      refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  if (list.isLoading) {
+    return (
+      <div className="flex justify-center py-20">
+        <Loader2 className="animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+  if (list.isError || !list.data) {
+    return (
+      <div className="mx-auto max-w-md rounded-2xl border border-destructive/40 bg-destructive/5 p-6 text-center">
+        <p className="mb-3 text-sm text-muted-foreground">
+          {(list.error as Error)?.message ?? "Couldn't load admin data."}
+        </p>
+        <Button variant="outline" onClick={onSignOut}>
+          Re-enter passcode
+        </Button>
+      </div>
+    );
+  }
+
+  const { teams, totals } = list.data;
+  const groupMatches = (tournament.data?.matches ?? []).filter((m) => m.stage === "group");
+  const knockoutMatches = (tournament.data?.matches ?? [])
+    .filter((m) => m.stage === "knockout")
+    .sort((a, b) => (a.round ?? 0) - (b.round ?? 0));
+
+  return (
+    <div className="space-y-8">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-3xl font-display font-bold">Cup admin</h1>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={refresh}>
+            <RefreshCw size={14} /> Refresh
+          </Button>
+          <Button variant="ghost" size="sm" onClick={onSignOut}>
+            Lock
+          </Button>
+        </div>
+      </div>
+
+      {/* Totals */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <div className="rounded-2xl border border-border bg-card p-5">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">Teams</p>
+          <p className="text-2xl font-bold">{totals.teamCount}</p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-5">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">Registered</p>
+          <p className="text-2xl font-bold">{totals.registeredCount}</p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-5">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">Money in</p>
+          <p className="text-2xl font-bold">{formatEuros(totals.totalPaidCents)}</p>
+        </div>
+      </div>
+
+      {/* Teams table */}
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <h2 className="mb-4 font-section text-lg font-bold">Teams</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-xs uppercase tracking-wide text-muted-foreground">
+                <th className="py-2 pr-3 font-medium">Team</th>
+                <th className="py-2 pr-3 font-medium">Status</th>
+                <th className="py-2 pr-3 font-medium">Roster</th>
+                <th className="py-2 pr-3 font-medium">Paid</th>
+                <th className="py-2 pr-3 font-medium">Captain</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teams.map((row) => (
+                <tr key={row.team.id} className="border-t border-border align-top">
+                  <td className="py-2 pr-3">
+                    <span className="inline-flex items-center gap-2 font-medium">
+                      <KitDot colour={row.team.kit_colour} /> {row.team.name}
+                    </span>
+                  </td>
+                  <td className="py-2 pr-3">
+                    <StatusBadge status={row.summary.status} />
+                  </td>
+                  <td className="py-2 pr-3">{row.summary.rosterCount}/7</td>
+                  <td className="py-2 pr-3">
+                    {formatEuros(row.summary.paidCents)}
+                    {row.summary.outstandingCents > 0 && (
+                      <span className="text-xs text-muted-foreground">
+                        {" "}
+                        ({formatEuros(row.summary.outstandingCents)} due)
+                      </span>
+                    )}
+                  </td>
+                  <td className="py-2 pr-3 text-xs text-muted-foreground">
+                    {row.team.captain_name}
+                    <br />
+                    {row.team.captain_email}
+                    <br />
+                    {row.team.captain_phone}
+                  </td>
+                </tr>
+              ))}
+              {teams.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="py-6 text-center text-muted-foreground">
+                    No teams yet.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Tournament controls */}
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <h2 className="mb-1 font-section text-lg font-bold">Generate tournament</h2>
+        <p className="mb-4 text-sm text-muted-foreground">
+          Draw balanced groups from all <strong>registered</strong> teams, then generate the
+          knockout bracket once group results are in.{" "}
+          {tournament.data?.tournament && (
+            <span className="font-medium">Current stage: {tournament.data.tournament.status}.</span>
+          )}
+        </p>
+        <div className="flex flex-wrap items-end gap-3">
+          <div className="space-y-1">
+            <Label htmlFor="group-size" className="text-xs">
+              Group size
+            </Label>
+            <Input
+              id="group-size"
+              type="number"
+              min={2}
+              value={groupSize}
+              onChange={(e) => setGroupSize(e.target.value)}
+              className="h-9 w-24"
+            />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="qualifiers" className="text-xs">
+              Qualify / group
+            </Label>
+            <Input
+              id="qualifiers"
+              type="number"
+              min={1}
+              value={qualifiers}
+              onChange={(e) => setQualifiers(e.target.value)}
+              className="h-9 w-24"
+            />
+          </div>
+          <Button onClick={() => genGroups.mutate()} disabled={genGroups.isPending}>
+            {genGroups.isPending ? <Loader2 className="animate-spin" /> : <Shuffle size={16} />} Draw
+            groups
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => genKnockout.mutate()}
+            disabled={genKnockout.isPending}
+          >
+            {genKnockout.isPending ? <Loader2 className="animate-spin" /> : <Trophy size={16} />}{" "}
+            Generate knockout
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-destructive hover:text-destructive"
+            onClick={() => {
+              if (confirm("Reset the tournament? Groups, fixtures and the bracket will be deleted."))
+                reset.mutate();
+            }}
+            disabled={reset.isPending}
+          >
+            Reset
+          </Button>
+        </div>
+      </div>
+
+      {/* Group fixtures / results */}
+      {groupMatches.length > 0 && (
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+          <h2 className="mb-3 font-section text-lg font-bold">Group results</h2>
+          <div className="divide-y divide-border">
+            {groupMatches.map((m) => (
+              <MatchRow key={m.id} match={m} token={token} teamName={teamName} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Knockout */}
+      {knockoutMatches.length > 0 && (
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+          <h2 className="mb-3 font-section text-lg font-bold">Knockout results</h2>
+          <div className="mb-6 divide-y divide-border">
+            {knockoutMatches.map((m) => (
+              <MatchRow key={m.id} match={m} token={token} teamName={teamName} />
+            ))}
+          </div>
+          {tournament.data?.bracket && (
+            <BracketView bracket={tournament.data.bracket} teams={tournament.data.teams} />
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const CupAdmin = () => {
+  const [token, setToken] = useState<string | null>(() => sessionStorage.getItem(TOKEN_KEY));
+  const [input, setInput] = useState("");
+
+  if (!isSupabaseConfigured) {
+    return (
+      <CupLayout>
+        <ConfigNotice />
+      </CupLayout>
+    );
+  }
+
+  const signIn = () => {
+    const t = input.trim();
+    if (!t) return;
+    sessionStorage.setItem(TOKEN_KEY, t);
+    setToken(t);
+  };
+
+  const signOut = () => {
+    sessionStorage.removeItem(TOKEN_KEY);
+    setToken(null);
+    setInput("");
+  };
+
+  return (
+    <CupLayout>
+      <div className="container py-10 md:py-14">
+        {token ? (
+          <AdminConsole token={token} onSignOut={signOut} />
+        ) : (
+          <div className="mx-auto max-w-sm rounded-2xl border border-border bg-card p-6 shadow-sm">
+            <div className="mb-4 flex items-center gap-2">
+              <Lock size={18} className="text-primary" />
+              <h1 className="font-section text-lg font-bold">Organiser access</h1>
+            </div>
+            <form
+              className="space-y-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                signIn();
+              }}
+            >
+              <div className="space-y-1">
+                <Label htmlFor="admin-token">Admin passcode</Label>
+                <Input
+                  id="admin-token"
+                  type="password"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Enter the ADMIN_TOKEN"
+                  autoFocus
+                />
+              </div>
+              <Button type="submit" className="w-full">
+                Unlock
+              </Button>
+            </form>
+            <p className="mt-3 text-xs text-muted-foreground">
+              This is the <code>ADMIN_TOKEN</code> secret you set on your Supabase functions.
+            </p>
+          </div>
+        )}
+      </div>
+    </CupLayout>
+  );
+};
+
+export default CupAdmin;
