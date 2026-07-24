@@ -1,5 +1,28 @@
 # Welcome to your Lovable project
 
+## Swap'n'Serve Cup
+
+The site includes the **Swap'n'Serve Cup** — registration, payment and
+tournament management for the 5-a-side community tournament (€1,000 prize pot,
+World-Cup format). Teams are 7 players at €10/head (€70/team); the captain or the
+players (or a mix) pay via Stripe, and a team is auto-eligible for the draw once
+it's 7/7 players and fully paid.
+
+- `/cup` — create a team, share an invite link, captain dashboard, teammate join
+- `/cup/admin` — organiser-only console (passcode): teams, money in, generate the
+  draw and bracket, record results
+- `/cup/tournament` — public groups, standings and the knockout bracket
+
+Pure, unit-tested logic lives in `src/lib/tournament.ts` (draw + standings +
+bracket) and `src/lib/teamStatus.ts` (registration state machine). The backend is
+Supabase (Postgres + Edge Functions) in `supabase/`. Run the tests with `npm test`.
+
+**Setup:** see [`docs/CUP.md`](./docs/CUP.md) for the full guide — creating the
+Supabase project, applying the migrations, deploying the edge functions, and the
+exact Stripe steps. Environment variables are documented in `.env.example`. If you
+don't have a Supabase project yet, [`docs/create-supabase-project.cowork.md`](./docs/create-supabase-project.cowork.md)
+has a browser prompt for Claude Cowork to create one.
+
 ## Project info
 
 **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
