@@ -51,3 +51,35 @@ export function remainingCents(payments: readonly PaymentInput[]): number {
 export function maxAdditionalChargeCents(payments: readonly PaymentInput[]): number {
   return remainingCents(payments);
 }
+
+export interface TeamSummary {
+  status: TeamStatus;
+  rosterCount: number;
+  rosterNeeded: number;
+  rosterComplete: boolean;
+  paidCents: number;
+  outstandingCents: number;
+  fullyPaid: boolean;
+}
+
+export function summariseTeam(
+  team: unknown,
+  players: readonly PlayerInput[],
+  payments: readonly PaymentInput[],
+): TeamSummary {
+  const rosterCount = Math.min(players.length, ROSTER_SIZE);
+  const paidCents = paidTowardEntry(payments);
+  return {
+    status: evaluateTeamStatus(team, players, payments),
+    rosterCount,
+    rosterNeeded: Math.max(0, ROSTER_SIZE - rosterCount),
+    rosterComplete: rosterCount >= ROSTER_SIZE,
+    paidCents,
+    outstandingCents: Math.max(0, TEAM_PRICE_CENTS - paidCents),
+    fullyPaid: paidCents >= TEAM_PRICE_CENTS,
+  };
+}
+
+export function formatEuros(cents: number): string {
+  return `€${(cents / 100).toFixed(2)}`;
+}
