@@ -15,7 +15,7 @@ const HeroSection = () => {
     <section className="relative min-h-screen overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src={heroBg}
+          src={heroBg.url}
           alt="The Swap'n'Serve volunteer team at a community event in Limerick"
           className="h-full w-full object-cover"
           loading="eager"
