@@ -1,10 +1,14 @@
-// Swap'n'Serve Cup — create a Stripe Checkout session.
+// Swap'n'Serve Cup — create a Stripe Checkout session (embedded mode).
 // Supports the whole €70 at once ("full") or a single player's €10 ("player"),
 // including the mixed case. The overpay guard means a team can never be charged
 // beyond €70: the amount is clamped to whatever is still outstanding.
-import Stripe from "https://esm.sh/stripe@16.6.0?target=deno";
+//
+// Runs on Lovable's built-in Stripe connection: API calls go through the
+// connector gateway (see _shared/stripe.ts) and the checkout form is embedded
+// on the site — we return a clientSecret, never a redirect URL.
 import { json, preflight } from "../_shared/cors.ts";
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
+import { createStripeClient, type StripeEnv } from "../_shared/stripe.ts";
 import {
   PRICE_PER_PLAYER_CENTS,
   remainingCents,
@@ -18,21 +22,16 @@ function clean(v: unknown): string {
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return preflight();
   try {
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-    if (!stripeKey) return json({ error: "Payments are not configured yet." }, 503);
-    const siteUrl = Deno.env.get("SITE_URL") ?? "";
-
-    const stripe = new Stripe(stripeKey, {
-      apiVersion: "2024-06-20",
-      httpClient: Stripe.createFetchHttpClient(),
-    });
-    const supabase = supabaseAdmin();
-
     const body = await req.json().catch(() => ({}));
+    const env: StripeEnv = body.environment === "live" ? "live" : "sandbox";
     const mode = clean(body.mode); // "full" | "player"
     const manageToken = clean(body.manage_token);
     const inviteToken = clean(body.invite_token);
     const playerId = clean(body.player_id);
+    const returnUrl = clean(body.return_url) || `${Deno.env.get("SITE_URL") ?? ""}/cup`;
+
+    const stripe = createStripeClient(env);
+    const supabase = supabaseAdmin();
 
     // Authorise against the team via either token.
     let teamQuery = supabase.from("teams").select("id, name");
@@ -79,25 +78,27 @@ Deno.serve(async (req) => {
 
     if (amountCents <= 0) return json({ error: "Nothing left to pay." }, 409);
 
+    const productName =
+      mode === "player"
+        ? `Swap'n'Serve Cup — player entry (${team.name})`
+        : `Swap'n'Serve Cup — team entry (${team.name})`;
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      ui_mode: "embedded_page",
+      return_url: returnUrl,
       line_items: [
         {
           quantity: 1,
           price_data: {
             currency: "eur",
             unit_amount: amountCents,
-            product_data: {
-              name:
-                mode === "player"
-                  ? `Swap'n'Serve Cup — player entry (${team.name})`
-                  : `Swap'n'Serve Cup — team entry (${team.name})`,
-            },
+            product_data: { name: productName },
           },
         },
       ],
-      success_url: `${siteUrl}/cup?paid=1`,
-      cancel_url: `${siteUrl}/cup?canceled=1`,
+      // Surfaces as the product name in the payments dashboard.
+      payment_intent_data: { description: productName },
       metadata: {
         team_id: team.id,
         covers_player_ids: JSON.stringify(coversPlayerIds),
@@ -114,7 +115,7 @@ Deno.serve(async (req) => {
       status: "pending",
     });
 
-    return json({ url: session.url, session_id: session.id });
+    return json({ clientSecret: session.client_secret });
   } catch (err) {
     console.error("create-checkout error", err);
     return json({ error: "Could not start checkout. Please try again." }, 500);

@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { Trophy } from "lucide-react";
 import logo from "@/assets/logo.png";
 import SiteFooter from "@/components/SiteFooter";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 /** Shared shell for the Cup pages — native header/footer, back-to-site link. */
 const CupLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <PaymentTestModeBanner />
       <header className="sticky top-0 z-40 border-b border-border bg-primary text-primary-foreground">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
