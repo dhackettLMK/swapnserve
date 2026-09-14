@@ -17,7 +17,8 @@ import {
 import CupLayout from "@/components/cup/CupLayout";
 import { KitDot, StatusBadge, ConfigNotice } from "@/components/cup/CupUi";
 import { isSupabaseConfigured } from "@/lib/supabase";
-import { cupApi } from "@/lib/cupApi";
+import { cupApi, type CheckoutInput } from "@/lib/cupApi";
+import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { KIT_COLOURS } from "@/lib/cupTypes";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
 
@@ -179,42 +180,36 @@ function CreateTeam() {
 function ManageTeam({ manageToken }: { manageToken: string }) {
   const qc = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
+  const returnUrl = `${window.location.origin}/cup?manage=${manageToken}&paid=1`;
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["cup-team", manageToken],
     queryFn: () => cupApi.getTeam(manageToken),
   });
 
-  // Handle the Stripe redirect back to this page.
+  // Handle the Stripe redirect back to this page: confirm the payment with
+  // the backend, then refresh the team so the new status shows.
   useEffect(() => {
     if (searchParams.get("paid") === "1") {
-      toast.success("Payment received — thanks! Your team status is updating.");
-      qc.invalidateQueries({ queryKey: ["cup-team", manageToken] });
-      searchParams.delete("paid");
-      setSearchParams(searchParams, { replace: true });
-    } else if (searchParams.get("canceled") === "1") {
-      toast("Payment canceled — no charge was made.");
-      searchParams.delete("canceled");
-      setSearchParams(searchParams, { replace: true });
+      const sessionId = searchParams.get("session_id");
+      const refresh = async () => {
+        if (sessionId) {
+          try {
+            await cupApi.confirmPayment(sessionId);
+          } catch {
+            // The webhook will catch up; the refresh below still shows it.
+          }
+        }
+        toast.success("Payment received, thanks! Your team status is updated.");
+        qc.invalidateQueries({ queryKey: ["cup-team", manageToken] });
+        searchParams.delete("paid");
+        searchParams.delete("session_id");
+        setSearchParams(searchParams, { replace: true });
+      };
+      refresh();
     }
   }, [searchParams, setSearchParams, qc, manageToken]);
-
-  const payFull = useMutation({
-    mutationFn: () => cupApi.checkout({ mode: "full", manage_token: manageToken }),
-    onSuccess: (res) => {
-      window.location.href = res.url;
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
-
-  const payPlayer = useMutation({
-    mutationFn: (playerId: string) =>
-      cupApi.checkout({ mode: "player", manage_token: manageToken, player_id: playerId }),
-    onSuccess: (res) => {
-      window.location.href = res.url;
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
 
   if (isLoading) {
     return (
@@ -238,6 +233,7 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
+      <CupCheckoutDialog checkout={checkout} onClose={() => setCheckout(null)} />
       <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -252,7 +248,7 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
 
         {summary.status === "registered" && (
           <div className="mt-4 rounded-xl border border-success/30 bg-success/10 p-4 text-sm text-success">
-            🎉 Your team is fully registered and in the draw. Nothing more to do — see you on the
+            Your team is fully registered and in the draw. Nothing more to do, see you on the
             pitch!
           </div>
         )}
@@ -289,10 +285,8 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
           <Button
             variant="cta"
             className="mt-4 w-full"
-            onClick={() => payFull.mutate()}
-            disabled={payFull.isPending}
+            onClick={() => setCheckout({ mode: "full", manage_token: manageToken, returnUrl })}
           >
-            {payFull.isPending ? <Loader2 className="animate-spin" /> : null}
             Pay outstanding {formatEuros(summary.outstandingCents)} now
           </Button>
         )}
@@ -339,8 +333,14 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => payPlayer.mutate(p.id)}
-                  disabled={payPlayer.isPending}
+                  onClick={() =>
+                    setCheckout({
+                      mode: "player",
+                      manage_token: manageToken,
+                      player_id: p.id,
+                      returnUrl,
+                    })
+                  }
                 >
                   Pay €10
                 </Button>
@@ -385,14 +385,7 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const payMine = useMutation({
-    mutationFn: () =>
-      cupApi.checkout({ mode: "player", invite_token: inviteToken, player_id: joinedPlayerId! }),
-    onSuccess: (res) => {
-      window.location.href = res.url;
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
+  const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
 
   if (isLoading) {
     return (
@@ -411,6 +404,7 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
 
   return (
     <div className="mx-auto max-w-xl">
+      <CupCheckoutDialog checkout={checkout} onClose={() => setCheckout(null)} />
       <div className="mb-6 text-center">
         <div className="mb-2 flex items-center justify-center gap-2">
           <KitDot colour={data.team.kit_colour} size={18} />
@@ -429,10 +423,16 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
           <Button
             variant="cta"
             className="w-full"
-            onClick={() => payMine.mutate()}
-            disabled={payMine.isPending}
+            onClick={() =>
+              setCheckout({
+                mode: "player",
+                invite_token: inviteToken,
+                player_id: joinedPlayerId,
+                returnUrl: `${window.location.origin}/cup`,
+              })
+            }
           >
-            {payMine.isPending ? <Loader2 className="animate-spin" /> : null} Pay my €10
+            Pay my €10
           </Button>
           <p className="mt-3 text-xs text-muted-foreground">
             Already sorted? Your captain may be covering your entry — you can close this page.

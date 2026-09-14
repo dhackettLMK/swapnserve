@@ -1,6 +1,7 @@
 // Swap'n'Serve Cup — typed wrappers around the Supabase edge functions.
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { getSupabase } from "./supabase";
+import { getStripeEnvironment } from "./stripe";
 import type {
   AdminListResponse,
   CreateTeamResponse,
@@ -8,6 +9,16 @@ import type {
   PublicTeamResponse,
   TournamentPublicResponse,
 } from "./cupTypes";
+
+/** Inputs for starting an embedded card checkout for a Cup entry. */
+export interface CheckoutInput {
+  mode: "full" | "player";
+  manage_token?: string;
+  invite_token?: string;
+  player_id?: string;
+  /** Where Stripe brings the player back to after payment. */
+  returnUrl: string;
+}
 
 /** Invokes an edge function and surfaces our friendly `{ error }` messages. */
 async function invoke<T>(
@@ -47,12 +58,20 @@ export const cupApi = {
   joinTeam: (input: { invite_token: string; full_name: string; email: string; phone: string }) =>
     invoke<{ ok: true; player_id: string }>("team", { action: "join", ...input }),
 
-  checkout: (input: {
-    mode: "full" | "player";
-    manage_token?: string;
-    invite_token?: string;
-    player_id?: string;
-  }) => invoke<{ url: string; session_id: string }>("create-checkout", input),
+  checkout: (input: CheckoutInput) => {
+    const { returnUrl, ...rest } = input;
+    return invoke<{ clientSecret: string }>("create-checkout", {
+      ...rest,
+      return_url: returnUrl,
+      environment: getStripeEnvironment(),
+    });
+  },
+
+  confirmPayment: (sessionId: string) =>
+    invoke<{ status: "paid" | "pending" | "unknown" }>("confirm-payment", {
+      session_id: sessionId,
+      environment: getStripeEnvironment(),
+    }),
 
   tournament: () => invoke<TournamentPublicResponse>("tournament", {}),
 
