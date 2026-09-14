@@ -14,7 +14,309 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      group_teams: {
+        Row: {
+          group_id: string
+          id: string
+          team_id: string
+        }
+        Insert: {
+          group_id: string
+          id?: string
+          team_id: string
+        }
+        Update: {
+          group_id?: string
+          id?: string
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_teams_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_teams_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      groups: {
+        Row: {
+          id: string
+          name: string
+          tournament_id: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          tournament_id: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          tournament_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "groups_tournament_id_fkey"
+            columns: ["tournament_id"]
+            isOneToOne: false
+            referencedRelation: "tournament"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      matches: {
+        Row: {
+          away_goals: number | null
+          away_team_id: string | null
+          bracket_match_id: string | null
+          created_at: string
+          group_id: string | null
+          home_goals: number | null
+          home_team_id: string | null
+          id: string
+          played: boolean
+          round: number | null
+          stage: string
+          tournament_id: string
+        }
+        Insert: {
+          away_goals?: number | null
+          away_team_id?: string | null
+          bracket_match_id?: string | null
+          created_at?: string
+          group_id?: string | null
+          home_goals?: number | null
+          home_team_id?: string | null
+          id?: string
+          played?: boolean
+          round?: number | null
+          stage: string
+          tournament_id: string
+        }
+        Update: {
+          away_goals?: number | null
+          away_team_id?: string | null
+          bracket_match_id?: string | null
+          created_at?: string
+          group_id?: string | null
+          home_goals?: number | null
+          home_team_id?: string | null
+          id?: string
+          played?: boolean
+          round?: number | null
+          stage?: string
+          tournament_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_away_team_id_fkey"
+            columns: ["away_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_home_team_id_fkey"
+            columns: ["home_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_tournament_id_fkey"
+            columns: ["tournament_id"]
+            isOneToOne: false
+            referencedRelation: "tournament"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount_cents: number
+          covers_player_ids: string[]
+          created_at: string
+          id: string
+          player_id: string | null
+          status: string
+          stripe_session_id: string | null
+          team_id: string
+        }
+        Insert: {
+          amount_cents: number
+          covers_player_ids?: string[]
+          created_at?: string
+          id?: string
+          player_id?: string | null
+          status?: string
+          stripe_session_id?: string | null
+          team_id: string
+        }
+        Update: {
+          amount_cents?: number
+          covers_player_ids?: string[]
+          created_at?: string
+          id?: string
+          player_id?: string | null
+          status?: string
+          stripe_session_id?: string | null
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      players: {
+        Row: {
+          amount_paid_cents: number
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          is_captain: boolean
+          paid: boolean
+          phone: string
+          stripe_session_id: string | null
+          team_id: string
+        }
+        Insert: {
+          amount_paid_cents?: number
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          is_captain?: boolean
+          paid?: boolean
+          phone: string
+          stripe_session_id?: string | null
+          team_id: string
+        }
+        Update: {
+          amount_paid_cents?: number
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          is_captain?: boolean
+          paid?: boolean
+          phone?: string
+          stripe_session_id?: string | null
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "players_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          amount_paid_cents: number
+          captain_email: string
+          captain_name: string
+          captain_phone: string
+          created_at: string
+          id: string
+          invite_token: string
+          kit_colour: string
+          manage_token: string
+          name: string
+          status: string
+        }
+        Insert: {
+          amount_paid_cents?: number
+          captain_email: string
+          captain_name: string
+          captain_phone: string
+          created_at?: string
+          id?: string
+          invite_token: string
+          kit_colour: string
+          manage_token: string
+          name: string
+          status?: string
+        }
+        Update: {
+          amount_paid_cents?: number
+          captain_email?: string
+          captain_name?: string
+          captain_phone?: string
+          created_at?: string
+          id?: string
+          invite_token?: string
+          kit_colour?: string
+          manage_token?: string
+          name?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      tournament: {
+        Row: {
+          bracket: Json | null
+          created_at: string
+          group_size: number
+          id: string
+          name: string
+          qualifiers_per_group: number
+          seed: number
+          status: string
+        }
+        Insert: {
+          bracket?: Json | null
+          created_at?: string
+          group_size?: number
+          id?: string
+          name?: string
+          qualifiers_per_group?: number
+          seed?: number
+          status?: string
+        }
+        Update: {
+          bracket?: Json | null
+          created_at?: string
+          group_size?: number
+          id?: string
+          name?: string
+          qualifiers_per_group?: number
+          seed?: number
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
