@@ -4,29 +4,29 @@ import logo from "@/assets/logo.png";
 import SiteFooter from "@/components/SiteFooter";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
-/** Shared shell for the Cup pages — native header/footer, back-to-site link. */
+/** Shared shell for the Cup pages with a native header, footer and back-to-site link. */
 const CupLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <PaymentTestModeBanner />
-      <header className="sticky top-0 z-40 border-b border-border bg-primary text-primary-foreground">
+      <header className="sticky top-0 z-40 border-b border-primary-foreground/10 bg-primary/95 text-primary-foreground backdrop-blur-md">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Swap'n'Serve logo" className="h-9 w-auto brightness-0 invert" />
-            <span className="hidden sm:inline text-sm font-semibold uppercase tracking-[0.16em] text-accent">
+            <span className="hidden font-cup-body text-sm font-semibold uppercase tracking-[0.16em] text-accent sm:inline">
               Cup
             </span>
           </Link>
-          <nav className="flex items-center gap-1 text-sm font-medium">
+          <nav className="flex items-center gap-1 font-cup-body text-sm font-medium">
             <Link
               to="/cup"
-              className="rounded-md px-3 py-2 hover:bg-primary-foreground/10 transition-colors"
+              className="rounded-full px-3 py-2 transition-colors hover:bg-primary-foreground/10"
             >
               Register
             </Link>
             <Link
               to="/cup/tournament"
-              className="inline-flex items-center gap-1.5 rounded-md px-3 py-2 hover:bg-primary-foreground/10 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 transition-colors hover:bg-primary-foreground/10"
             >
               <Trophy size={15} className="text-accent" /> Tournament
             </Link>

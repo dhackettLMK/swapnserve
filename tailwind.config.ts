@@ -17,6 +17,8 @@ export default {
         display: ["var(--font-display)"],
         section: ["var(--font-section)"],
         body: ["var(--font-body)"],
+        "cup-display": ["var(--font-cup-display)"],
+        "cup-body": ["var(--font-cup-body)"],
       },
       colors: {
         border: "hsl(var(--border))",

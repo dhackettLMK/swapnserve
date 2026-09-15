@@ -1,4 +1,4 @@
-// Swap'n'Serve Cup — typed wrappers around the Supabase edge functions.
+// Swap'n'Serve Cup typed wrappers around the backend functions.
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { getSupabase } from "./supabase";
 import { getStripeEnvironment } from "./stripe";
