@@ -13,7 +13,7 @@ import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
-import cupWordmark from "@/assets/swapnserve-wordmark.jpg.asset.json";
+import cupWordmark from "@/assets/swapnserve-wordmark-clean.png";
 
 const PRIVACY_NOTE =
   "We only collect your name, email and phone to run the tournament and contact you about your team. Nothing else.";
@@ -83,7 +83,7 @@ function CreateTeam() {
       <section className="cup-hero relative isolate overflow-hidden bg-primary text-primary-foreground">
         <div className="cup-pitch-lines absolute inset-0 opacity-25" aria-hidden="true" />
         <div className="cup-floodlight absolute inset-x-0 top-0 h-40 opacity-70" aria-hidden="true" />
-        <div className="container relative z-10 grid min-h-[calc(100svh-5.5rem)] items-center gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
+        <div className="container relative z-10 grid min-h-[680px] items-center gap-8 py-12 lg:min-h-[720px] lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
           <div className="animate-fade-up text-center lg:text-left">
             <p className="mb-5 font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Limerick grassroots football
@@ -91,7 +91,7 @@ function CreateTeam() {
             <img
               src={cupWordmark.url}
               alt="Swap'n'Serve"
-              className="cup-wordmark mx-auto w-full max-w-[620px] mix-blend-screen lg:mx-0"
+              className="cup-wordmark mx-auto w-full max-w-[620px] lg:mx-0"
             />
             <h1 className="mt-5 font-cup-display text-6xl leading-[0.9] text-primary-foreground sm:text-7xl lg:text-8xl">
               The Cup

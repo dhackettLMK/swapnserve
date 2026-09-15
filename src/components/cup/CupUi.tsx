@@ -36,8 +36,8 @@ export const ConfigNotice = () => (
       <AlertTriangle className="mx-auto mb-3 text-accent" />
       <h2 className="text-lg font-section font-bold mb-2">Cup registration isn't live yet</h2>
       <p className="text-sm text-muted-foreground">
-        The organiser still needs to connect the payment and database keys. Please check back soon —
-        the team registration will open here shortly.
+        The organiser still needs to connect the payment and database keys. Please check back soon.
+        The team registration will open here shortly.
       </p>
     </div>
   </div>

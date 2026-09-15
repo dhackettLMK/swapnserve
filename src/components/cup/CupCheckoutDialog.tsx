@@ -16,7 +16,7 @@ interface CupCheckoutDialogProps {
 }
 
 /**
- * Embedded card payment for Cup entries — the player never leaves the site.
+ * Embedded card payment for Cup entries. The player never leaves the site.
  * Stripe redirects to the return URL on completion.
  */
 export function CupCheckoutDialog({ checkout, onClose }: CupCheckoutDialogProps) {
