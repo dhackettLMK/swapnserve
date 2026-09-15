@@ -76,7 +76,7 @@ function CreateTeam() {
   const eventFacts = [
     { icon: CalendarDays, label: "Date", value: "5 December" },
     { icon: Clock3, label: "Kick-off", value: "2pm until completion" },
-    { icon: Users, label: "Format", value: "5-a-side, squads of 7" },
+    { icon: Users, label: "Format", value: "5-a-side, 2 subs, rolling subs" },
   ];
 
   return (
