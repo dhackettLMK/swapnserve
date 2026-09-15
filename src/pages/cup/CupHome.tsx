@@ -89,7 +89,7 @@ function CreateTeam() {
               Limerick grassroots football
             </p>
             <img
-              src={cupWordmark.url}
+              src={cupWordmark}
               alt="Swap'n'Serve"
               className="cup-wordmark mx-auto w-full max-w-[620px] lg:mx-0"
             />
