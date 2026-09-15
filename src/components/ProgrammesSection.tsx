@@ -379,7 +379,7 @@ const CupCard = () => (
           Register your team <ArrowRight size={16} />
         </Link>
         <Link
-          to="/cup/tournament"
+          to="/cup/format"
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-foreground/90 underline-offset-4 hover:text-primary-foreground hover:underline"
         >
           View the tournament
