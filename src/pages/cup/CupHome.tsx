@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ArrowDown, CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, Users } from "lucide-react";
+import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -89,7 +89,7 @@ function CreateTeam() {
             <p className="mb-5 font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Limerick grassroots football
             </p>
-            <div className="relative mx-auto w-fit lg:mx-0">
+            <div className="relative mx-auto w-full max-w-[620px] lg:mx-0">
               <img
                 src={cupWordmark}
                 alt="Swap'n'Serve"
@@ -104,27 +104,57 @@ function CreateTeam() {
             </div>
             <h1 className="sr-only">The Swap'n'Serve Cup</h1>
             <p className="mt-5 max-w-xl font-cup-body text-lg leading-relaxed text-primary-foreground/75 lg:text-xl">
-              A World Cup-style community tournament with a €1,000 winners' prize and permanent
-              goals left for the local community after the final whistle.
+              A World Cup-style community tournament with permanent goals left for the local
+              community after the final whistle.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
-              <Button asChild size="lg" className="cup-primary-cta h-13 rounded-full bg-accent px-8 font-cup-body font-bold text-accent-foreground hover:bg-accent/90">
-                <a href="#register">Register your team <ArrowDown /></a>
-              </Button>
-              <span className="font-cup-body text-sm text-primary-foreground/65">€10 per player or €70 per team</span>
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent shadow-[0_0_30px_hsl(var(--accent)/0.15)]">
+                <Trophy className="h-4 w-4" /> €1,000 winners' prize
+              </span>
+              <span className="font-cup-body text-sm text-primary-foreground/65">
+                €10 per team member · 7 team members required
+              </span>
             </div>
           </div>
 
-          <div className="cup-prize-wrap relative mx-auto flex aspect-square w-full max-w-[440px] items-center justify-center" aria-label="One thousand euro winners' prize">
-            <div className="cup-orbit absolute inset-[10%] rounded-full border border-accent/25" aria-hidden="true" />
-            <div className="cup-orbit cup-orbit-reverse absolute inset-[22%] rounded-full border border-primary-foreground/15" aria-hidden="true" />
-            <div className="cup-prize relative flex h-64 w-64 flex-col items-center justify-center rounded-full border border-accent/50 bg-primary/80 text-center shadow-[0_0_80px_hsl(var(--accent)/0.18)] sm:h-72 sm:w-72">
-              <Trophy className="mb-3 h-8 w-8 text-accent" />
-              <span className="font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/60">Winners take</span>
-              <strong className="font-cup-display text-7xl leading-none text-accent sm:text-8xl">€1,000</strong>
-              <span className="mt-2 font-cup-body text-sm text-primary-foreground/70">Prize fund</span>
+          <form
+            id="register"
+            className="cup-register-form w-full max-w-xl scroll-mt-24 space-y-5 justify-self-center rounded-[2rem] border border-border bg-card p-6 text-card-foreground shadow-[0_24px_70px_hsl(var(--accent)/0.14)] md:p-8 lg:justify-self-end"
+            onSubmit={(e) => {
+              e.preventDefault();
+              create.mutate();
+            }}
+          >
+            <div className="font-cup-body">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
+              <h2 className="mt-1 font-cup-display text-4xl leading-none text-foreground">Register your team</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Your captain creates the team here. We then provide a private link to invite the remaining six players and arrange payment.
+              </p>
             </div>
-          </div>
+            <div className="space-y-2 font-cup-body">
+              <Label htmlFor="team-name">Team name</Label>
+              <Input id="team-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="For example, Shannonside Rovers" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="space-y-2 font-cup-body">
+                <Label htmlFor="captain-name">Captain name</Label>
+                <Input id="captain-name" value={captainName} onChange={(e) => setCaptainName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              </div>
+              <div className="space-y-2 font-cup-body">
+                <Label htmlFor="captain-phone">Captain phone</Label>
+                <Input id="captain-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              </div>
+            </div>
+            <div className="space-y-2 font-cup-body">
+              <Label htmlFor="captain-email">Captain email</Label>
+              <Input id="captain-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="We'll send the private team link here" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+            </div>
+            <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
+            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
+              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team · €10 per team member
+            </Button>
+          </form>
         </div>
       </section>
 
@@ -166,52 +196,6 @@ function CreateTeam() {
         </div>
       </section>
 
-      <section id="register" className="scroll-mt-24 bg-background py-16 md:py-24">
-        <div className="container grid gap-12 lg:grid-cols-[0.75fr_1.25fr]">
-          <div>
-            <p className="mb-3 font-cup-body text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
-            <h2 className="font-cup-display text-5xl leading-none text-foreground md:text-7xl">Bring your seven</h2>
-            <p className="mt-5 max-w-md font-cup-body text-base leading-relaxed text-muted-foreground">
-              Your captain creates the team first. We then provide a private link to invite the remaining six players and arrange payment.
-            </p>
-            <div className="mt-8 border-l-2 border-accent pl-5 font-cup-body">
-              <p className="text-3xl font-bold text-primary">€70</p>
-              <p className="text-sm text-muted-foreground">Full squad entry, or €10 per player</p>
-            </div>
-          </div>
-
-          <form
-            className="cup-register-form space-y-6 rounded-[2rem] border border-border bg-card p-6 shadow-[0_24px_70px_hsl(var(--primary)/0.08)] md:p-10"
-            onSubmit={(e) => {
-              e.preventDefault();
-              create.mutate();
-            }}
-          >
-            <div className="space-y-2 font-cup-body">
-              <Label htmlFor="team-name">Team name</Label>
-              <Input id="team-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="For example, Shannonside Rovers" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="space-y-2 font-cup-body">
-                <Label htmlFor="captain-name">Captain name</Label>
-                <Input id="captain-name" value={captainName} onChange={(e) => setCaptainName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-              </div>
-              <div className="space-y-2 font-cup-body">
-                <Label htmlFor="captain-phone">Captain phone</Label>
-                <Input id="captain-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-              </div>
-            </div>
-            <div className="space-y-2 font-cup-body">
-              <Label htmlFor="captain-email">Captain email</Label>
-              <Input id="captain-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="We'll send the private team link here" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-            </div>
-            <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
-            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
-              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team
-            </Button>
-          </form>
-        </div>
-      </section>
     </div>
   );
 }
