@@ -89,7 +89,7 @@ function CreateTeam() {
             <p className="mb-5 font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Limerick grassroots football
             </p>
-            <div className="relative mx-auto w-fit lg:mx-0">
+            <div className="relative mx-auto w-full max-w-[620px] lg:mx-0">
               <img
                 src={cupWordmark}
                 alt="Swap'n'Serve"
