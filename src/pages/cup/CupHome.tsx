@@ -85,7 +85,7 @@ function CreateTeam() {
         <div className="cup-pitch-lines absolute inset-0 opacity-25" aria-hidden="true" />
         <div className="cup-floodlight absolute inset-x-0 top-0 h-40 opacity-70" aria-hidden="true" />
         <div className="container relative z-10 grid min-h-[680px] items-center gap-8 py-12 lg:min-h-[720px] lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
-          <div className="animate-fade-up text-center lg:text-left">
+          <div className="min-w-0 animate-fade-up text-center lg:text-left">
             <p className="mb-5 font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Limerick grassroots football
             </p>
