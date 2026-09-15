@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Trophy } from "lucide-react";
 import logo from "@/assets/logo.png";
+import cupSpray from "@/assets/cup-spraypaint.png";
 import SiteFooter from "@/components/SiteFooter";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
@@ -13,9 +14,11 @@ const CupLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Swap'n'Serve logo" className="h-9 w-auto brightness-0 invert" />
-            <span className="hidden font-cup-body text-sm font-semibold uppercase tracking-[0.16em] text-accent sm:inline">
-              Cup
-            </span>
+            <img
+              src={cupSpray}
+              alt="Cup"
+              className="hidden h-6 w-auto sm:block"
+            />
           </Link>
           <nav className="flex items-center gap-1 font-cup-body text-sm font-medium">
             <Link
