@@ -85,15 +85,15 @@ function CreateTeam() {
         <div className="cup-pitch-lines absolute inset-0 opacity-25" aria-hidden="true" />
         <div className="cup-floodlight absolute inset-x-0 top-0 h-40 opacity-70" aria-hidden="true" />
         <div className="container relative z-10 grid min-h-[680px] items-center gap-8 py-12 lg:min-h-[720px] lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
-          <div className="animate-fade-up text-center lg:text-left">
+          <div className="min-w-0 animate-fade-up text-center lg:text-left">
             <p className="mb-5 font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Limerick grassroots football
             </p>
-            <div className="relative mx-auto w-full max-w-[620px] lg:mx-0">
+            <div className="relative mx-auto w-full min-w-0 max-w-[620px] lg:mx-0">
               <img
                 src={cupWordmark}
                 alt="Swap'n'Serve"
-                className="cup-wordmark w-full max-w-[620px]"
+                className="cup-wordmark w-full min-w-0 max-w-full"
               />
               <img
                 src={cupSpray}
@@ -119,7 +119,7 @@ function CreateTeam() {
 
           <form
             id="register"
-            className="cup-register-form w-full max-w-xl scroll-mt-24 space-y-5 justify-self-center rounded-[2rem] border border-border bg-card p-6 text-card-foreground shadow-[0_24px_70px_hsl(var(--accent)/0.14)] md:p-8 lg:justify-self-end"
+            className="cup-register-form w-full min-w-0 max-w-xl scroll-mt-24 space-y-5 justify-self-center rounded-[2rem] border border-border bg-card p-6 text-card-foreground shadow-[0_24px_70px_hsl(var(--accent)/0.14)] md:p-8 lg:justify-self-end"
             onSubmit={(e) => {
               e.preventDefault();
               create.mutate();
