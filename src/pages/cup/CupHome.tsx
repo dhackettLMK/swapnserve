@@ -196,52 +196,6 @@ function CreateTeam() {
         </div>
       </section>
 
-      <section id="register" className="scroll-mt-24 bg-background py-16 md:py-24">
-        <div className="container grid gap-12 lg:grid-cols-[0.75fr_1.25fr]">
-          <div>
-            <p className="mb-3 font-cup-body text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
-            <h2 className="font-cup-display text-5xl leading-none text-foreground md:text-7xl">Bring your seven</h2>
-            <p className="mt-5 max-w-md font-cup-body text-base leading-relaxed text-muted-foreground">
-              Your captain creates the team first. We then provide a private link to invite the remaining six players and arrange payment.
-            </p>
-            <div className="mt-8 border-l-2 border-accent pl-5 font-cup-body">
-              <p className="text-3xl font-bold text-primary">€70</p>
-              <p className="text-sm text-muted-foreground">Full squad entry, or €10 per player</p>
-            </div>
-          </div>
-
-          <form
-            className="cup-register-form space-y-6 rounded-[2rem] border border-border bg-card p-6 shadow-[0_24px_70px_hsl(var(--primary)/0.08)] md:p-10"
-            onSubmit={(e) => {
-              e.preventDefault();
-              create.mutate();
-            }}
-          >
-            <div className="space-y-2 font-cup-body">
-              <Label htmlFor="team-name">Team name</Label>
-              <Input id="team-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="For example, Shannonside Rovers" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="space-y-2 font-cup-body">
-                <Label htmlFor="captain-name">Captain name</Label>
-                <Input id="captain-name" value={captainName} onChange={(e) => setCaptainName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-              </div>
-              <div className="space-y-2 font-cup-body">
-                <Label htmlFor="captain-phone">Captain phone</Label>
-                <Input id="captain-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-              </div>
-            </div>
-            <div className="space-y-2 font-cup-body">
-              <Label htmlFor="captain-email">Captain email</Label>
-              <Input id="captain-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="We'll send the private team link here" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
-            </div>
-            <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
-            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
-              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team
-            </Button>
-          </form>
-        </div>
-      </section>
     </div>
   );
 }
