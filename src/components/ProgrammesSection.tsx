@@ -318,8 +318,13 @@ const CupCard = () => (
       </motion.div>
 
       <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
-        Swap'n'Serve Cup
+        Swap'n'Serve
       </h3>
+      <img
+        src={cupSpray}
+        alt="Cup"
+        className="mb-2 h-10 w-auto -rotate-2 drop-shadow-[0_4px_14px_hsl(var(--accent)/0.35)]"
+      />
 
       <div className="flex items-center gap-2 mb-4">
         <span className="relative flex h-2 w-2">

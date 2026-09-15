@@ -14,6 +14,7 @@ import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
+import cupSpray from "@/assets/cup-spraypaint.png";
 
 const PRIVACY_NOTE =
   "We only collect your name, email and phone to run the tournament and contact you about your team. Nothing else.";
@@ -88,14 +89,20 @@ function CreateTeam() {
             <p className="mb-5 font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               Limerick grassroots football
             </p>
-            <img
-              src={cupWordmark}
-              alt="Swap'n'Serve"
-              className="cup-wordmark mx-auto w-full max-w-[620px] lg:mx-0"
-            />
-            <h1 className="mt-5 font-cup-display text-6xl leading-[0.9] text-primary-foreground sm:text-7xl lg:text-8xl">
-              The Cup
-            </h1>
+            <div className="relative mx-auto w-fit lg:mx-0">
+              <img
+                src={cupWordmark}
+                alt="Swap'n'Serve"
+                className="cup-wordmark w-full max-w-[620px]"
+              />
+              <img
+                src={cupSpray}
+                alt=""
+                aria-hidden="true"
+                className="cup-wordmark mx-auto -mt-3 w-2/5 max-w-[240px] -rotate-2 drop-shadow-[0_6px_18px_hsl(var(--accent)/0.35)] lg:ml-auto lg:mr-6"
+              />
+            </div>
+            <h1 className="sr-only">The Swap'n'Serve Cup</h1>
             <p className="mt-5 max-w-xl font-cup-body text-lg leading-relaxed text-primary-foreground/75 lg:text-xl">
               A World Cup-style community tournament with a €1,000 winners' prize and permanent
               goals left for the local community after the final whistle.
