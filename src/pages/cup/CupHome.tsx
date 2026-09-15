@@ -13,7 +13,7 @@ import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
-import cupWordmark from "@/assets/swapnserve-wordmark-clean.png";
+import cupWordmark from "@/assets/swapnserve-wordmark-clean-no-smiley.png";
 
 const PRIVACY_NOTE =
   "We only collect your name, email and phone to run the tournament and contact you about your team. Nothing else.";
