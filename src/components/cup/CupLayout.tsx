@@ -28,6 +28,12 @@ const CupLayout = ({ children }: { children: React.ReactNode }) => {
               Register
             </Link>
             <Link
+              to="/cup/format"
+              className="rounded-full px-3 py-2 transition-colors hover:bg-primary-foreground/10"
+            >
+              Format
+            </Link>
+            <Link
               to="/cup/tournament"
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 transition-colors hover:bg-primary-foreground/10"
             >

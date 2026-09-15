@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, Users } from "lucide-react";
@@ -115,7 +115,14 @@ function CreateTeam() {
                 €10 per team member · 7 team members required
               </span>
             </div>
+            <Link
+              to="/cup/format"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-5 py-2.5 font-cup-body text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+            >
+              View the tournament format
+            </Link>
           </div>
+
 
           <form
             id="register"
