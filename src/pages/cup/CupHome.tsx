@@ -104,7 +104,7 @@ function CreateTeam() {
             </div>
             <h1 className="sr-only">The Swap'n'Serve Cup</h1>
             <p className="mt-5 max-w-xl font-cup-body text-lg leading-relaxed text-primary-foreground/75 lg:text-xl">
-              A World Cup-style community tournament with permanent goals left for the local
+              A community tournament with permanent goals left for the local
               community after the final whistle.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
