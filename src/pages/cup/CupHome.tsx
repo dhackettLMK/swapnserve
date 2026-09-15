@@ -175,23 +175,12 @@ function CreateTeam() {
       </section>
 
       <section className="bg-card py-14 md:py-20">
-        <div className="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-          <div className="font-cup-body">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Match venue</p>
-            <h2 className="font-cup-display text-5xl leading-none text-foreground md:text-6xl">Summerville Rovers FC Astro</h2>
-            <div className="mt-6 flex items-start gap-3 text-muted-foreground">
-              <MapPin className="mt-0.5 shrink-0 text-primary" size={20} />
-              <p>124 Ballinacurra Gardens, Ballinacurra Weston, Limerick, V94 R98D</p>
-            </div>
-          </div>
-          <div className="relative min-h-56 overflow-hidden rounded-[2rem] bg-primary p-8 text-primary-foreground md:p-10">
-            <div className="cup-mini-pitch absolute inset-0 opacity-20" aria-hidden="true" />
-            <div className="relative max-w-lg font-cup-body">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">More than one match</p>
-              <p className="mt-4 text-xl leading-relaxed text-primary-foreground/85 md:text-2xl">
-                The tournament funds permanent football goals for the local community, creating a place to play long after cup day.
-              </p>
-            </div>
+        <div className="container font-cup-body">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Match venue</p>
+          <h2 className="font-cup-display text-5xl leading-none text-foreground md:text-6xl">Summerville Rovers FC Astro</h2>
+          <div className="mt-6 flex items-start gap-3 text-muted-foreground">
+            <MapPin className="mt-0.5 shrink-0 text-primary" size={20} />
+            <p>124 Ballinacurra Gardens, Ballinacurra Weston, Limerick, V94 R98D</p>
           </div>
         </div>
       </section>
