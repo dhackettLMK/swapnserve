@@ -25,7 +25,7 @@ const rise = {
 const KEY_FACTS = [
   { icon: Users, label: "32 teams" },
   { icon: Trophy, label: "5-a-side" },
-  { icon: Users, label: "2 subs per team" },
+  { icon: Users, label: "2 subs, rolling" },
   { icon: Medal, label: "1 pitch" },
   { icon: Timer, label: "8-minute knockouts" },
   { icon: Clock, label: "2 games guaranteed" },
