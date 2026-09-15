@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import CupHome from "./pages/cup/CupHome.tsx";
 import CupAdmin from "./pages/cup/CupAdmin.tsx";
 import CupTournament from "./pages/cup/CupTournament.tsx";
+import CupFormat from "./pages/cup/CupFormat.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/cup" element={<CupHome />} />
           <Route path="/cup/admin" element={<CupAdmin />} />
           <Route path="/cup/tournament" element={<CupTournament />} />
+          <Route path="/cup/format" element={<CupFormat />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
