@@ -2,25 +2,18 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Check, Copy, Loader2, Share2, Trophy } from "lucide-react";
+import { ArrowDown, CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import CupLayout from "@/components/cup/CupLayout";
 import { KitDot, StatusBadge, ConfigNotice } from "@/components/cup/CupUi";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
-import { KIT_COLOURS } from "@/lib/cupTypes";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
+import cupWordmark from "@/assets/swapnserve-wordmark.jpg.asset.json";
 
 const PRIVACY_NOTE =
   "We only collect your name, email and phone to run the tournament and contact you about your team. Nothing else.";
@@ -43,7 +36,7 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
           toast.success("Copied to clipboard");
           setTimeout(() => setCopied(false), 1500);
         } catch {
-          toast.error("Couldn't copy — select and copy manually.");
+          toast.error("Couldn't copy. Select and copy manually.");
         }
       }}
     >
@@ -59,7 +52,6 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
 function CreateTeam() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [kit, setKit] = useState("");
   const [captainName, setCaptainName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -68,7 +60,7 @@ function CreateTeam() {
     mutationFn: () =>
       cupApi.createTeam({
         name,
-        kit_colour: kit,
+        kit_colour: "Green",
         captain_name: captainName,
         captain_email: email,
         captain_phone: phone,
@@ -80,95 +72,139 @@ function CreateTeam() {
     onError: (e: Error) => toast.error(e.message),
   });
 
+  const eventFacts = [
+    { icon: CalendarDays, label: "Date", value: "5 December" },
+    { icon: Clock3, label: "Kick-off", value: "2pm until completion" },
+    { icon: Users, label: "Format", value: "5-a-side, squads of 7" },
+  ];
+
   return (
-    <div className="mx-auto max-w-xl">
-      <div className="mb-8 text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/15 border border-accent/30">
-          <Trophy className="text-accent" />
-        </div>
-        <h1 className="text-3xl font-display font-bold mb-2">Register your team</h1>
-        <p className="text-muted-foreground">
-          5-a-side, World Cup format, €1,000 prize pot. Teams are 7 players at €10 a head — €70 in
-          total. Create your team, then invite your squad.
-        </p>
-      </div>
-
-      <form
-        className="space-y-5 rounded-2xl border border-border bg-card p-6 shadow-sm"
-        onSubmit={(e) => {
-          e.preventDefault();
-          create.mutate();
-        }}
-      >
-        <div className="space-y-2">
-          <Label htmlFor="team-name">Team name</Label>
-          <Input
-            id="team-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Shannonside Rovers"
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="kit">Kit colour (the whole team wears this)</Label>
-          <Select value={kit} onValueChange={setKit}>
-            <SelectTrigger id="kit">
-              <SelectValue placeholder="Choose a colour" />
-            </SelectTrigger>
-            <SelectContent>
-              {KIT_COLOURS.map((c) => (
-                <SelectItem key={c.name} value={c.name}>
-                  <span className="flex items-center gap-2">
-                    <KitDot colour={c.name} /> {c.name}
-                  </span>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div className="space-y-2">
-            <Label htmlFor="captain-name">Captain name</Label>
-            <Input
-              id="captain-name"
-              value={captainName}
-              onChange={(e) => setCaptainName(e.target.value)}
-              required
+    <div className="cup-landing -mt-1">
+      <section className="cup-hero relative isolate overflow-hidden bg-primary text-primary-foreground">
+        <div className="cup-pitch-lines absolute inset-0 opacity-25" aria-hidden="true" />
+        <div className="cup-floodlight absolute inset-x-0 top-0 h-40 opacity-70" aria-hidden="true" />
+        <div className="container relative z-10 grid min-h-[calc(100svh-5.5rem)] items-center gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
+          <div className="animate-fade-up text-center lg:text-left">
+            <p className="mb-5 font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+              Limerick grassroots football
+            </p>
+            <img
+              src={cupWordmark.url}
+              alt="Swap'n'Serve"
+              className="cup-wordmark mx-auto w-full max-w-[620px] mix-blend-screen lg:mx-0"
             />
+            <h1 className="mt-5 font-cup-display text-6xl leading-[0.9] text-primary-foreground sm:text-7xl lg:text-8xl">
+              The Cup
+            </h1>
+            <p className="mt-5 max-w-xl font-cup-body text-lg leading-relaxed text-primary-foreground/75 lg:text-xl">
+              A World Cup-style community tournament with a €1,000 winners' prize and permanent
+              goals left for the local community after the final whistle.
+            </p>
+            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
+              <Button asChild size="lg" className="cup-primary-cta h-13 rounded-full bg-accent px-8 font-cup-body font-bold text-accent-foreground hover:bg-accent/90">
+                <a href="#register">Register your team <ArrowDown /></a>
+              </Button>
+              <span className="font-cup-body text-sm text-primary-foreground/65">€10 per player or €70 per team</span>
+            </div>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="captain-phone">Captain phone</Label>
-            <Input
-              id="captain-phone"
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            />
+
+          <div className="cup-prize-wrap relative mx-auto flex aspect-square w-full max-w-[440px] items-center justify-center" aria-label="One thousand euro winners' prize">
+            <div className="cup-orbit absolute inset-[10%] rounded-full border border-accent/25" aria-hidden="true" />
+            <div className="cup-orbit cup-orbit-reverse absolute inset-[22%] rounded-full border border-primary-foreground/15" aria-hidden="true" />
+            <div className="cup-prize relative flex h-64 w-64 flex-col items-center justify-center rounded-full border border-accent/50 bg-primary/80 text-center shadow-[0_0_80px_hsl(var(--accent)/0.18)] sm:h-72 sm:w-72">
+              <Trophy className="mb-3 h-8 w-8 text-accent" />
+              <span className="font-cup-body text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/60">Winners take</span>
+              <strong className="font-cup-display text-7xl leading-none text-accent sm:text-8xl">€1,000</strong>
+              <span className="mt-2 font-cup-body text-sm text-primary-foreground/70">Prize fund</span>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="space-y-2">
-          <Label htmlFor="captain-email">Captain email</Label>
-          <Input
-            id="captain-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="We'll send your team management link here"
-            required
-          />
+      <section className="border-b border-border bg-background py-10">
+        <div className="container grid gap-6 md:grid-cols-3">
+          {eventFacts.map((fact, index) => (
+            <div key={fact.label} className="cup-fact flex items-start gap-4 font-cup-body" style={{ animationDelay: `${index * 100}ms` }}>
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/8 text-primary">
+                <fact.icon size={19} />
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">{fact.label}</p>
+                <p className="mt-1 text-lg font-semibold text-foreground">{fact.value}</p>
+              </div>
+            </div>
+          ))}
         </div>
+      </section>
 
-        <p className="text-xs text-muted-foreground">{PRIVACY_NOTE}</p>
+      <section className="bg-card py-14 md:py-20">
+        <div className="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+          <div className="font-cup-body">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Match venue</p>
+            <h2 className="font-cup-display text-5xl leading-none text-foreground md:text-6xl">Summerville Rovers FC Astro</h2>
+            <div className="mt-6 flex items-start gap-3 text-muted-foreground">
+              <MapPin className="mt-0.5 shrink-0 text-primary" size={20} />
+              <p>124 Ballinacurra Gardens, Ballinacurra Weston, Limerick, V94 R98D</p>
+            </div>
+          </div>
+          <div className="relative min-h-56 overflow-hidden rounded-[2rem] bg-primary p-8 text-primary-foreground md:p-10">
+            <div className="cup-mini-pitch absolute inset-0 opacity-20" aria-hidden="true" />
+            <div className="relative max-w-lg font-cup-body">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">More than one match</p>
+              <p className="mt-4 text-xl leading-relaxed text-primary-foreground/85 md:text-2xl">
+                The tournament funds permanent football goals for the local community, creating a place to play long after cup day.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <Button type="submit" variant="cta" size="lg" className="w-full" disabled={create.isPending}>
-          {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team
-        </Button>
-      </form>
+      <section id="register" className="scroll-mt-24 bg-background py-16 md:py-24">
+        <div className="container grid gap-12 lg:grid-cols-[0.75fr_1.25fr]">
+          <div>
+            <p className="mb-3 font-cup-body text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
+            <h2 className="font-cup-display text-5xl leading-none text-foreground md:text-7xl">Bring your seven</h2>
+            <p className="mt-5 max-w-md font-cup-body text-base leading-relaxed text-muted-foreground">
+              Your captain creates the team first. We then provide a private link to invite the remaining six players and arrange payment.
+            </p>
+            <div className="mt-8 border-l-2 border-accent pl-5 font-cup-body">
+              <p className="text-3xl font-bold text-primary">€70</p>
+              <p className="text-sm text-muted-foreground">Full squad entry, or €10 per player</p>
+            </div>
+          </div>
+
+          <form
+            className="cup-register-form space-y-6 rounded-[2rem] border border-border bg-card p-6 shadow-[0_24px_70px_hsl(var(--primary)/0.08)] md:p-10"
+            onSubmit={(e) => {
+              e.preventDefault();
+              create.mutate();
+            }}
+          >
+            <div className="space-y-2 font-cup-body">
+              <Label htmlFor="team-name">Team name</Label>
+              <Input id="team-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="For example, Shannonside Rovers" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="space-y-2 font-cup-body">
+                <Label htmlFor="captain-name">Captain name</Label>
+                <Input id="captain-name" value={captainName} onChange={(e) => setCaptainName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              </div>
+              <div className="space-y-2 font-cup-body">
+                <Label htmlFor="captain-phone">Captain phone</Label>
+                <Input id="captain-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              </div>
+            </div>
+            <div className="space-y-2 font-cup-body">
+              <Label htmlFor="captain-email">Captain email</Label>
+              <Input id="captain-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="We'll send the private team link here" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+            </div>
+            <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
+            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
+              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team
+            </Button>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }
@@ -351,7 +387,7 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
           ))}
         </ul>
         <p className="mt-4 text-xs text-muted-foreground">
-          Bookmark this page — it's your private link to manage the team.
+          Bookmark this page. It's your private link to manage the team.
         </p>
       </div>
     </div>
@@ -435,7 +471,7 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
             Pay my €10
           </Button>
           <p className="mt-3 text-xs text-muted-foreground">
-            Already sorted? Your captain may be covering your entry — you can close this page.
+            Already sorted? Your captain may be covering your entry. You can close this page.
           </p>
         </div>
       ) : data.rosterComplete ? (
@@ -499,7 +535,7 @@ const CupHome = () => {
 
   return (
     <CupLayout>
-      <div className="container py-10 md:py-14">{isSupabaseConfigured ? view : <ConfigNotice />}</div>
+      <div className={manageToken || inviteToken ? "container py-10 md:py-14" : ""}>{isSupabaseConfigured ? view : <ConfigNotice />}</div>
     </CupLayout>
   );
 };

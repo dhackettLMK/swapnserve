@@ -16,7 +16,7 @@ export function PaymentTestModeBanner() {
   if (clientToken.startsWith("pk_test_")) {
     return (
       <div className="w-full border-b border-accent/30 bg-accent/10 px-4 py-2 text-center text-sm text-accent-foreground">
-        Payments are in test mode — no real money moves.
+        Payments are in test mode. No real money moves.
       </div>
     );
   }
