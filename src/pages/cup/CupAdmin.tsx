@@ -10,7 +10,8 @@ import { ConfigNotice, KitDot, StatusBadge } from "@/components/cup/CupUi";
 import { BracketView } from "@/components/cup/TournamentView";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi } from "@/lib/cupApi";
-import { formatEuros } from "@/lib/teamStatus";
+import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
+import { Progress } from "@/components/ui/progress";
 import type { CupMatch } from "@/lib/cupTypes";
 
 const TOKEN_KEY = "cup_admin_token";
