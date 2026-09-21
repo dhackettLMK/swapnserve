@@ -101,26 +101,35 @@ const VolunteerRoles = () => {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-base font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
-            >
-              <Send size={18} />
-              Send Message
-            </motion.button>
-            <motion.a
-              href="mailto:swapnserve@gmail.com"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 border border-white/20 px-6 py-3.5 text-base font-semibold text-white hover:bg-white/15 transition-colors"
-            >
-              <Mail size={18} />
-              Email Us
-            </motion.a>
-          </div>
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-base font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
+          >
+            <Send size={18} />
+            Send Message
+          </motion.button>
+
+          <Link
+            to="/cup"
+            className="mt-4 group inline-flex w-full items-center justify-center gap-3 rounded-full border border-gold/30 bg-gold/10 px-6 py-3 text-sm font-semibold text-white hover:bg-gold/20 transition-colors"
+          >
+            <span className="text-white/70 group-hover:text-white transition-colors">
+              Next up:
+            </span>
+            <span className="font-cup-display tracking-wide text-base text-white">
+              Swap'n'Serve
+            </span>
+            <img
+              src={cupSpraypaint}
+              alt="Cup"
+              className="h-5 -rotate-2 drop-shadow-[0_0_8px_rgba(243,198,78,0.5)] transition-transform group-hover:scale-110"
+            />
+            <span className="text-gold/80 group-hover:text-gold transition-colors">
+              Registration open
+            </span>
+          </Link>
 
           <p className="mt-4 text-xs text-white/50 text-center flex items-center justify-center gap-1.5">
             <Heart size={12} /> We only use your details to reply about
