@@ -78,25 +78,29 @@ Deno.serve(async (req) => {
 
     if (amountCents <= 0) return json({ error: "Nothing left to pay." }, 409);
 
-    // One open checkout per team, enforced by the
-    // payments_one_pending_per_team unique index. Before creating a new
-    // session, expire any abandoned ones and clear their pending rows, so
-    // two people can never both complete a checkout for the same money.
+    // Guard against double charges, enforced by the
+    // payments_one_pending_per_target unique index (one open checkout per
+    // team for full payments, one per player for individual payments).
+    // Before creating a session, retire conflicting abandoned checkouts:
+    // a full-team payment conflicts with every open checkout for the team;
+    // a player payment conflicts with an open full checkout or another
+    // checkout for the same player. Sessions that Stripe says are already
+    // paid are left for the webhook / confirm-payment to fulfil.
     const { data: pendingRows } = await supabase
       .from("payments")
-      .select("id, stripe_session_id")
+      .select("id, player_id, stripe_session_id")
       .eq("team_id", team.id)
       .eq("status", "pending");
     for (const row of pendingRows ?? []) {
+      const conflicts = mode === "player"
+        ? row.player_id === null || row.player_id === playerId
+        : true;
+      if (!conflicts) continue;
       try {
         const existing = await stripe.checkout.sessions.retrieve(
           row.stripe_session_id,
         );
-        if (existing.payment_status === "paid") {
-          // Paid but not yet fulfilled — keep the row so the webhook or
-          // confirm-payment can complete it.
-          continue;
-        }
+        if (existing.payment_status === "paid") continue;
         if (existing.status === "open") {
           await stripe.checkout.sessions.expire(row.stripe_session_id);
         }
