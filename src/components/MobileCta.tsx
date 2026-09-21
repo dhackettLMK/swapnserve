@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import CupButtonBrand from "@/components/cup/CupButtonBrand";
 
 const MobileCta = () => {
   const [visible, setVisible] = useState(false);

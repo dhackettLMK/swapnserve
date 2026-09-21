@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import CupButtonBrand from "@/components/cup/CupButtonBrand";
 
 const CtaBanner = () => {
   return (
