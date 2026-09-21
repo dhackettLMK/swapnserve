@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import logo from "@/assets/logo.png";
+import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const SiteFooter = () => {
   return (
