@@ -89,17 +89,21 @@ Deno.serve(async (req) => {
       .eq("status", "pending");
     for (const row of pendingRows ?? []) {
       try {
-        await stripe.checkout.sessions.expire(row.stripe_session_id);
-      } catch {
-        // Already expired or completed — nothing to cancel.
+        const existing = await stripe.checkout.sessions.retrieve(
+          row.stripe_session_id,
+        );
+        if (existing.payment_status === "paid") {
+          // Paid but not yet fulfilled — keep the row so the webhook or
+          // confirm-payment can complete it.
+          continue;
+        }
+        if (existing.status === "open") {
+          await stripe.checkout.sessions.expire(row.stripe_session_id);
+        }
+        await supabase.from("payments").delete().eq("id", row.id);
+      } catch (err) {
+        console.error("could not retire pending session", row.stripe_session_id, err);
       }
-    }
-    if ((pendingRows ?? []).length > 0) {
-      await supabase
-        .from("payments")
-        .delete()
-        .eq("team_id", team.id)
-        .eq("status", "pending");
     }
 
     const productName =
