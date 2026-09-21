@@ -115,22 +115,15 @@ const VolunteerRoles = () => {
 
           <Link
             to="/cup"
-            className="mt-4 group inline-flex w-full items-center justify-center gap-3 rounded-full border border-gold/30 bg-gold/10 px-6 py-3 text-sm font-semibold text-white hover:bg-gold/20 transition-colors"
+            className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-3 font-cup-body text-sm font-semibold text-accent shadow-[0_0_30px_hsl(var(--accent)/0.12)] transition-all hover:bg-accent/15 hover:shadow-[0_0_40px_hsl(var(--accent)/0.2)]"
           >
-            <span className="text-white/70 group-hover:text-white transition-colors">
-              Next up:
-            </span>
-            <span className="font-cup-display tracking-wide text-base text-white">
-              Swap'n'Serve
-            </span>
+            Next up: Swap'n'Serve
             <img
               src={cupSpraypaint}
               alt="Cup"
-              className="h-5 -rotate-2 drop-shadow-[0_0_8px_rgba(243,198,78,0.5)] transition-transform group-hover:scale-110"
+              className="h-5 -rotate-2 drop-shadow-[0_0_8px_hsl(var(--accent)/0.5)] transition-transform group-hover:scale-110"
             />
-            <span className="text-gold/80 group-hover:text-gold transition-colors">
-              Registration open
-            </span>
+            registration open
           </Link>
 
           <p className="mt-4 text-xs text-white/50 text-center flex items-center justify-center gap-1.5">
