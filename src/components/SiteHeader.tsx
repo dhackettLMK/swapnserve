@@ -121,7 +121,7 @@ const SiteHeader = () => {
                   aria-label="Sign Up to the Swap'n'Serve Cup"
                   className="mt-3 flex items-center justify-center rounded-xl bg-secondary px-3 py-3"
                 >
-                  <CupButtonBrand wordmarkClass="h-3.5" cupClass="h-4.5" />
+                  <CupButtonBrand wordmarkClass="h-3.5" cupClass="h-4" />
                 </Link>
               </div>
             </motion.nav>
