@@ -390,7 +390,7 @@ const CupAdmin = () => {
                   type="password"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Enter the ADMIN_TOKEN"
+                  placeholder="Enter your passcode"
                   autoFocus
                 />
               </div>
@@ -399,7 +399,7 @@ const CupAdmin = () => {
               </Button>
             </form>
             <p className="mt-3 text-xs text-muted-foreground">
-              This is the <code>ADMIN_TOKEN</code> secret you set on your Supabase functions.
+              This page is private. Without the passcode, no team or payment details are shown.
             </p>
           </div>
         )}
