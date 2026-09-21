@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Mail, Send, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Send, Heart } from "lucide-react";
 import { toast } from "sonner";
+import cupSpraypaint from "@/assets/cup-spraypaint.png";
 
 const VolunteerRoles = () => {
   const [name, setName] = useState("");
@@ -101,26 +103,28 @@ const VolunteerRoles = () => {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-base font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
-            >
-              <Send size={18} />
-              Send Message
-            </motion.button>
-            <motion.a
-              href="mailto:swapnserve@gmail.com"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 border border-white/20 px-6 py-3.5 text-base font-semibold text-white hover:bg-white/15 transition-colors"
-            >
-              <Mail size={18} />
-              Email Us
-            </motion.a>
-          </div>
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-base font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
+          >
+            <Send size={18} />
+            Send Message
+          </motion.button>
+
+          <Link
+            to="/cup"
+            className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-3 font-cup-body text-sm font-semibold text-accent shadow-[0_0_30px_hsl(var(--accent)/0.12)] transition-all hover:bg-accent/15 hover:shadow-[0_0_40px_hsl(var(--accent)/0.2)]"
+          >
+            Next up: Swap'n'Serve
+            <img
+              src={cupSpraypaint}
+              alt="Cup"
+              className="h-5 -rotate-2 drop-shadow-[0_0_8px_hsl(var(--accent)/0.5)] transition-transform group-hover:scale-110"
+            />
+            registration open
+          </Link>
 
           <p className="mt-4 text-xs text-white/50 text-center flex items-center justify-center gap-1.5">
             <Heart size={12} /> We only use your details to reply about
