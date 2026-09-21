@@ -4,7 +4,7 @@ import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const SiteFooter = () => {
   return (
-    <footer className="bg-primary py-12 md:py-16" role="contentinfo">
+    <footer className="bg-primary py-12 pb-28 md:py-16 md:pb-16" role="contentinfo">
       <div className="container">
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           <div>
