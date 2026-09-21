@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Recycle, Heart, Users, Leaf } from "lucide-react";
+import CupButtonBrand from "@/components/cup/CupButtonBrand";
 import heroBg from "@/assets/hero-community.png.asset.json";
 
 const chips = [

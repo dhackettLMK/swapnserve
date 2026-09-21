@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import CupButtonBrand from "@/components/cup/CupButtonBrand";
 import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const navLinks = [
