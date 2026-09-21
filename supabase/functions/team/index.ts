@@ -97,6 +97,9 @@ Deno.serve(async (req) => {
         rosterCount: summary.rosterCount,
         rosterNeeded: summary.rosterNeeded,
         rosterComplete: summary.rosterComplete,
+        paidCents: summary.paidCents,
+        outstandingCents: summary.outstandingCents,
+        fullyPaid: summary.fullyPaid,
       });
     }
 
