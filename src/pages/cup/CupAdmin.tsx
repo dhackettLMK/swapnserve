@@ -344,6 +344,21 @@ const CupAdmin = () => {
   const [token, setToken] = useState<string | null>(() => sessionStorage.getItem(TOKEN_KEY));
   const [input, setInput] = useState("");
 
+  // Keep this page out of search engines.
+  useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.head.appendChild(meta);
+    const previousTitle = document.title;
+    document.title = "Organiser access";
+    return () => {
+      meta.remove();
+      document.title = previousTitle;
+    };
+  }, []);
+
+
   if (!isSupabaseConfigured) {
     return (
       <CupLayout>
