@@ -367,7 +367,7 @@ const CupCard = () => (
           whileHover={{ scale: 1.06 }}
           className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
         >
-          Funds the next clothing event
+          Funds future Swap'N'Serve projects
         </motion.span>
       </div>
 
