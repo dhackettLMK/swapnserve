@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Mail, Send, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Send, Heart } from "lucide-react";
 import { toast } from "sonner";
+import cupSpraypaint from "@/assets/cup-spraypaint.png";
 
 const VolunteerRoles = () => {
   const [name, setName] = useState("");
