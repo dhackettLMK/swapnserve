@@ -3,6 +3,7 @@ import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight } from "lucid
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import cupSpray from "@/assets/cup-spraypaint.png";
+import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 /* -------------------------------------------------------------------------- */
 /*  Clothing Flagship - boutique / wardrobe card                              */
@@ -318,9 +319,12 @@ const CupCard = () => (
         <Trophy size={26} className="text-accent drop-shadow-[0_0_8px_hsl(var(--accent)/0.6)]" />
       </motion.div>
 
-      <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
-        Swap'n'Serve
-      </h3>
+      <h3 className="sr-only">Swap'n'Serve Cup</h3>
+      <img
+        src={cupWordmark}
+        alt="Swap'n'Serve"
+        className="mb-1 h-9 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
+      />
       <img
         src={cupSpray}
         alt="Cup"
@@ -341,9 +345,9 @@ const CupCard = () => (
       </div>
 
       <p className="text-primary-foreground/85 leading-relaxed mb-4">
-        A 5-a-side community football tournament with a €1,000 prize pot, run World
-        Cup-style from group stage to final. Built to unite the city across every
-        background and fund the next clothing event.
+        A 5-a-side community football tournament with a €1,000 prize pot, from the
+        first whistle to the final. Built to unite the city across every
+        background and fund future Swap'N'Serve projects.
       </p>
       <p className="text-primary-foreground/75 leading-relaxed mb-6">
         Teams register 7 players at €10 a head, with BBQ-style food on the day. All

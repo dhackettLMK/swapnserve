@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Send, Heart } from "lucide-react";
 import { toast } from "sonner";
 import cupSpraypaint from "@/assets/cup-spraypaint.png";
+import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const VolunteerRoles = () => {
   const [name, setName] = useState("");
@@ -117,7 +118,12 @@ const VolunteerRoles = () => {
             to="/cup"
             className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-3 font-cup-body text-sm font-semibold text-accent shadow-[0_0_30px_hsl(var(--accent)/0.12)] transition-all hover:bg-accent/15 hover:shadow-[0_0_40px_hsl(var(--accent)/0.2)]"
           >
-            Next up: Swap'n'Serve
+            Next up:
+            <img
+              src={wordmark}
+              alt="Swap'n'Serve"
+              className="h-5 w-auto transition-transform group-hover:scale-105"
+            />
             <img
               src={cupSpraypaint}
               alt="Cup"
