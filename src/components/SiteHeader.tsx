@@ -73,9 +73,10 @@ const SiteHeader = () => {
             })}
             <Link
               to="/cup"
-              className="ml-3 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-transform hover:scale-[1.02]"
+              aria-label="Sign Up to the Cup"
+              className="ml-3 inline-flex items-center rounded-full bg-secondary px-4 py-2 transition-transform hover:scale-[1.02]"
             >
-              Sign Up to the Cup
+              <CupButtonBrand wordmarkClass="h-3" cupClass="h-4" />
             </Link>
           </nav>
 

@@ -66,7 +66,9 @@ const HeroSection = () => {
             className="mb-5 flex flex-col gap-3 sm:flex-row"
           >
             <Button variant="cta" size="lg" asChild className="min-w-[220px] rounded-full">
-              <Link to="/cup">Sign Up to the Swap'n'Serve Cup</Link>
+              <Link to="/cup" aria-label="Sign Up to the Swap'n'Serve Cup">
+                <CupButtonBrand wordmarkClass="h-5" cupClass="h-7" />
+              </Link>
             </Button>
             <a
               href="https://www.gofundme.com/f/swapnserve-2"
