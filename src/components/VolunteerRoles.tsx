@@ -122,7 +122,7 @@ const VolunteerRoles = () => {
             <img
               src={wordmark}
               alt="Swap'n'Serve"
-              className="h-5 w-auto brightness-0 invert transition-transform group-hover:scale-105"
+              className="h-5 w-auto transition-transform group-hover:scale-105"
             />
             <img
               src={cupSpraypaint}
