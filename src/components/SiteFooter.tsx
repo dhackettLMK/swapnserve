@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import logo from "@/assets/logo.png";
+import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const SiteFooter = () => {
   return (
@@ -9,7 +9,7 @@ const SiteFooter = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           <div>
             <a href="#" className="inline-block">
-              <img src={logo} alt="Swap'n'Serve logo" className="h-12 w-auto brightness-0 invert" />
+              <img src={wordmark} alt="Swap'n'Serve logo" className="h-11 w-auto" />
             </a>
             <p className="text-sm text-primary-foreground/60 mt-3 leading-relaxed">
               A nonprofit organisation working for the betterment of Limerick city through

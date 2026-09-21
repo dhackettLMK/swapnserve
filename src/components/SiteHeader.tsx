@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo.png";
+import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -51,7 +51,7 @@ const SiteHeader = () => {
       >
         <div className="flex h-16 items-center justify-between px-4 md:h-[72px] md:px-6">
           <a href="#" className="flex items-center">
-            <img src={logo} alt="Swap'n'Serve logo" className="h-9 w-auto md:h-11" />
+            <img src={wordmark} alt="Swap'n'Serve logo" className="h-8 w-auto md:h-10" />
           </a>
 
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
