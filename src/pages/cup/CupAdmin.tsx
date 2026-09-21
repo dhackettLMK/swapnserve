@@ -10,7 +10,8 @@ import { ConfigNotice, KitDot, StatusBadge } from "@/components/cup/CupUi";
 import { BracketView } from "@/components/cup/TournamentView";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi } from "@/lib/cupApi";
-import { formatEuros } from "@/lib/teamStatus";
+import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
+import { Progress } from "@/components/ui/progress";
 import type { CupMatch } from "@/lib/cupTypes";
 
 const TOKEN_KEY = "cup_admin_token";
@@ -207,12 +208,21 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                     <StatusBadge status={row.summary.status} />
                   </td>
                   <td className="py-2 pr-3">{row.summary.rosterCount}/7</td>
-                  <td className="py-2 pr-3">
-                    {formatEuros(row.summary.paidCents)}
+                  <td className="w-40 py-2 pr-3">
+                    <span className="whitespace-nowrap">
+                      {formatEuros(row.summary.paidCents)}
+                      <span className="text-muted-foreground">
+                        {" "}
+                        / {formatEuros(TEAM_PRICE_CENTS)}
+                      </span>
+                    </span>
+                    <Progress
+                      value={Math.round((row.summary.paidCents / TEAM_PRICE_CENTS) * 100)}
+                      className="mt-1 h-1.5"
+                    />
                     {row.summary.outstandingCents > 0 && (
                       <span className="text-xs text-muted-foreground">
-                        {" "}
-                        ({formatEuros(row.summary.outstandingCents)} due)
+                        {formatEuros(row.summary.outstandingCents)} left to register
                       </span>
                     )}
                   </td>

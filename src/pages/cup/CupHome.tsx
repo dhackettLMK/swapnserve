@@ -276,43 +276,66 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
           </div>
         )}
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-border p-4">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Roster</p>
-            <p className="mt-1 text-2xl font-bold">{summary.rosterCount}/7 players</p>
-            {summary.rosterNeeded > 0 && (
-              <p className="text-xs text-muted-foreground">
-                {summary.rosterNeeded} more to invite
-              </p>
-            )}
-          </div>
-          <div className="rounded-xl border border-border p-4">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Paid</p>
-            <p className="mt-1 text-2xl font-bold">
-              {formatEuros(summary.paidCents)}
-              <span className="text-base font-normal text-muted-foreground">
-                {" "}
-                / {formatEuros(TEAM_PRICE_CENTS)}
-              </span>
-            </p>
-            <Progress value={pct} className="mt-2 h-2" />
-            {summary.outstandingCents > 0 && (
-              <p className="mt-1 text-xs text-muted-foreground">
-                {formatEuros(summary.outstandingCents)} outstanding
-              </p>
-            )}
-          </div>
+        <div className="mt-6 rounded-xl border border-border p-4">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">Roster</p>
+          <p className="mt-1 text-2xl font-bold">{summary.rosterCount}/7 players</p>
+          {summary.rosterNeeded > 0 && (
+            <p className="text-xs text-muted-foreground">{summary.rosterNeeded} more to invite</p>
+          )}
         </div>
 
-        {summary.outstandingCents > 0 && (
-          <Button
-            variant="cta"
-            className="mt-4 w-full"
-            onClick={() => setCheckout({ mode: "full", manage_token: manageToken, returnUrl })}
-          >
-            Pay outstanding {formatEuros(summary.outstandingCents)} now
-          </Button>
-        )}
+        <div className="mt-4 rounded-xl border border-border p-5">
+          <div className="flex items-end justify-between gap-3">
+            <div>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                Entry fee progress
+              </p>
+              <p className="mt-1 text-3xl font-bold leading-none">
+                {formatEuros(summary.paidCents)}
+                <span className="text-lg font-normal text-muted-foreground">
+                  {" "}
+                  / {formatEuros(TEAM_PRICE_CENTS)}
+                </span>
+              </p>
+            </div>
+            <p className="text-sm font-semibold text-muted-foreground">{pct}%</p>
+          </div>
+
+          <Progress value={pct} className="mt-3 h-3" />
+
+          <p className="mt-3 text-sm text-muted-foreground">
+            {summary.outstandingCents > 0 ? (
+              <>
+                <span className="font-semibold text-foreground">
+                  {formatEuros(summary.outstandingCents)} left
+                </span>{" "}
+                until your team is officially registered for the tournament. Your place is only
+                confirmed once the full {formatEuros(TEAM_PRICE_CENTS)} has been paid.
+              </>
+            ) : (
+              <>
+                The full {formatEuros(TEAM_PRICE_CENTS)} is paid. Your team is officially
+                registered.
+              </>
+            )}
+          </p>
+
+          {summary.outstandingCents > 0 && (
+            <div className="mt-4 space-y-2">
+              <Button
+                variant="cta"
+                className="w-full"
+                onClick={() => setCheckout({ mode: "full", manage_token: manageToken, returnUrl })}
+              >
+                Pay the remaining {formatEuros(summary.outstandingCents)} in one go
+              </Button>
+              <p className="text-center text-xs text-muted-foreground">
+                Or split it: each player pays their own €10 from the list below, or share the
+                invite link so they can pay themselves.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Invite link */}
@@ -436,6 +459,30 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
         <p className="text-muted-foreground">
           You've been invited to join this team for the Swap'n'Serve Cup. {data.rosterCount}/7
           players so far.
+        </p>
+      </div>
+
+      <div className="mb-6 rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <div className="flex items-end justify-between gap-3">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">
+            Entry fee progress
+          </p>
+          <p className="text-lg font-bold">
+            {formatEuros(data.paidCents)}
+            <span className="text-sm font-normal text-muted-foreground">
+              {" "}
+              / {formatEuros(TEAM_PRICE_CENTS)}
+            </span>
+          </p>
+        </div>
+        <Progress
+          value={Math.round((data.paidCents / TEAM_PRICE_CENTS) * 100)}
+          className="mt-2 h-2.5"
+        />
+        <p className="mt-2 text-xs text-muted-foreground">
+          {data.outstandingCents > 0
+            ? `${formatEuros(data.outstandingCents)} left before this team is officially registered.`
+            : "Paid in full. This team is officially registered."}
         </p>
       </div>
 

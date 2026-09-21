@@ -62,6 +62,9 @@ export interface PublicTeamResponse {
   rosterCount: number;
   rosterNeeded: number;
   rosterComplete: boolean;
+  paidCents: number;
+  outstandingCents: number;
+  fullyPaid: boolean;
 }
 
 export interface CreateTeamResponse {
