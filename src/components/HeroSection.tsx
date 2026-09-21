@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Recycle, Heart, Users, Leaf } from "lucide-react";
 import CupButtonBrand from "@/components/cup/CupButtonBrand";
-import heroBg from "@/assets/hero-community.png.asset.json";
+import heroBg from "@/assets/hero-community.jpg";
+import heroBgSmall from "@/assets/hero-community-sm.jpg";
 
 const chips = [
   { label: "Youth-led, Limerick-born", icon: Users },
