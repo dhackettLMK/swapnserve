@@ -10,6 +10,9 @@ interface CupButtonBrandProps {
 // used inside sign-up buttons so they carry the actual Cup branding.
 const CupButtonBrand = ({ wordmarkClass = "h-4", cupClass = "h-5" }: CupButtonBrandProps) => (
   <span className="inline-flex items-center gap-2 whitespace-nowrap">
+    <span className="font-display text-sm font-semibold uppercase tracking-[0.12em]">
+      Sign Up to the
+    </span>
     <img src={wordmark} alt="" className={`${wordmarkClass} w-auto`} />
     <img src={cupSpraypaint} alt="Swap'n'Serve Cup" className={`${cupClass} w-auto`} />
   </span>
