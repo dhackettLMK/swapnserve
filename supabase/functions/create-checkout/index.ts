@@ -133,8 +133,10 @@ Deno.serve(async (req) => {
       },
     });
 
-    // Record a pending payment; the webhook flips it to "paid".
-    await supabase.from("payments").insert({
+    // Record a pending payment; the webhook flips it to "paid". The unique
+    // index rejects a second concurrent checkout for this team — if that
+    // happens, cancel the session we just made and tell the user to retry.
+    const { error: insertError } = await supabase.from("payments").insert({
       team_id: team.id,
       player_id: mode === "player" ? playerId : null,
       stripe_session_id: session.id,
@@ -142,6 +144,18 @@ Deno.serve(async (req) => {
       covers_player_ids: coversPlayerIds,
       status: "pending",
     });
+    if (insertError) {
+      console.error("pending payment insert failed", insertError);
+      try {
+        await stripe.checkout.sessions.expire(session.id);
+      } catch {
+        // best effort
+      }
+      return json(
+        { error: "Another checkout for this team is already open. Please try again in a moment." },
+        409,
+      );
+    }
 
     return json({ clientSecret: session.client_secret });
   } catch (err) {
