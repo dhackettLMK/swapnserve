@@ -78,6 +78,30 @@ Deno.serve(async (req) => {
 
     if (amountCents <= 0) return json({ error: "Nothing left to pay." }, 409);
 
+    // One open checkout per team, enforced by the
+    // payments_one_pending_per_team unique index. Before creating a new
+    // session, expire any abandoned ones and clear their pending rows, so
+    // two people can never both complete a checkout for the same money.
+    const { data: pendingRows } = await supabase
+      .from("payments")
+      .select("id, stripe_session_id")
+      .eq("team_id", team.id)
+      .eq("status", "pending");
+    for (const row of pendingRows ?? []) {
+      try {
+        await stripe.checkout.sessions.expire(row.stripe_session_id);
+      } catch {
+        // Already expired or completed — nothing to cancel.
+      }
+    }
+    if ((pendingRows ?? []).length > 0) {
+      await supabase
+        .from("payments")
+        .delete()
+        .eq("team_id", team.id)
+        .eq("status", "pending");
+    }
+
     const productName =
       mode === "player"
         ? `Swap'n'Serve Cup — player entry (${team.name})`
