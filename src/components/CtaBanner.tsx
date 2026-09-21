@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import CupButtonBrand from "@/components/cup/CupButtonBrand";
 
 const CtaBanner = () => {
   return (
@@ -30,9 +31,10 @@ const CtaBanner = () => {
           >
             <Link
               to="/cup"
-              className="inline-flex items-center gap-2 rounded-full bg-secondary px-8 py-4 text-lg font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
+              aria-label="Sign Up to the Swap'n'Serve Cup"
+              className="inline-flex items-center gap-3 rounded-full bg-secondary px-8 py-4 shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
             >
-              Sign Up to the Swap'n'Serve Cup
+              <CupButtonBrand wordmarkClass="h-5" cupClass="h-7" />
               <ArrowRight size={20} />
             </Link>
           </motion.div>

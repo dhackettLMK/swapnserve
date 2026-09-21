@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import CupButtonBrand from "@/components/cup/CupButtonBrand";
 
 const MobileCta = () => {
   const [visible, setVisible] = useState(false);
@@ -17,8 +18,8 @@ const MobileCta = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-card/95 backdrop-blur-md border-t border-border p-3 safe-area-pb">
       <Button variant="hero" className="w-full" asChild>
-        <Link to="/cup" className="inline-flex items-center gap-2">
-          Sign Up to the Swap'n'Serve Cup
+        <Link to="/cup" aria-label="Sign Up to the Swap'n'Serve Cup" className="inline-flex items-center justify-center gap-2">
+          <CupButtonBrand wordmarkClass="h-3.5" cupClass="h-4" />
           <ArrowRight size={16} />
         </Link>
       </Button>
