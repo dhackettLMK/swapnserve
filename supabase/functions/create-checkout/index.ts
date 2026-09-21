@@ -78,6 +78,38 @@ Deno.serve(async (req) => {
 
     if (amountCents <= 0) return json({ error: "Nothing left to pay." }, 409);
 
+    // Guard against double charges, enforced by the
+    // payments_one_pending_per_target unique index (one open checkout per
+    // team for full payments, one per player for individual payments).
+    // Before creating a session, retire conflicting abandoned checkouts:
+    // a full-team payment conflicts with every open checkout for the team;
+    // a player payment conflicts with an open full checkout or another
+    // checkout for the same player. Sessions that Stripe says are already
+    // paid are left for the webhook / confirm-payment to fulfil.
+    const { data: pendingRows } = await supabase
+      .from("payments")
+      .select("id, player_id, stripe_session_id")
+      .eq("team_id", team.id)
+      .eq("status", "pending");
+    for (const row of pendingRows ?? []) {
+      const conflicts = mode === "player"
+        ? row.player_id === null || row.player_id === playerId
+        : true;
+      if (!conflicts) continue;
+      try {
+        const existing = await stripe.checkout.sessions.retrieve(
+          row.stripe_session_id,
+        );
+        if (existing.payment_status === "paid") continue;
+        if (existing.status === "open") {
+          await stripe.checkout.sessions.expire(row.stripe_session_id);
+        }
+        await supabase.from("payments").delete().eq("id", row.id);
+      } catch (err) {
+        console.error("could not retire pending session", row.stripe_session_id, err);
+      }
+    }
+
     const productName =
       mode === "player"
         ? `Swap'n'Serve Cup — player entry (${team.name})`
@@ -105,8 +137,10 @@ Deno.serve(async (req) => {
       },
     });
 
-    // Record a pending payment; the webhook flips it to "paid".
-    await supabase.from("payments").insert({
+    // Record a pending payment; the webhook flips it to "paid". The unique
+    // index rejects a second concurrent checkout for this team — if that
+    // happens, cancel the session we just made and tell the user to retry.
+    const { error: insertError } = await supabase.from("payments").insert({
       team_id: team.id,
       player_id: mode === "player" ? playerId : null,
       stripe_session_id: session.id,
@@ -114,6 +148,18 @@ Deno.serve(async (req) => {
       covers_player_ids: coversPlayerIds,
       status: "pending",
     });
+    if (insertError) {
+      console.error("pending payment insert failed", insertError);
+      try {
+        await stripe.checkout.sessions.expire(session.id);
+      } catch {
+        // best effort
+      }
+      return json(
+        { error: "Another checkout for this team is already open. Please try again in a moment." },
+        409,
+      );
+    }
 
     return json({ clientSecret: session.client_secret });
   } catch (err) {
