@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CtaBanner = () => {
   return (
@@ -22,15 +23,19 @@ const CtaBanner = () => {
             Whether you have an hour or a day, your time supports families across the city. Join
             the Swap'n'Serve volunteer team.
           </p>
-          <motion.a
-            href="https://example.com/volunteer"
+          <motion.div
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 rounded-full bg-secondary px-8 py-4 text-lg font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
+            className="inline-block"
           >
-            Sign Up to Volunteer
-            <ArrowRight size={20} />
-          </motion.a>
+            <Link
+              to="/cup"
+              className="inline-flex items-center gap-2 rounded-full bg-secondary px-8 py-4 text-lg font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
+            >
+              Sign Up to the Swap'n'Serve Cup
+              <ArrowRight size={20} />
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
@@ -70,12 +71,12 @@ const SiteHeader = () => {
                 </a>
               );
             })}
-            <a
-              href="https://example.com/volunteer"
+            <Link
+              to="/cup"
               className="ml-3 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-transform hover:scale-[1.02]"
             >
-              Sign Up
-            </a>
+              Sign Up to the Cup
+            </Link>
           </nav>
 
           <button
@@ -112,13 +113,13 @@ const SiteHeader = () => {
                     {link.label}
                   </a>
                 ))}
-                <a
-                  href="https://example.com/volunteer"
+                <Link
+                  to="/cup"
                   onClick={() => setMobileOpen(false)}
                   className="mt-3 block rounded-xl bg-secondary px-3 py-3 text-center text-sm font-semibold text-secondary-foreground"
                 >
-                  Sign Up to Volunteer
-                </a>
+                  Sign Up to the Swap'n'Serve Cup
+                </Link>
               </div>
             </motion.nav>
           )}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Recycle, Heart, Users, Leaf } from "lucide-react";
@@ -65,7 +66,7 @@ const HeroSection = () => {
             className="mb-5 flex flex-col gap-3 sm:flex-row"
           >
             <Button variant="cta" size="lg" asChild className="min-w-[220px] rounded-full">
-              <a href="https://example.com/volunteer">Sign Up to Volunteer</a>
+              <Link to="/cup">Sign Up to the Swap'n'Serve Cup</Link>
             </Button>
             <a
               href="https://www.gofundme.com/f/swapnserve-2"
