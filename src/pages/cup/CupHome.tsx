@@ -462,6 +462,30 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
         </p>
       </div>
 
+      <div className="mb-6 rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <div className="flex items-end justify-between gap-3">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">
+            Entry fee progress
+          </p>
+          <p className="text-lg font-bold">
+            {formatEuros(data.paidCents)}
+            <span className="text-sm font-normal text-muted-foreground">
+              {" "}
+              / {formatEuros(TEAM_PRICE_CENTS)}
+            </span>
+          </p>
+        </div>
+        <Progress
+          value={Math.round((data.paidCents / TEAM_PRICE_CENTS) * 100)}
+          className="mt-2 h-2.5"
+        />
+        <p className="mt-2 text-xs text-muted-foreground">
+          {data.outstandingCents > 0
+            ? `${formatEuros(data.outstandingCents)} left before this team is officially registered.`
+            : "Paid in full. This team is officially registered."}
+        </p>
+      </div>
+
       {joinedPlayerId ? (
         <div className="rounded-2xl border border-success/30 bg-success/10 p-6 text-center">
           <Check className="mx-auto mb-2 text-success" />
