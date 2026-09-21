@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2, Lock, RefreshCw, Shuffle, Trophy } from "lucide-react";
@@ -344,6 +344,21 @@ const CupAdmin = () => {
   const [token, setToken] = useState<string | null>(() => sessionStorage.getItem(TOKEN_KEY));
   const [input, setInput] = useState("");
 
+  // Keep this page out of search engines.
+  useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.head.appendChild(meta);
+    const previousTitle = document.title;
+    document.title = "Organiser access";
+    return () => {
+      meta.remove();
+      document.title = previousTitle;
+    };
+  }, []);
+
+
   if (!isSupabaseConfigured) {
     return (
       <CupLayout>
@@ -390,7 +405,7 @@ const CupAdmin = () => {
                   type="password"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Enter the ADMIN_TOKEN"
+                  placeholder="Enter your passcode"
                   autoFocus
                 />
               </div>
@@ -399,7 +414,7 @@ const CupAdmin = () => {
               </Button>
             </form>
             <p className="mt-3 text-xs text-muted-foreground">
-              This is the <code>ADMIN_TOKEN</code> secret you set on your Supabase functions.
+              This page is private. Without the passcode, no team or payment details are shown.
             </p>
           </div>
         )}
