@@ -21,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/cup" element={<CupHome />} />
+          <Route path="/admin" element={<CupAdmin />} />
           <Route path="/cup/admin" element={<CupAdmin />} />
           <Route path="/cup/tournament" element={<CupTournament />} />
           <Route path="/cup/format" element={<CupFormat />} />
