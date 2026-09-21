@@ -118,9 +118,10 @@ const SiteHeader = () => {
                 <Link
                   to="/cup"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-3 block rounded-xl bg-secondary px-3 py-3 text-center text-sm font-semibold text-secondary-foreground"
+                  aria-label="Sign Up to the Swap'n'Serve Cup"
+                  className="mt-3 flex items-center justify-center rounded-xl bg-secondary px-3 py-3"
                 >
-                  Sign Up to the Swap'n'Serve Cup
+                  <CupButtonBrand wordmarkClass="h-3.5" cupClass="h-4.5" />
                 </Link>
               </div>
             </motion.nav>
