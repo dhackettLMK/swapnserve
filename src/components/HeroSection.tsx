@@ -17,19 +17,18 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
       <div className="absolute inset-0 bg-primary">
-        <picture>
-          <source media="(max-width: 767px)" srcSet={heroBgSmall} />
-          <img
-            src={heroBg}
-            alt="The Swap'n'Serve volunteer team at a community event in Limerick"
-            className="h-full w-full object-cover object-center"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-            width={1264}
-            height={848}
-          />
-        </picture>
+        <img
+          src={heroBg}
+          srcSet={`${heroBgSmall} 632w, ${heroBg} 1264w`}
+          sizes="100vw"
+          alt="The Swap'n'Serve volunteer team at a community event in Limerick"
+          className="h-full w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          width={1264}
+          height={848}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/75 to-primary/90" />
       </div>
 
