@@ -212,7 +212,7 @@ function CreateTeam() {
         mode: "player",
         manage_token: res.manage_token,
         player_id: res.captain_player_id,
-        returnUrl: `${window.location.origin}${manageUrl}`,
+        returnUrl: `${window.location.origin}${manageUrl}&paid=1`,
       });
     },
     onError: (e: Error) => toast.error(e.message),
@@ -367,6 +367,7 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
   const qc = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
   const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
+  const [justPaid, setJustPaid] = useState(false);
   const returnUrl = `${window.location.origin}/cup?manage=${manageToken}&paid=1`;
 
   const { data, isLoading, isError, error } = useQuery({
@@ -387,7 +388,7 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
             // The webhook will catch up; the refresh below still shows it.
           }
         }
-        toast.success("Payment received, thanks! Your team status is updated.");
+        setJustPaid(true);
         qc.invalidateQueries({ queryKey: ["cup-team", manageToken] });
         searchParams.delete("paid");
         searchParams.delete("session_id");
@@ -420,6 +421,53 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <CupCheckoutDialog checkout={checkout} onClose={() => setCheckout(null)} />
+
+      {justPaid && (
+        <div className="animate-fade-up rounded-2xl border border-success/40 bg-success/10 p-6 text-center shadow-sm">
+          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-success/20 text-success">
+            <Check size={28} />
+          </div>
+          <h2 className="font-section text-2xl font-bold">Payment received</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Thanks, {team.captain_name.split(" ")[0]}. Your payment for {team.name} went through.
+          </p>
+
+          <dl className="mx-auto mt-5 max-w-sm space-y-2 rounded-xl border border-border bg-card p-4 text-left text-sm">
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">Team</dt>
+              <dd className="font-medium">{team.name}</dd>
+            </div>
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">Paid so far</dt>
+              <dd className="font-medium">
+                {formatEuros(summary.paidCents)} of {formatEuros(TEAM_PRICE_CENTS)}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">Status</dt>
+              <dd className="font-medium">
+                {summary.outstandingCents > 0
+                  ? `${formatEuros(summary.outstandingCents)} left to register`
+                  : "Officially registered"}
+              </dd>
+            </div>
+          </dl>
+
+          <p className="mt-4 text-sm text-muted-foreground">
+            {summary.outstandingCents > 0
+              ? "Next: share your invite link below so your six teammates can join and pay their €10."
+              : "Your team is in the draw. See you on the pitch on 5 December."}
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Your receipt goes to {team.captain_email}. Keep this page bookmarked, it is your private
+            team link.
+          </p>
+          <Button variant="outline" className="mt-5 rounded-full" onClick={() => setJustPaid(false)}>
+            Continue to my team
+          </Button>
+        </div>
+      )}
+
       <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
         <div className="flex items-start justify-between gap-4">
           <div>
