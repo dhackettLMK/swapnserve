@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight } from "lucide-react";
+import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight, UserPlus } from "lucide-react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import cupSpray from "@/assets/cup-spraypaint.png";
@@ -381,6 +381,12 @@ const CupCard = () => (
           className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-accent-foreground shadow-lg transition-transform hover:scale-105"
         >
           Register your team <ArrowRight size={16} />
+        </Link>
+        <Link
+          to="/cup#solo"
+          className="inline-flex items-center gap-2 rounded-full border border-accent/60 bg-accent/10 px-5 py-2.5 text-sm font-bold text-accent transition-transform hover:scale-105"
+        >
+          Register as an individual <UserPlus size={16} />
         </Link>
         <Link
           to="/cup/format"
