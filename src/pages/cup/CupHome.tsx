@@ -388,7 +388,7 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
             // The webhook will catch up; the refresh below still shows it.
           }
         }
-        toast.success("Payment received, thanks! Your team status is updated.");
+        setJustPaid(true);
         qc.invalidateQueries({ queryKey: ["cup-team", manageToken] });
         searchParams.delete("paid");
         searchParams.delete("session_id");
