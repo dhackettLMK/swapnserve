@@ -7,6 +7,7 @@ import type {
   CreateTeamResponse,
   ManageTeamResponse,
   PublicTeamResponse,
+  SoloJoinResponse,
   TournamentPublicResponse,
 } from "./cupTypes";
 
