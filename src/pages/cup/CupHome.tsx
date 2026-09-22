@@ -12,6 +12,7 @@ import { KitDot, StatusBadge, ConfigNotice } from "@/components/cup/CupUi";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
+import { CupAssistant } from "@/components/cup/CupAssistant";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
 import type { Payment } from "@/lib/cupTypes";
 
@@ -695,6 +696,8 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
           Bookmark this page. It's your private link to manage the team.
         </p>
       </div>
+
+      <CupAssistant manageToken={manageToken} />
     </div>
   );
 }
