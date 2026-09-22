@@ -708,15 +708,38 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
 
 function JoinTeam({ inviteToken }: { inviteToken: string }) {
   const qc = useQueryClient();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [joinedPlayerId, setJoinedPlayerId] = useState<string | null>(null);
+  const [justPaid, setJustPaid] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["cup-public-team", inviteToken],
     queryFn: () => cupApi.getPublicTeam(inviteToken),
   });
+
+  // Coming back from Stripe: confirm the €10, then show the receipt panel.
+  useEffect(() => {
+    if (searchParams.get("paid") !== "1") return;
+    const sessionId = searchParams.get("session_id");
+    const refresh = async () => {
+      if (sessionId) {
+        try {
+          await cupApi.confirmPayment(sessionId);
+        } catch {
+          // The webhook catches up; the refresh below still shows it.
+        }
+      }
+      setJustPaid(true);
+      qc.invalidateQueries({ queryKey: ["cup-public-team", inviteToken] });
+      searchParams.delete("paid");
+      searchParams.delete("session_id");
+      setSearchParams(searchParams, { replace: true });
+    };
+    refresh();
+  }, [searchParams, setSearchParams, qc, inviteToken]);
 
   const join = useMutation({
     mutationFn: () =>
