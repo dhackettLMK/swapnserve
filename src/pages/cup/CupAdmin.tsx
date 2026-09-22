@@ -390,11 +390,18 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                     <br />
                     {row.team.captain_phone}
                   </td>
+                  <td className="py-2 pr-3">
+                    <TeamActions
+                      token={token}
+                      teamId={row.team.id}
+                      currentName={row.team.name}
+                    />
+                  </td>
                 </tr>
               ))}
               {teams.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="py-6 text-center text-muted-foreground">
+                  <td colSpan={6} className="py-6 text-center text-muted-foreground">
                     No teams yet.
                   </td>
                 </tr>
