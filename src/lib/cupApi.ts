@@ -101,6 +101,10 @@ export const cupApi = {
       token: string,
       input: { match_id: string; home_goals: number; away_goals: number },
     ) => invoke<{ ok: true }>("admin", { action: "record-match", ...input }, { "x-admin-token": token }),
+    renameTeam: (token: string, input: { team_id: string; name: string }) =>
+      invoke<{ ok: true }>("admin", { action: "rename-team", ...input }, { "x-admin-token": token }),
+    deleteTeam: (token: string, team_id: string) =>
+      invoke<{ ok: true }>("admin", { action: "delete-team", team_id }, { "x-admin-token": token }),
     reset: (token: string) =>
       invoke<{ ok: true }>("admin", { action: "reset" }, { "x-admin-token": token }),
   },

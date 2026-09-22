@@ -294,6 +294,35 @@ Deno.serve(async (req) => {
       return json({ ok: true });
     }
 
+    // ----------------------------------------------------------- rename-team
+    if (action === "rename-team") {
+      const teamId = clean(body.team_id);
+      const name = clean(body.name);
+      if (!teamId || name.length < 2) {
+        return json({ error: "Provide a team and a name of at least 2 characters." }, 400);
+      }
+      const { error } = await supabase.from("teams").update({ name }).eq("id", teamId);
+      if (error) return json({ error: "Couldn't rename that team." }, 500);
+      return json({ ok: true });
+    }
+
+    // ----------------------------------------------------------- delete-team
+    if (action === "delete-team") {
+      const teamId = clean(body.team_id);
+      if (!teamId) return json({ error: "Provide a team to remove." }, 400);
+
+      await supabase
+        .from("matches")
+        .delete()
+        .or(`home_team_id.eq.${teamId},away_team_id.eq.${teamId}`);
+      await supabase.from("group_teams").delete().eq("team_id", teamId);
+      await supabase.from("payments").delete().eq("team_id", teamId);
+      await supabase.from("players").delete().eq("team_id", teamId);
+      const { error } = await supabase.from("teams").delete().eq("id", teamId);
+      if (error) return json({ error: "Couldn't remove that team." }, 500);
+      return json({ ok: true });
+    }
+
     // --------------------------------------------------------------- reset
     if (action === "reset") {
       await supabase.from("tournament").delete().neq("id", "00000000-0000-0000-0000-000000000000");
