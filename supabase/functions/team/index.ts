@@ -154,6 +154,105 @@ Deno.serve(async (req) => {
       return json({ ok: true, player_id: inserted.id });
     }
 
+    // A player signing up on their own. They are dropped at random into one of
+    // the mixed "Free Agents" squads made up of other solo entries.
+    if (action === "solo") {
+      const fullName = clean(body.full_name);
+      const email = clean(body.email);
+      const phone = clean(body.phone);
+
+      if (fullName.length < 2) return json({ error: "Enter your full name." }, 400);
+      if (!EMAIL_RE.test(email)) return json({ error: "Enter a valid email." }, 400);
+      if (phone.length < 5) return json({ error: "Enter a valid phone number." }, 400);
+
+      const { data: poolTeams } = await supabase
+        .from("teams")
+        .select("id, name, invite_token")
+        .eq("is_pool", true);
+
+      const pool = poolTeams ?? [];
+      const counts = new Map<string, number>();
+      if (pool.length) {
+        const { data: poolPlayers } = await supabase
+          .from("players")
+          .select("team_id")
+          .in("team_id", pool.map((t) => t.id));
+        for (const p of poolPlayers ?? []) {
+          counts.set(p.team_id, (counts.get(p.team_id) ?? 0) + 1);
+        }
+      }
+
+      // Randomise which open squad they land in.
+      const open = pool
+        .filter((t) => (counts.get(t.id) ?? 0) < 7)
+        .sort(() => Math.random() - 0.5);
+
+      for (const team of open) {
+        const { data: inserted, error } = await supabase
+          .from("players")
+          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false })
+          .select("id")
+          .single();
+        if (!error) {
+          await recomputeTeamStatus(supabase, team.id);
+          return json({
+            ok: true,
+            player_id: inserted.id,
+            invite_token: team.invite_token,
+            team_name: team.name,
+            squad_size: (counts.get(team.id) ?? 0) + 1,
+          });
+        }
+        if (error.code === "23505") return json({ error: "You're already in a squad." }, 409);
+        if (!String(error.message).includes("Roster is full")) throw error;
+        // Squad filled up between the count and the insert; try the next one.
+      }
+
+      // Every squad is full (or none exist yet), so open a new one.
+      for (let attempt = 0; attempt < 5; attempt += 1) {
+        const invite_token = generateToken();
+        const manage_token = generateToken();
+        const name = `Free Agents ${pool.length + 1 + attempt}`;
+        const { data: team, error } = await supabase
+          .from("teams")
+          .insert({
+            name,
+            kit_colour: "Green",
+            captain_name: "Swap'n'Serve organisers",
+            captain_email: "swapnserve@gmail.com",
+            captain_phone: "swapnserve@gmail.com",
+            invite_token,
+            manage_token,
+            status: "draft",
+            is_pool: true,
+          })
+          .select("id, name, invite_token")
+          .single();
+        if (error) {
+          if (error.code === "23505") continue;
+          throw error;
+        }
+
+        const { data: inserted, error: playerError } = await supabase
+          .from("players")
+          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false })
+          .select("id")
+          .single();
+        if (playerError) throw playerError;
+
+        await recomputeTeamStatus(supabase, team.id);
+        return json({
+          ok: true,
+          player_id: inserted.id,
+          invite_token: team.invite_token,
+          team_name: team.name,
+          squad_size: 1,
+        });
+      }
+
+      return json({ error: "Couldn't place you in a squad. Please try again." }, 500);
+    }
+
     if (action === "get") {
       const manageToken = clean(body.manage_token);
       const { data: team } = await supabase
