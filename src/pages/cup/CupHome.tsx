@@ -59,7 +59,9 @@ function SoloEntry() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
-  const [placed, setPlaced] = useState<{ team_name: string; invite_token: string } | null>(null);
+  const [placed, setPlaced] = useState<
+    { team_name: string; invite_token: string; player_id: string } | null
+  >(null);
 
   const joinSolo = useMutation({
     mutationFn: () => cupApi.joinSolo({ full_name: fullName, email, phone }),
@@ -122,13 +124,12 @@ function SoloEntry() {
                   setCheckout({
                     mode: "player",
                     invite_token: placed.invite_token,
-                    player_id: null as never,
+                    player_id: placed.player_id,
                     returnUrl: `${window.location.origin}/cup?invite=${placed.invite_token}`,
                   })
                 }
-                disabled
               >
-                Payment window opened
+                Pay my €10
               </Button>
               <Link
                 to={`/cup?invite=${placed.invite_token}`}
