@@ -212,7 +212,7 @@ function CreateTeam() {
         mode: "player",
         manage_token: res.manage_token,
         player_id: res.captain_player_id,
-        returnUrl: `${window.location.origin}${manageUrl}`,
+        returnUrl: `${window.location.origin}${manageUrl}&paid=1`,
       });
     },
     onError: (e: Error) => toast.error(e.message),
@@ -367,6 +367,7 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
   const qc = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
   const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
+  const [justPaid, setJustPaid] = useState(false);
   const returnUrl = `${window.location.origin}/cup?manage=${manageToken}&paid=1`;
 
   const { data, isLoading, isError, error } = useQuery({
