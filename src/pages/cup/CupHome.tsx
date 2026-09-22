@@ -56,6 +56,9 @@ function CreateTeam() {
   const [captainName, setCaptainName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  /** Captain's €10 deposit, opened as soon as the team row exists. */
+  const [deposit, setDeposit] = useState<CheckoutInput | null>(null);
+  const [manageToken, setManageToken] = useState<string | null>(null);
 
   const create = useMutation({
     mutationFn: () =>
@@ -67,8 +70,19 @@ function CreateTeam() {
         captain_phone: phone,
       }),
     onSuccess: (res) => {
-      toast.success("Team created! Share your invite link with your teammates.");
-      navigate(`/cup?manage=${res.manage_token}`);
+      const manageUrl = `/cup?manage=${res.manage_token}`;
+      setManageToken(res.manage_token);
+      if (!res.captain_player_id) {
+        navigate(manageUrl);
+        return;
+      }
+      toast.success("Team created. Pay your €10 deposit to secure your place.");
+      setDeposit({
+        mode: "player",
+        manage_token: res.manage_token,
+        player_id: res.captain_player_id,
+        returnUrl: `${window.location.origin}${manageUrl}`,
+      });
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -136,7 +150,7 @@ function CreateTeam() {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
               <h2 className="mt-1 font-cup-display text-4xl leading-none text-foreground">Register your team</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Your captain creates the team here. We then provide a private link to invite the remaining six players and arrange payment.
+                Your captain creates the team and pays their own €10 as a deposit to hold the place. We then provide a private link to invite the remaining six players and arrange the rest of the payment.
               </p>
             </div>
             <div className="space-y-2 font-cup-body">
@@ -159,7 +173,7 @@ function CreateTeam() {
             </div>
             <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
             <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
-              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team · €10 per team member
+              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team · pay your €10 deposit
             </Button>
           </form>
         </div>
@@ -192,9 +206,17 @@ function CreateTeam() {
         </div>
       </section>
 
+      <CupCheckoutDialog
+        checkout={deposit}
+        onClose={() => {
+          setDeposit(null);
+          if (manageToken) navigate(`/cup?manage=${manageToken}`);
+        }}
+      />
     </div>
   );
 }
+
 
 /* -------------------------------------------------------------------------- */
 /*  Manage a team (captain dashboard)                                         */
