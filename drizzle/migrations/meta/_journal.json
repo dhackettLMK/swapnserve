@@ -15,6 +15,13 @@
       "when": 1790079819620,
       "tag": "0001_add_is_solo_to_players",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790079945206,
+      "tag": "0002_add_signup_source_to_players",
+      "breakpoints": true
     }
   ]
 }
