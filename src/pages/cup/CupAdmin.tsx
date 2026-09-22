@@ -182,6 +182,56 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
         </div>
       </div>
 
+      {/* Sign-up mix */}
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <h2 className="mb-4 font-section text-lg font-bold">Sign-ups</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-xl bg-muted/50 p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Captains</p>
+            <p className="text-2xl font-bold">{signups.captains}</p>
+          </div>
+          <div className="rounded-xl bg-muted/50 p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Individuals</p>
+            <p className="text-2xl font-bold">{signups.individuals}</p>
+          </div>
+          <div className="rounded-xl bg-muted/50 p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">
+              Joined a team by invite
+            </p>
+            <p className="text-2xl font-bold">{signups.teammates}</p>
+          </div>
+        </div>
+
+        <div className="mt-5 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-xs uppercase tracking-wide text-muted-foreground">
+                <th className="py-2 pr-3 font-medium">Button</th>
+                <th className="py-2 pr-3 font-medium">Captains</th>
+                <th className="py-2 pr-3 font-medium">Individuals</th>
+              </tr>
+            </thead>
+            <tbody>
+              {signups.sources.length === 0 && (
+                <tr>
+                  <td colSpan={3} className="py-3 text-muted-foreground">
+                    No sign-ups yet.
+                  </td>
+                </tr>
+              )}
+              {signups.sources.map((row) => (
+                <tr key={row.source} className="border-t border-border/60">
+                  <td className="py-2 pr-3 font-medium">{SOURCE_LABELS[row.source] ?? row.source}</td>
+                  <td className="py-2 pr-3">{row.captains}</td>
+                  <td className="py-2 pr-3">{row.individuals}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
       {/* Teams table */}
       <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
         <h2 className="mb-4 font-section text-lg font-bold">Teams</h2>
