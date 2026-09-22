@@ -547,6 +547,76 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
             </div>
           )}
         </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-xl border border-border p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Captain deposit</p>
+            <p className="mt-1 text-xl font-bold">{formatEuros(DEPOSIT_CENTS)}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {captainPaid ? "Paid" : "Not paid yet"}
+            </p>
+          </div>
+          <div className="rounded-xl border border-border p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Balance left</p>
+            <p className="mt-1 text-xl font-bold">{formatEuros(summary.outstandingCents)}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {summary.outstandingCents > 0
+                ? `${Math.ceil(summary.outstandingCents / DEPOSIT_CENTS)} × €10 still to come`
+                : "Nothing left to pay"}
+            </p>
+          </div>
+          <div className="rounded-xl border border-border p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Registration</p>
+            <p
+              className={`mt-1 text-xl font-bold ${summary.fullyPaid ? "text-success" : "text-foreground"}`}
+            >
+              {summary.fullyPaid ? "Registered" : "Not yet"}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {summary.fullyPaid ? "Your place is confirmed" : "Confirmed once €70 is paid"}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Payment history */}
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <div className="mb-3 flex items-center gap-2">
+          <Receipt size={16} className="text-primary" />
+          <h2 className="font-section text-lg font-bold">Payment history</h2>
+        </div>
+        {paidPayments.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            No payments yet. Your €10 deposit shows here as soon as it goes through.
+          </p>
+        ) : (
+          <ul className="divide-y divide-border">
+            {paidPayments.map((p) => (
+              <li key={p.id} className="flex items-center justify-between gap-3 py-3">
+                <div>
+                  <p className="text-sm font-medium">{paymentLabel(p)}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {new Date(p.created_at).toLocaleDateString("en-IE", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+                <span className="text-sm font-semibold">{formatEuros(p.amount_cents)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="mt-4 flex justify-between border-t border-border pt-3 text-sm font-semibold">
+          <span>Total paid</span>
+          <span>
+            {formatEuros(summary.paidCents)}{" "}
+            <span className="font-normal text-muted-foreground">
+              of {formatEuros(TEAM_PRICE_CENTS)}
+            </span>
+          </span>
+        </p>
       </div>
 
       {/* Invite link */}
