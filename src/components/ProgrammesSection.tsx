@@ -383,6 +383,12 @@ const CupCard = () => (
           Register your team <ArrowRight size={16} />
         </Link>
         <Link
+          to="/cup#solo"
+          className="inline-flex items-center gap-2 rounded-full border border-accent/60 bg-accent/10 px-5 py-2.5 text-sm font-bold text-accent transition-transform hover:scale-105"
+        >
+          Register as an individual <UserPlus size={16} />
+        </Link>
+        <Link
           to="/cup/format"
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-foreground/90 underline-offset-4 hover:text-primary-foreground hover:underline"
         >

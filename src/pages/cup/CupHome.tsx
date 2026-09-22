@@ -859,6 +859,16 @@ const CupHome = () => {
   const manageToken = searchParams.get("manage");
   const inviteToken = searchParams.get("invite");
 
+  // Deep links such as /cup#solo scroll straight to individual registration.
+  useEffect(() => {
+    if (manageToken || inviteToken) return;
+    if (window.location.hash !== "#solo") return;
+    const t = window.setTimeout(() => {
+      document.getElementById("solo")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+    return () => window.clearTimeout(t);
+  }, [manageToken, inviteToken]);
+
   const view = useMemo(() => {
     if (inviteToken) return <JoinTeam inviteToken={inviteToken} />;
     if (manageToken) return <ManageTeam manageToken={manageToken} />;
