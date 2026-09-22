@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight } from "lucide-react";
+import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight, UserPlus } from "lucide-react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import cupSpray from "@/assets/cup-spraypaint.png";
