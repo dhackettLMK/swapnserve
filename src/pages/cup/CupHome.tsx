@@ -81,7 +81,7 @@ function SoloEntry() {
         mode: "player",
         invite_token: res.invite_token,
         player_id: res.player_id,
-        returnUrl: `${window.location.origin}/cup?invite=${res.invite_token}`,
+        returnUrl: `${window.location.origin}/cup?invite=${res.invite_token}&paid=1`,
       });
     },
     onError: (e: Error) => toast.error(e.message),
@@ -134,7 +134,7 @@ function SoloEntry() {
                     mode: "player",
                     invite_token: placed.invite_token,
                     player_id: placed.player_id,
-                    returnUrl: `${window.location.origin}/cup?invite=${placed.invite_token}`,
+                    returnUrl: `${window.location.origin}/cup?invite=${placed.invite_token}&paid=1`,
                   })
                 }
               >
@@ -708,15 +708,38 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
 
 function JoinTeam({ inviteToken }: { inviteToken: string }) {
   const qc = useQueryClient();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [joinedPlayerId, setJoinedPlayerId] = useState<string | null>(null);
+  const [justPaid, setJustPaid] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["cup-public-team", inviteToken],
     queryFn: () => cupApi.getPublicTeam(inviteToken),
   });
+
+  // Coming back from Stripe: confirm the €10, then show the receipt panel.
+  useEffect(() => {
+    if (searchParams.get("paid") !== "1") return;
+    const sessionId = searchParams.get("session_id");
+    const refresh = async () => {
+      if (sessionId) {
+        try {
+          await cupApi.confirmPayment(sessionId);
+        } catch {
+          // The webhook catches up; the refresh below still shows it.
+        }
+      }
+      setJustPaid(true);
+      qc.invalidateQueries({ queryKey: ["cup-public-team", inviteToken] });
+      searchParams.delete("paid");
+      searchParams.delete("session_id");
+      setSearchParams(searchParams, { replace: true });
+    };
+    refresh();
+  }, [searchParams, setSearchParams, qc, inviteToken]);
 
   const join = useMutation({
     mutationFn: () =>
@@ -749,14 +772,68 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
   return (
     <div className="mx-auto max-w-xl">
       <CupCheckoutDialog checkout={checkout} onClose={() => setCheckout(null)} />
+
+      {justPaid && (
+        <div className="animate-fade-up mb-6 rounded-2xl border border-success/40 bg-success/10 p-6 text-center shadow-sm">
+          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-success/20 text-success">
+            <Check size={28} />
+          </div>
+          <h2 className="font-section text-2xl font-bold">Payment received</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Your €10 is paid and your place in {data.team.name} is held.
+          </p>
+
+          <dl className="mx-auto mt-5 max-w-sm space-y-2 rounded-xl border border-border bg-card p-4 text-left text-sm">
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">Squad</dt>
+              <dd className="font-medium">{data.team.name}</dd>
+            </div>
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">You paid</dt>
+              <dd className="font-medium">{formatEuros(DEPOSIT_CENTS)}</dd>
+            </div>
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">Squad total</dt>
+              <dd className="font-medium">
+                {formatEuros(data.paidCents)} of {formatEuros(TEAM_PRICE_CENTS)}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">Status</dt>
+              <dd className="font-medium">
+                {data.outstandingCents > 0
+                  ? `${formatEuros(data.outstandingCents)} left to register`
+                  : "Officially registered"}
+              </dd>
+            </div>
+          </dl>
+
+          <p className="mt-4 text-sm text-muted-foreground">
+            {data.team.is_pool
+              ? "We fill your squad with other players who signed up on their own, then send you your team mates and the kick-off details before the day."
+              : data.outstandingCents > 0
+                ? "Your squad is registered once every place is paid for."
+                : "Your squad is in the draw. See you on the pitch on 5 December."}
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Your receipt is emailed to you by our payment provider. Bookmark this page to follow
+            your squad filling up.
+          </p>
+          <Button variant="outline" className="mt-5 rounded-full" onClick={() => setJustPaid(false)}>
+            Continue
+          </Button>
+        </div>
+      )}
+
       <div className="mb-6 text-center">
         <div className="mb-2 flex items-center justify-center gap-2">
           <KitDot colour={data.team.kit_colour} size={18} />
           <h1 className="text-3xl font-display font-bold">{data.team.name}</h1>
         </div>
         <p className="text-muted-foreground">
-          You've been invited to join this team for the Swap'n'Serve Cup. {data.rosterCount}/7
-          players so far.
+          {data.team.is_pool
+            ? `Your mixed squad for the Swap'n'Serve Cup. ${data.rosterCount}/7 players so far.`
+            : `You've been invited to join this team for the Swap'n'Serve Cup. ${data.rosterCount}/7 players so far.`}
         </p>
       </div>
 
@@ -796,7 +873,7 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
                 mode: "player",
                 invite_token: inviteToken,
                 player_id: joinedPlayerId,
-                returnUrl: `${window.location.origin}/cup`,
+                returnUrl: `${window.location.origin}/cup?invite=${inviteToken}&paid=1`,
               })
             }
           >

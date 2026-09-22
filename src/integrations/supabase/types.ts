@@ -203,6 +203,7 @@ export type Database = {
           full_name: string
           id: string
           is_captain: boolean
+          is_solo: boolean
           paid: boolean
           phone: string
           stripe_session_id: string | null
@@ -215,6 +216,7 @@ export type Database = {
           full_name: string
           id?: string
           is_captain?: boolean
+          is_solo?: boolean
           paid?: boolean
           phone: string
           stripe_session_id?: string | null
@@ -227,6 +229,7 @@ export type Database = {
           full_name?: string
           id?: string
           is_captain?: boolean
+          is_solo?: boolean
           paid?: boolean
           phone?: string
           stripe_session_id?: string | null

@@ -58,7 +58,7 @@ export interface ManageTeamResponse {
 }
 
 export interface PublicTeamResponse {
-  team: { name: string; kit_colour: string; status: TeamStatus };
+  team: { name: string; kit_colour: string; status: TeamStatus; is_pool?: boolean };
   rosterCount: number;
   rosterNeeded: number;
   rosterComplete: boolean;

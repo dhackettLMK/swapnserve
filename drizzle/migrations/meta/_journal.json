@@ -8,6 +8,13 @@
       "when": 1790079291182,
       "tag": "0000_add_pool_teams",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790079819620,
+      "tag": "0001_add_is_solo_to_players",
+      "breakpoints": true
     }
   ]
 }
