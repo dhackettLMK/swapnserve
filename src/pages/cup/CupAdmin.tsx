@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Loader2, Lock, RefreshCw, Shuffle, Trophy } from "lucide-react";
+import { Loader2, Lock, Pencil, RefreshCw, Shuffle, Trash2, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -87,6 +87,99 @@ function MatchRow({
         onClick={() => save.mutate()}
       >
         {save.isPending ? <Loader2 className="animate-spin" size={14} /> : "Save"}
+      </Button>
+    </div>
+  );
+}
+
+/** Organiser controls for renaming or removing a team. */
+function TeamActions({
+  token,
+  teamId,
+  currentName,
+}: {
+  token: string;
+  teamId: string;
+  currentName: string;
+}) {
+  const qc = useQueryClient();
+  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState(currentName);
+
+  const refresh = () => {
+    qc.invalidateQueries({ queryKey: ["cup-admin"] });
+    qc.invalidateQueries({ queryKey: ["cup-tournament"] });
+  };
+
+  const rename = useMutation({
+    mutationFn: () => cupApi.admin.renameTeam(token, { team_id: teamId, name: name.trim() }),
+    onSuccess: () => {
+      toast.success("Team name updated");
+      setEditing(false);
+      refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: () => cupApi.admin.deleteTeam(token, teamId),
+    onSuccess: () => {
+      toast.success("Team removed");
+      refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  if (editing) {
+    return (
+      <div className="flex items-center gap-2">
+        <Input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="h-8 w-40"
+          autoFocus
+        />
+        <Button
+          size="sm"
+          disabled={rename.isPending || name.trim().length < 2}
+          onClick={() => rename.mutate()}
+        >
+          {rename.isPending ? <Loader2 className="animate-spin" size={14} /> : "Save"}
+        </Button>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={() => {
+            setName(currentName);
+            setEditing(false);
+          }}
+        >
+          Cancel
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-1">
+      <Button size="sm" variant="outline" onClick={() => setEditing(true)}>
+        <Pencil size={14} /> Rename
+      </Button>
+      <Button
+        size="sm"
+        variant="ghost"
+        className="text-destructive hover:text-destructive"
+        disabled={remove.isPending}
+        onClick={() => {
+          if (
+            confirm(
+              `Remove "${currentName}"? Their players and payment records will be deleted too. This can't be undone.`,
+            )
+          )
+            remove.mutate();
+        }}
+      >
+        {remove.isPending ? <Loader2 className="animate-spin" size={14} /> : <Trash2 size={14} />}
       </Button>
     </div>
   );
