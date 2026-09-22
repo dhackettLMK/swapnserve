@@ -16,6 +16,19 @@ import type { CupMatch } from "@/lib/cupTypes";
 
 const TOKEN_KEY = "cup_admin_token";
 
+const SOURCE_LABELS: Record<string, string> = {
+  hero: "Homepage hero button",
+  header: "Top menu button",
+  "header-mobile": "Mobile menu button",
+  "mobile-bar": "Mobile bottom bar",
+  "cta-banner": "Homepage banner",
+  "programme-team": "Cup card: register your team",
+  "programme-solo": "Cup card: register as an individual",
+  "volunteer-teaser": "Get involved teaser",
+  "cup-page-solo": "Cup page: sign up on your own",
+  direct: "Direct or shared link",
+};
+
 function MatchRow({
   match,
   token,
@@ -146,7 +159,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
     );
   }
 
-  const { teams, totals } = list.data;
+  const { teams, totals, signups } = list.data;
   const groupMatches = (tournament.data?.matches ?? []).filter((m) => m.stage === "group");
   const knockoutMatches = (tournament.data?.matches ?? [])
     .filter((m) => m.stage === "knockout")
@@ -181,6 +194,56 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
           <p className="text-2xl font-bold">{formatEuros(totals.totalPaidCents)}</p>
         </div>
       </div>
+
+      {/* Sign-up mix */}
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <h2 className="mb-4 font-section text-lg font-bold">Sign-ups</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-xl bg-muted/50 p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Captains</p>
+            <p className="text-2xl font-bold">{signups.captains}</p>
+          </div>
+          <div className="rounded-xl bg-muted/50 p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Individuals</p>
+            <p className="text-2xl font-bold">{signups.individuals}</p>
+          </div>
+          <div className="rounded-xl bg-muted/50 p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">
+              Joined a team by invite
+            </p>
+            <p className="text-2xl font-bold">{signups.teammates}</p>
+          </div>
+        </div>
+
+        <div className="mt-5 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-xs uppercase tracking-wide text-muted-foreground">
+                <th className="py-2 pr-3 font-medium">Button</th>
+                <th className="py-2 pr-3 font-medium">Captains</th>
+                <th className="py-2 pr-3 font-medium">Individuals</th>
+              </tr>
+            </thead>
+            <tbody>
+              {signups.sources.length === 0 && (
+                <tr>
+                  <td colSpan={3} className="py-3 text-muted-foreground">
+                    No sign-ups yet.
+                  </td>
+                </tr>
+              )}
+              {signups.sources.map((row) => (
+                <tr key={row.source} className="border-t border-border/60">
+                  <td className="py-2 pr-3 font-medium">{SOURCE_LABELS[row.source] ?? row.source}</td>
+                  <td className="py-2 pr-3">{row.captains}</td>
+                  <td className="py-2 pr-3">{row.individuals}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
 
       {/* Teams table */}
       <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">

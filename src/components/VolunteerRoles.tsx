@@ -115,7 +115,7 @@ const VolunteerRoles = () => {
           </motion.button>
 
           <Link
-            to="/cup"
+            to="/cup?src=volunteer-teaser"
             className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-3 font-cup-body text-sm font-semibold text-accent shadow-[0_0_30px_hsl(var(--accent)/0.12)] transition-all hover:bg-accent/15 hover:shadow-[0_0_40px_hsl(var(--accent)/0.2)]"
           >
             Next up:

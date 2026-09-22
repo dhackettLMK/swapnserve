@@ -30,7 +30,7 @@ const CtaBanner = () => {
             className="inline-block"
           >
             <Link
-              to="/cup"
+              to="/cup?src=cta-banner"
               aria-label="Sign Up to the Swap'n'Serve Cup"
               className="inline-flex items-center gap-3 rounded-full bg-secondary px-8 py-4 shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
             >

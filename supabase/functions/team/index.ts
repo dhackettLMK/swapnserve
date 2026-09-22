@@ -39,6 +39,7 @@ Deno.serve(async (req) => {
       const captainName = clean(body.captain_name);
       const captainEmail = clean(body.captain_email);
       const captainPhone = clean(body.captain_phone);
+      const signupSource = clean(body.signup_source).slice(0, 40) || null;
 
       if (name.length < 2) return json({ error: "Team name is too short." }, 400);
       if (!KIT_COLOURS.includes(kitColour)) return json({ error: "Pick a valid kit colour." }, 400);
@@ -79,6 +80,7 @@ Deno.serve(async (req) => {
           email: captainEmail,
           phone: captainPhone,
           is_captain: true,
+          signup_source: signupSource,
         })
         .select("id")
         .single();
@@ -165,6 +167,7 @@ Deno.serve(async (req) => {
       const fullName = clean(body.full_name);
       const email = clean(body.email);
       const phone = clean(body.phone);
+      const signupSource = clean(body.signup_source).slice(0, 40) || null;
 
       if (fullName.length < 2) return json({ error: "Enter your full name." }, 400);
       if (!EMAIL_RE.test(email)) return json({ error: "Enter a valid email." }, 400);
@@ -195,7 +198,7 @@ Deno.serve(async (req) => {
       for (const team of open) {
         const { data: inserted, error } = await supabase
           .from("players")
-          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false, is_solo: true })
+          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false, is_solo: true, signup_source: signupSource })
           .select("id")
           .single();
         if (!error) {
@@ -240,7 +243,7 @@ Deno.serve(async (req) => {
 
         const { data: inserted, error: playerError } = await supabase
           .from("players")
-          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false, is_solo: true })
+          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false, is_solo: true, signup_source: signupSource })
           .select("id")
           .single();
         if (playerError) throw playerError;

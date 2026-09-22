@@ -103,6 +103,12 @@ export interface AdminTeamRow {
 export interface AdminListResponse {
   teams: AdminTeamRow[];
   totals: { teamCount: number; registeredCount: number; totalPaidCents: number };
+  signups: {
+    captains: number;
+    individuals: number;
+    teammates: number;
+    sources: { source: string; captains: number; individuals: number }[];
+  };
   tournament: TournamentRow | null;
 }
 

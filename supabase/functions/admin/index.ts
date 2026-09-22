@@ -88,12 +88,35 @@ Deno.serve(async (req) => {
         .limit(1)
         .maybeSingle();
 
+      // Sign-up mix: captains (team entries) versus individuals (solo entries),
+      // broken down by the button each person came in through.
+      const everyone = players ?? [];
+      const captains = everyone.filter((p) => p.is_captain);
+      const solos = everyone.filter((p) => p.is_solo);
+      const bySource = new Map<string, { source: string; captains: number; individuals: number }>();
+      const bump = (p: Record<string, unknown>, key: "captains" | "individuals") => {
+        const source = (p.signup_source as string | null) || "direct";
+        const row = bySource.get(source) ?? { source, captains: 0, individuals: 0 };
+        row[key] += 1;
+        bySource.set(source, row);
+      };
+      captains.forEach((p) => bump(p, "captains"));
+      solos.forEach((p) => bump(p, "individuals"));
+
       return json({
         teams: rows,
         totals: {
           teamCount: rows.length,
           registeredCount: rows.filter((r) => r.summary.status === "registered").length,
           totalPaidCents: totalCents,
+        },
+        signups: {
+          captains: captains.length,
+          individuals: solos.length,
+          teammates: everyone.length - captains.length - solos.length,
+          sources: [...bySource.values()].sort(
+            (a, b) => b.captains + b.individuals - (a.captains + a.individuals),
+          ),
         },
         tournament,
       });

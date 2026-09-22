@@ -206,6 +206,7 @@ export type Database = {
           is_solo: boolean
           paid: boolean
           phone: string
+          signup_source: string | null
           stripe_session_id: string | null
           team_id: string
         }
@@ -219,6 +220,7 @@ export type Database = {
           is_solo?: boolean
           paid?: boolean
           phone: string
+          signup_source?: string | null
           stripe_session_id?: string | null
           team_id: string
         }
@@ -232,6 +234,7 @@ export type Database = {
           is_solo?: boolean
           paid?: boolean
           phone?: string
+          signup_source?: string | null
           stripe_session_id?: string | null
           team_id?: string
         }

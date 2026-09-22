@@ -14,6 +14,7 @@ import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { CupAssistant } from "@/components/cup/CupAssistant";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
+import { captureSignupSource, getSignupSource, setSignupSource } from "@/lib/signupSource";
 import type { Payment } from "@/lib/cupTypes";
 
 /** Each player's share of the €70 entry fee. */
@@ -69,7 +70,8 @@ function SoloEntry() {
   >(null);
 
   const joinSolo = useMutation({
-    mutationFn: () => cupApi.joinSolo({ full_name: fullName, email, phone }),
+    mutationFn: () =>
+      cupApi.joinSolo({ full_name: fullName, email, phone, signup_source: getSignupSource() }),
     onSuccess: (res) => {
       setPlaced({
         team_name: res.team_name,
@@ -204,6 +206,7 @@ function CreateTeam() {
         captain_name: captainName,
         captain_email: email,
         captain_phone: phone,
+        signup_source: getSignupSource(),
       }),
     onSuccess: (res) => {
       const manageUrl = `/cup?manage=${res.manage_token}`;
@@ -274,6 +277,7 @@ function CreateTeam() {
               </Link>
               <a
                 href="#solo"
+                onClick={() => setSignupSource("cup-page-solo")}
                 className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent transition-colors hover:bg-accent/20"
               >
                 <UserPlus className="h-4 w-4" /> No team? Sign up on your own
@@ -935,6 +939,11 @@ const CupHome = () => {
   const [searchParams] = useSearchParams();
   const manageToken = searchParams.get("manage");
   const inviteToken = searchParams.get("invite");
+
+  // Remember which button brought them here.
+  useEffect(() => {
+    captureSignupSource();
+  }, []);
 
   // Deep links such as /cup#solo scroll straight to individual registration.
   useEffect(() => {
