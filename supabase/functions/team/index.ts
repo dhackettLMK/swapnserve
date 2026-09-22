@@ -195,7 +195,7 @@ Deno.serve(async (req) => {
       for (const team of open) {
         const { data: inserted, error } = await supabase
           .from("players")
-          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false })
+          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false, is_solo: true })
           .select("id")
           .single();
         if (!error) {
@@ -240,7 +240,7 @@ Deno.serve(async (req) => {
 
         const { data: inserted, error: playerError } = await supabase
           .from("players")
-          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false })
+          .insert({ team_id: team.id, full_name: fullName, email, phone, is_captain: false, is_solo: true })
           .select("id")
           .single();
         if (playerError) throw playerError;
