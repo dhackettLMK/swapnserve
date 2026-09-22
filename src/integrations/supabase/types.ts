@@ -251,6 +251,7 @@ export type Database = {
           created_at: string
           id: string
           invite_token: string
+          is_pool: boolean
           kit_colour: string
           manage_token: string
           name: string
@@ -264,6 +265,7 @@ export type Database = {
           created_at?: string
           id?: string
           invite_token: string
+          is_pool?: boolean
           kit_colour: string
           manage_token: string
           name: string
@@ -277,6 +279,7 @@ export type Database = {
           created_at?: string
           id?: string
           invite_token?: string
+          is_pool?: boolean
           kit_colour?: string
           manage_token?: string
           name?: string

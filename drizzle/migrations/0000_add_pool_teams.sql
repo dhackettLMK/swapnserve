@@ -1,0 +1,1 @@
+ALTER TABLE public.teams ADD COLUMN IF NOT EXISTS is_pool boolean NOT NULL DEFAULT false;
