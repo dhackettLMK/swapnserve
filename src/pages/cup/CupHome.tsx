@@ -81,7 +81,7 @@ function SoloEntry() {
         mode: "player",
         invite_token: res.invite_token,
         player_id: res.player_id,
-        returnUrl: `${window.location.origin}/cup?invite=${res.invite_token}`,
+        returnUrl: `${window.location.origin}/cup?invite=${res.invite_token}&paid=1`,
       });
     },
     onError: (e: Error) => toast.error(e.message),
@@ -134,7 +134,7 @@ function SoloEntry() {
                     mode: "player",
                     invite_token: placed.invite_token,
                     player_id: placed.player_id,
-                    returnUrl: `${window.location.origin}/cup?invite=${placed.invite_token}`,
+                    returnUrl: `${window.location.origin}/cup?invite=${placed.invite_token}&paid=1`,
                   })
                 }
               >
@@ -796,7 +796,7 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
                 mode: "player",
                 invite_token: inviteToken,
                 player_id: joinedPlayerId,
-                returnUrl: `${window.location.origin}/cup`,
+                returnUrl: `${window.location.origin}/cup?invite=${inviteToken}&paid=1`,
               })
             }
           >
