@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, UserPlus, Users } from "lucide-react";
+import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Receipt, Share2, Trophy, UserPlus, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,10 @@ import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
+import type { Payment } from "@/lib/cupTypes";
+
+/** Each player's share of the €70 entry fee. */
+const DEPOSIT_CENTS = TEAM_PRICE_CENTS / 7;
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 import cupSpray from "@/assets/cup-spraypaint.png";
 
@@ -415,8 +419,18 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
     );
   }
 
-  const { team, players, summary } = data;
+  const { team, players, payments, summary } = data;
   const pct = Math.round((summary.paidCents / TEAM_PRICE_CENTS) * 100);
+  const captainPaid = players.some((p) => p.is_captain && p.paid);
+  const paidPayments = payments.filter((p) => p.status === "paid");
+  const playerName = (id: string | null) =>
+    players.find((p) => p.id === id)?.full_name ?? null;
+  const paymentLabel = (p: Payment) => {
+    const name = playerName(p.player_id);
+    if (name) return `${name}${p.player_id === players.find((x) => x.is_captain)?.id ? " (captain deposit)" : ""}`;
+    if (p.covers_player_ids.length > 1) return `Team payment for ${p.covers_player_ids.length} players`;
+    return "Team payment";
+  };
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -547,6 +561,76 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
             </div>
           )}
         </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-xl border border-border p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Captain deposit</p>
+            <p className="mt-1 text-xl font-bold">{formatEuros(DEPOSIT_CENTS)}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {captainPaid ? "Paid" : "Not paid yet"}
+            </p>
+          </div>
+          <div className="rounded-xl border border-border p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Balance left</p>
+            <p className="mt-1 text-xl font-bold">{formatEuros(summary.outstandingCents)}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {summary.outstandingCents > 0
+                ? `${Math.ceil(summary.outstandingCents / DEPOSIT_CENTS)} × €10 still to come`
+                : "Nothing left to pay"}
+            </p>
+          </div>
+          <div className="rounded-xl border border-border p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Registration</p>
+            <p
+              className={`mt-1 text-xl font-bold ${summary.fullyPaid ? "text-success" : "text-foreground"}`}
+            >
+              {summary.fullyPaid ? "Registered" : "Not yet"}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {summary.fullyPaid ? "Your place is confirmed" : "Confirmed once €70 is paid"}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Payment history */}
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <div className="mb-3 flex items-center gap-2">
+          <Receipt size={16} className="text-primary" />
+          <h2 className="font-section text-lg font-bold">Payment history</h2>
+        </div>
+        {paidPayments.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            No payments yet. Your €10 deposit shows here as soon as it goes through.
+          </p>
+        ) : (
+          <ul className="divide-y divide-border">
+            {paidPayments.map((p) => (
+              <li key={p.id} className="flex items-center justify-between gap-3 py-3">
+                <div>
+                  <p className="text-sm font-medium">{paymentLabel(p)}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {new Date(p.created_at).toLocaleDateString("en-IE", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+                <span className="text-sm font-semibold">{formatEuros(p.amount_cents)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="mt-4 flex justify-between border-t border-border pt-3 text-sm font-semibold">
+          <span>Total paid</span>
+          <span>
+            {formatEuros(summary.paidCents)}{" "}
+            <span className="font-normal text-muted-foreground">
+              of {formatEuros(TEAM_PRICE_CENTS)}
+            </span>
+          </span>
+        </p>
       </div>
 
       {/* Invite link */}
