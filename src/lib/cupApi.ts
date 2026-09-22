@@ -48,6 +48,7 @@ export const cupApi = {
     captain_name: string;
     captain_email: string;
     captain_phone: string;
+    signup_source?: string;
   }) => invoke<CreateTeamResponse>("team", { action: "create", ...input }),
 
   getTeam: (manage_token: string) =>
@@ -62,7 +63,12 @@ export const cupApi = {
   ask: (input: { manage_token: string; question: string }) =>
     invoke<{ answer: string }>("cup-assistant", input),
 
-  joinSolo: (input: { full_name: string; email: string; phone: string }) =>
+  joinSolo: (input: {
+    full_name: string;
+    email: string;
+    phone: string;
+    signup_source?: string;
+  }) =>
     invoke<SoloJoinResponse>("team", { action: "solo", ...input }),
 
   checkout: (input: CheckoutInput) => {

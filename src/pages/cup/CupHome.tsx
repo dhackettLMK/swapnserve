@@ -14,6 +14,7 @@ import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { CupAssistant } from "@/components/cup/CupAssistant";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
+import { captureSignupSource, getSignupSource, setSignupSource } from "@/lib/signupSource";
 import type { Payment } from "@/lib/cupTypes";
 
 /** Each player's share of the €70 entry fee. */
@@ -69,7 +70,8 @@ function SoloEntry() {
   >(null);
 
   const joinSolo = useMutation({
-    mutationFn: () => cupApi.joinSolo({ full_name: fullName, email, phone }),
+    mutationFn: () =>
+      cupApi.joinSolo({ full_name: fullName, email, phone, signup_source: getSignupSource() }),
     onSuccess: (res) => {
       setPlaced({
         team_name: res.team_name,
@@ -204,6 +206,7 @@ function CreateTeam() {
         captain_name: captainName,
         captain_email: email,
         captain_phone: phone,
+        signup_source: getSignupSource(),
       }),
     onSuccess: (res) => {
       const manageUrl = `/cup?manage=${res.manage_token}`;
@@ -935,6 +938,11 @@ const CupHome = () => {
   const [searchParams] = useSearchParams();
   const manageToken = searchParams.get("manage");
   const inviteToken = searchParams.get("invite");
+
+  // Remember which button brought them here.
+  useEffect(() => {
+    captureSignupSource();
+  }, []);
 
   // Deep links such as /cup#solo scroll straight to individual registration.
   useEffect(() => {
