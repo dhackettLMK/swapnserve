@@ -75,6 +75,15 @@ export interface CreateTeamResponse {
   captain_player_id: string | null;
 }
 
+/** A solo player placed at random into a mixed "Free Agents" squad. */
+export interface SoloJoinResponse {
+  ok: true;
+  player_id: string;
+  invite_token: string;
+  team_name: string;
+  squad_size: number;
+}
+
 export interface AdminTeamRow {
   team: {
     id: string;

@@ -7,6 +7,7 @@ import type {
   CreateTeamResponse,
   ManageTeamResponse,
   PublicTeamResponse,
+  SoloJoinResponse,
   TournamentPublicResponse,
 } from "./cupTypes";
 
@@ -57,6 +58,9 @@ export const cupApi = {
 
   joinTeam: (input: { invite_token: string; full_name: string; email: string; phone: string }) =>
     invoke<{ ok: true; player_id: string }>("team", { action: "join", ...input }),
+
+  joinSolo: (input: { full_name: string; email: string; phone: string }) =>
+    invoke<SoloJoinResponse>("team", { action: "solo", ...input }),
 
   checkout: (input: CheckoutInput) => {
     const { returnUrl, ...rest } = input;
