@@ -350,6 +350,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                 <th className="py-2 pr-3 font-medium">Roster</th>
                 <th className="py-2 pr-3 font-medium">Paid</th>
                 <th className="py-2 pr-3 font-medium">Captain</th>
+                <th className="py-2 pr-3 font-medium">Manage</th>
               </tr>
             </thead>
             <tbody>
