@@ -277,6 +277,7 @@ function CreateTeam() {
               </Link>
               <a
                 href="#solo"
+                onClick={() => setSignupSource("cup-page-solo")}
                 className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent transition-colors hover:bg-accent/20"
               >
                 <UserPlus className="h-4 w-4" /> No team? Sign up on your own
