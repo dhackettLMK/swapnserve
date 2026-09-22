@@ -415,8 +415,18 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
     );
   }
 
-  const { team, players, summary } = data;
+  const { team, players, payments, summary } = data;
   const pct = Math.round((summary.paidCents / TEAM_PRICE_CENTS) * 100);
+  const captainPaid = players.some((p) => p.is_captain && p.paid);
+  const paidPayments = payments.filter((p) => p.status === "paid");
+  const playerName = (id: string | null) =>
+    players.find((p) => p.id === id)?.full_name ?? null;
+  const paymentLabel = (p: Payment) => {
+    const name = playerName(p.player_id);
+    if (name) return `${name}${p.player_id === players.find((x) => x.is_captain)?.id ? " (captain deposit)" : ""}`;
+    if (p.covers_player_ids.length > 1) return `Team payment for ${p.covers_player_ids.length} players`;
+    return "Team payment";
+  };
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
