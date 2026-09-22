@@ -95,7 +95,7 @@ Deno.serve(async (req) => {
       const inviteToken = clean(body.invite_token);
       const { data: team } = await supabase
         .from("teams")
-        .select("id, name, kit_colour, status")
+        .select("id, name, kit_colour, status, is_pool")
         .eq("invite_token", inviteToken)
         .maybeSingle();
       if (!team) return json({ error: "This invite link is not valid." }, 404);
@@ -103,7 +103,12 @@ Deno.serve(async (req) => {
       const { players, payments } = await loadTeamContext(supabase, team.id);
       const summary = summariseTeam(team, players, payments);
       return json({
-        team: { name: team.name, kit_colour: team.kit_colour, status: team.status },
+        team: {
+          name: team.name,
+          kit_colour: team.kit_colour,
+          status: team.status,
+          is_pool: Boolean(team.is_pool),
+        },
         rosterCount: summary.rosterCount,
         rosterNeeded: summary.rosterNeeded,
         rosterComplete: summary.rosterComplete,
