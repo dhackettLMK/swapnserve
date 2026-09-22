@@ -129,12 +129,20 @@ function CreateTeam() {
                 €10 per team member · 7 team members required
               </span>
             </div>
-            <Link
-              to="/cup/format"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-5 py-2.5 font-cup-body text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
-            >
-              View the tournament format
-            </Link>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+              <Link
+                to="/cup/format"
+                className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-5 py-2.5 font-cup-body text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+              >
+                View the tournament format
+              </Link>
+              <a
+                href="#solo"
+                className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent transition-colors hover:bg-accent/20"
+              >
+                <UserPlus className="h-4 w-4" /> No team? Sign up on your own
+              </a>
+            </div>
           </div>
 
 
@@ -194,6 +202,8 @@ function CreateTeam() {
           ))}
         </div>
       </section>
+
+      <SoloEntry />
 
       <section className="bg-card py-14 md:py-20">
         <div className="container font-cup-body">
