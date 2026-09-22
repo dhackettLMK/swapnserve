@@ -459,8 +459,8 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
               : "Your team is in the draw. See you on the pitch on 5 December."}
           </p>
           <p className="mt-2 text-xs text-muted-foreground">
-            A card receipt is emailed to {team.captain_email}. Keep this page bookmarked, it is your
-            private team link.
+            Your receipt goes to {team.captain_email}. Keep this page bookmarked, it is your private
+            team link.
           </p>
           <Button variant="outline" className="mt-5 rounded-full" onClick={() => setJustPaid(false)}>
             Continue to my team
