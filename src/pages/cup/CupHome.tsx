@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, Users } from "lucide-react";
+import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, UserPlus, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -43,6 +43,132 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
     >
       {copied ? <Check size={14} /> : <Copy size={14} />} {label}
     </Button>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Create a team                                                             */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*  Solo entry: placed at random into a mixed squad                           */
+/* -------------------------------------------------------------------------- */
+
+function SoloEntry() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
+  const [placed, setPlaced] = useState<{ team_name: string; invite_token: string } | null>(null);
+
+  const joinSolo = useMutation({
+    mutationFn: () => cupApi.joinSolo({ full_name: fullName, email, phone }),
+    onSuccess: (res) => {
+      setPlaced({ team_name: res.team_name, invite_token: res.invite_token });
+      toast.success(`You're in ${res.team_name}. Pay your €10 to lock in your place.`);
+      setCheckout({
+        mode: "player",
+        invite_token: res.invite_token,
+        player_id: res.player_id,
+        returnUrl: `${window.location.origin}/cup?invite=${res.invite_token}`,
+      });
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  return (
+    <section id="solo" className="scroll-mt-24 border-b border-border bg-background py-14 md:py-20">
+      <CupCheckoutDialog checkout={checkout} onClose={() => setCheckout(null)} />
+      <div className="container grid items-center gap-10 font-cup-body lg:grid-cols-[1fr_0.9fr]">
+        <div>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
+            No team? No problem
+          </p>
+          <h2 className="font-cup-display text-4xl leading-none text-foreground md:text-5xl">
+            Sign up on your own and make new friends
+          </h2>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Sign up as an individual and we put you into a mixed squad with other players who
+            entered on their own. You turn up, meet six new team mates, and play the full day
+            together. It is the easiest way to meet people in Limerick through football.
+          </p>
+          <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
+            {[
+              "Placed at random into a Free Agents squad of seven",
+              "Same €10 as everyone else, same two guaranteed games",
+              "We send your squad details and a group chat link before the day",
+            ].map((line) => (
+              <li key={line} className="flex items-start gap-3">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" />
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {placed ? (
+          <div className="rounded-[2rem] border border-secondary/30 bg-card p-6 text-center shadow-sm md:p-8">
+            <UserPlus className="mx-auto mb-3 text-secondary" />
+            <h3 className="font-cup-display text-3xl text-foreground">You're in {placed.team_name}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Your place is held once your €10 is paid. You can follow your squad filling up on
+              your squad page.
+            </p>
+            <div className="mt-5 flex flex-col gap-3">
+              <Button
+                variant="cta"
+                className="rounded-full"
+                onClick={() =>
+                  setCheckout({
+                    mode: "player",
+                    invite_token: placed.invite_token,
+                    player_id: null as never,
+                    returnUrl: `${window.location.origin}/cup?invite=${placed.invite_token}`,
+                  })
+                }
+                disabled
+              >
+                Payment window opened
+              </Button>
+              <Link
+                to={`/cup?invite=${placed.invite_token}`}
+                className="text-sm font-semibold text-secondary underline-offset-4 hover:underline"
+              >
+                View my squad
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <form
+            className="w-full min-w-0 space-y-5 rounded-[2rem] border border-border bg-card p-6 shadow-[0_24px_70px_hsl(var(--accent)/0.12)] md:p-8"
+            onSubmit={(e) => {
+              e.preventDefault();
+              joinSolo.mutate();
+            }}
+          >
+            <h3 className="font-cup-display text-3xl leading-none text-foreground">
+              Join as an individual
+            </h3>
+            <div className="space-y-2">
+              <Label htmlFor="solo-name">Full name</Label>
+              <Input id="solo-name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="solo-phone">Phone</Label>
+              <Input id="solo-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="solo-email">Email</Label>
+              <Input id="solo-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+            </div>
+            <p className="text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
+            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={joinSolo.isPending}>
+              {joinSolo.isPending ? <Loader2 className="animate-spin" /> : <UserPlus />} Place me in a squad · €10
+            </Button>
+          </form>
+        )}
+      </div>
+    </section>
   );
 }
 
