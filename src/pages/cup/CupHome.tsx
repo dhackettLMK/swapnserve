@@ -66,7 +66,11 @@ function SoloEntry() {
   const joinSolo = useMutation({
     mutationFn: () => cupApi.joinSolo({ full_name: fullName, email, phone }),
     onSuccess: (res) => {
-      setPlaced({ team_name: res.team_name, invite_token: res.invite_token });
+      setPlaced({
+        team_name: res.team_name,
+        invite_token: res.invite_token,
+        player_id: res.player_id,
+      });
       toast.success(`You're in ${res.team_name}. Pay your €10 to lock in your place.`);
       setCheckout({
         mode: "player",
