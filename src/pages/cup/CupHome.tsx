@@ -206,9 +206,17 @@ function CreateTeam() {
         </div>
       </section>
 
+      <CupCheckoutDialog
+        checkout={deposit}
+        onClose={() => {
+          setDeposit(null);
+          if (manageToken) navigate(`/cup?manage=${manageToken}`);
+        }}
+      />
     </div>
   );
 }
+
 
 /* -------------------------------------------------------------------------- */
 /*  Manage a team (captain dashboard)                                         */
