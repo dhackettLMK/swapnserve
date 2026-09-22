@@ -71,6 +71,8 @@ export interface CreateTeamResponse {
   team_id: string;
   invite_token: string;
   manage_token: string;
+  /** The captain's player row, charged the €10 deposit straight after creation. */
+  captain_player_id: string | null;
 }
 
 export interface AdminTeamRow {

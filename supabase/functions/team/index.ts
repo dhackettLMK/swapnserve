@@ -69,16 +69,26 @@ Deno.serve(async (req) => {
         throw error;
       }
 
-      // The captain is player #1.
-      await supabase.from("players").insert({
-        team_id: team.id,
-        full_name: captainName,
-        email: captainEmail,
-        phone: captainPhone,
-        is_captain: true,
-      });
+      // The captain is player #1. Their €10 deposit is taken immediately after
+      // creation, so the id is returned for the checkout that follows.
+      const { data: captain } = await supabase
+        .from("players")
+        .insert({
+          team_id: team.id,
+          full_name: captainName,
+          email: captainEmail,
+          phone: captainPhone,
+          is_captain: true,
+        })
+        .select("id")
+        .single();
 
-      return json({ team_id: team.id, invite_token, manage_token });
+      return json({
+        team_id: team.id,
+        invite_token,
+        manage_token,
+        captain_player_id: captain?.id ?? null,
+      });
     }
 
     if (action === "public") {
