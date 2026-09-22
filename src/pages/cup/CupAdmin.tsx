@@ -16,6 +16,19 @@ import type { CupMatch } from "@/lib/cupTypes";
 
 const TOKEN_KEY = "cup_admin_token";
 
+const SOURCE_LABELS: Record<string, string> = {
+  hero: "Homepage hero button",
+  header: "Top menu button",
+  "header-mobile": "Mobile menu button",
+  "mobile-bar": "Mobile bottom bar",
+  "cta-banner": "Homepage banner",
+  "programme-team": "Cup card: register your team",
+  "programme-solo": "Cup card: register as an individual",
+  "volunteer-teaser": "Get involved teaser",
+  "cup-page-solo": "Cup page: sign up on your own",
+  direct: "Direct or shared link",
+};
+
 function MatchRow({
   match,
   token,
@@ -146,7 +159,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
     );
   }
 
-  const { teams, totals } = list.data;
+  const { teams, totals, signups } = list.data;
   const groupMatches = (tournament.data?.matches ?? []).filter((m) => m.stage === "group");
   const knockoutMatches = (tournament.data?.matches ?? [])
     .filter((m) => m.stage === "knockout")
