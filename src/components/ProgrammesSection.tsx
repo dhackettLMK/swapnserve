@@ -377,13 +377,13 @@ const CupCard = () => (
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <Link
-          to="/cup"
+          to="/cup?src=programme-team"
           className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-accent-foreground shadow-lg transition-transform hover:scale-105"
         >
           Register your team <ArrowRight size={16} />
         </Link>
         <Link
-          to="/cup#solo"
+          to="/cup?src=programme-solo#solo"
           className="inline-flex items-center gap-2 rounded-full border border-accent/60 bg-accent/10 px-5 py-2.5 text-sm font-bold text-accent transition-transform hover:scale-105"
         >
           Register as an individual <UserPlus size={16} />
