@@ -150,7 +150,7 @@ function CreateTeam() {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
               <h2 className="mt-1 font-cup-display text-4xl leading-none text-foreground">Register your team</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Your captain creates the team here. We then provide a private link to invite the remaining six players and arrange payment.
+                Your captain creates the team and pays their own €10 as a deposit to hold the place. We then provide a private link to invite the remaining six players and arrange the rest of the payment.
               </p>
             </div>
             <div className="space-y-2 font-cup-body">
@@ -173,7 +173,7 @@ function CreateTeam() {
             </div>
             <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
             <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
-              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team · €10 per team member
+              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team · pay your €10 deposit
             </Button>
           </form>
         </div>
