@@ -56,6 +56,9 @@ function CreateTeam() {
   const [captainName, setCaptainName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  /** Captain's €10 deposit, opened as soon as the team row exists. */
+  const [deposit, setDeposit] = useState<CheckoutInput | null>(null);
+  const [manageToken, setManageToken] = useState<string | null>(null);
 
   const create = useMutation({
     mutationFn: () =>
@@ -67,8 +70,19 @@ function CreateTeam() {
         captain_phone: phone,
       }),
     onSuccess: (res) => {
-      toast.success("Team created! Share your invite link with your teammates.");
-      navigate(`/cup?manage=${res.manage_token}`);
+      const manageUrl = `/cup?manage=${res.manage_token}`;
+      setManageToken(res.manage_token);
+      if (!res.captain_player_id) {
+        navigate(manageUrl);
+        return;
+      }
+      toast.success("Team created. Pay your €10 deposit to secure your place.");
+      setDeposit({
+        mode: "player",
+        manage_token: res.manage_token,
+        player_id: res.captain_player_id,
+        returnUrl: `${window.location.origin}${manageUrl}`,
+      });
     },
     onError: (e: Error) => toast.error(e.message),
   });
