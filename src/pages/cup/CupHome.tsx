@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Share2, Trophy, UserPlus, Users } from "lucide-react";
+import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Receipt, Share2, Trophy, UserPlus, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,10 @@ import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
+import type { Payment } from "@/lib/cupTypes";
+
+/** Each player's share of the €70 entry fee. */
+const DEPOSIT_CENTS = TEAM_PRICE_CENTS / 7;
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 import cupSpray from "@/assets/cup-spraypaint.png";
 
