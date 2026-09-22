@@ -59,6 +59,9 @@ export const cupApi = {
   joinTeam: (input: { invite_token: string; full_name: string; email: string; phone: string }) =>
     invoke<{ ok: true; player_id: string }>("team", { action: "join", ...input }),
 
+  ask: (input: { manage_token: string; question: string }) =>
+    invoke<{ answer: string }>("cup-assistant", input),
+
   joinSolo: (input: { full_name: string; email: string; phone: string }) =>
     invoke<SoloJoinResponse>("team", { action: "solo", ...input }),
 
