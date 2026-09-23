@@ -24,7 +24,8 @@ Deno.serve(async (req) => {
   try {
     const body = await req.json().catch(() => ({}));
     const env: StripeEnv = body.environment === "live" ? "live" : "sandbox";
-    const mode = clean(body.mode); // "full" | "player"
+    const mode = clean(body.mode); // "full" | "player" | "shares"
+    const shares = Math.max(1, Math.min(7, Math.floor(Number(body.shares) || 1)));
     const manageToken = clean(body.manage_token);
     const inviteToken = clean(body.invite_token);
     const playerId = clean(body.player_id);
