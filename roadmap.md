@@ -6,3 +6,4 @@
 - [ ] Audit codebase business logic (payments, registration, admin, tournament) for gaps
 - [ ] Fix identified gaps and write a preview test plan for the user
 - [x] Redesign the Cup page as a clean event landing page with integrated registration
+- [x] Turn the public tournament page into a visual 32-team Cup and Plate bracket
