@@ -13,7 +13,9 @@ import type {
 
 /** Inputs for starting an embedded card checkout for a Cup entry. */
 export interface CheckoutInput {
-  mode: "full" | "player";
+  mode: "full" | "player" | "shares";
+  /** How many players to pay for at once (shares mode), 1-7. */
+  shares?: number;
   manage_token?: string;
   invite_token?: string;
   player_id?: string;

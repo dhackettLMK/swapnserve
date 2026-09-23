@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
 import CupLayout from "@/components/cup/CupLayout";
 import { KitDot, StatusBadge, ConfigNotice } from "@/components/cup/CupUi";
 import { isSupabaseConfigured } from "@/lib/supabase";
@@ -372,6 +373,65 @@ function CreateTeam() {
 /*  Manage a team (captain dashboard)                                         */
 /* -------------------------------------------------------------------------- */
 
+/** Lets the captain choose how many players to pay for in one go. */
+function PaySharesPanel({
+  outstandingCents,
+  onPay,
+  onPayAll,
+}: {
+  outstandingCents: number;
+  onPay: (shares: number) => void;
+  onPayAll: () => void;
+}) {
+  const maxShares = Math.min(7, Math.max(1, Math.ceil(outstandingCents / DEPOSIT_CENTS)));
+  const [shares, setShares] = useState(1);
+  const count = Math.min(shares, maxShares);
+  const amount = Math.min(count * DEPOSIT_CENTS, outstandingCents);
+  const payingAll = amount >= outstandingCents;
+
+  return (
+    <div className="mt-4 rounded-xl border border-border p-4">
+      <div className="flex items-baseline justify-between gap-3">
+        <p className="text-sm font-semibold">How many players do you want to pay for?</p>
+        <p className="text-lg font-bold text-primary">{formatEuros(amount)}</p>
+      </div>
+
+      <Slider
+        value={[count]}
+        min={1}
+        max={maxShares}
+        step={1}
+        onValueChange={(v) => setShares(v[0])}
+        className="mt-4"
+      />
+      <div className="mt-2 flex justify-between text-xs text-muted-foreground">
+        <span>1 player</span>
+        <span className="font-semibold text-foreground">
+          {count} {count === 1 ? "player" : "players"} at €10 each
+        </span>
+        <span>
+          {maxShares} {maxShares === 1 ? "player" : "players"}
+        </span>
+      </div>
+
+      <Button
+        variant="cta"
+        className="mt-4 w-full"
+        onClick={() => (payingAll ? onPayAll() : onPay(count))}
+      >
+        Pay {formatEuros(amount)}
+        {payingAll ? " and register the team" : ""}
+      </Button>
+      <p className="mt-2 text-center text-xs text-muted-foreground">
+        {formatEuros(outstandingCents)} is outstanding. Your players can also pay their own €10 from
+        the list below or through the invite link.
+      </p>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+
 function ManageTeam({ manageToken }: { manageToken: string }) {
   const qc = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -551,19 +611,15 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
           </p>
 
           {summary.outstandingCents > 0 && (
-            <div className="mt-4 space-y-2">
-              <Button
-                variant="cta"
-                className="w-full"
-                onClick={() => setCheckout({ mode: "full", manage_token: manageToken, returnUrl })}
-              >
-                Pay the remaining {formatEuros(summary.outstandingCents)} in one go
-              </Button>
-              <p className="text-center text-xs text-muted-foreground">
-                Or split it: each player pays their own €10 from the list below, or share the
-                invite link so they can pay themselves.
-              </p>
-            </div>
+            <PaySharesPanel
+              outstandingCents={summary.outstandingCents}
+              onPay={(shares) =>
+                setCheckout({ mode: "shares", shares, manage_token: manageToken, returnUrl })
+              }
+              onPayAll={() =>
+                setCheckout({ mode: "full", manage_token: manageToken, returnUrl })
+              }
+            />
           )}
         </div>
 

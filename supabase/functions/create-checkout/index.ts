@@ -24,7 +24,8 @@ Deno.serve(async (req) => {
   try {
     const body = await req.json().catch(() => ({}));
     const env: StripeEnv = body.environment === "live" ? "live" : "sandbox";
-    const mode = clean(body.mode); // "full" | "player"
+    const mode = clean(body.mode); // "full" | "player" | "shares"
+    const shares = Math.max(1, Math.min(7, Math.floor(Number(body.shares) || 1)));
     const manageToken = clean(body.manage_token);
     const inviteToken = clean(body.invite_token);
     const playerId = clean(body.player_id);
@@ -65,6 +66,16 @@ Deno.serve(async (req) => {
       if (player.paid) return json({ error: "This player has already paid." }, 409);
       amountCents = Math.min(PRICE_PER_PLAYER_CENTS, outstanding);
       coversPlayerIds = [playerId];
+    } else if (mode === "shares") {
+      // Pay for a chosen number of players (1-7), clamped to what's outstanding.
+      amountCents = Math.min(shares * PRICE_PER_PLAYER_CENTS, outstanding);
+      const { data: unpaidPlayers } = await supabase
+        .from("players")
+        .select("id")
+        .eq("team_id", team.id)
+        .eq("paid", false)
+        .order("created_at");
+      coversPlayerIds = (unpaidPlayers ?? []).slice(0, shares).map((p) => p.id as string);
     } else {
       // "full" — pay everything still outstanding toward the €70.
       amountCents = outstanding;
@@ -75,6 +86,7 @@ Deno.serve(async (req) => {
         .eq("paid", false);
       coversPlayerIds = (unpaidPlayers ?? []).map((p) => p.id as string);
     }
+
 
     if (amountCents <= 0) return json({ error: "Nothing left to pay." }, 409);
 
@@ -110,10 +122,13 @@ Deno.serve(async (req) => {
       }
     }
 
+    const playersCovered = Math.max(1, Math.round(amountCents / PRICE_PER_PLAYER_CENTS));
     const productName =
       mode === "player"
-        ? `Swap'n'Serve Cup — player entry (${team.name})`
-        : `Swap'n'Serve Cup — team entry (${team.name})`;
+        ? `Swap'n'Serve Cup - player entry (${team.name})`
+        : mode === "shares"
+          ? `Swap'n'Serve Cup - entry for ${playersCovered} player${playersCovered === 1 ? "" : "s"} (${team.name})`
+          : `Swap'n'Serve Cup - team entry (${team.name})`;
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
