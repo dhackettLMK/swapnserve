@@ -64,6 +64,9 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
     { title: "Semi-finals", matches: 2, minutes: "8 mins" },
     { title: `${isCup ? "Cup" : "Plate"} final`, matches: 1, minutes: "10 mins" },
   ];
+  const stageStartNumbers = stages.map((_, stageIndex) =>
+    firstMatch + stages.slice(0, stageIndex).reduce((total, stage) => total + stage.matches, 0)
+  );
 
   return (
     <div>
