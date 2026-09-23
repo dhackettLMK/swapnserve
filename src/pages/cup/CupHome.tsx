@@ -551,19 +551,15 @@ function ManageTeam({ manageToken }: { manageToken: string }) {
           </p>
 
           {summary.outstandingCents > 0 && (
-            <div className="mt-4 space-y-2">
-              <Button
-                variant="cta"
-                className="w-full"
-                onClick={() => setCheckout({ mode: "full", manage_token: manageToken, returnUrl })}
-              >
-                Pay the remaining {formatEuros(summary.outstandingCents)} in one go
-              </Button>
-              <p className="text-center text-xs text-muted-foreground">
-                Or split it: each player pays their own €10 from the list below, or share the
-                invite link so they can pay themselves.
-              </p>
-            </div>
+            <PaySharesPanel
+              outstandingCents={summary.outstandingCents}
+              onPay={(shares) =>
+                setCheckout({ mode: "shares", shares, manage_token: manageToken, returnUrl })
+              }
+              onPayAll={() =>
+                setCheckout({ mode: "full", manage_token: manageToken, returnUrl })
+              }
+            />
           )}
         </div>
 
