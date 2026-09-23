@@ -503,6 +503,58 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                     />
                   </td>
                 </tr>
+                {openTeamId === row.team.id && (
+                  <tr>
+                    <td colSpan={6} className="border-t border-border bg-muted/30 p-4">
+                      {row.players.length === 0 ? (
+                        <p className="py-2 text-sm text-muted-foreground">
+                          No players yet. Share the team's join link to fill the squad.
+                        </p>
+                      ) : (
+                        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                          {row.players.map((p) => (
+                            <div key={p.id} className="rounded-xl border border-border bg-card p-3 text-sm">
+                              <div className="mb-1 flex flex-wrap items-center gap-2">
+                                <span className="font-medium">{p.full_name}</span>
+                                {p.is_captain && (
+                                  <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-primary-foreground">
+                                    Captain
+                                  </span>
+                                )}
+                                {p.is_solo && (
+                                  <span className="rounded-full bg-terracotta px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+                                    Individual
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs text-muted-foreground break-all">{p.email}</p>
+                              <p className="text-xs text-muted-foreground">{p.phone}</p>
+                              <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                                <span
+                                  className={`text-xs font-medium ${
+                                    p.paid ? "text-primary" : "text-muted-foreground"
+                                  }`}
+                                >
+                                  {p.paid
+                                    ? `Paid ${formatEuros(p.amount_paid_cents)}`
+                                    : "Not paid yet"}
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  Joined{" "}
+                                  {new Date(p.created_at).toLocaleDateString("en-IE", {
+                                    day: "numeric",
+                                    month: "short",
+                                  })}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                )}
+                </Fragment>
               ))}
               {teams.length === 0 && (
                 <tr>
