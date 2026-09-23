@@ -122,10 +122,13 @@ Deno.serve(async (req) => {
       }
     }
 
+    const playersCovered = Math.max(1, Math.round(amountCents / PRICE_PER_PLAYER_CENTS));
     const productName =
       mode === "player"
-        ? `Swap'n'Serve Cup — player entry (${team.name})`
-        : `Swap'n'Serve Cup — team entry (${team.name})`;
+        ? `Swap'n'Serve Cup - player entry (${team.name})`
+        : mode === "shares"
+          ? `Swap'n'Serve Cup - entry for ${playersCovered} player${playersCovered === 1 ? "" : "s"} (${team.name})`
+          : `Swap'n'Serve Cup - team entry (${team.name})`;
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
