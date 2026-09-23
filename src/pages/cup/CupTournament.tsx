@@ -58,8 +58,6 @@ function OpeningMatch({ number, home, away }: { number: number; home: string; aw
 function PathBracket({ pathway }: { pathway: Pathway }) {
   const isCup = pathway === "cup";
   const firstMatch = isCup ? 17 : 25;
-  const start = isCup ? 0 : 16;
-  const teams = placeholderTeams.slice(start, start + 16);
   const stages = [
     { title: "Round 2", matches: 8, minutes: "6 mins" },
     { title: "Quarter-finals", matches: 4, minutes: "8 mins" },
