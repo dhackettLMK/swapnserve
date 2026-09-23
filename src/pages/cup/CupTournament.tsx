@@ -18,7 +18,6 @@ const facts = [
   { icon: Trophy, value: "5-a-side", label: "2 rolling subs" },
 ];
 
-const placeholderTeams = Array.from({ length: 32 }, (_, index) => `Team ${index + 1}`);
 
 function Fixtures({
   matches,
