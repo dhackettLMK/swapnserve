@@ -104,7 +104,7 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
                       : `Winner ${firstMatch + matchIndex * 2 + 1}`;
                     return (
                       <div key={`${stage.title}-${matchIndex}`} className="relative rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.07] p-3 font-cup-body text-sm">
-                        <p className="mb-2 text-[10px] uppercase text-primary-foreground/45">Match {firstMatch + matchIndex}</p>
+                        <p className="mb-2 text-[10px] uppercase text-primary-foreground/45">Match {stageStartNumbers[stageIndex] + matchIndex}</p>
                         <p className="truncate border-b border-primary-foreground/10 pb-1.5 text-primary-foreground/80">{home}</p>
                         <p className="truncate pt-1.5 text-primary-foreground/80">{away}</p>
                         {stageIndex < stages.length - 1 && <ChevronRight className="absolute -right-[19px] top-1/2 -translate-y-1/2 text-accent/70" size={18} />}
