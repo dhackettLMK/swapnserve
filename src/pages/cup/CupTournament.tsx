@@ -90,8 +90,16 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
                 <div className={`flex min-h-[700px] flex-col justify-around gap-3 ${stageIndex > 0 ? "py-5" : ""}`}>
                   {Array.from({ length: shownMatches }, (_, matchIndex) => {
                     const teamOffset = matchIndex * 2;
-                    const home = stageIndex === 0 ? teams[teamOffset] : `Winner ${firstMatch + matchIndex * 2}`;
-                    const away = stageIndex === 0 ? teams[teamOffset + 1] : `Winner ${firstMatch + matchIndex * 2 + 1}`;
+                    const home = stageIndex === 0
+                      ? isCup
+                        ? `Winner Match ${matchIndex * 2 + 1}`
+                        : `Loser Match ${matchIndex * 2 + 1}`
+                      : `Winner ${firstMatch + matchIndex * 2}`;
+                    const away = stageIndex === 0
+                      ? isCup
+                        ? `Winner Match ${matchIndex * 2 + 2}`
+                        : `Loser Match ${matchIndex * 2 + 2}`
+                      : `Winner ${firstMatch + matchIndex * 2 + 1}`;
                     return (
                       <div key={`${stage.title}-${matchIndex}`} className="relative rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.07] p-3 font-cup-body text-sm">
                         <p className="mb-2 text-[10px] uppercase text-primary-foreground/45">Match {firstMatch + matchIndex}</p>
