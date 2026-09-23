@@ -278,6 +278,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
   const qc = useQueryClient();
   const [groupSize, setGroupSize] = useState("4");
   const [qualifiers, setQualifiers] = useState("2");
+  const [openTeamId, setOpenTeamId] = useState<string | null>(null);
 
   const list = useQuery({ queryKey: ["cup-admin"], queryFn: () => cupApi.admin.list(token) });
   const tournament = useQuery({ queryKey: ["cup-tournament"], queryFn: () => cupApi.tournament() });
