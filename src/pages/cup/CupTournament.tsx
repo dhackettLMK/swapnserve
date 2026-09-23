@@ -18,7 +18,6 @@ const facts = [
   { icon: Trophy, value: "5-a-side", label: "2 rolling subs" },
 ];
 
-const placeholderTeams = Array.from({ length: 32 }, (_, index) => `Team ${index + 1}`);
 
 function Fixtures({
   matches,
@@ -59,14 +58,15 @@ function OpeningMatch({ number, home, away }: { number: number; home: string; aw
 function PathBracket({ pathway }: { pathway: Pathway }) {
   const isCup = pathway === "cup";
   const firstMatch = isCup ? 17 : 25;
-  const start = isCup ? 0 : 16;
-  const teams = placeholderTeams.slice(start, start + 16);
   const stages = [
     { title: "Round 2", matches: 8, minutes: "6 mins" },
     { title: "Quarter-finals", matches: 4, minutes: "8 mins" },
     { title: "Semi-finals", matches: 2, minutes: "8 mins" },
     { title: `${isCup ? "Cup" : "Plate"} final`, matches: 1, minutes: "10 mins" },
   ];
+  const stageStartNumbers = stages.map((_, stageIndex) =>
+    firstMatch + stages.slice(0, stageIndex).reduce((total, stage) => total + stage.matches, 0)
+  );
 
   return (
     <div>
@@ -92,12 +92,19 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
                 </div>
                 <div className={`flex min-h-[700px] flex-col justify-around gap-3 ${stageIndex > 0 ? "py-5" : ""}`}>
                   {Array.from({ length: shownMatches }, (_, matchIndex) => {
-                    const teamOffset = matchIndex * 2;
-                    const home = stageIndex === 0 ? teams[teamOffset] : `Winner ${firstMatch + matchIndex * 2}`;
-                    const away = stageIndex === 0 ? teams[teamOffset + 1] : `Winner ${firstMatch + matchIndex * 2 + 1}`;
+                    const home = stageIndex === 0
+                      ? isCup
+                        ? `Winner Match ${matchIndex * 2 + 1}`
+                        : `Loser Match ${matchIndex * 2 + 1}`
+                      : `Winner ${firstMatch + matchIndex * 2}`;
+                    const away = stageIndex === 0
+                      ? isCup
+                        ? `Winner Match ${matchIndex * 2 + 2}`
+                        : `Loser Match ${matchIndex * 2 + 2}`
+                      : `Winner ${firstMatch + matchIndex * 2 + 1}`;
                     return (
                       <div key={`${stage.title}-${matchIndex}`} className="relative rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.07] p-3 font-cup-body text-sm">
-                        <p className="mb-2 text-[10px] uppercase text-primary-foreground/45">Match {firstMatch + matchIndex}</p>
+                        <p className="mb-2 text-[10px] uppercase text-primary-foreground/45">Match {stageStartNumbers[stageIndex] + matchIndex}</p>
                         <p className="truncate border-b border-primary-foreground/10 pb-1.5 text-primary-foreground/80">{home}</p>
                         <p className="truncate pt-1.5 text-primary-foreground/80">{away}</p>
                         {stageIndex < stages.length - 1 && <ChevronRight className="absolute -right-[19px] top-1/2 -translate-y-1/2 text-accent/70" size={18} />}
@@ -146,12 +153,12 @@ function TournamentOverview() {
           <div className="text-center">
             <p className="font-cup-body text-xs uppercase text-muted-foreground">Opening round</p>
             <h2 className="mt-2 font-cup-display text-4xl md:text-5xl">32 teams · 16 matches</h2>
-            <p className="mx-auto mt-3 max-w-xl font-cup-body text-muted-foreground">Six minutes decides your pathway. Losing does not eliminate you.</p>
+            <p className="mx-auto mt-3 max-w-xl font-cup-body text-muted-foreground">Six minutes decides your pathway. The draw decides who plays who. Losing does not eliminate you.</p>
           </div>
 
           <div className="mx-auto mt-9 grid max-w-4xl gap-3 rounded-3xl bg-primary p-4 text-primary-foreground sm:grid-cols-2 md:p-6 lg:grid-cols-4">
-            {placeholderTeams.slice(0, 16).map((team, index) => (
-              <OpeningMatch key={team} number={index + 1} home={`Team ${index * 2 + 1}`} away={`Team ${index * 2 + 2}`} />
+            {Array.from({ length: 16 }, (_, index) => (
+              <OpeningMatch key={index} number={index + 1} home="Team A" away="Team B" />
             ))}
           </div>
 
