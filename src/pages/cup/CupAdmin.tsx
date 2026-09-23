@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Check, Copy, Loader2, Lock, Mail, Pencil, RefreshCw, Shuffle, Trash2, Trophy } from "lucide-react";
+import { Check, Copy, Loader2, Lock, Mail, Pencil, RefreshCw, Shuffle, Trash2, Trophy, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -278,6 +278,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
   const qc = useQueryClient();
   const [groupSize, setGroupSize] = useState("4");
   const [qualifiers, setQualifiers] = useState("2");
+  const [openTeamId, setOpenTeamId] = useState<string | null>(null);
 
   const list = useQuery({ queryKey: ["cup-admin"], queryFn: () => cupApi.admin.list(token) });
   const tournament = useQuery({ queryKey: ["cup-tournament"], queryFn: () => cupApi.tournament() });
@@ -444,7 +445,8 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
             </thead>
             <tbody>
               {teams.map((row) => (
-                <tr key={row.team.id} className="border-t border-border align-top">
+                <Fragment key={row.team.id}>
+                <tr className="border-t border-border align-top">
                   <td className="py-2 pr-3">
                     <span className="inline-flex items-center gap-2 font-medium">
                       <KitDot colour={row.team.kit_colour} /> {row.team.name}
@@ -453,7 +455,21 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                   <td className="py-2 pr-3">
                     <StatusBadge status={row.summary.status} />
                   </td>
-                  <td className="py-2 pr-3">{row.summary.rosterCount}/7</td>
+                  <td className="py-2 pr-3">
+                    <button
+                      type="button"
+                      onClick={() => setOpenTeamId(openTeamId === row.team.id ? null : row.team.id)}
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors ${
+                        openTeamId === row.team.id
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border hover:bg-muted"
+                      }`}
+                      aria-expanded={openTeamId === row.team.id}
+                    >
+                      <Users size={12} />
+                      {row.summary.rosterCount}/7
+                    </button>
+                  </td>
                   <td className="w-40 py-2 pr-3">
                     <span className="whitespace-nowrap">
                       {formatEuros(row.summary.paidCents)}
@@ -487,6 +503,60 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                     />
                   </td>
                 </tr>
+                {openTeamId === row.team.id && (
+                  <tr>
+                    <td colSpan={6} className="border-t border-border bg-muted/30 p-4">
+                      {row.players.length === 0 ? (
+                        <p className="py-2 text-sm text-muted-foreground">
+                          No players yet. Share the team's join link to fill the squad.
+                        </p>
+                      ) : (
+                        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                          {row.players.map((p) => (
+                            <div key={p.id} className="rounded-xl border border-border bg-card p-3 text-sm">
+                              <div className="mb-1 flex flex-wrap items-center gap-2">
+                                <span className="font-medium">{p.full_name}</span>
+                                {p.is_captain && (
+                                  <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-primary-foreground">
+                                    Captain
+                                  </span>
+                                )}
+                                {p.is_solo && (
+                                  <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-foreground">
+                                    Individual
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs text-muted-foreground break-all">{p.email}</p>
+                              <p className="text-xs text-muted-foreground">{p.phone}</p>
+                              <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                                <span
+                                  className={`text-xs font-medium ${
+                                    p.paid ? "text-primary" : "text-muted-foreground"
+                                  }`}
+                                >
+                                  {p.paid
+                                    ? p.amount_paid_cents > 0
+                                      ? `Paid ${formatEuros(p.amount_paid_cents)}`
+                                      : "Paid"
+                                    : "Not paid yet"}
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  Joined{" "}
+                                  {new Date(p.created_at).toLocaleDateString("en-IE", {
+                                    day: "numeric",
+                                    month: "short",
+                                  })}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                )}
+                </Fragment>
               ))}
               {teams.length === 0 && (
                 <tr>
