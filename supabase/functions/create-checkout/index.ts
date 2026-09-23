@@ -66,6 +66,16 @@ Deno.serve(async (req) => {
       if (player.paid) return json({ error: "This player has already paid." }, 409);
       amountCents = Math.min(PRICE_PER_PLAYER_CENTS, outstanding);
       coversPlayerIds = [playerId];
+    } else if (mode === "shares") {
+      // Pay for a chosen number of players (1-7), clamped to what's outstanding.
+      amountCents = Math.min(shares * PRICE_PER_PLAYER_CENTS, outstanding);
+      const { data: unpaidPlayers } = await supabase
+        .from("players")
+        .select("id")
+        .eq("team_id", team.id)
+        .eq("paid", false)
+        .order("created_at");
+      coversPlayerIds = (unpaidPlayers ?? []).slice(0, shares).map((p) => p.id as string);
     } else {
       // "full" — pay everything still outstanding toward the €70.
       amountCents = outstanding;
@@ -76,6 +86,7 @@ Deno.serve(async (req) => {
         .eq("paid", false);
       coversPlayerIds = (unpaidPlayers ?? []).map((p) => p.id as string);
     }
+
 
     if (amountCents <= 0) return json({ error: "Nothing left to pay." }, 409);
 
