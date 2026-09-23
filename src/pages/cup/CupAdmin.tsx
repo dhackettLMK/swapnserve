@@ -522,7 +522,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                                   </span>
                                 )}
                                 {p.is_solo && (
-                                  <span className="rounded-full bg-terracotta px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+                                  <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-foreground">
                                     Individual
                                   </span>
                                 )}
