@@ -83,14 +83,14 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
       <div className="overflow-x-auto pb-4 [scrollbar-color:hsl(var(--accent))_transparent]">
         <div className="grid min-w-[930px] grid-cols-4 gap-5">
           {stages.map((stage, stageIndex) => {
-            const shownMatches = Math.min(stage.matches, 4);
+            const shownMatches = stage.matches;
             return (
               <div key={stage.title} className="relative">
                 <div className="mb-3 flex items-end justify-between gap-2">
                   <p className="font-cup-display text-xl text-primary-foreground">{stage.title}</p>
                   <p className="font-cup-body text-[10px] uppercase text-primary-foreground/45">{stage.minutes}</p>
                 </div>
-                <div className={`flex min-h-[350px] flex-col justify-around gap-3 ${stageIndex > 0 ? "py-5" : ""}`}>
+                <div className={`flex min-h-[700px] flex-col justify-around gap-3 ${stageIndex > 0 ? "py-5" : ""}`}>
                   {Array.from({ length: shownMatches }, (_, matchIndex) => {
                     const teamOffset = matchIndex * 2;
                     const home = stageIndex === 0 ? teams[teamOffset] : `Winner ${firstMatch + matchIndex * 2}`;
