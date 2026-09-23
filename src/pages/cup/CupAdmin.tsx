@@ -454,7 +454,21 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                   <td className="py-2 pr-3">
                     <StatusBadge status={row.summary.status} />
                   </td>
-                  <td className="py-2 pr-3">{row.summary.rosterCount}/7</td>
+                  <td className="py-2 pr-3">
+                    <button
+                      type="button"
+                      onClick={() => setOpenTeamId(openTeamId === row.team.id ? null : row.team.id)}
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors ${
+                        openTeamId === row.team.id
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border hover:bg-muted"
+                      }`}
+                      aria-expanded={openTeamId === row.team.id}
+                    >
+                      <Users size={12} />
+                      {row.summary.rosterCount}/7
+                    </button>
+                  </td>
                   <td className="w-40 py-2 pr-3">
                     <span className="whitespace-nowrap">
                       {formatEuros(row.summary.paidCents)}
