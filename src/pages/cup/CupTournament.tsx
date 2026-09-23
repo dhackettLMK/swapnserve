@@ -83,7 +83,7 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
       : `Winner ${firstMatch + matchIndex * 2 + 1}`;
     return (
       <div
-        key={`${stage.title}-${matchIndex}`}
+        key={`${stages[stageIndex].title}-${matchIndex}`}
         className={
           isFinal
             ? "relative rounded-xl border border-accent/70 bg-accent/[0.12] p-3 font-cup-body text-sm shadow-[0_0_30px_hsl(var(--accent)/0.28)]"
