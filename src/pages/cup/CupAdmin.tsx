@@ -500,6 +500,10 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
         </div>
       </div>
 
+      <TeamLinks teams={teams} />
+
+
+
       {/* Tournament controls */}
       <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
         <h2 className="mb-1 font-section text-lg font-bold">Generate tournament</h2>
