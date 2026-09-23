@@ -445,7 +445,8 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
             </thead>
             <tbody>
               {teams.map((row) => (
-                <tr key={row.team.id} className="border-t border-border align-top">
+                <Fragment key={row.team.id}>
+                <tr className="border-t border-border align-top">
                   <td className="py-2 pr-3">
                     <span className="inline-flex items-center gap-2 font-medium">
                       <KitDot colour={row.team.kit_colour} /> {row.team.name}
