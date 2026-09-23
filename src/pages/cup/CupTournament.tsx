@@ -67,6 +67,38 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
   const stageStartNumbers = stages.map((_, stageIndex) =>
     firstMatch + stages.slice(0, stageIndex).reduce((total, stage) => total + stage.matches, 0)
   );
+  const finalIndex = stages.length - 1;
+
+  const matchCard = (stageIndex: number, matchIndex: number, withChevron: boolean) => {
+    const isFinal = stageIndex === finalIndex;
+    const home = stageIndex === 0
+      ? isCup
+        ? `Winner Match ${matchIndex * 2 + 1}`
+        : `Loser Match ${matchIndex * 2 + 1}`
+      : `Winner ${firstMatch + matchIndex * 2}`;
+    const away = stageIndex === 0
+      ? isCup
+        ? `Winner Match ${matchIndex * 2 + 2}`
+        : `Loser Match ${matchIndex * 2 + 2}`
+      : `Winner ${firstMatch + matchIndex * 2 + 1}`;
+    return (
+      <div
+        key={`${stages[stageIndex].title}-${matchIndex}`}
+        className={
+          isFinal
+            ? "relative rounded-xl border border-accent/70 bg-accent/[0.12] p-3 font-cup-body text-sm shadow-[0_0_30px_hsl(var(--accent)/0.28)]"
+            : "relative rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.07] p-3 font-cup-body text-sm"
+        }
+      >
+        <p className={`mb-2 text-[10px] uppercase ${isFinal ? "font-semibold text-accent" : "text-primary-foreground/45"}`}>
+          Match {stageStartNumbers[stageIndex] + matchIndex}
+        </p>
+        <p className={`truncate border-b pb-1.5 ${isFinal ? "border-accent/30 text-accent" : "border-primary-foreground/10 text-primary-foreground/80"}`}>{home}</p>
+        <p className={`truncate pt-1.5 ${isFinal ? "text-accent" : "text-primary-foreground/80"}`}>{away}</p>
+        {withChevron && <ChevronRight className="absolute -right-[19px] top-1/2 -translate-y-1/2 text-accent/70" size={18} />}
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -75,49 +107,46 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
           {isCup ? <Trophy size={22} /> : <Medal size={22} />}
         </div>
         <div>
-          <h3 className="font-cup-display text-3xl text-primary-foreground">{isCup ? "Cup" : "Plate"} pathway</h3>
+          <h3 className="font-cup-display text-2xl text-primary-foreground md:text-3xl">{isCup ? "Cup" : "Plate"} pathway</h3>
           <p className="font-cup-body text-xs uppercase text-primary-foreground/55">16 teams · one trophy</p>
         </div>
       </div>
 
-      <div className="overflow-x-auto pb-4 [scrollbar-color:hsl(var(--accent))_transparent]">
-        <div className="grid min-w-[930px] grid-cols-4 gap-5">
-          {stages.map((stage, stageIndex) => {
-            const shownMatches = stage.matches;
-            return (
+      {/* Mobile: stages stacked vertically */}
+      <div className="space-y-8 md:hidden">
+        {stages.map((stage, stageIndex) => (
+          <div key={stage.title}>
+            <div className="mb-3 flex items-end justify-between gap-2">
+              <p className={`font-cup-display text-xl ${stageIndex === finalIndex ? "text-accent" : "text-primary-foreground"}`}>{stage.title}</p>
+              <p className="font-cup-body text-[10px] uppercase text-primary-foreground/45">{stage.minutes}</p>
+            </div>
+            <div className="grid gap-3">
+              {Array.from({ length: stage.matches }, (_, matchIndex) => matchCard(stageIndex, matchIndex, false))}
+            </div>
+            {stageIndex < finalIndex && <ArrowDown className="mx-auto mt-5 text-accent/70" size={20} />}
+          </div>
+        ))}
+      </div>
+
+      {/* Tablet and desktop: side by side bracket */}
+      <div className="hidden md:block">
+        <div className="overflow-x-auto pb-4 [scrollbar-color:hsl(var(--accent))_transparent]">
+          <div className="grid min-w-[930px] grid-cols-4 gap-5">
+            {stages.map((stage, stageIndex) => (
               <div key={stage.title} className="relative">
                 <div className="mb-3 flex items-end justify-between gap-2">
-                  <p className="font-cup-display text-xl text-primary-foreground">{stage.title}</p>
+                  <p className={`font-cup-display text-xl ${stageIndex === finalIndex ? "text-accent" : "text-primary-foreground"}`}>{stage.title}</p>
                   <p className="font-cup-body text-[10px] uppercase text-primary-foreground/45">{stage.minutes}</p>
                 </div>
-                <div className={`flex min-h-[700px] flex-col justify-around gap-3 ${stageIndex > 0 ? "py-5" : ""}`}>
-                  {Array.from({ length: shownMatches }, (_, matchIndex) => {
-                    const home = stageIndex === 0
-                      ? isCup
-                        ? `Winner Match ${matchIndex * 2 + 1}`
-                        : `Loser Match ${matchIndex * 2 + 1}`
-                      : `Winner ${firstMatch + matchIndex * 2}`;
-                    const away = stageIndex === 0
-                      ? isCup
-                        ? `Winner Match ${matchIndex * 2 + 2}`
-                        : `Loser Match ${matchIndex * 2 + 2}`
-                      : `Winner ${firstMatch + matchIndex * 2 + 1}`;
-                    return (
-                      <div key={`${stage.title}-${matchIndex}`} className="relative rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.07] p-3 font-cup-body text-sm">
-                        <p className="mb-2 text-[10px] uppercase text-primary-foreground/45">Match {stageStartNumbers[stageIndex] + matchIndex}</p>
-                        <p className="truncate border-b border-primary-foreground/10 pb-1.5 text-primary-foreground/80">{home}</p>
-                        <p className="truncate pt-1.5 text-primary-foreground/80">{away}</p>
-                        {stageIndex < stages.length - 1 && <ChevronRight className="absolute -right-[19px] top-1/2 -translate-y-1/2 text-accent/70" size={18} />}
-                      </div>
-                    );
-                  })}
+                <div className="flex min-h-[700px] flex-col justify-around gap-3 py-5">
+                  {Array.from({ length: stage.matches }, (_, matchIndex) => matchCard(stageIndex, matchIndex, stageIndex < finalIndex))}
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
+        <p className="font-cup-body text-xs text-primary-foreground/50 lg:hidden">Swipe across to follow the bracket</p>
       </div>
-      <p className="mt-1 font-cup-body text-xs text-primary-foreground/50 md:hidden">Swipe across to follow the bracket</p>
     </div>
   );
 }
