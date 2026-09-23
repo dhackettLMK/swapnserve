@@ -30,6 +30,10 @@ export interface Player {
   paid: boolean;
   amount_paid_cents: number;
   created_at: string;
+  /** True when the person signed up on their own and was placed in a squad. */
+  is_solo?: boolean;
+  /** Which button or link brought them in. */
+  signup_source?: string | null;
 }
 
 export interface Payment {
