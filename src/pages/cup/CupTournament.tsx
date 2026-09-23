@@ -150,12 +150,12 @@ function TournamentOverview() {
           <div className="text-center">
             <p className="font-cup-body text-xs uppercase text-muted-foreground">Opening round</p>
             <h2 className="mt-2 font-cup-display text-4xl md:text-5xl">32 teams · 16 matches</h2>
-            <p className="mx-auto mt-3 max-w-xl font-cup-body text-muted-foreground">Six minutes decides your pathway. Losing does not eliminate you.</p>
+            <p className="mx-auto mt-3 max-w-xl font-cup-body text-muted-foreground">Six minutes decides your pathway. The draw decides who plays who. Losing does not eliminate you.</p>
           </div>
 
           <div className="mx-auto mt-9 grid max-w-4xl gap-3 rounded-3xl bg-primary p-4 text-primary-foreground sm:grid-cols-2 md:p-6 lg:grid-cols-4">
-            {placeholderTeams.slice(0, 16).map((team, index) => (
-              <OpeningMatch key={team} number={index + 1} home={`Team ${index * 2 + 1}`} away={`Team ${index * 2 + 2}`} />
+            {Array.from({ length: 16 }, (_, index) => (
+              <OpeningMatch key={index} number={index + 1} home="Team A" away="Team B" />
             ))}
           </div>
 
