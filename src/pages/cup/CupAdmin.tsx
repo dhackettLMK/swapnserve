@@ -185,6 +185,95 @@ function TeamActions({
   );
 }
 
+/** Copies a link to the clipboard. */
+function CopyButton({ value, label = "Copy" }: { value: string; label?: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      size="sm"
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(value);
+          setCopied(true);
+          toast.success("Copied to clipboard");
+          setTimeout(() => setCopied(false), 1500);
+        } catch {
+          toast.error("Couldn't copy. Select and copy manually.");
+        }
+      }}
+    >
+      {copied ? <Check size={14} /> : <Copy size={14} />} {label}
+    </Button>
+  );
+}
+
+/** Every team's private payment links, so lost links can be resent. */
+function TeamLinks({
+  teams,
+}: {
+  teams: { team: { id: string; name: string; captain_name: string; captain_email: string; invite_token: string; manage_token: string } }[];
+}) {
+  const origin = typeof window === "undefined" ? "" : window.location.origin;
+
+  return (
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+      <h2 className="mb-1 font-section text-lg font-bold">Payment links</h2>
+      <p className="mb-4 text-sm text-muted-foreground">
+        Every team's private links. If a captain loses theirs, copy it here and send it on. The
+        captain link manages the team and pays the balance. The player link is for teammates to join
+        and pay their €10.
+      </p>
+
+      <div className="space-y-4">
+        {teams.map(({ team }) => {
+          const manageUrl = `${origin}/cup?manage=${team.manage_token}`;
+          const inviteUrl = `${origin}/cup?invite=${team.invite_token}`;
+          const mailto = `mailto:${team.captain_email}?subject=${encodeURIComponent(
+            `Your Swap'N'Serve Cup links for ${team.name}`,
+          )}&body=${encodeURIComponent(
+            `Hi ${team.captain_name},\n\nHere are your private links for ${team.name}.\n\nManage your team and pay: ${manageUrl}\n\nShare this with your players so they can join and pay their €10: ${inviteUrl}\n\nKeep the first link private.\n\nSwap'N'Serve Cup`,
+          )}`;
+
+          return (
+            <div key={team.id} className="rounded-xl border border-border p-4">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <span className="font-medium">{team.name}</span>
+                <Button size="sm" variant="secondary" asChild>
+                  <a href={mailto}>
+                    <Mail size={14} /> Email the captain
+                  </a>
+                </Button>
+              </div>
+
+              <div className="space-y-2">
+                <div>
+                  <Label className="text-xs text-muted-foreground">Captain link (private)</Label>
+                  <div className="mt-1 flex flex-col gap-2 sm:flex-row">
+                    <Input readOnly value={manageUrl} className="font-mono text-xs" />
+                    <CopyButton value={manageUrl} label="Copy" />
+                  </div>
+                </div>
+                <div>
+                  <Label className="text-xs text-muted-foreground">Player join link</Label>
+                  <div className="mt-1 flex flex-col gap-2 sm:flex-row">
+                    <Input readOnly value={inviteUrl} className="font-mono text-xs" />
+                    <CopyButton value={inviteUrl} label="Copy" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        {teams.length === 0 && (
+          <p className="py-4 text-center text-sm text-muted-foreground">No teams yet.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => void }) {
   const qc = useQueryClient();
   const [groupSize, setGroupSize] = useState("4");
