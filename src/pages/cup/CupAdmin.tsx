@@ -536,7 +536,9 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                                   }`}
                                 >
                                   {p.paid
-                                    ? `Paid ${formatEuros(p.amount_paid_cents)}`
+                                    ? p.amount_paid_cents > 0
+                                      ? `Paid ${formatEuros(p.amount_paid_cents)}`
+                                      : "Paid"
                                     : "Not paid yet"}
                                 </span>
                                 <span className="text-xs text-muted-foreground">
