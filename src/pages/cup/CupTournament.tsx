@@ -89,7 +89,6 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
                 </div>
                 <div className={`flex min-h-[700px] flex-col justify-around gap-3 ${stageIndex > 0 ? "py-5" : ""}`}>
                   {Array.from({ length: shownMatches }, (_, matchIndex) => {
-                    const teamOffset = matchIndex * 2;
                     const home = stageIndex === 0
                       ? isCup
                         ? `Winner Match ${matchIndex * 2 + 1}`
