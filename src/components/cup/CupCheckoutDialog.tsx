@@ -22,7 +22,10 @@ interface CupCheckoutDialogProps {
 export function CupCheckoutDialog({ checkout, onClose }: CupCheckoutDialogProps) {
   return (
     <Dialog open={checkout !== null} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-lg">
+      <DialogContent
+        className="max-w-lg max-h-[90dvh] overflow-y-auto overscroll-contain"
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
         <DialogHeader>
           <DialogTitle>Pay entry fee</DialogTitle>
           <DialogDescription>
