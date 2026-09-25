@@ -62,33 +62,48 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
 /* -------------------------------------------------------------------------- */
 
 function SoloEntry() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
-  const [placed, setPlaced] = useState<
-    { team_name: string; invite_token: string; player_id: string } | null
-  >(null);
+  const [confirming, setConfirming] = useState(false);
 
-  const joinSolo = useMutation({
-    mutationFn: () =>
-      cupApi.joinSolo({ full_name: fullName, email, phone, signup_source: getSignupSource() }),
-    onSuccess: (res) => {
-      setPlaced({
-        team_name: res.team_name,
-        invite_token: res.invite_token,
-        player_id: res.player_id,
-      });
-      toast.success(`You're in ${res.team_name}. Pay your €10 to lock in your place.`);
-      setCheckout({
-        mode: "player",
-        invite_token: res.invite_token,
-        player_id: res.player_id,
-        returnUrl: `${window.location.origin}/cup?invite=${res.invite_token}&paid=1`,
-      });
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
+  // Back from payment: place them in a squad, then show their squad receipt.
+  useEffect(() => {
+    const sessionId = searchParams.get("session_id");
+    if (searchParams.get("solo_paid") !== "1" || !sessionId) return;
+    setConfirming(true);
+    let tries = 0;
+    const attempt = async () => {
+      try {
+        const res = await cupApi.confirmPayment(sessionId);
+        if (res.status === "paid" && res.invite_token) {
+          navigate(`/cup?invite=${res.invite_token}&paid=1`, { replace: true });
+          return;
+        }
+      } catch {
+        // retry below
+      }
+      if (++tries < 6) setTimeout(attempt, 2000);
+      else {
+        setConfirming(false);
+        toast.error("We couldn't confirm your payment yet. Email swapnserve@gmail.com and we'll sort it.");
+      }
+    };
+    attempt();
+  }, [searchParams, navigate]);
+
+  const startPayment = () =>
+    setCheckout({
+      mode: "solo",
+      full_name: fullName,
+      email,
+      phone,
+      signup_source: getSignupSource() ?? undefined,
+      returnUrl: `${window.location.origin}/cup?solo_paid=1`,
+    });
 
   return (
     <section id="solo" className="scroll-mt-24 border-b border-border bg-background py-14 md:py-20">
