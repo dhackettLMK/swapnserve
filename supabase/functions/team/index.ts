@@ -164,6 +164,9 @@ Deno.serve(async (req) => {
     // A player signing up on their own. They are dropped at random into one of
     // the mixed "Free Agents" squads made up of other solo entries.
     if (action === "solo") {
+      // Individuals are only placed once paid (see create-checkout "solo").
+      return json({ error: "Please refresh the page and try again." }, 410);
+      // deno-lint-ignore no-unreachable
       const fullName = clean(body.full_name);
       const email = clean(body.email);
       const phone = clean(body.phone);

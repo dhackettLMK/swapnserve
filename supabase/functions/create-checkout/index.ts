@@ -29,10 +29,46 @@ Deno.serve(async (req) => {
     const manageToken = clean(body.manage_token);
     const inviteToken = clean(body.invite_token);
     const playerId = clean(body.player_id);
-    const returnUrl = clean(body.return_url) || `${Deno.env.get("SITE_URL") ?? ""}/cup`;
+    const baseReturn = clean(body.return_url) || `${Deno.env.get("SITE_URL") ?? ""}/cup`;
+    // Stripe swaps the placeholder for the real session id on return.
+    const returnUrl = `${baseReturn}${baseReturn.includes("?") ? "&" : "?"}session_id={CHECKOUT_SESSION_ID}`;
 
     const stripe = createStripeClient(env);
     const supabase = supabaseAdmin();
+
+    // Individuals: nothing is saved until they have paid. Their details ride
+    // on the session and they are placed in a squad on fulfilment.
+    if (mode === "solo") {
+      const fullName = clean(body.full_name).slice(0, 100);
+      const email = clean(body.email).slice(0, 200);
+      const phone = clean(body.phone).slice(0, 40);
+      const signupSource = clean(body.signup_source).slice(0, 40);
+      if (fullName.length < 2) return json({ error: "Enter your full name." }, 400);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "Enter a valid email." }, 400);
+      if (phone.length < 5) return json({ error: "Enter a valid phone number." }, 400);
+
+      const productName = "Swap'n'Serve Cup - individual entry";
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        ui_mode: "embedded_page",
+        return_url: returnUrl,
+        customer_email: email,
+        line_items: [
+          {
+            quantity: 1,
+            price_data: {
+              currency: "eur",
+              unit_amount: PRICE_PER_PLAYER_CENTS,
+              product_data: { name: productName },
+            },
+          },
+        ],
+        payment_intent_data: { description: productName },
+        metadata: { kind: "solo", full_name: fullName, email, phone, signup_source: signupSource },
+      });
+      return json({ clientSecret: session.client_secret });
+    }
+
 
     // Authorise against the team via either token.
     let teamQuery = supabase.from("teams").select("id, name");

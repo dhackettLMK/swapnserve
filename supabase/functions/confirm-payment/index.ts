@@ -7,6 +7,7 @@ import { json, preflight } from "../_shared/cors.ts";
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
 import { createStripeClient, type StripeEnv } from "../_shared/stripe.ts";
 import { recomputeTeamStatus } from "../_shared/recompute.ts";
+import { fulfilSoloSession, isSoloSession } from "../_shared/solo.ts";
 
 function clean(v: unknown): string {
   return typeof v === "string" ? v.trim() : "";
@@ -31,10 +32,23 @@ Deno.serve(async (req) => {
       .select("*")
       .eq("stripe_session_id", sessionId)
       .maybeSingle();
-    if (!payment) return json({ status: "unknown" });
-    if (payment.status === "paid") return json({ status: "paid" });
+    if (payment?.status === "paid") {
+      const { data: team } = await supabase
+        .from("teams")
+        .select("invite_token")
+        .eq("id", payment.team_id)
+        .maybeSingle();
+      return json({ status: "paid", invite_token: team?.invite_token ?? null });
+    }
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
+    if (!payment) {
+      // Individual entries have no row until paid.
+      if (!isSoloSession(session)) return json({ status: "unknown" });
+      if (session.payment_status !== "paid") return json({ status: "pending" });
+      const inviteToken = await fulfilSoloSession(supabase, session);
+      return json({ status: "paid", invite_token: inviteToken });
+    }
     if (session.payment_status !== "paid") return json({ status: "pending" });
 
     await supabase.from("payments").update({ status: "paid" }).eq("id", payment.id);

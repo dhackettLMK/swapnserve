@@ -62,33 +62,48 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
 /* -------------------------------------------------------------------------- */
 
 function SoloEntry() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
-  const [placed, setPlaced] = useState<
-    { team_name: string; invite_token: string; player_id: string } | null
-  >(null);
+  const [confirming, setConfirming] = useState(false);
 
-  const joinSolo = useMutation({
-    mutationFn: () =>
-      cupApi.joinSolo({ full_name: fullName, email, phone, signup_source: getSignupSource() }),
-    onSuccess: (res) => {
-      setPlaced({
-        team_name: res.team_name,
-        invite_token: res.invite_token,
-        player_id: res.player_id,
-      });
-      toast.success(`You're in ${res.team_name}. Pay your €10 to lock in your place.`);
-      setCheckout({
-        mode: "player",
-        invite_token: res.invite_token,
-        player_id: res.player_id,
-        returnUrl: `${window.location.origin}/cup?invite=${res.invite_token}&paid=1`,
-      });
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
+  // Back from payment: place them in a squad, then show their squad receipt.
+  useEffect(() => {
+    const sessionId = searchParams.get("session_id");
+    if (searchParams.get("solo_paid") !== "1" || !sessionId) return;
+    setConfirming(true);
+    let tries = 0;
+    const attempt = async () => {
+      try {
+        const res = await cupApi.confirmPayment(sessionId);
+        if (res.status === "paid" && res.invite_token) {
+          navigate(`/cup?invite=${res.invite_token}&paid=1`, { replace: true });
+          return;
+        }
+      } catch {
+        // retry below
+      }
+      if (++tries < 6) setTimeout(attempt, 2000);
+      else {
+        setConfirming(false);
+        toast.error("We couldn't confirm your payment yet. Email swapnserve@gmail.com and we'll sort it.");
+      }
+    };
+    attempt();
+  }, [searchParams, navigate]);
+
+  const startPayment = () =>
+    setCheckout({
+      mode: "solo",
+      full_name: fullName,
+      email,
+      phone,
+      signup_source: getSignupSource() ?? undefined,
+      returnUrl: `${window.location.origin}/cup?solo_paid=1`,
+    });
 
   return (
     <section id="solo" className="scroll-mt-24 border-b border-border bg-background py-14 md:py-20">
@@ -120,43 +135,18 @@ function SoloEntry() {
           </ul>
         </div>
 
-        {placed ? (
+        {confirming ? (
           <div className="rounded-[2rem] border border-secondary/30 bg-card p-6 text-center shadow-sm md:p-8">
-            <UserPlus className="mx-auto mb-3 text-secondary" />
-            <h3 className="font-cup-display text-3xl text-foreground">You're in {placed.team_name}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Your place is held once your €10 is paid. You can follow your squad filling up on
-              your squad page.
-            </p>
-            <div className="mt-5 flex flex-col gap-3">
-              <Button
-                variant="cta"
-                className="rounded-full"
-                onClick={() =>
-                  setCheckout({
-                    mode: "player",
-                    invite_token: placed.invite_token,
-                    player_id: placed.player_id,
-                    returnUrl: `${window.location.origin}/cup?invite=${placed.invite_token}&paid=1`,
-                  })
-                }
-              >
-                Pay my €10
-              </Button>
-              <Link
-                to={`/cup?invite=${placed.invite_token}`}
-                className="text-sm font-semibold text-secondary underline-offset-4 hover:underline"
-              >
-                View my squad
-              </Link>
-            </div>
+            <Loader2 className="mx-auto mb-3 animate-spin text-secondary" />
+            <h3 className="font-cup-display text-3xl text-foreground">Payment received</h3>
+            <p className="mt-2 text-sm text-muted-foreground">Placing you in a squad now...</p>
           </div>
         ) : (
           <form
             className="w-full min-w-0 space-y-5 rounded-[2rem] border border-border bg-card p-6 shadow-[0_24px_70px_hsl(var(--accent)/0.12)] md:p-8"
             onSubmit={(e) => {
               e.preventDefault();
-              joinSolo.mutate();
+              startPayment();
             }}
           >
             <h3 className="font-cup-display text-3xl leading-none text-foreground">
@@ -174,9 +164,9 @@ function SoloEntry() {
               <Label htmlFor="solo-email">Email</Label>
               <Input id="solo-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
             </div>
-            <p className="text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
-            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={joinSolo.isPending}>
-              {joinSolo.isPending ? <Loader2 className="animate-spin" /> : <UserPlus />} Place me in a squad · €10
+            <p className="text-xs leading-relaxed text-muted-foreground">You are placed in a squad once your €10 is paid. {PRIVACY_NOTE}</p>
+            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" >
+              <UserPlus /> Pay €10 and join a squad
             </Button>
           </form>
         )}
