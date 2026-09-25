@@ -6,9 +6,15 @@
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
 import { verifyWebhook, type StripeEnv } from "../_shared/stripe.ts";
 import { recomputeTeamStatus } from "../_shared/recompute.ts";
+import { fulfilSoloSession, isSoloSession } from "../_shared/solo.ts";
 
-async function fulfilSession(session: { id: string }) {
+async function fulfilSession(session: { id: string; amount_total?: number | null; metadata?: Record<string, string> | null }) {
   const supabase = supabaseAdmin();
+
+  if (isSoloSession(session)) {
+    await fulfilSoloSession(supabase, session);
+    return;
+  }
 
   // Look the payment up by session id (recorded when checkout started).
   const { data: payment } = await supabase
