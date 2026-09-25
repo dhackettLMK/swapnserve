@@ -69,6 +69,8 @@ export interface PublicTeamResponse {
   paidCents: number;
   outstandingCents: number;
   fullyPaid: boolean;
+  /** Places the captain has paid for that nobody has taken yet. */
+  prepaidSlots?: number;
 }
 
 export interface CreateTeamResponse {

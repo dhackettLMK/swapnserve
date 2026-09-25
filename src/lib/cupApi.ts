@@ -13,8 +13,9 @@ import type {
 
 /** Inputs for starting an embedded card checkout for a Cup entry. */
 export interface CheckoutInput {
-  mode: "full" | "player" | "shares" | "solo";
-  /** Individual entry details (solo mode). */
+  mode: "full" | "player" | "shares" | "solo" | "new_team" | "join";
+  /** Pay-first entry details (solo, new_team, join). */
+  team_name?: string;
   full_name?: string;
   email?: string;
   phone?: string;
@@ -88,7 +89,7 @@ export const cupApi = {
   },
 
   confirmPayment: (sessionId: string) =>
-    invoke<{ status: "paid" | "pending" | "unknown"; invite_token?: string | null }>("confirm-payment", {
+    invoke<{ status: "paid" | "pending" | "unknown"; invite_token?: string | null; manage_token?: string | null }>("confirm-payment", {
       session_id: sessionId,
       environment: getStripeEnvironment(),
     }),

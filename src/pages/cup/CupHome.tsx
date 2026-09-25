@@ -68,32 +68,6 @@ function SoloEntry() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
-  const [confirming, setConfirming] = useState(false);
-
-  // Back from payment: place them in a squad, then show their squad receipt.
-  useEffect(() => {
-    const sessionId = searchParams.get("session_id");
-    if (searchParams.get("solo_paid") !== "1" || !sessionId) return;
-    setConfirming(true);
-    let tries = 0;
-    const attempt = async () => {
-      try {
-        const res = await cupApi.confirmPayment(sessionId);
-        if (res.status === "paid" && res.invite_token) {
-          navigate(`/cup?invite=${res.invite_token}&paid=1`, { replace: true });
-          return;
-        }
-      } catch {
-        // retry below
-      }
-      if (++tries < 6) setTimeout(attempt, 2000);
-      else {
-        setConfirming(false);
-        toast.error("We couldn't confirm your payment yet. Email swapnserve@gmail.com and we'll sort it.");
-      }
-    };
-    attempt();
-  }, [searchParams, navigate]);
 
   const startPayment = () =>
     setCheckout({
@@ -102,7 +76,7 @@ function SoloEntry() {
       email,
       phone,
       signup_source: getSignupSource() ?? undefined,
-      returnUrl: `${window.location.origin}/cup?solo_paid=1`,
+      returnUrl: `${window.location.origin}/cup?entry_paid=1`,
     });
 
   return (
@@ -135,13 +109,7 @@ function SoloEntry() {
           </ul>
         </div>
 
-        {confirming ? (
-          <div className="rounded-[2rem] border border-secondary/30 bg-card p-6 text-center shadow-sm md:p-8">
-            <Loader2 className="mx-auto mb-3 animate-spin text-secondary" />
-            <h3 className="font-cup-display text-3xl text-foreground">Payment received</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Placing you in a squad now...</p>
-          </div>
-        ) : (
+        {(
           <form
             className="w-full min-w-0 space-y-5 rounded-[2rem] border border-border bg-card p-6 shadow-[0_24px_70px_hsl(var(--accent)/0.12)] md:p-8"
             onSubmit={(e) => {
@@ -189,33 +157,20 @@ function CreateTeam() {
   const [deposit, setDeposit] = useState<CheckoutInput | null>(null);
   const [manageToken, setManageToken] = useState<string | null>(null);
 
-  const create = useMutation({
-    mutationFn: () =>
-      cupApi.createTeam({
-        name,
-        kit_colour: "Green",
-        captain_name: captainName,
-        captain_email: email,
-        captain_phone: phone,
-        signup_source: getSignupSource(),
-      }),
-    onSuccess: (res) => {
-      const manageUrl = `/cup?manage=${res.manage_token}`;
-      setManageToken(res.manage_token);
-      if (!res.captain_player_id) {
-        navigate(manageUrl);
-        return;
-      }
-      toast.success("Team created. Pay your €10 deposit to secure your place.");
+  // Nothing is saved until the captain's €10 goes through.
+  const create = {
+    isPending: false,
+    mutate: () =>
       setDeposit({
-        mode: "player",
-        manage_token: res.manage_token,
-        player_id: res.captain_player_id,
-        returnUrl: `${window.location.origin}${manageUrl}&paid=1`,
-      });
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
+        mode: "new_team",
+        team_name: name,
+        full_name: captainName,
+        email,
+        phone,
+        signup_source: getSignupSource(),
+        returnUrl: `${window.location.origin}/cup?entry_paid=1`,
+      }),
+  };
 
   const eventFacts = [
     { icon: CalendarDays, label: "Date", value: "5 December" },
@@ -351,7 +306,6 @@ function CreateTeam() {
         checkout={deposit}
         onClose={() => {
           setDeposit(null);
-          if (manageToken) navigate(`/cup?manage=${manageToken}`);
         }}
       />
     </div>
@@ -796,7 +750,7 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
       cupApi.joinTeam({ invite_token: inviteToken, full_name: fullName, email, phone }),
     onSuccess: (res) => {
       setJoinedPlayerId(res.player_id);
-      toast.success("You're on the team! Now pay your €10 (or ask your captain to cover it).");
+      toast.success("You're on the team. Your captain has covered your €10.");
       qc.invalidateQueries({ queryKey: ["cup-public-team", inviteToken] });
     },
     onError: (e: Error) => toast.error(e.message),
@@ -914,24 +868,8 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
       {joinedPlayerId ? (
         <div className="rounded-2xl border border-success/30 bg-success/10 p-6 text-center">
           <Check className="mx-auto mb-2 text-success" />
-          <p className="mb-4 font-medium">You're on the roster for {data.team.name}.</p>
-          <Button
-            variant="cta"
-            className="w-full"
-            onClick={() =>
-              setCheckout({
-                mode: "player",
-                invite_token: inviteToken,
-                player_id: joinedPlayerId,
-                returnUrl: `${window.location.origin}/cup?invite=${inviteToken}&paid=1`,
-              })
-            }
-          >
-            Pay my €10
-          </Button>
-          <p className="mt-3 text-xs text-muted-foreground">
-            Already sorted? Your captain may be covering your entry. You can close this page.
-          </p>
+          <p className="font-medium">You're on the roster for {data.team.name}.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Your captain has already paid your €10. See you on the pitch.</p>
         </div>
       ) : data.rosterComplete ? (
         <div className="rounded-2xl border border-border bg-muted/40 p-6 text-center text-sm text-muted-foreground">
@@ -942,7 +880,18 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
           className="space-y-5 rounded-2xl border border-border bg-card p-6 shadow-sm"
           onSubmit={(e) => {
             e.preventDefault();
-            join.mutate();
+            if ((data.prepaidSlots ?? 0) > 0) {
+              join.mutate();
+            } else {
+              setCheckout({
+                mode: "join",
+                invite_token: inviteToken,
+                full_name: fullName,
+                email,
+                phone,
+                returnUrl: `${window.location.origin}/cup?entry_paid=1`,
+              });
+            }
           }}
         >
           <div className="space-y-2">
@@ -969,9 +918,12 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
               required
             />
           </div>
-          <p className="text-xs text-muted-foreground">{PRIVACY_NOTE}</p>
+          <p className="text-xs text-muted-foreground">You are only added to the team once your €10 is paid. {PRIVACY_NOTE}</p>
           <Button type="submit" variant="cta" size="lg" className="w-full" disabled={join.isPending}>
-            {join.isPending ? <Loader2 className="animate-spin" /> : null} Join {data.team.name}
+            {join.isPending ? <Loader2 className="animate-spin" /> : null}{" "}
+            {(data.prepaidSlots ?? 0) > 0
+              ? `Join ${data.team.name} (already paid for by your captain)`
+              : `Pay €10 and join ${data.team.name}`}
           </Button>
         </form>
       )}
@@ -980,6 +932,66 @@ function JoinTeam({ inviteToken }: { inviteToken: string }) {
 }
 
 /* -------------------------------------------------------------------------- */
+/*  Back from payment: create the entry, then send them to their page          */
+/* -------------------------------------------------------------------------- */
+
+function PaymentReturn() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const sessionId = searchParams.get("session_id");
+    if (!sessionId) {
+      setFailed(true);
+      return;
+    }
+    let tries = 0;
+    let cancelled = false;
+    const attempt = async () => {
+      try {
+        const res = await cupApi.confirmPayment(sessionId);
+        if (res.status === "paid" && (res.manage_token || res.invite_token)) {
+          navigate(
+            res.manage_token
+              ? `/cup?manage=${res.manage_token}&paid=1`
+              : `/cup?invite=${res.invite_token}&paid=1`,
+            { replace: true },
+          );
+          return;
+        }
+      } catch {
+        // retry below
+      }
+      if (cancelled) return;
+      if (++tries < 6) window.setTimeout(attempt, 2500);
+      else setFailed(true);
+    };
+    attempt();
+    return () => {
+      cancelled = true;
+    };
+  }, [searchParams, navigate]);
+
+  return (
+    <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
+      {failed ? (
+        <>
+          <h1 className="font-section text-2xl font-bold">We couldn't confirm your payment yet</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            If money left your account, email swapnserve@gmail.com and we will sort it straight away.
+          </p>
+        </>
+      ) : (
+        <>
+          <Loader2 className="mx-auto mb-3 animate-spin text-secondary" />
+          <h1 className="font-section text-2xl font-bold">Payment received</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Setting up your place now...</p>
+        </>
+      )}
+    </div>
+  );
+}
 
 const CupHome = () => {
   const [searchParams] = useSearchParams();
@@ -1001,15 +1013,17 @@ const CupHome = () => {
     return () => window.clearTimeout(t);
   }, [manageToken, inviteToken]);
 
+  const entryPaid = searchParams.get("entry_paid") === "1";
   const view = useMemo(() => {
+    if (entryPaid) return <PaymentReturn />;
     if (inviteToken) return <JoinTeam inviteToken={inviteToken} />;
     if (manageToken) return <ManageTeam manageToken={manageToken} />;
     return <CreateTeam />;
-  }, [inviteToken, manageToken]);
+  }, [inviteToken, manageToken, entryPaid]);
 
   return (
     <CupLayout>
-      <div className={manageToken || inviteToken ? "container py-10 md:py-14" : ""}>{isSupabaseConfigured ? view : <ConfigNotice />}</div>
+      <div className={manageToken || inviteToken || entryPaid ? "container py-10 md:py-14" : ""}>{isSupabaseConfigured ? view : <ConfigNotice />}</div>
     </CupLayout>
   );
 };
