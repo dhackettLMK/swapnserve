@@ -101,6 +101,7 @@ export interface AdminTeamRow {
     captain_phone: string;
     invite_token: string;
     manage_token: string;
+    is_pool?: boolean;
   };
   players: Player[];
   summary: TeamSummary;
