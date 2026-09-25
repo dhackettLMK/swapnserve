@@ -69,6 +69,8 @@ export interface PublicTeamResponse {
   paidCents: number;
   outstandingCents: number;
   fullyPaid: boolean;
+  /** Places the captain has paid for that nobody has taken yet. */
+  prepaidSlots?: number;
 }
 
 export interface CreateTeamResponse {
@@ -99,6 +101,7 @@ export interface AdminTeamRow {
     captain_phone: string;
     invite_token: string;
     manage_token: string;
+    is_pool?: boolean;
   };
   players: Player[];
   summary: TeamSummary;

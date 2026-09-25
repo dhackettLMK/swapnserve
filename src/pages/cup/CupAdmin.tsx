@@ -503,6 +503,25 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
                     />
                   </td>
                 </tr>
+                {row.team.is_pool && openTeamId !== row.team.id && (
+                  <tr>
+                    <td colSpan={6} className="pb-3 pl-8 pr-3">
+                      {row.players.length === 0 ? (
+                        <p className="text-xs text-muted-foreground">No individuals yet.</p>
+                      ) : (
+                        <ol className="grid gap-x-6 gap-y-1 text-xs sm:grid-cols-2">
+                          {row.players.map((p, i) => (
+                            <li key={p.id} className="flex min-w-0 gap-2">
+                              <span className="text-muted-foreground">{i + 1}.</span>
+                              <span className="font-medium">{p.full_name}</span>
+                              <span className="truncate text-muted-foreground">{p.email}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      )}
+                    </td>
+                  </tr>
+                )}
                 {openTeamId === row.team.id && (
                   <tr>
                     <td colSpan={6} className="border-t border-border bg-muted/30 p-4">

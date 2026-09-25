@@ -36,9 +36,9 @@ Deno.serve(async (req) => {
     const stripe = createStripeClient(env);
     const supabase = supabaseAdmin();
 
-    // Individuals: nothing is saved until they have paid. Their details ride
-    // on the session and they are placed in a squad on fulfilment.
-    if (mode === "solo") {
+    // Pay-first entries: nothing is saved until the €10 is paid. Details ride
+    // on the session and the player (and team) are created on fulfilment.
+    if (mode === "solo" || mode === "new_team" || mode === "join") {
       const fullName = clean(body.full_name).slice(0, 100);
       const email = clean(body.email).slice(0, 200);
       const phone = clean(body.phone).slice(0, 40);
@@ -47,7 +47,31 @@ Deno.serve(async (req) => {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "Enter a valid email." }, 400);
       if (phone.length < 5) return json({ error: "Enter a valid phone number." }, 400);
 
-      const productName = "Swap'n'Serve Cup - individual entry";
+      const metadata: Record<string, string> = {
+        kind: mode, full_name: fullName, email, phone, signup_source: signupSource,
+      };
+      let productName = "Swap'n'Serve Cup - individual entry";
+
+      if (mode === "new_team") {
+        const teamName = clean(body.team_name).slice(0, 60);
+        if (teamName.length < 2) return json({ error: "Team name is too short." }, 400);
+        const { data: taken } = await supabase.from("teams").select("id").eq("name", teamName).maybeSingle();
+        if (taken) return json({ error: "That team name is already taken." }, 409);
+        metadata.team_name = teamName;
+        productName = `Swap'n'Serve Cup - captain deposit (${teamName})`;
+      }
+      if (mode === "join") {
+        const { data: t } = await supabase.from("teams").select("id, name").eq("invite_token", inviteToken).maybeSingle();
+        if (!t) return json({ error: "This invite link is not valid." }, 404);
+        const { data: roster } = await supabase.from("players").select("email").eq("team_id", t.id);
+        if ((roster ?? []).length >= 7) return json({ error: "This team already has 7 players." }, 409);
+        if ((roster ?? []).some((r) => String(r.email).toLowerCase() === email.toLowerCase())) {
+          return json({ error: "You're already on this team." }, 409);
+        }
+        metadata.invite_token = inviteToken;
+        productName = `Swap'n'Serve Cup - player entry (${t.name})`;
+      }
+
       const session = await stripe.checkout.sessions.create({
         mode: "payment",
         ui_mode: "embedded_page",
@@ -64,7 +88,7 @@ Deno.serve(async (req) => {
           },
         ],
         payment_intent_data: { description: productName },
-        metadata: { kind: "solo", full_name: fullName, email, phone, signup_source: signupSource },
+        metadata,
       });
       return json({ clientSecret: session.client_secret });
     }

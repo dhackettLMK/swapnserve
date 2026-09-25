@@ -26,6 +26,16 @@ async function loadTeamContext(supabase: ReturnType<typeof supabaseAdmin>, teamI
   return { players: players ?? [], payments: payments ?? [] };
 }
 
+/** Places already paid for by the captain that no player has taken yet. */
+function prepaidSlots(players: Array<Record<string, unknown>>, payments: Array<Record<string, unknown>>) {
+  const paidCents = payments
+    .filter((p) => p.status === "paid")
+    .reduce((sum, p) => sum + Number(p.amount_cents ?? 0), 0);
+  const paidPlayers = players.filter((p) => p.paid).length;
+  const slots = Math.floor(paidCents / 1000) - paidPlayers;
+  return Math.max(0, Math.min(slots, 7 - players.length));
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return preflight();
   try {
@@ -34,6 +44,9 @@ Deno.serve(async (req) => {
     const supabase = supabaseAdmin();
 
     if (action === "create") {
+      // Teams are only created once the captain's €10 is paid (create-checkout "new_team").
+      return json({ error: "Please refresh the page and try again." }, 410);
+      // deno-lint-ignore no-unreachable
       const name = clean(body.name);
       const kitColour = clean(body.kit_colour);
       const captainName = clean(body.captain_name);
@@ -117,9 +130,12 @@ Deno.serve(async (req) => {
         paidCents: summary.paidCents,
         outstandingCents: summary.outstandingCents,
         fullyPaid: summary.fullyPaid,
+        prepaidSlots: prepaidSlots(players, payments),
       });
     }
 
+    // Joining without paying is only possible when the captain has already
+    // paid for places nobody has taken yet. Otherwise it goes via checkout.
     if (action === "join") {
       const inviteToken = clean(body.invite_token);
       const fullName = clean(body.full_name);
@@ -137,6 +153,11 @@ Deno.serve(async (req) => {
         .maybeSingle();
       if (!team) return json({ error: "This invite link is not valid." }, 404);
 
+      const ctx = await loadTeamContext(supabase, team.id);
+      if (prepaidSlots(ctx.players, ctx.payments) < 1) {
+        return json({ error: "Please pay your €10 to join this team." }, 402);
+      }
+
       const { data: inserted, error } = await supabase
         .from("players")
         .insert({
@@ -145,6 +166,7 @@ Deno.serve(async (req) => {
           email,
           phone,
           is_captain: false,
+          paid: true,
         })
         .select("id")
         .single();
