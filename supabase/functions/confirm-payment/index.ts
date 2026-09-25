@@ -7,7 +7,7 @@ import { json, preflight } from "../_shared/cors.ts";
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
 import { createStripeClient, type StripeEnv } from "../_shared/stripe.ts";
 import { recomputeTeamStatus } from "../_shared/recompute.ts";
-import { fulfilSoloSession, isSoloSession } from "../_shared/solo.ts";
+import { fulfilEntrySession, isEntrySession } from "../_shared/solo.ts";
 
 function clean(v: unknown): string {
   return typeof v === "string" ? v.trim() : "";
@@ -44,10 +44,10 @@ Deno.serve(async (req) => {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
     if (!payment) {
       // Individual entries have no row until paid.
-      if (!isSoloSession(session)) return json({ status: "unknown" });
+      if (!isEntrySession(session)) return json({ status: "unknown" });
       if (session.payment_status !== "paid") return json({ status: "pending" });
-      const inviteToken = await fulfilSoloSession(supabase, session);
-      return json({ status: "paid", invite_token: inviteToken });
+      const tokens = await fulfilEntrySession(supabase, session);
+      return json({ status: "paid", ...tokens });
     }
     if (session.payment_status !== "paid") return json({ status: "pending" });
 
