@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import CupLayout from "@/components/cup/CupLayout";
 import MoneyPanel from "@/components/cup/MoneyPanel";
+import InsightsPanel from "@/components/cup/InsightsPanel";
 import { ConfigNotice, KitDot, StatusBadge } from "@/components/cup/CupUi";
 import { BracketView } from "@/components/cup/TournamentView";
 import { isSupabaseConfigured } from "@/lib/supabase";
@@ -590,6 +591,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
         </div>
       </div>
 
+      <InsightsPanel data={list.data} />
       <MoneyPanel token={token} />
       <TeamLinks teams={teams} />
 
