@@ -151,8 +151,46 @@ Deno.serve(async (req) => {
       captains.forEach((p) => bump(p, "captains"));
       solos.forEach((p) => bump(p, "individuals"));
 
+      // Visitors: last 30 days of anonymous page views.
+      const since = new Date(Date.now() - 30 * 86400000).toISOString();
+      const views: { path: string; visitor_id: string; created_at: string }[] = [];
+      for (let from = 0; from < 50000; from += 1000) {
+        const { data } = await supabase
+          .from("page_views")
+          .select("path, visitor_id, created_at")
+          .gte("created_at", since)
+          .range(from, from + 999);
+        views.push(...(data ?? []));
+        if (!data || data.length < 1000) break;
+      }
+      const daily = new Map<string, { views: number; visitors: Set<string> }>();
+      const pages = new Map<string, number>();
+      for (const v of views) {
+        const day = v.created_at.slice(0, 10);
+        const d = daily.get(day) ?? { views: 0, visitors: new Set<string>() };
+        d.views += 1;
+        d.visitors.add(v.visitor_id);
+        daily.set(day, d);
+        pages.set(v.path, (pages.get(v.path) ?? 0) + 1);
+      }
+      const visitors = {
+        uniqueVisitors: new Set(views.map((v) => v.visitor_id)).size,
+        pageViews: views.length,
+        daily: [...daily.entries()]
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([day, d]) => ({ day, views: d.views, visitors: d.visitors.size })),
+        topPages: [...pages.entries()]
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 8)
+          .map(([path, count]) => ({ path, count })),
+      };
+
       return json({
         teams: rows,
+        visitors,
+        paidPayments: (payments ?? [])
+          .filter((p) => p.status === "paid")
+          .map((p) => ({ team_id: p.team_id, amount_cents: p.amount_cents, created_at: p.created_at })),
         totals: {
           teamCount: rows.length,
           registeredCount: rows.filter((r) => r.summary.status === "registered").length,

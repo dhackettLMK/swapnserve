@@ -147,6 +147,27 @@ export type Database = {
           },
         ]
       }
+      page_views: {
+        Row: {
+          created_at: string
+          id: string
+          path: string
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          path: string
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          path?: string
+          visitor_id?: string
+        }
+        Relationships: []
+      }
       payments: {
         Row: {
           amount_cents: number

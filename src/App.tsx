@@ -9,6 +9,7 @@ import CupHome from "./pages/cup/CupHome.tsx";
 import CupAdmin from "./pages/cup/CupAdmin.tsx";
 import CupTournament from "./pages/cup/CupTournament.tsx";
 import CupFormat from "./pages/cup/CupFormat.tsx";
+import PageViewTracker from "./components/PageViewTracker";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <PageViewTracker />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/cup" element={<CupHome />} />
