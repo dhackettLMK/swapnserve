@@ -11,6 +11,24 @@ import type {
   TournamentPublicResponse,
 } from "./cupTypes";
 
+export interface MoneyTransaction {
+  id: string;
+  created: string;
+  description: string | null;
+  amount: number;
+  fee: number;
+  net: number;
+  status: "available" | "pending";
+  available_on: string;
+}
+export interface MoneyResponse {
+  transactions: MoneyTransaction[];
+  pending: number;
+  available: number;
+  paid_out: number;
+  in_transit: number;
+}
+
 /** Inputs for starting an embedded card checkout for a Cup entry. */
 export interface CheckoutInput {
   mode: "full" | "player" | "shares" | "solo" | "new_team" | "join";
@@ -113,6 +131,12 @@ export const cupApi = {
       invoke<{ ok: true }>("admin", { action: "rename-team", ...input }, { "x-admin-token": token }),
     deleteTeam: (token: string, team_id: string) =>
       invoke<{ ok: true }>("admin", { action: "delete-team", team_id }, { "x-admin-token": token }),
+    money: (token: string) =>
+      invoke<MoneyResponse>(
+        "admin",
+        { action: "money", environment: getStripeEnvironment() },
+        { "x-admin-token": token },
+      ),
     reset: (token: string) =>
       invoke<{ ok: true }>("admin", { action: "reset" }, { "x-admin-token": token }),
   },

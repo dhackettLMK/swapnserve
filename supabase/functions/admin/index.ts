@@ -6,6 +6,7 @@ import type { SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.45.4
 import { json, preflight } from "../_shared/cors.ts";
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
 import { summariseTeam, type PaymentInput } from "../_shared/teamStatus.ts";
+import { createStripeClient, type StripeEnv } from "../_shared/stripe.ts";
 import {
   drawGroups,
   generateGroupFixtures,
@@ -62,6 +63,53 @@ Deno.serve(async (req) => {
     const supabase = supabaseAdmin();
     const body = await req.json().catch(() => ({}));
     const action = clean(body.action);
+
+    // ---------------------------------------------------------- money
+    // Per-payment fees, net amount and payout state, straight from Stripe.
+    if (action === "money") {
+      const env: StripeEnv = body.environment === "sandbox" ? "sandbox" : "live";
+      const stripe = createStripeClient(env);
+      const rows: unknown[] = [];
+      let startingAfter: string | undefined;
+      for (let page = 0; page < 5; page++) {
+        const list = await stripe.balanceTransactions.list({
+          limit: 100,
+          type: "charge",
+          ...(startingAfter ? { starting_after: startingAfter } : {}),
+        });
+        for (const t of list.data) {
+          rows.push({
+            id: t.id,
+            created: new Date(t.created * 1000).toISOString(),
+            description: t.description,
+            amount: t.amount,
+            fee: t.fee,
+            net: t.net,
+            status: t.status, // "available" | "pending"
+            available_on: new Date(t.available_on * 1000).toISOString(),
+          });
+        }
+        if (!list.has_more || list.data.length === 0) break;
+        startingAfter = list.data[list.data.length - 1].id;
+      }
+      const balance = await stripe.balance.retrieve();
+      const sum = (a: { amount: number; currency: string }[]) =>
+        a.filter((x) => x.currency === "eur").reduce((s, x) => s + x.amount, 0);
+      const payouts = await stripe.payouts.list({ limit: 100 });
+      const paidOut = payouts.data
+        .filter((p) => p.status === "paid" && p.currency === "eur")
+        .reduce((s, p) => s + p.amount, 0);
+      const inTransit = payouts.data
+        .filter((p) => (p.status === "in_transit" || p.status === "pending") && p.currency === "eur")
+        .reduce((s, p) => s + p.amount, 0);
+      return json({
+        transactions: rows,
+        pending: sum(balance.pending),
+        available: sum(balance.available),
+        paid_out: paidOut,
+        in_transit: inTransit,
+      });
+    }
 
     // ---------------------------------------------------------------- list
     if (action === "list") {
