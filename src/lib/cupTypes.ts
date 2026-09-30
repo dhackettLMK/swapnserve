@@ -109,6 +109,13 @@ export interface AdminTeamRow {
 
 export interface AdminListResponse {
   teams: AdminTeamRow[];
+  visitors?: {
+    uniqueVisitors: number;
+    pageViews: number;
+    daily: { day: string; views: number; visitors: number }[];
+    topPages: { path: string; count: number }[];
+  };
+  paidPayments?: { team_id: string; amount_cents: number; created_at: string }[];
   totals: { teamCount: number; registeredCount: number; totalPaidCents: number };
   signups: {
     captains: number;
