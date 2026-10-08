@@ -14,6 +14,35 @@ import {
 
 const PASS_KEY = "sns-editor-pass";
 
+/** Render website references without interpreting HTML from editable content. */
+function LinkedText({ value }: { value: string }) {
+  const pattern = /\[([^\]]+)\]\((https?:\/\/[^\s]+?)\)|https?:\/\/[^\s<>]+/g;
+  const parts = [];
+  let cursor = 0;
+  for (const match of value.matchAll(pattern)) {
+    const index = match.index ?? 0;
+    parts.push(value.slice(cursor, index));
+    const rawUrl = match[2] ?? match[0];
+    const url = match[2] ? rawUrl : rawUrl.replace(/[.,;:!?\)\]]+$/, "");
+    const label = (match[1] ?? url).replace(/\\([\\:.-])/g, "$1");
+    parts.push(
+      <a
+        key={index}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="break-words underline decoration-current underline-offset-4 transition-opacity hover:opacity-75 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+      >
+        {label}
+      </a>,
+    );
+    if (!match[2]) parts.push(rawUrl.slice(url.length));
+    cursor = index + match[0].length;
+  }
+  parts.push(value.slice(cursor));
+  return <>{parts}</>;
+}
+
 /** Text that turns into an input box in edit mode. */
 function Editable({
   value,
@@ -34,11 +63,11 @@ function Editable({
     return multiline ? (
       <div className={className}>
         {value.split(/\n{2,}/).map((para, i) => (
-          <p key={i} className={i ? "mt-4" : ""}>{para}</p>
+          <p key={i} className={i ? "mt-4" : ""}><LinkedText value={para} /></p>
         ))}
       </div>
     ) : (
-      <span className={className}>{value}</span>
+      <span className={className}><LinkedText value={value} /></span>
     );
   }
   const shared =
