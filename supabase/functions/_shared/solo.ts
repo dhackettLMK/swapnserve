@@ -36,6 +36,19 @@ export async function fulfilEntrySession(
   const existing = await findExisting(supabase, session.id);
   if (existing) return existing;
 
+  // The webhook and confirm-payment often run at the same moment. Only one may
+  // place the entry: the loser used to hit "already on this team" / "name
+  // taken" and fall back to a Free Agents squad or a "(2)" team.
+  const { error: claimError } = await supabase.from("entry_claims").insert({ session_id: session.id });
+  if (claimError) {
+    for (let i = 0; i < 20; i += 1) {
+      await new Promise((r) => setTimeout(r, 500));
+      const done = await findExisting(supabase, session.id);
+      if (done) return done;
+    }
+    return { invite_token: null, manage_token: null };
+  }
+
   const meta = session.metadata ?? {};
   const amount = session.amount_total ?? 1000;
   const details = {
