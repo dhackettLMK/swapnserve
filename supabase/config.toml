@@ -10,3 +10,6 @@ verify_jwt = false
 
 [functions.cup-assistant]
 verify_jwt = false
+
+[functions.thirty]
+verify_jwt = false
