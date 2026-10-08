@@ -68,10 +68,18 @@ function SoloEntry() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
+  /** "" means no team: place me in a Free Agents squad. */
+  const [teamId, setTeamId] = useState("");
+  const { data: openTeams } = useQuery({
+    queryKey: ["cup-open-teams"],
+    queryFn: () => cupApi.openTeams(),
+    enabled: isSupabaseConfigured,
+  });
 
   const startPayment = () =>
     setCheckout({
-      mode: "solo",
+      mode: teamId ? "join" : "solo",
+      team_id: teamId || undefined,
       full_name: fullName,
       email,
       phone,
@@ -118,8 +126,27 @@ function SoloEntry() {
             }}
           >
             <h3 className="font-cup-display text-3xl leading-none text-foreground">
-              Join as an individual
+              Join as a player
             </h3>
+            <div className="space-y-2">
+              <Label htmlFor="solo-team">Are you joining a team?</Label>
+              <select
+                id="solo-team"
+                value={teamId}
+                onChange={(e) => setTeamId(e.target.value)}
+                className="h-12 w-full rounded-xl border border-input bg-background px-4 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <option value="">No team, put me in a Free Agents squad</option>
+                {(openTeams?.teams ?? []).map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name} ({t.players}/7)
+                  </option>
+                ))}
+              </select>
+              <p className="text-xs text-muted-foreground">
+                If your captain has already registered, pick their team here.
+              </p>
+            </div>
             <div className="space-y-2">
               <Label htmlFor="solo-name">Full name</Label>
               <Input id="solo-name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
@@ -132,9 +159,9 @@ function SoloEntry() {
               <Label htmlFor="solo-email">Email</Label>
               <Input id="solo-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
             </div>
-            <p className="text-xs leading-relaxed text-muted-foreground">You are placed in a squad once your €10 is paid. {PRIVACY_NOTE}</p>
+            <p className="text-xs leading-relaxed text-muted-foreground">You are added once your €10 is paid. {PRIVACY_NOTE}</p>
             <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" >
-              <UserPlus /> Pay €10 and join a squad
+              <UserPlus /> {teamId ? "Pay €10 and join this team" : "Pay €10 and join a squad"}
             </Button>
           </form>
         )}

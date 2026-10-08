@@ -42,6 +42,8 @@ export interface CheckoutInput {
   shares?: number;
   manage_token?: string;
   invite_token?: string;
+  /** Join a team picked from the list (join mode, no invite link). */
+  team_id?: string;
   player_id?: string;
   /** Where Stripe brings the player back to after payment. */
   returnUrl: string;
@@ -79,6 +81,9 @@ export const cupApi = {
 
   getTeam: (manage_token: string) =>
     invoke<ManageTeamResponse>("team", { action: "get", manage_token }),
+
+  openTeams: () =>
+    invoke<{ teams: Array<{ id: string; name: string; players: number }> }>("team", { action: "open-teams" }),
 
   getPublicTeam: (invite_token: string) =>
     invoke<PublicTeamResponse>("team", { action: "public", invite_token }),

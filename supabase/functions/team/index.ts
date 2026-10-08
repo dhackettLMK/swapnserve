@@ -106,6 +106,22 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Team names with open places, so players can pick their team on the Cup page.
+    if (action === "open-teams") {
+      const { data: teams } = await supabase.from("teams").select("id, name").eq("is_pool", false).order("name");
+      const ids = (teams ?? []).map((t) => t.id);
+      const counts = new Map<string, number>();
+      if (ids.length) {
+        const { data: ps } = await supabase.from("players").select("team_id").in("team_id", ids);
+        for (const p of ps ?? []) counts.set(p.team_id, (counts.get(p.team_id) ?? 0) + 1);
+      }
+      return json({
+        teams: (teams ?? [])
+          .filter((t) => (counts.get(t.id) ?? 0) < 7)
+          .map((t) => ({ id: t.id, name: t.name, players: counts.get(t.id) ?? 0 })),
+      });
+    }
+
     if (action === "public") {
       const inviteToken = clean(body.invite_token);
       const { data: team } = await supabase
