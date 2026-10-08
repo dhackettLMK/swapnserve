@@ -7,3 +7,4 @@
 - [ ] Fix identified gaps and write a preview test plan for the user
 - [x] Redesign the Cup page as a clean event landing page with integrated registration
 - [x] Turn the public tournament page into a visual 32-team Cup and Plate bracket
+- [x] Find and import confidently identified public photos for the Thirty Under Thirty honourees; leave uncertain matches blank (10 portraits imported)
