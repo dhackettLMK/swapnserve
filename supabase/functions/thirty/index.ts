@@ -45,9 +45,15 @@ Deno.serve(async (req) => {
       const bucket = supabase.storage.from("thirty");
       const { data: up, error } = await bucket.createSignedUploadUrl(path);
       if (error) throw error;
-      const { data: view, error: vErr } = await bucket.createSignedUrl(path, TEN_YEARS);
-      if (vErr) throw vErr;
-      return json({ path, token: up.token, url: view.signedUrl });
+      return json({ path, token: up.token });
+    }
+
+    if (action === "image-url") {
+      const path = String(body.path ?? "");
+      if (!/^[0-9a-f-]{36}\.[a-z0-9]{1,5}$/.test(path)) return json({ error: "Bad image." }, 400);
+      const { data: view, error } = await supabase.storage.from("thirty").createSignedUrl(path, TEN_YEARS);
+      if (error) throw error;
+      return json({ url: view.signedUrl });
     }
 
     return json({ error: "Unknown action." }, 400);
