@@ -1,3 +1,4 @@
 
 - Thirty Under Thirty page content lives as one JSON row in `site_content` (key `thirty-under-thirty`), edited in place on the page behind the admin passcode via the `thirty` function; images go to the private `thirty` bucket with long-lived signed URLs, because public buckets are blocked and the organiser must edit without code changes.
 - Researched public honouree photos are imported through Lovable Assets and their CDN paths saved in the editable content row; organiser uploads retain the private-bucket flow so either source remains replaceable in the page editor.
+- Ten confirmed honouree photos are saved in the content row. Source references are in `src/assets/thirty/portrait-sources.json`; uncertain identities remain blank. The asset URLs were verified on swapnserve.com, but the local preview may not proxy those CDN paths.
