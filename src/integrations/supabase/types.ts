@@ -14,6 +14,21 @@ export type Database = {
   }
   public: {
     Tables: {
+      entry_claims: {
+        Row: {
+          created_at: string
+          session_id: string
+        }
+        Insert: {
+          created_at?: string
+          session_id: string
+        }
+        Update: {
+          created_at?: string
+          session_id?: string
+        }
+        Relationships: []
+      }
       group_teams: {
         Row: {
           group_id: string
