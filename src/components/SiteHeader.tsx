@@ -73,6 +73,12 @@ const SiteHeader = () => {
               );
             })}
             <Link
+              to="/thirty-under-thirty"
+              className="rounded-full px-4 py-2 text-sm font-medium text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+            >
+              30 Under 30
+            </Link>
+            <Link
               to="/cup?src=header"
               aria-label="Sign Up to the Cup"
               className="ml-3 inline-flex items-center rounded-full bg-secondary px-4 py-2 transition-transform hover:scale-[1.02]"
@@ -115,6 +121,13 @@ const SiteHeader = () => {
                     {link.label}
                   </a>
                 ))}
+                <Link
+                  to="/thirty-under-thirty"
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-xl px-3 py-3 text-sm font-medium text-primary-foreground/80 hover:bg-primary-foreground/10"
+                >
+                  Talented Thirty Under Thirty
+                </Link>
                 <Link
                   to="/cup?src=header-mobile"
                   onClick={() => setMobileOpen(false)}
