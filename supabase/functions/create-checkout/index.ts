@@ -61,14 +61,19 @@ Deno.serve(async (req) => {
         productName = `Swap'n'Serve Cup - captain deposit (${teamName})`;
       }
       if (mode === "join") {
-        const { data: t } = await supabase.from("teams").select("id, name").eq("invite_token", inviteToken).maybeSingle();
-        if (!t) return json({ error: "This invite link is not valid." }, 404);
+        // Join by invite link, or by picking the team from the list on the Cup page.
+        const teamId = clean(body.team_id);
+        const base = supabase.from("teams").select("id, name, invite_token, is_pool");
+        const { data: t } = await (inviteToken
+          ? base.eq("invite_token", inviteToken)
+          : base.eq("id", teamId)).maybeSingle();
+        if (!t || (!inviteToken && t.is_pool)) return json({ error: "That team could not be found." }, 404);
         const { data: roster } = await supabase.from("players").select("email").eq("team_id", t.id);
         if ((roster ?? []).length >= 7) return json({ error: "This team already has 7 players." }, 409);
         if ((roster ?? []).some((r) => String(r.email).toLowerCase() === email.toLowerCase())) {
           return json({ error: "You're already on this team." }, 409);
         }
-        metadata.invite_token = inviteToken;
+        metadata.invite_token = t.invite_token;
         productName = `Swap'n'Serve Cup - player entry (${t.name})`;
       }
 
