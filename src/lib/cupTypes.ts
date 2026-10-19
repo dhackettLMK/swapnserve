@@ -122,6 +122,7 @@ export interface AdminListResponse {
     individuals: number;
     teammates: number;
     sources: { source: string; captains: number; individuals: number }[];
+    attribution?: Record<"apps" | "devices" | "referrers", AttributionRow[]>;
   };
   tournament: TournamentRow | null;
 }
