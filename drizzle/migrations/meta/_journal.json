@@ -43,6 +43,13 @@
       "when": 1791440365486,
       "tag": "0005_site_content",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792449858433,
+      "tag": "0006_signup_attribution",
+      "breakpoints": true
     }
   ]
 }

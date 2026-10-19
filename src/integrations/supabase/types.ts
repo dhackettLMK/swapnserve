@@ -242,6 +242,9 @@ export type Database = {
           is_solo: boolean
           paid: boolean
           phone: string
+          signup_app: string | null
+          signup_device: string | null
+          signup_referrer: string | null
           signup_source: string | null
           stripe_session_id: string | null
           team_id: string
@@ -256,6 +259,9 @@ export type Database = {
           is_solo?: boolean
           paid?: boolean
           phone: string
+          signup_app?: string | null
+          signup_device?: string | null
+          signup_referrer?: string | null
           signup_source?: string | null
           stripe_session_id?: string | null
           team_id: string
@@ -270,6 +276,9 @@ export type Database = {
           is_solo?: boolean
           paid?: boolean
           phone?: string
+          signup_app?: string | null
+          signup_device?: string | null
+          signup_referrer?: string | null
           signup_source?: string | null
           stripe_session_id?: string | null
           team_id?: string

@@ -427,6 +427,40 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
             </tbody>
           </table>
         </div>
+
+        {signups.attribution && (
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {([
+              ["App or browser", signups.attribution.apps],
+              ["Device", signups.attribution.devices],
+              ["Arrived from", signups.attribution.referrers],
+            ] as const).map(([title, rows]) => (
+              <div key={title} className="rounded-xl border border-border/60 p-3">
+                <h3 className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">{title}</h3>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left text-xs text-muted-foreground">
+                      <th className="py-1 pr-2 font-medium"></th>
+                      <th className="py-1 pr-2 font-medium">Capt.</th>
+                      <th className="py-1 pr-2 font-medium">Indiv.</th>
+                      <th className="py-1 font-medium">Team</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((r) => (
+                      <tr key={r.label} className="border-t border-border/60">
+                        <td className="py-1 pr-2 font-medium">{r.label}</td>
+                        <td className="py-1 pr-2">{r.captains}</td>
+                        <td className="py-1 pr-2">{r.individuals}</td>
+                        <td className="py-1">{r.others}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
 

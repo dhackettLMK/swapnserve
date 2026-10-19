@@ -1,4 +1,5 @@
 // Swap'n'Serve Cup typed wrappers around the backend functions.
+import { getSignupContext } from "./signupContext";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { getSupabase } from "./supabase";
 import { getStripeEnvironment } from "./stripe";
@@ -101,6 +102,7 @@ export const cupApi = {
     const { returnUrl, ...rest } = input;
     return invoke<{ clientSecret: string }>("create-checkout", {
       ...rest,
+      ...getSignupContext(),
       return_url: returnUrl,
       environment: getStripeEnvironment(),
     });

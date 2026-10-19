@@ -151,6 +151,27 @@ Deno.serve(async (req) => {
       captains.forEach((p) => bump(p, "captains"));
       solos.forEach((p) => bump(p, "individuals"));
 
+      // Which app, device and referring site each sign-up came from.
+      const tally = (field: string) => {
+        const m = new Map<string, { label: string; captains: number; individuals: number; others: number }>();
+        for (const p of everyone) {
+          const label = (p[field] as string | null) || "Not recorded";
+          const row = m.get(label) ?? { label, captains: 0, individuals: 0, others: 0 };
+          if (p.is_captain) row.captains += 1;
+          else if (p.is_solo) row.individuals += 1;
+          else row.others += 1;
+          m.set(label, row);
+        }
+        return [...m.values()].sort(
+          (a, b) => b.captains + b.individuals + b.others - (a.captains + a.individuals + a.others),
+        );
+      };
+      const attribution = {
+        apps: tally("signup_app"),
+        devices: tally("signup_device"),
+        referrers: tally("signup_referrer"),
+      };
+
       // Visitors: last 30 days of anonymous page views.
       const since = new Date(Date.now() - 30 * 86400000).toISOString();
       const views: { path: string; visitor_id: string; created_at: string }[] = [];
@@ -203,6 +224,7 @@ Deno.serve(async (req) => {
           sources: [...bySource.values()].sort(
             (a, b) => b.captains + b.individuals - (a.captains + a.individuals),
           ),
+          attribution,
         },
         tournament,
       });

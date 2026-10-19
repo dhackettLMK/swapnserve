@@ -49,6 +49,9 @@ Deno.serve(async (req) => {
 
       const metadata: Record<string, string> = {
         kind: mode, full_name: fullName, email, phone, signup_source: signupSource,
+        signup_app: clean(body.signup_app).slice(0, 30),
+        signup_device: clean(body.signup_device).slice(0, 30),
+        signup_referrer: clean(body.signup_referrer).slice(0, 60),
       };
       let productName = "Swap'n'Serve Cup - individual entry";
 

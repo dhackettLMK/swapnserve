@@ -122,6 +122,7 @@ export interface AdminListResponse {
     individuals: number;
     teammates: number;
     sources: { source: string; captains: number; individuals: number }[];
+    attribution?: Record<"apps" | "devices" | "referrers", AttributionRow[]>;
   };
   tournament: TournamentRow | null;
 }
@@ -161,3 +162,5 @@ export interface TournamentPublicResponse {
   matches: CupMatch[];
   bracket: Bracket | null;
 }
+
+export interface AttributionRow { label: string; captains: number; individuals: number; others: number }
