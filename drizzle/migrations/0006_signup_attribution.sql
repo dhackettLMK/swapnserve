@@ -1,0 +1,1 @@
+ALTER TABLE public.players ADD COLUMN IF NOT EXISTS signup_app text, ADD COLUMN IF NOT EXISTS signup_device text, ADD COLUMN IF NOT EXISTS signup_referrer text;
