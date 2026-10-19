@@ -181,8 +181,14 @@ export default function ThirtyUnderThirty() {
     setContent((c) => ({ ...c, [key]: v }));
     setDirty(true);
   };
-  const setHonouree = (id: string, patch: Partial<Honouree>) =>
-    set("honourees", content.honourees.map((h) => (h.id === id ? { ...h, ...patch } : h)));
+  const setHonouree = (id: string, patch: Partial<Honouree>) => {
+    // Functional update so slow uploads never overwrite newer edits.
+    setContent((c) => ({
+      ...c,
+      honourees: c.honourees.map((h) => (h.id === id ? { ...h, ...patch } : h)),
+    }));
+    setDirty(true);
+  };
 
   const upload = async (file: File) => {
     if (!pass) return "";

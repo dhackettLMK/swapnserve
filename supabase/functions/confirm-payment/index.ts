@@ -35,10 +35,24 @@ Deno.serve(async (req) => {
     if (payment?.status === "paid") {
       const { data: team } = await supabase
         .from("teams")
-        .select("invite_token")
+        .select("invite_token, manage_token")
         .eq("id", payment.team_id)
         .maybeSingle();
-      return json({ status: "paid", invite_token: team?.invite_token ?? null });
+      // Captains who created the team need their manage link back.
+      let isCaptain = false;
+      if (payment.player_id) {
+        const { data: p } = await supabase
+          .from("players")
+          .select("is_captain")
+          .eq("id", payment.player_id)
+          .maybeSingle();
+        isCaptain = Boolean(p?.is_captain);
+      }
+      return json({
+        status: "paid",
+        invite_token: team?.invite_token ?? null,
+        manage_token: isCaptain ? team?.manage_token ?? null : null,
+      });
     }
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
