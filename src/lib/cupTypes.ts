@@ -162,3 +162,5 @@ export interface TournamentPublicResponse {
   matches: CupMatch[];
   bracket: Bracket | null;
 }
+
+export interface AttributionRow { label: string; captains: number; individuals: number; others: number }
