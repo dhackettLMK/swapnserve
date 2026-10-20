@@ -29,7 +29,7 @@ export interface ThirtyContent {
 
 export const DEFAULT_THIRTY: ThirtyContent = {
   eyebrow: "Swap'N'Serve presents",
-  title: "Talented Thirty Under Thirty",
+  title: "Meet the talented people within Limerick City",
   intro:
     "Celebrating thirty young people under thirty who are making Limerick a better place to live, work and grow up.",
   coverImage: "",
