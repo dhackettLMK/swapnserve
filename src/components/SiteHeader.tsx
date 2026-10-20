@@ -76,7 +76,7 @@ const SiteHeader = () => {
               to="/thirty-under-thirty"
               className="rounded-full px-4 py-2 text-sm font-medium text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
             >
-              30 Under 30
+              Talented People
             </Link>
             <Link
               to="/cup?src=header"
@@ -126,7 +126,7 @@ const SiteHeader = () => {
                   onClick={() => setMobileOpen(false)}
                   className="block rounded-xl px-3 py-3 text-sm font-medium text-primary-foreground/80 hover:bg-primary-foreground/10"
                 >
-                  Talented Thirty Under Thirty
+                  Meet the Talented People
                 </Link>
                 <Link
                   to="/cup?src=header-mobile"
