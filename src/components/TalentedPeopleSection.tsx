@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Award } from "lucide-react";
 import { DEFAULT_THIRTY, thirtyApi, type Honouree, type ThirtyContent } from "@/lib/thirtyApi";
+import { resolvePortrait } from "@/lib/thirtyPortraits";
 
 const MAX_PORTRAITS = 6;
 
@@ -32,7 +33,7 @@ const Portrait = ({ honouree, index }: { honouree: Honouree; index: number }) =>
         <div className="aspect-[3/4]">
           {honouree.photo && !broken ? (
             <img
-              src={honouree.photo}
+              src={resolvePortrait(honouree.photo)}
               alt={honouree.name}
               loading="lazy"
               onError={() => setBroken(true)}

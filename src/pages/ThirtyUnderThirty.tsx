@@ -11,6 +11,7 @@ import {
   type Honouree,
   type ThirtyContent,
 } from "@/lib/thirtyApi";
+import { resolvePortrait } from "@/lib/thirtyPortraits";
 
 const PASS_KEY = "sns-editor-pass";
 
@@ -110,7 +111,7 @@ function PhotoSlot({
   return (
     <div className={`relative overflow-hidden bg-muted ${className ?? ""}`}>
       {photo ? (
-        <img src={photo} alt={name} loading="lazy" className="h-full w-full object-cover" />
+        <img src={resolvePortrait(photo)} alt={name} loading="lazy" className="h-full w-full object-cover" />
       ) : (
         <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/15 to-secondary/20">
           <span className="font-display text-4xl text-primary/40">
