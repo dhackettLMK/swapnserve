@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight, UserPlus } from "lucide-react";
+import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight, UserPlus, Award } from "lucide-react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import cupSpray from "@/assets/cup-spraypaint.png";
@@ -550,6 +550,166 @@ const HackathonCard = () => (
 
 /* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
+/*  Talented People - stage and spotlight card                                */
+/* -------------------------------------------------------------------------- */
+
+const StageBackdrop = () => (
+  <svg
+    viewBox="0 0 400 300"
+    className="absolute inset-0 w-full h-full opacity-[0.14] pointer-events-none"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    {/* Spotlight cone from above */}
+    <path d="M200 -20 L108 300 L292 300 Z" fill="hsl(var(--accent))" opacity="0.3" />
+    {/* Stage rings */}
+    {[0, 1, 2, 3].map((i) => (
+      <ellipse
+        key={i}
+        cx="200"
+        cy="288"
+        rx={55 + i * 42}
+        ry={15 + i * 10}
+        fill="none"
+        stroke="hsl(var(--accent))"
+        strokeWidth="1.5"
+      />
+    ))}
+    {/* Side ticks */}
+    {[62, 84, 106, 294, 316, 338].map((x, i) => (
+      <line
+        key={i}
+        x1={x}
+        y1={244 - (i % 3) * 14}
+        x2={x}
+        y2={262 - (i % 3) * 14}
+        stroke="hsl(var(--accent))"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    ))}
+  </svg>
+);
+
+const FloatingStars = () => {
+  const stars = useMemo(
+    () => [
+      { left: 12, top: 20, size: 14, delay: 0, duration: 7 },
+      { left: 78, top: 26, size: 10, delay: 1.2, duration: 8 },
+      { left: 62, top: 58, size: 16, delay: 0.6, duration: 9 },
+      { left: 26, top: 66, size: 12, delay: 2.1, duration: 7.5 },
+      { left: 88, top: 46, size: 9, delay: 2.9, duration: 6.5 },
+      { left: 8, top: 78, size: 11, delay: 1.6, duration: 8.5 },
+    ],
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {stars.map((s, i) => (
+        <motion.span
+          key={i}
+          className="absolute opacity-0 group-hover:opacity-50 transition-opacity duration-700"
+          style={{ left: `${s.left}%`, top: `${s.top}%` }}
+          animate={{ y: [0, -14, 0, 8, 0], rotate: [0, 20, -12, 0] }}
+          transition={{
+            duration: s.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: s.delay,
+          }}
+        >
+          <svg width={s.size} height={s.size} viewBox="0 0 24 24" fill="hsl(var(--accent))" aria-hidden="true">
+            <path d="M12 2l2 8 8 2-8 2-2 8-2-8-8-2 8-2z" />
+          </svg>
+        </motion.span>
+      ))}
+    </div>
+  );
+};
+
+const TalentedPeopleCard = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: 0.15 }}
+    whileHover={{ y: -6, transition: { duration: 0.25 } }}
+    className="group relative rounded-3xl border border-accent/30 bg-gradient-to-br from-[hsl(152_48%_20%)] via-primary to-[hsl(152_50%_22%)] p-8 shadow-sm hover-lift hover:shadow-xl hover:shadow-primary/30 overflow-hidden"
+  >
+    <StageBackdrop />
+    <FloatingStars />
+    <WarmGlow />
+
+    <div className="absolute top-5 right-5 inline-flex items-center rounded-full bg-accent/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-accent border border-accent/30">
+      Now Live
+    </div>
+
+    <div className="relative">
+      <motion.div
+        className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center mb-5"
+        whileHover={{ rotate: [0, -6, 6, -3, 3, 0], scale: 1.05 }}
+        transition={{ duration: 0.6 }}
+      >
+        <Award size={26} className="text-accent drop-shadow-[0_0_8px_hsl(var(--accent)/0.6)]" />
+      </motion.div>
+
+      <h3 className="text-2xl font-section font-bold text-primary-foreground mb-1">
+        Talented People
+      </h3>
+
+      <div className="flex items-center gap-2 mb-4">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+        </span>
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+          Thirty Under Thirty
+        </p>
+      </div>
+
+      <p className="text-primary-foreground/85 leading-relaxed mb-4">
+        Every day Limerick City is full of people doing remarkable things: building
+        businesses, coaching teams, caring for others, making things. This is our
+        chance to put a name to that talent and celebrate it in public.
+      </p>
+      <p className="text-primary-foreground/75 leading-relaxed mb-6">
+        The list is looked after by our own team, so it grows as more people are put
+        forward by the city that knows them.
+      </p>
+
+      <div className="flex flex-wrap gap-2 mb-6">
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent"
+        >
+          <Award size={11} /> Limerick City
+        </motion.span>
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
+        >
+          Nominated by the city
+        </motion.span>
+        <motion.span
+          whileHover={{ scale: 1.06 }}
+          className="inline-flex items-center rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90"
+        >
+          Updated as we go
+        </motion.span>
+      </div>
+
+      <Link
+        to="/thirty-under-thirty"
+        className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-accent-foreground shadow-lg transition-transform hover:scale-105"
+      >
+        Meet the honourees <ArrowRight size={16} />
+      </Link>
+    </div>
+  </motion.div>
+);
+
 const ProgrammesSection = () => {
   return (
     <section id="programmes" className="py-20 md:py-28 bg-background">
@@ -568,13 +728,14 @@ const ProgrammesSection = () => {
             Built for the Betterment of Limerick
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            One umbrella, three pillars. Each programme bridges a different layer of
-            Limerick - grassroots, talent and civic leadership - under one mission.
+            One umbrella, four pillars. Each programme reaches a different part of
+            Limerick: grassroots, talent, enterprise and recognition, all under one mission.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           <CupCard />
+          <TalentedPeopleCard />
           <HackathonCard />
           <FlagshipCard />
         </div>
