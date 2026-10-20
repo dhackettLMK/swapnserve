@@ -24,6 +24,7 @@ const Index = () => {
       <main id="main-content">
         <HeroSection />
         <ProgrammesSection />
+        <TalentedPeopleSection />
         <HowItWorks />
         <ImpactSnapshot />
         <TimelineSection />
