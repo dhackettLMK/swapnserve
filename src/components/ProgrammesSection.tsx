@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight, UserPlus } from "lucide-react";
+import { Shirt, Trophy, Code, Terminal, ArrowLeftRight, ArrowRight, UserPlus, Award } from "lucide-react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import cupSpray from "@/assets/cup-spraypaint.png";
@@ -568,13 +568,14 @@ const ProgrammesSection = () => {
             Built for the Betterment of Limerick
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            One umbrella, three pillars. Each programme bridges a different layer of
-            Limerick - grassroots, talent and civic leadership - under one mission.
+            One umbrella, four pillars. Each programme reaches a different part of
+            Limerick: grassroots, talent, enterprise and recognition, all under one mission.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           <CupCard />
+          <TalentedPeopleCard />
           <HackathonCard />
           <FlagshipCard />
         </div>
