@@ -82,7 +82,7 @@ const SiteHeader = () => {
             <Link
               to="/cup?src=header"
               aria-label="Sign Up to the Cup"
-              className="ml-3 inline-flex items-center rounded-full bg-primary px-4 py-2 transition-transform hover:scale-[1.02]"
+              className="ml-3 inline-flex items-center rounded-full bg-secondary px-4 py-2 ring-1 ring-primary-foreground/20 transition-transform hover:scale-[1.02]"
             >
               <CupButtonBrand wordmarkClass="h-3" cupClass="h-4" />
             </Link>
@@ -133,7 +133,7 @@ const SiteHeader = () => {
                   to="/cup?src=header-mobile"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Sign Up to the Swap'n'Serve Cup"
-                  className="mt-3 flex items-center justify-center rounded-xl bg-primary px-3 py-3"
+                  className="mt-3 flex items-center justify-center rounded-xl bg-secondary px-3 py-3 ring-1 ring-primary-foreground/20"
                 >
                   <CupButtonBrand wordmarkClass="h-3.5" cupClass="h-4" />
                 </Link>
