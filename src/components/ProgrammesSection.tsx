@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import cupSpray from "@/assets/cup-spraypaint.webp";
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
-import prizeCup from "@/assets/prize-1000-spraypaint.webp";
-import prizePlate from "@/assets/prize-300-spraypaint.webp";
-import prizePlayer from "@/assets/prize-100-spraypaint.webp";
+import prizeCup from "@/assets/prize-1000.svg";
+import prizePlate from "@/assets/prize-300.svg";
+import prizePlayer from "@/assets/prize-100.svg";
 
 const PRIZES = [
   { image: prizeCup, amount: "€1,000", label: "Cup winners" },
