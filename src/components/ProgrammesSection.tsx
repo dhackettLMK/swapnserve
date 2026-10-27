@@ -73,7 +73,7 @@ const RunwayModel = () => (
       scale: [0.4, 0.9, 0.9, 0.9],
       opacity: [0, 0.95, 0.95, 0],
     }}
-    transition={{ duration: 9, times: [0, 0.28, 0.92, 1], repeat: Infinity, ease: "linear" }}
+    transition={{ duration: 9, times: [0, 0.28, 0.92, 1], repeat: Infinity, ease: "easeOut" }}
   >
     <motion.div
       className="h-full w-full"
@@ -87,31 +87,67 @@ const RunwayModel = () => (
             <stop offset="0" stopColor="hsl(var(--accent))" stopOpacity="0.95" />
             <stop offset="1" stopColor="hsl(var(--accent))" stopOpacity="0.5" />
           </linearGradient>
+          <linearGradient id="sheenGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="hsl(var(--primary-foreground))" stopOpacity="0.55" />
+            <stop offset="1" stopColor="hsl(var(--primary-foreground))" stopOpacity="0.05" />
+          </linearGradient>
         </defs>
-        <g fill="url(#gownGrad)">
-          {/* flowing hair swept behind */}
-          <path d="M26.5 5 C33.5 2.5 37 7 36.5 14 C38.5 24 37.5 34 33 41 C34.5 30.5 33.5 20 31.5 13 C30 9.5 28 8.5 26.2 10 Z" />
-          {/* head + neck */}
+        {/* upper body counter-rotates against the hips */}
+        <motion.g
+          fill="url(#gownGrad)"
+          style={{ transformBox: "view-box", transformOrigin: "30px 24px" }}
+          animate={{ rotate: [2.2, -2.2, 2.2] }}
+          transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
+        >
+          {/* flowing hair swept behind, with its own bounce */}
+          <motion.path
+            d="M26.5 5 C33.5 2.5 37 7 36.5 14 C38.5 24 37.5 34 33 41 C34.5 30.5 33.5 20 31.5 13 C30 9.5 28 8.5 26.2 10 Z"
+            style={{ transformBox: "view-box", transformOrigin: "30px 8px" }}
+            animate={{ rotate: [-5, 5, -5] }}
+            transition={{ duration: 2.1, repeat: Infinity, ease: "easeInOut" }}
+          />
           <ellipse cx="30" cy="10.5" rx="3.6" ry="4.5" />
           <rect x="28.7" y="14.5" width="2.6" height="3.8" rx="1.2" />
-          {/* fitted bodice to tiny waist */}
           <path d="M22.5 20 Q30 16.5 37.5 20 L36.3 40.5 Q30 43.5 23.7 40.5 Z" />
           {/* arm on hip */}
           <path d="M23.5 20 C17.5 26.5 15.5 36.5 21 46 L24 45 C19.5 37 21 28.5 26 23 Z" />
-          {/* arm hanging, swept slightly back */}
-          <path d="M37 20 C42.5 27.5 44.5 38.5 43 48.5 L39.8 48 C41.3 38.5 39.5 29.5 35 22.5 Z" />
-          {/* curvy hips */}
+          {/* free arm swings gently */}
+          <motion.path
+            d="M37 20 C42.5 27.5 44.5 38.5 43 48.5 L39.8 48 C41.3 38.5 39.5 29.5 35 22.5 Z"
+            style={{ transformBox: "view-box", transformOrigin: "37px 21px" }}
+            animate={{ rotate: [-4, 4, -4] }}
+            transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.g>
+        {/* hips and skirt ride with the hip sway */}
+        <g fill="url(#gownGrad)">
           <path d="M23.7 40.5 L36.3 40.5 Q39 47.5 37.5 55 Q30 59 22.5 55 Q21 47.5 23.7 40.5 Z" />
-          {/* bodycon skirt with front slit */}
           <path d="M22.5 55 Q20.5 67 22 78 Q30 81.5 38 78 Q39.5 67 37.5 55 Q30 59 22.5 55 Z" />
-          {/* front leg striding */}
-          <path d="M25 80 C23.5 97 23 116 24 133 L27.6 133 C27 116 27.5 97 29 80 Z" />
-          {/* back leg extended behind */}
-          <path d="M33.5 80 C36 95 38 111 40.5 126 L44 125 C41.5 109 38.5 92 36.5 80 Z" />
-          {/* stilettos */}
-          <path d="M23 133 l-2.2 7 h3 l1.6 -5.5 z" />
-          <path d="M39.6 126 l-1.6 6.5 h3 l-1.4 -5.5 z" />
         </g>
+        {/* shimmer sweeping the dress */}
+        <motion.g fill="url(#sheenGrad)" animate={{ opacity: [0, 0.4, 0] }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}>
+          <path d="M22.5 20 Q30 16.5 37.5 20 L36.3 40.5 Q30 43.5 23.7 40.5 Z" />
+          <path d="M22.5 55 Q20.5 67 22 78 Q30 81.5 38 78 Q39.5 67 37.5 55 Q30 59 22.5 55 Z" />
+        </motion.g>
+        {/* legs in mid-stride, subtle alternate kick */}
+        <motion.g
+          fill="url(#gownGrad)"
+          style={{ transformBox: "view-box", transformOrigin: "27px 60px" }}
+          animate={{ rotate: [3.5, -3.5, 3.5] }}
+          transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <path d="M25 80 C23.5 97 23 116 24 133 L27.6 133 C27 116 27.5 97 29 80 Z" />
+          <path d="M23 133 l-2.2 7 h3 l1.6 -5.5 z" />
+        </motion.g>
+        <motion.g
+          fill="url(#gownGrad)"
+          style={{ transformBox: "view-box", transformOrigin: "35px 60px" }}
+          animate={{ rotate: [-3.5, 3.5, -3.5] }}
+          transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <path d="M33.5 80 C36 95 38 111 40.5 126 L44 125 C41.5 109 38.5 92 36.5 80 Z" />
+          <path d="M39.6 126 l-1.6 6.5 h3 l-1.4 -5.5 z" />
+        </motion.g>
       </svg>
     </motion.div>
   </motion.div>
@@ -157,12 +193,13 @@ const Catwalk = () => (
     {Array.from({ length: 6 }).map((_, i) => (
       <span key={`cr${i}`} className="absolute h-1.5 w-1.5 rounded-full bg-primary-foreground/20" style={{ right: `${2 + i * 3.4}%`, bottom: `${16 + (i % 3) * 5}%` }} />
     ))}
-    {Array.from({ length: 4 }).map((_, i) => (
+    {Array.from({ length: 5 }).map((_, i) => (
       <motion.span
         key={`f${i}`}
-        className={`absolute top-[30%] h-1.5 w-1.5 rounded-full bg-primary-foreground ${i < 2 ? "left-[9%]" : "right-[9%]"}`}
-        animate={{ opacity: [0, 1, 0], scale: [0.4, 1.6, 0.4] }}
-        transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 2.2 + i * 0.5, delay: i * 0.7, ease: "easeOut" }}
+        className={`absolute h-1.5 w-1.5 rounded-full bg-primary-foreground ${i % 2 ? "right-[8%]" : "left-[8%]"}`}
+        style={{ top: `${22 + (i % 3) * 7}%` }}
+        animate={{ opacity: [0, 0, 1, 0, 0], scale: [0.4, 0.4, 1.8, 0.4, 0.4] }}
+        transition={{ duration: 9, times: [0, 0.24 + i * 0.03, 0.28 + i * 0.03, 0.32 + i * 0.03, 1], repeat: Infinity, ease: "easeOut" }}
       />
     ))}
     <RunwayModel />
