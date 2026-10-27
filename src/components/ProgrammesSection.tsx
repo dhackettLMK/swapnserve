@@ -5,6 +5,16 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import cupSpray from "@/assets/cup-spraypaint.png";
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
+import prizeCup from "@/assets/prize-1000-spraypaint.png";
+import prizePlate from "@/assets/prize-300-spraypaint.png";
+import prizePlayer from "@/assets/prize-100-spraypaint.png";
+
+const PRIZES = [
+  { image: prizeCup, amount: "€1,000", label: "Cup winners" },
+  { image: prizePlate, amount: "€300", label: "Plate winners" },
+  { image: prizePlayer, amount: "€100", label: "Player of the tournament" },
+];
+
 
 const MatrixRain = () => {
   const columns = useMemo(() => {
@@ -102,11 +112,19 @@ export default function ProgrammesSection() {
               <img src={cupSpray} alt="Cup" className="ml-auto h-16 w-auto" />
             </div>
             <p className="mb-5 text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with €1,400 in prize money. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
-            <div className="mb-8 grid grid-cols-2 gap-4 border-y border-primary-foreground/20 py-5">
-              <div><p className="text-2xl font-semibold text-accent">€1,400</p><p className="mt-1 text-xs text-primary-foreground/70">Prize money</p></div>
-              <div><p className="text-2xl font-semibold">5-a-side</p><p className="mt-1 text-xs text-primary-foreground/70">2 subs · rolling subs</p></div>
-
+            <div className="mb-8 border-y border-primary-foreground/20 py-6">
+              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
+              <div className="grid grid-cols-3 gap-4">
+                {PRIZES.map((prize) => (
+                  <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
+                    <img src={prize.image} alt={prize.amount} loading="lazy" width={1408} height={608} className="h-9 w-auto max-w-full sm:h-11 md:h-14" />
+                    <p className="mt-3 text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-primary-foreground/80">{prize.label}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-5 text-xs text-primary-foreground/70">5-a-side · 2 subs · rolling subs</p>
             </div>
+
             <p className="mb-6 text-sm text-primary-foreground/75">€10 per team member · 7 team members required</p>
             <div className="mt-auto flex flex-wrap gap-3">
               <Button asChild variant="secondary" size="lg"><Link to="/cup?src=programme-team">Register your team <ArrowRight /></Link></Button>
