@@ -12,7 +12,7 @@ const Banknote = ({ value, label, serial, className }: Props) => {
   return (
     <div
       className={cn(
-        "relative aspect-[2.1/1] w-full overflow-hidden rounded-[3cqw] bg-[hsl(var(--note-paper))] text-[hsl(var(--note-ink))] shadow-[0_18px_40px_-18px_hsl(var(--note-ink)/0.8)]",
+        "relative aspect-[2.1/1] w-full overflow-hidden rounded-md text-left bg-[hsl(var(--note-paper))] text-[hsl(var(--note-ink))] shadow-[0_18px_40px_-18px_hsl(var(--note-ink)/0.8)]",
         className,
       )}
       style={{ containerType: "inline-size" }}
