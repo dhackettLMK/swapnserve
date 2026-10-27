@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import cupSpray from "@/assets/cup-spraypaint.webp";
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
-import prizeCup from "@/assets/prize-1000.svg";
-import prizePlate from "@/assets/prize-300.svg";
-import prizePlayer from "@/assets/prize-100.svg";
+
+import PrizeAmount from "@/components/cup/PrizeAmount";
 
 const PRIZES = [
-  { image: prizeCup, amount: "€1,000", label: "Cup winners" },
-  { image: prizePlate, amount: "€300", label: "Plate winners" },
-  { image: prizePlayer, amount: "€100", label: "Player of the tournament" },
+  { amount: "1,000", label: "Cup winners" },
+  { amount: "300", label: "Plate winners" },
+  { amount: "100", label: "Player of the tournament" },
 ];
 
 
@@ -121,7 +120,7 @@ export default function ProgrammesSection() {
 
                 {PRIZES.map((prize) => (
                   <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
-                    <img src={prize.image} alt={prize.amount} loading="lazy" width={1408} height={608} className="h-9 w-auto max-w-full sm:h-11 md:h-14" />
+                    <PrizeAmount value={prize.amount} className="text-[1.6rem] sm:text-4xl md:text-5xl" />
                     <p className="mt-3 text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-primary-foreground/80">{prize.label}</p>
                   </div>
                 ))}

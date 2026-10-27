@@ -294,3 +294,13 @@ html {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Prize money: live metallic gold numerals (crisp at any size, counters stay see-through) */
+.prize-gold {
+  background: linear-gradient(180deg, hsl(48 100% 88%) 0%, hsl(45 92% 66%) 38%, hsl(40 80% 48%) 62%, hsl(44 90% 70%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 hsl(35 70% 22% / 0.55)) drop-shadow(0 10px 24px hsl(40 90% 50% / 0.18));
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}

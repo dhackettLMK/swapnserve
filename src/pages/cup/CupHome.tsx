@@ -22,15 +22,14 @@ import type { Payment } from "@/lib/cupTypes";
 const DEPOSIT_CENTS = TEAM_PRICE_CENTS / 7;
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 import cupSpray from "@/assets/cup-spraypaint.webp";
-import prizeCup from "@/assets/prize-1000.svg";
-import prizePlate from "@/assets/prize-300.svg";
-import prizePlayer from "@/assets/prize-100.svg";
 
 /** Prize money on the line, shown in the same gold spray-paint lettering as the Cup wordmark. */
+import PrizeAmount from "@/components/cup/PrizeAmount";
+
 const PRIZES = [
-  { image: prizeCup, amount: "€1,000", label: "Cup winners" },
-  { image: prizePlate, amount: "€300", label: "Plate winners" },
-  { image: prizePlayer, amount: "€100", label: "Player of the tournament" },
+  { amount: "1,000", label: "Cup winners" },
+  { amount: "300", label: "Plate winners" },
+  { amount: "100", label: "Player of the tournament" },
 ];
 
 
@@ -321,14 +320,7 @@ function CreateTeam() {
           <div className="mt-10 grid gap-10 sm:grid-cols-3">
             {PRIZES.map((prize) => (
               <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
-                <img
-                  src={prize.image}
-                  alt={prize.amount}
-                  loading="lazy"
-                  width={1408}
-                  height={608}
-                  className="h-16 w-auto max-w-full sm:h-20 md:h-24"
-                />
+                <PrizeAmount value={prize.amount} className="text-6xl sm:text-6xl md:text-7xl lg:text-8xl" />
                 <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground/80">
                   {prize.label}
                 </p>
