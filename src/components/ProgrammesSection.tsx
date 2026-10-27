@@ -69,8 +69,8 @@ const RunwayModel = () => (
     className="absolute left-1/2 h-[110px] w-9 origin-bottom md:h-[128px]"
     animate={{
       x: "-50%",
-      bottom: ["34%", "19%", "19%"],
-      scale: [0.4, 1.04, 1.04],
+      bottom: ["34%", "19%", "19%", "19%"],
+      scale: [0.4, 1.04, 1.04, 1.04],
       opacity: [0, 0.95, 0.95, 0],
     }}
     transition={{ duration: 9, times: [0, 0.28, 0.92, 1], repeat: Infinity, ease: "linear" }}
