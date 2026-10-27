@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import CupButtonBrand from "@/components/cup/CupButtonBrand";
+import { Button } from "@/components/ui/button";
 import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const navLinks = [
@@ -46,8 +47,8 @@ const SiteHeader = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
       <div
-        className={`mx-auto max-w-6xl rounded-2xl border border-primary-foreground/15 bg-primary/95 text-primary-foreground transition-all duration-300 ${
-          scrolled ? "shadow-xl" : "shadow-lg"
+        className={`mx-auto max-w-[1400px] rounded-xl border border-primary-foreground/15 bg-secondary/95 backdrop-blur-xl text-primary-foreground transition-all duration-300 ${
+          scrolled ? "shadow-refined" : "shadow-sm"
         }`}
       >
         <div className="flex h-16 items-center justify-between px-4 md:h-[72px] md:px-6">
@@ -62,7 +63,7 @@ const SiteHeader = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`rounded-full px-2.5 py-2 text-xs font-medium transition-colors ${
                     active
                       ? "bg-primary-foreground text-primary"
                       : "text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
@@ -74,26 +75,26 @@ const SiteHeader = () => {
             })}
             <Link
               to="/thirty-under-thirty"
-              className="rounded-full px-4 py-2 text-sm font-medium text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              className="rounded-full px-2.5 py-2 text-xs font-medium text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
             >
               Talented People
             </Link>
             <Link
               to="/cup?src=header"
               aria-label="Sign Up to the Cup"
-              className="ml-3 inline-flex items-center rounded-full bg-secondary px-4 py-2 transition-transform hover:scale-[1.02]"
+              className="ml-3 inline-flex items-center rounded-full bg-primary px-4 py-2 transition-transform hover:scale-[1.02]"
             >
               <CupButtonBrand wordmarkClass="h-3" cupClass="h-4" />
             </Link>
           </nav>
 
-          <button
-            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary-foreground/10 text-primary-foreground"
+          <Button variant="ghost" size="icon"
+            className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary-foreground/10 text-primary-foreground"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((prev) => !prev)}
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          </Button>
         </div>
 
         <AnimatePresence>
@@ -103,7 +104,7 @@ const SiteHeader = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden border-t border-primary-foreground/10 px-4 py-4"
+              className="lg:hidden border-t border-primary-foreground/10 px-4 py-4"
               aria-label="Mobile navigation"
             >
               <div className="space-y-1">
@@ -132,7 +133,7 @@ const SiteHeader = () => {
                   to="/cup?src=header-mobile"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Sign Up to the Swap'n'Serve Cup"
-                  className="mt-3 flex items-center justify-center rounded-xl bg-secondary px-3 py-3"
+                  className="mt-3 flex items-center justify-center rounded-xl bg-primary px-3 py-3"
                 >
                   <CupButtonBrand wordmarkClass="h-3.5" cupClass="h-4" />
                 </Link>
