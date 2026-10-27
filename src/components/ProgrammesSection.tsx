@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import cupSpray from "@/assets/cup-spraypaint.webp";
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
+import wordmarkClean from "@/assets/swapnserve-wordmark-clean.png";
 
 import Banknote from "@/components/cup/Banknote";
 
@@ -40,106 +41,61 @@ const Cursor = () => (
   <motion.span aria-hidden="true" className="ml-1 inline-block h-[14px] w-[7px] bg-accent align-middle" animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
 );
 
-const RIVER_Y = 138;
+const LOOP = 12;
 
-const BUILDINGS = [
-  { x: 12, w: 34, h: 46 },
-  { x: 50, w: 22, h: 62 },
-  { x: 76, w: 30, h: 34 },
-  { x: 110, w: 26, h: 78 },
-  { x: 140, w: 34, h: 50 },
-  { x: 178, w: 20, h: 66 },
-  { x: 202, w: 36, h: 40 },
-  { x: 242, w: 24, h: 72 },
-  { x: 270, w: 32, h: 44 },
-  { x: 306, w: 22, h: 58 },
-  { x: 332, w: 30, h: 36 },
-  { x: 366, w: 26, h: 52 },
-  { x: 396, w: 18, h: 30 },
-];
+const Rays = ({ cx, cy, r1, r2, angles }: { cx: number; cy: number; r1: number; r2: number; angles: number[] }) => (
+  <g>
+    {angles.map((a) => {
+      const r = (a * Math.PI) / 180;
+      return <line key={a} x1={cx + Math.cos(r) * r1} y1={cy + Math.sin(r) * r1} x2={cx + Math.cos(r) * r2} y2={cy + Math.sin(r) * r2} stroke="hsl(var(--accent) / 0.75)" strokeWidth={1.4} strokeLinecap="round" />;
+    })}
+  </g>
+);
 
-const STARS = [
-  { x: 30, y: 18 }, { x: 88, y: 30 }, { x: 150, y: 14 }, { x: 210, y: 26 },
-  { x: 268, y: 16 }, { x: 318, y: 34 }, { x: 400, y: 44 }, { x: 120, y: 44 },
-  { x: 240, y: 46 }, { x: 350, y: 52 },
-];
-
-const CityScene = () => {
-  const windows = useMemo(() => BUILDINGS.flatMap((b, bi) => {
-    const cols = Math.max(1, Math.floor((b.w - 8) / 8));
-    const rows = Math.max(1, Math.floor((b.h - 12) / 11));
-    const out: { x: number; y: number; i: number; lit: boolean }[] = [];
-    for (let c = 0; c < cols; c++) {
-      for (let r = 0; r < rows; r++) {
-        const i = bi * 97 + c * 7 + r * 13;
-        out.push({ x: b.x + 5 + c * 8, y: RIVER_Y - b.h + 8 + r * 11, i, lit: i % 11 < 6 });
-      }
-    }
-    return out;
-  }), []);
-
-  return (
-    <div aria-hidden="true" className="relative mt-6 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary-foreground/[0.03] px-2 pb-2 pt-3 md:px-3">
-      <motion.div className="pointer-events-none absolute -inset-10" style={{ background: "radial-gradient(circle at 50% 30%, hsl(var(--accent) / 0.16), transparent 65%)" }} animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
-      <svg viewBox="0 0 420 176" className="relative h-auto w-full" fill="none">
-        <circle cx={372} cy={26} r={20} fill="hsl(var(--accent) / 0.07)" />
-        <circle cx={372} cy={26} r={9} fill="hsl(var(--accent) / 0.8)" />
-        {STARS.map((s, i) => (
-          <motion.circle key={i} cx={s.x} cy={s.y} r={1.4} fill="hsl(var(--accent) / 0.8)" animate={{ opacity: [0.15, 0.9, 0.15] }} transition={{ duration: 3 + (i % 4), repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }} />
-        ))}
-        {BUILDINGS.map((b, i) => (
-          <rect key={i} x={b.x} y={RIVER_Y - b.h} width={b.w} height={b.h} fill="hsl(var(--primary-foreground) / 0.06)" stroke="hsl(var(--accent) / 0.22)" strokeWidth={1} />
-        ))}
-        <path d={`M240 ${RIVER_Y - 72} l26 0 l-13 -13 z`} fill="hsl(var(--primary-foreground) / 0.08)" stroke="hsl(var(--accent) / 0.3)" strokeWidth={1} />
-        <line x1={123} y1={RIVER_Y - 78} x2={123} y2={RIVER_Y - 94} stroke="hsl(var(--accent) / 0.45)" strokeWidth={1.4} strokeLinecap="round" />
-        <line x1={61} y1={RIVER_Y - 62} x2={61} y2={RIVER_Y - 74} stroke="hsl(var(--accent) / 0.4)" strokeWidth={1.2} strokeLinecap="round" />
-        <motion.circle cx={123} cy={RIVER_Y - 96} r={2} fill="hsl(var(--accent) / 0.95)" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }} />
-        <motion.circle cx={61} cy={RIVER_Y - 76} r={1.6} fill="hsl(var(--accent) / 0.85)" animate={{ opacity: [0.2, 0.95, 0.2] }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }} />
-        {windows.map((wd) => wd.i % 3 === 0 && wd.lit ? (
-          <motion.rect key={wd.i} x={wd.x} y={wd.y} width={3.5} height={4.5} rx={0.6} fill="hsl(var(--accent) / 0.9)" animate={{ opacity: [0.15, 1, 0.15] }} transition={{ duration: 2.5 + (wd.i % 4), repeat: Infinity, ease: "easeInOut", delay: (wd.i % 9) * 0.5 }} />
-        ) : (
-          <rect key={wd.i} x={wd.x} y={wd.y} width={3.5} height={4.5} rx={0.6} fill={wd.lit ? "hsl(var(--accent) / 0.3)" : "hsl(var(--primary-foreground) / 0.08)"} />
-        ))}
-        <rect x={0} y={RIVER_Y} width={420} height={38} fill="hsl(var(--primary-foreground) / 0.04)" />
-        <rect x={0} y={RIVER_Y} width={420} height={1.4} fill="hsl(var(--accent) / 0.45)" />
-        <rect x={100} y={145} width={220} height={3.5} rx={1.5} fill="hsl(var(--accent) / 0.35)" />
-        {[108, 160, 212, 264].map((ax) => (
-          <path key={ax} d={`M${ax} 148 q 26 20 52 0`} fill="none" stroke="hsl(var(--accent) / 0.4)" strokeWidth={2} />
-        ))}
-        {[118, 168, 218, 268].map((lx, i) => (
-          <g key={lx}>
-            <line x1={lx} y1={145} x2={lx} y2={138} stroke="hsl(var(--accent) / 0.4)" strokeWidth={1.2} />
-            <motion.circle cx={lx} cy={136} r={2.2} fill="hsl(var(--accent) / 0.9)" animate={{ opacity: [0.35, 1, 0.35] }} transition={{ duration: 3 + i * 0.7, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }} />
-          </g>
-        ))}
-        {[64, 122, 190, 250, 316, 378].map((rx, i) => (
-          <motion.line key={rx} x1={rx} y1={152} x2={rx} y2={168} stroke="hsl(var(--accent) / 0.18)" strokeWidth={2.5} strokeLinecap="round" animate={{ opacity: [0.08, 0.3, 0.08], y: [0, 2, 0] }} transition={{ duration: 4 + i * 0.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }} />
-        ))}
-        {[
-          { x: 40, y: 150, w: 26, d: 5, delay: 0 },
-          { x: 120, y: 162, w: 18, d: 6.5, delay: 1.2 },
-          { x: 210, y: 156, w: 30, d: 5.5, delay: 2.4 },
-          { x: 300, y: 166, w: 22, d: 7, delay: 0.6 },
-          { x: 356, y: 152, w: 16, d: 6, delay: 3 },
-          { x: 70, y: 170, w: 20, d: 6.8, delay: 1.8 },
-        ].map((s, i) => (
-          <motion.line key={i} x1={s.x} y1={s.y} x2={s.x + s.w} y2={s.y} stroke="hsl(var(--accent) / 0.35)" strokeWidth={1.2} strokeLinecap="round" animate={{ x: [0, 14, 0], opacity: [0.15, 0.6, 0.15] }} transition={{ duration: s.d, repeat: Infinity, ease: "easeInOut", delay: s.delay }} />
-        ))}
-        {[
-          { x: 64, d: 8, delay: 0 },
-          { x: 190, d: 9.5, delay: 2.6 },
-          { x: 300, d: 8.5, delay: 5 },
-        ].map((o, i) => (
-          <motion.g key={i} animate={{ y: [0, -76], opacity: [0, 0.9, 0] }} transition={{ duration: o.d, repeat: Infinity, ease: "easeOut", delay: o.delay }}>
-            <circle cx={o.x} cy={128} r={3} fill="hsl(var(--accent) / 0.9)" />
-            <line x1={o.x} y1={131} x2={o.x} y2={140} stroke="hsl(var(--accent) / 0.35)" strokeWidth={1.4} strokeLinecap="round" />
-          </motion.g>
-        ))}
-      </svg>
-      <div className="relative mt-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-primary-foreground/45">built for limerick</div>
-    </div>
-  );
-};
+const HackFlow = () => (
+  <div aria-hidden="true" className="relative mt-6 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary-foreground/[0.03] px-2 pb-2 pt-3 md:px-3">
+    <motion.div className="pointer-events-none absolute -inset-10" style={{ background: "radial-gradient(circle at 50% 40%, hsl(var(--accent) / 0.14), transparent 65%)" }} animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
+    <svg viewBox="0 0 420 176" className="relative h-auto w-full" fill="none">
+      {Array.from({ length: 16 }).map((_, i) => (
+        <circle key={i} cx={14 + i * 26} cy={16} r={1} fill="hsl(var(--primary-foreground) / 0.1)" />
+      ))}
+      <path d="M86 92 H334" stroke="hsl(var(--primary-foreground) / 0.16)" strokeWidth={1.2} strokeDasharray="4 6" />
+      <motion.circle cx={86} cy={92} r={3.2} fill="hsl(var(--accent) / 0.95)" animate={{ cx: [86, 160, 262, 334] }} transition={{ duration: LOOP, repeat: Infinity, ease: "easeInOut", times: [0, 0.3, 0.62, 0.95] }} />
+      {/* 1. idea */}
+      <motion.g animate={{ opacity: [0, 1, 1, 0], scale: [0.6, 1.08, 1, 0.6] }} transition={{ duration: LOOP, repeat: Infinity, times: [0, 0.05, 0.26, 0.33], ease: "easeOut" }} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+        <circle cx={58} cy={84} r={9} fill="hsl(var(--accent) / 0.88)" />
+        <rect x={55} y={93} width={6} height={5} rx={1.2} fill="hsl(var(--accent) / 0.5)" />
+        <Rays cx={58} cy={84} r1={13} r2={18} angles={[-90, -45, 0, 45, 135, 180, 225]} />
+      </motion.g>
+      {/* 2. build */}
+      {[0, 1, 2].map((i) => (
+        <motion.rect key={i} x={147} y={99 - i * 11} width={26} height={9} rx={2} fill="hsl(var(--primary-foreground) / 0.09)" stroke="hsl(var(--accent) / 0.45)" strokeWidth={1} animate={{ y: [16, 16, 0, 0, 16, 16], opacity: [0, 0, 1, 1, 0, 0] }} transition={{ duration: LOOP, repeat: Infinity, times: [0, 0.28 + i * 0.05, 0.35 + i * 0.05, 0.5, 0.57, 1], ease: "easeOut" }} />
+      ))}
+      {/* 3. pitch */}
+      <motion.g animate={{ opacity: [0, 0, 1, 1, 0, 0], scale: [0.9, 0.9, 1.06, 1, 0.9, 0.9] }} transition={{ duration: LOOP, repeat: Infinity, times: [0, 0.5, 0.56, 0.63, 0.74, 1], ease: "easeOut" }} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+        <ellipse cx={262} cy={90} rx={44} ry={28} fill="hsl(var(--accent) / 0.07)" />
+        <rect x={232} y={70} width={60} height={40} rx={4} fill="hsl(var(--primary-foreground) / 0.07)" stroke="hsl(var(--accent) / 0.5)" strokeWidth={1.2} />
+        <image href={wordmarkClean} x={240} y={80} width={44} height={18} preserveAspectRatio="xMidYMid meet" />
+        <path d="M262 110 v7 M252 119 h20" stroke="hsl(var(--accent) / 0.4)" strokeWidth={1.4} strokeLinecap="round" />
+      </motion.g>
+      {/* 4. launch */}
+      <motion.g animate={{ y: [0, 0, 0, -46, -46], opacity: [0, 0, 1, 1, 0] }} transition={{ duration: LOOP, repeat: Infinity, times: [0, 0.7, 0.76, 0.93, 1], ease: "easeIn" }}>
+        <path d="M362 62 q11 15 11 30 v12 h-22 v-12 q0 -15 11 -30 z" fill="hsl(var(--primary-foreground) / 0.14)" stroke="hsl(var(--accent) / 0.6)" strokeWidth={1.2} />
+        <circle cx={362} cy={86} r={4.5} fill="hsl(var(--accent) / 0.85)" />
+        <path d="M351 98 l-7 12 h7 z" fill="hsl(var(--accent) / 0.5)" />
+        <path d="M373 98 l7 12 h-7 z" fill="hsl(var(--accent) / 0.5)" />
+        <motion.path d="M356 106 q6 13 12 0 z" fill="hsl(var(--accent) / 0.85)" animate={{ opacity: [0.35, 1, 0.35], scale: [0.85, 1.25, 0.85] }} transition={{ duration: 0.45, repeat: Infinity, ease: "easeInOut" }} style={{ transformBox: "fill-box", transformOrigin: "top center" }} />
+      </motion.g>
+      {["idea", "build", "pitch", "launch"].map((t, i) => (
+        <text key={t} className="font-mono" x={[58, 160, 262, 362][i]} y={142} textAnchor="middle" fill="hsl(var(--primary-foreground) / 0.5)" fontSize={9} letterSpacing="0.2em">{t.toUpperCase()}</text>
+      ))}
+      <rect x={20} y={158} width={380} height={2.5} rx={1.25} fill="hsl(var(--primary-foreground) / 0.08)" />
+      <motion.rect x={20} y={158} width={0} height={2.5} rx={1.25} fill="hsl(var(--accent) / 0.7)" animate={{ width: [0, 380] }} transition={{ duration: LOOP, repeat: Infinity, ease: "linear" }} />
+      <motion.circle cx={20} cy={159.2} r={2.6} fill="hsl(var(--accent) / 0.95)" animate={{ cx: [20, 400] }} transition={{ duration: LOOP, repeat: Infinity, ease: "linear" }} />
+    </svg>
+    <div className="relative mt-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-primary-foreground/45">idea to launch</div>
+  </div>
+);
 
 const HackathonCard = () => (
   <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
