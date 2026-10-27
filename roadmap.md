@@ -1,5 +1,11 @@
 # Roadmap
 
+## Platinum redesign
+- [ ] Apply platinum and green tokens and Sora/Manrope throughout all pages.
+- [ ] Refine the homepage into an editorial magazine layout and simplify decorative treatments.
+- [ ] Refine Cup, Talented People, registration and admin presentation without changing payment logic.
+- [ ] Verify public pages and navigation at desktop and phone widths; check private admin gate.
+
 - [x] Rebuild Cup backend on Lovable Cloud (schema, functions, client)
 - [ ] Wire Cup payments to built-in Stripe (checkout, webhook, confirm-payment, embedded form)
 - [ ] Verify end-to-end Cup checkout flow in preview with test card
