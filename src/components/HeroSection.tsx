@@ -62,12 +62,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:mb-8 md:text-lg"
           >
-            Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025 by
-            David Hackett. On the surface we are a community clothing event. Underneath, we
-            are an umbrella for upskilling, financial relief, circular textiles and breaking
-            down the antisocial barriers that hold our city back. Quality clothing for €1 or
-            free, opportunities for everyone regardless of background, and a culture where
-            hate is not tolerated in any form.
+            Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025, We are a non-profit where we use our operations as opportunties to connect in local youth talent with resources and a stage to develop and demostrate their skills and opportunties to promote growth and positive change in a unqiue and innovative manner, a culture where hate is not tolerated in any form. We also host world class events, you should come. :)
           </motion.p>
 
           <motion.div
