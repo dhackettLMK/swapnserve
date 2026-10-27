@@ -12,14 +12,14 @@ export default function MoneyPanel({ token }: { token: string }) {
 
   if (q.isLoading) {
     return (
-      <div className="flex items-center gap-2 rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground">
+      <div className="flex items-center gap-2 rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
         <Loader2 className="h-4 w-4 animate-spin" /> Loading money breakdown
       </div>
     );
   }
   if (q.error || !q.data) {
     return (
-      <div className="rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground">
+      <div className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
         Could not load the money breakdown. {(q.error as Error)?.message}
       </div>
     );
@@ -41,7 +41,7 @@ export default function MoneyPanel({ token }: { token: string }) {
   ];
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+    <div className="border-t border-border py-6">
       <h2 className="mb-1 font-section text-lg font-bold">Money breakdown</h2>
       <p className="mb-4 text-sm text-muted-foreground">
         Every payment with its fee, what you keep and whether it has reached your bank yet.

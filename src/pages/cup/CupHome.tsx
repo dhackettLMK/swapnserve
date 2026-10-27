@@ -87,7 +87,7 @@ function SoloEntry() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
             No team? No problem
           </p>
-          <h2 className="font-cup-display text-4xl leading-none text-foreground md:text-5xl">
+          <h2 className="font-cup-display text-3xl leading-tight text-foreground md:text-5xl">
             Sign up on your own and make new friends
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
@@ -111,7 +111,7 @@ function SoloEntry() {
 
         {(
           <form
-            className="w-full min-w-0 space-y-5 rounded-[2rem] border border-border bg-card p-6 shadow-[0_24px_70px_hsl(var(--accent)/0.12)] md:p-8"
+            className="w-full min-w-0 space-y-5 rounded-xl border border-border bg-card p-6 shadow-refined md:p-8"
             onSubmit={(e) => {
               e.preventDefault();
               startPayment();
@@ -122,15 +122,15 @@ function SoloEntry() {
             </h3>
             <div className="space-y-2">
               <Label htmlFor="solo-name">Full name</Label>
-              <Input id="solo-name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              <Input id="solo-name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="solo-phone">Phone</Label>
-              <Input id="solo-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              <Input id="solo-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="solo-email">Email</Label>
-              <Input id="solo-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              <Input id="solo-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
             </div>
             <p className="text-xs leading-relaxed text-muted-foreground">You are placed in a squad once your €10 is paid. {PRIVACY_NOTE}</p>
             <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" >
@@ -198,7 +198,7 @@ function CreateTeam() {
                 src={cupSpray}
                 alt=""
                 aria-hidden="true"
-                className="cup-wordmark mx-auto -mt-3 w-2/5 max-w-[240px] -rotate-2 drop-shadow-[0_6px_18px_hsl(var(--accent)/0.35)] lg:ml-auto lg:mr-6"
+                className="cup-wordmark mx-auto -mt-3 w-2/5 max-w-[240px] -rotate-2 lg:ml-auto lg:mr-6"
               />
             </div>
             <h1 className="sr-only">The Swap'n'Serve Cup</h1>
@@ -207,7 +207,7 @@ function CreateTeam() {
               community after the final whistle.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
-              <span className="inline-flex items-center gap-2.5 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent shadow-[0_0_30px_hsl(var(--accent)/0.15)]">
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent shadow-refined">
                 <Trophy className="h-4 w-4" /> €1,000 winners' prize
               </span>
               <span className="font-cup-body text-sm text-primary-foreground/65">
@@ -234,7 +234,7 @@ function CreateTeam() {
 
           <form
             id="register"
-            className="cup-register-form w-full min-w-0 max-w-xl scroll-mt-24 space-y-5 justify-self-center rounded-[2rem] border border-border bg-card p-6 text-card-foreground shadow-[0_24px_70px_hsl(var(--accent)/0.14)] md:p-8 lg:justify-self-end"
+            className="cup-register-form w-full min-w-0 max-w-xl scroll-mt-24 space-y-5 justify-self-center rounded-xl border border-border bg-card p-6 text-card-foreground shadow-refined md:p-8 lg:justify-self-end"
             onSubmit={(e) => {
               e.preventDefault();
               create.mutate();
@@ -242,28 +242,28 @@ function CreateTeam() {
           >
             <div className="font-cup-body">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
-              <h2 className="mt-1 font-cup-display text-4xl leading-none text-foreground">Register your team</h2>
+              <h2 className="mt-1 font-cup-display text-3xl leading-tight text-foreground">Register your team</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 Your captain creates the team and pays their own €10 as a deposit to hold the place. We then provide a private link to invite the remaining six players and arrange the rest of the payment.
               </p>
             </div>
             <div className="space-y-2 font-cup-body">
               <Label htmlFor="team-name">Team name</Label>
-              <Input id="team-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="For example, Shannonside Rovers" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              <Input id="team-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="For example, Shannonside Rovers" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="space-y-2 font-cup-body">
                 <Label htmlFor="captain-name">Captain name</Label>
-                <Input id="captain-name" value={captainName} onChange={(e) => setCaptainName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+                <Input id="captain-name" value={captainName} onChange={(e) => setCaptainName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
               </div>
               <div className="space-y-2 font-cup-body">
                 <Label htmlFor="captain-phone">Captain phone</Label>
-                <Input id="captain-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+                <Input id="captain-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
               </div>
             </div>
             <div className="space-y-2 font-cup-body">
               <Label htmlFor="captain-email">Captain email</Label>
-              <Input id="captain-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="We'll send the private team link here" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-accent" />
+              <Input id="captain-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="We'll send the private team link here" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
             </div>
             <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
             <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
@@ -294,7 +294,7 @@ function CreateTeam() {
       <section className="bg-card py-14 md:py-20">
         <div className="container font-cup-body">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Match venue</p>
-          <h2 className="font-cup-display text-5xl leading-none text-foreground md:text-6xl">Summerville Rovers FC Astro</h2>
+          <h2 className="font-cup-display text-3xl leading-tight text-foreground md:text-4xl">Summerville Rovers FC Astro</h2>
           <div className="mt-6 flex items-start gap-3 text-muted-foreground">
             <MapPin className="mt-0.5 shrink-0 text-primary" size={20} />
             <p>124 Ballinacurra Gardens, Ballinacurra Weston, Limerick, V94 R98D</p>

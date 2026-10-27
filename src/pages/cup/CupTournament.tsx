@@ -86,7 +86,7 @@ function PathBracket({ pathway }: { pathway: Pathway }) {
         key={`${stages[stageIndex].title}-${matchIndex}`}
         className={
           isFinal
-            ? "relative rounded-xl border border-accent/70 bg-accent/[0.12] p-3 font-cup-body text-sm shadow-[0_0_30px_hsl(var(--accent)/0.28)]"
+            ? "relative rounded-xl border border-accent/70 bg-accent/[0.12] p-3 font-cup-body text-sm shadow-refined"
             : "relative rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.07] p-3 font-cup-body text-sm"
         }
       >
@@ -159,9 +159,9 @@ function TournamentOverview() {
         <div className="cup-floodlight pointer-events-none absolute inset-0" aria-hidden />
         <div className="container relative py-12 text-center md:py-16">
           <img src={wordmark} alt="Swap'n'Serve" className="cup-wordmark mx-auto w-full max-w-[390px]" />
-          <img src={cupSpray} alt="Cup" className="mx-auto -mt-2 w-32 -rotate-2 drop-shadow-[0_0_22px_hsl(var(--accent)/0.35)] md:w-40" />
+          <img src={cupSpray} alt="Cup" className="mx-auto -mt-2 w-32 -rotate-2 md:w-40" />
           <p className="mt-5 font-cup-body text-xs uppercase text-accent">Tournament structure</p>
-          <h1 className="mt-2 font-cup-display text-5xl leading-none md:text-7xl">The road to the finals</h1>
+          <h1 className="mt-2 font-cup-display text-4xl leading-tight md:text-6xl">The road to the finals</h1>
           <p className="mx-auto mt-4 max-w-xl font-cup-body text-primary-foreground/70">
             Every team plays twice. Your opening result decides whether you chase the Cup or the Plate.
           </p>
@@ -185,7 +185,7 @@ function TournamentOverview() {
             <p className="mx-auto mt-3 max-w-xl font-cup-body text-muted-foreground">Six minutes decides your pathway. The draw decides who plays who. Losing does not eliminate you.</p>
           </div>
 
-          <div className="mx-auto mt-9 grid max-w-4xl gap-3 rounded-3xl bg-primary p-4 text-primary-foreground sm:grid-cols-2 md:p-6 lg:grid-cols-4">
+          <div className="mx-auto mt-9 grid max-w-4xl gap-3 rounded-xl bg-primary p-4 text-primary-foreground sm:grid-cols-2 md:p-6 lg:grid-cols-4">
             {Array.from({ length: 16 }, (_, index) => (
               <OpeningMatch key={index} number={index + 1} home="Team A" away="Team B" />
             ))}

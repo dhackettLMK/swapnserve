@@ -64,15 +64,6 @@ const HowItWorks = () => {
       ref={sectionRef}
       className="relative py-20 md:py-28 bg-card overflow-hidden"
     >
-      {/* Soft background blobs */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-secondary/10 blur-3xl"
-      />
 
       <div className="container relative">
         <motion.div
@@ -99,7 +90,7 @@ const HowItWorks = () => {
           <div className="absolute top-[3.25rem] left-[10%] right-[10%] h-1 rounded-full bg-border/70 overflow-hidden">
             <motion.div
               style={{ width: progressWidth }}
-              className="h-full bg-gradient-to-r from-primary via-secondary to-primary rounded-full"
+              className="h-full bg-primary rounded-full"
             />
           </div>
 
@@ -119,7 +110,6 @@ const HowItWorks = () => {
                   transition={{ type: "spring", stiffness: 300, damping: 18 }}
                   className="relative z-10 mb-6"
                 >
-                  <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-110" />
                   <div className="relative w-[6.5rem] h-[6.5rem] rounded-full bg-background border-2 border-border shadow-md flex items-center justify-center">
                     <div
                       className={`w-16 h-16 rounded-full ${step.iconBg} flex items-center justify-center`}
@@ -135,7 +125,7 @@ const HowItWorks = () => {
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.25 }}
-                  className={`group relative w-full rounded-3xl border border-border bg-gradient-to-br ${step.accent} backdrop-blur p-6 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/30 transition-all`}
+                  className={`group relative w-full rounded-xl border border-border bg-background backdrop-blur p-6 hover:shadow-sm hover:shadow-primary/5 hover:border-primary/30 transition-all`}
                 >
                   <h3 className="text-lg font-section font-bold text-foreground mb-2">
                     {step.title}
@@ -155,7 +145,7 @@ const HowItWorks = () => {
           <div className="absolute left-[2.05rem] top-2 bottom-2 w-0.5 rounded-full bg-border overflow-hidden">
             <motion.div
               style={{ height: progressWidth }}
-              className="w-full bg-gradient-to-b from-primary via-secondary to-primary"
+              className="w-full bg-primary"
             />
           </div>
 
@@ -186,7 +176,7 @@ const HowItWorks = () => {
               </motion.div>
 
               <div
-                className={`rounded-3xl border border-border bg-gradient-to-br ${step.accent} p-5 hover-lift hover:shadow-lg hover:shadow-primary/5`}
+                className={`rounded-xl border border-border bg-background p-5 hover-lift hover:shadow-lg hover:shadow-primary/5`}
               >
                 <h3 className="text-lg font-section font-bold text-foreground mb-1.5">
                   {step.title}

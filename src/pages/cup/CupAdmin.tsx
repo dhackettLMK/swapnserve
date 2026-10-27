@@ -220,7 +220,7 @@ function TeamLinks({
   const origin = typeof window === "undefined" ? "" : window.location.origin;
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+    <div className="border-t border-border py-6">
       <h2 className="mb-1 font-section text-lg font-bold">Payment links</h2>
       <p className="mb-4 text-sm text-muted-foreground">
         Every team's private links. If a captain loses theirs, copy it here and send it on. The
@@ -333,7 +333,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
   }
   if (list.isError || !list.data) {
     return (
-      <div className="mx-auto max-w-md rounded-2xl border border-destructive/40 bg-destructive/5 p-6 text-center">
+      <div className="mx-auto max-w-md rounded-xl border border-destructive/40 bg-destructive/5 p-6 text-center">
         <p className="mb-3 text-sm text-muted-foreground">
           {(list.error as Error)?.message ?? "Couldn't load admin data."}
         </p>
@@ -366,22 +366,22 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
 
       {/* Totals */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-border bg-card p-5">
+        <div className="rounded-xl border border-border bg-card p-5">
           <p className="text-xs uppercase tracking-wide text-muted-foreground">Teams</p>
           <p className="text-2xl font-bold">{totals.teamCount}</p>
         </div>
-        <div className="rounded-2xl border border-border bg-card p-5">
+        <div className="rounded-xl border border-border bg-card p-5">
           <p className="text-xs uppercase tracking-wide text-muted-foreground">Registered</p>
           <p className="text-2xl font-bold">{totals.registeredCount}</p>
         </div>
-        <div className="rounded-2xl border border-border bg-card p-5">
+        <div className="rounded-xl border border-border bg-card p-5">
           <p className="text-xs uppercase tracking-wide text-muted-foreground">Money in</p>
           <p className="text-2xl font-bold">{formatEuros(totals.totalPaidCents)}</p>
         </div>
       </div>
 
       {/* Sign-up mix */}
-      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+      <div className="border-t border-border py-6">
         <h2 className="mb-4 font-section text-lg font-bold">Sign-ups</h2>
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-xl bg-muted/50 p-4">
@@ -429,13 +429,13 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
         </div>
 
         {signups.attribution && (
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-6 grid min-w-0 gap-4 lg:grid-cols-3">
             {([
               ["App or browser", signups.attribution.apps],
               ["Device", signups.attribution.devices],
               ["Arrived from", signups.attribution.referrers],
             ] as const).map(([title, rows]) => (
-              <div key={title} className="rounded-xl border border-border/60 p-3">
+              <div key={title} className="min-w-0 overflow-x-auto border-t border-border/60 pt-3">
                 <h3 className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">{title}</h3>
                 <table className="w-full text-sm">
                   <thead>
@@ -465,7 +465,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
 
 
       {/* Teams table */}
-      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+      <div className="border-t border-border py-6">
         <h2 className="mb-4 font-section text-lg font-bold">Teams</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -632,7 +632,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
 
 
       {/* Tournament controls */}
-      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+      <div className="border-t border-border py-6">
         <h2 className="mb-1 font-section text-lg font-bold">Generate tournament</h2>
         <p className="mb-4 text-sm text-muted-foreground">
           Draw balanced groups from all <strong>registered</strong> teams, then generate the
@@ -696,7 +696,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
 
       {/* Group fixtures / results */}
       {groupMatches.length > 0 && (
-        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <div className="border-t border-border py-6">
           <h2 className="mb-3 font-section text-lg font-bold">Group results</h2>
           <div className="divide-y divide-border">
             {groupMatches.map((m) => (
@@ -708,7 +708,7 @@ function AdminConsole({ token, onSignOut }: { token: string; onSignOut: () => vo
 
       {/* Knockout */}
       {knockoutMatches.length > 0 && (
-        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <div className="border-t border-border py-6">
           <h2 className="mb-3 font-section text-lg font-bold">Knockout results</h2>
           <div className="mb-6 divide-y divide-border">
             {knockoutMatches.map((m) => (
@@ -770,7 +770,7 @@ const CupAdmin = () => {
         {token ? (
           <AdminConsole token={token} onSignOut={signOut} />
         ) : (
-          <div className="mx-auto max-w-sm rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div className="mx-auto max-w-sm rounded-xl border border-border bg-card p-6 shadow-sm">
             <div className="mb-4 flex items-center gap-2">
               <Lock size={18} className="text-primary" />
               <h1 className="font-section text-lg font-bold">Organiser access</h1>

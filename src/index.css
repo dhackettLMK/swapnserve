@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@600;700;800&display=swap');
-@import '@fontsource/bebas-neue/400.css';
-@import '@fontsource/barlow/400.css';
-@import '@fontsource/barlow/600.css';
-@import '@fontsource/barlow/700.css';
+@import '@fontsource/sora/400.css';
+@import '@fontsource/sora/600.css';
+@import '@fontsource/sora/700.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
 
 @tailwind base;
 @tailwind components;
@@ -10,26 +12,26 @@
 
 @layer base {
   :root {
-    --background: 40 33% 97%;
-    --foreground: 20 10% 12%;
+    --background: 180 7% 97%;
+    --foreground: 157 15% 17%;
 
     --card: 0 0% 100%;
-    --card-foreground: 20 10% 12%;
+    --card-foreground: 157 15% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 10% 12%;
+    --popover-foreground: 157 15% 17%;
 
-    --primary: 152 42% 32%;
+    --primary: 157 61% 23%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 15 65% 56%;
+    --secondary: 157 15% 17%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 40 20% 92%;
-    --muted-foreground: 20 8% 46%;
+    --muted: 190 10% 88%;
+    --muted-foreground: 160 6% 41%;
 
-    --accent: 42 92% 56%;
-    --accent-foreground: 20 10% 12%;
+    --accent: 43 65% 62%;
+    --accent-foreground: 157 15% 17%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -37,11 +39,12 @@
     --success: 152 50% 40%;
     --success-foreground: 0 0% 100%;
 
-    --border: 30 15% 88%;
-    --input: 30 15% 88%;
-    --ring: 152 42% 32%;
+    --border: 190 10% 88%;
+    --input: 190 10% 88%;
+    --ring: 157 61% 23%;
 
     --radius: 0.75rem;
+    --shadow-refined: 0 8px 32px -16px hsl(var(--foreground) / 0.18);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -52,32 +55,32 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-section: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
-    --font-cup-display: 'Bebas Neue', sans-serif;
-    --font-cup-body: 'Barlow', sans-serif;
+    --font-display: 'Sora', system-ui, sans-serif;
+    --font-section: 'Sora', system-ui, sans-serif;
+    --font-body: 'Manrope', system-ui, sans-serif;
+    --font-cup-display: 'Sora', system-ui, sans-serif;
+    --font-cup-body: 'Manrope', system-ui, sans-serif;
   }
 
   .dark {
-    --background: 20 10% 8%;
-    --foreground: 40 20% 95%;
-    --card: 20 10% 12%;
-    --card-foreground: 40 20% 95%;
-    --popover: 20 10% 12%;
-    --popover-foreground: 40 20% 95%;
+    --background: 157 10% 8%;
+    --foreground: 160 10% 95%;
+    --card: 157 15% 17%;
+    --card-foreground: 160 10% 95%;
+    --popover: 157 15% 17%;
+    --popover-foreground: 160 10% 95%;
     --primary: 152 42% 42%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 15 65% 56%;
+    --secondary: 157 15% 17%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 20 8% 18%;
-    --muted-foreground: 40 10% 60%;
-    --accent: 42 92% 56%;
-    --accent-foreground: 20 10% 12%;
+    --muted: 160 8% 18%;
+    --muted-foreground: 160 8% 65%;
+    --accent: 43 65% 62%;
+    --accent-foreground: 157 15% 17%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 20 8% 22%;
-    --input: 20 8% 22%;
+    --border: 160 8% 24%;
+    --input: 160 8% 24%;
     --ring: 152 42% 42%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -181,7 +184,7 @@
   }
   h2, h3, h4 {
     font-family: var(--font-section);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 }
 
@@ -239,7 +242,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, transparent 30%, hsl(0 0% 100% / 0.25) 50%, transparent 70%);
+    background: linear-gradient(120deg, transparent 30%, hsl(var(--primary-foreground) / 0.15) 50%, transparent 70%);
     transform: translateX(-120%);
     transition: transform 0.8s ease;
     pointer-events: none;
@@ -267,4 +270,27 @@ html {
 }
 .skip-to-content:focus {
   @apply top-4;
+}
+
+/* A shared platinum finish, including event, registration and organiser views. */
+@layer base {
+  body { -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  h1, h2 { line-height: 1.15; }
+  button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline-offset: 4px; }
+}
+@layer utilities {
+  .tracking-wide, .tracking-wider, .tracking-widest { letter-spacing: 0; }
+  .shadow-refined { box-shadow: var(--shadow-refined); }
+}
+.cup-wordmark { animation: cup-fade 600ms ease-out both; filter: none; }
+.cup-wordmark:hover { filter: none; transform: none; }
+.cup-floodlight, .cup-orbit { display: none; }
+.cup-register-form:focus-within { border-color: hsl(var(--ring)); box-shadow: var(--shadow-refined); transform: none; }
+.cup-primary-cta:hover { transform: none; box-shadow: none; }
+.font-cup-display { font-weight: 600; line-height: 1.2; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }

@@ -200,9 +200,9 @@ const CupFormat = () => {
             <img
               src={cupSpray}
               alt="Cup"
-              className="mx-auto -mt-2 w-2/5 max-w-[190px] -rotate-2 drop-shadow-[0_0_22px_hsl(var(--accent)/0.35)]"
+              className="mx-auto -mt-2 w-2/5 max-w-[190px] -rotate-2"
             />
-            <h1 className="mt-6 font-cup-display text-5xl tracking-wide md:text-7xl">
+            <h1 className="mt-6 font-cup-display text-4xl tracking-wide md:text-6xl">
               Tournament format
             </h1>
             <p className="mt-3 font-cup-body text-base text-primary-foreground/75 md:text-lg">
@@ -322,7 +322,7 @@ const CupFormat = () => {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`hover-lift rounded-3xl border p-7 ${
+                className={`hover-lift rounded-xl border p-7 ${
                   item.tone === "cup"
                     ? "border-accent/40 bg-accent/10"
                     : "border-primary/25 bg-primary/5"
@@ -369,7 +369,7 @@ const CupFormat = () => {
             ].map((path) => (
               <div
                 key={path.name}
-                className="hover-lift rounded-3xl border border-border bg-card p-7 shadow-sm"
+                className="hover-lift rounded-xl border border-border bg-card p-7 shadow-sm"
               >
                 <div className="flex items-center gap-3">
                   {path.tone === "cup" ? (
@@ -477,7 +477,7 @@ const CupFormat = () => {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="hover-lift rounded-3xl border border-border bg-card p-7 shadow-sm"
+                className="hover-lift rounded-xl border border-border bg-card p-7 shadow-sm"
               >
                 <Clock className="text-accent" />
                 <p className="mt-4 font-cup-body text-xs uppercase tracking-[0.2em] text-muted-foreground">
