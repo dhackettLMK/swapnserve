@@ -120,7 +120,7 @@ export default function ProgrammesSection() {
 
                 {PRIZES.map((prize) => (
                   <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
-                    <PrizeAmount value={prize.amount} className="text-3xl sm:text-4xl md:text-5xl" />
+                    <PrizeAmount value={prize.amount} className="text-[1.6rem] sm:text-4xl md:text-5xl" />
                     <p className="mt-3 text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-primary-foreground/80">{prize.label}</p>
                   </div>
                 ))}
