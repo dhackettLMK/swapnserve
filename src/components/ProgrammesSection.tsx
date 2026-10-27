@@ -113,8 +113,12 @@ export default function ProgrammesSection() {
             </div>
             <p className="mb-5 text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with €1,400 in prize money. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
             <div className="mb-8 border-y border-primary-foreground/20 py-6">
-              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
+              <div className="mb-5 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
+                <p className="font-cup-display text-4xl font-bold uppercase leading-none tracking-tight text-primary-foreground md:text-5xl">32 <span className="text-accent">teams</span></p>
+              </div>
               <div className="grid grid-cols-3 gap-4">
+
                 {PRIZES.map((prize) => (
                   <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
                     <img src={prize.image} alt={prize.amount} loading="lazy" width={1408} height={608} className="h-9 w-auto max-w-full sm:h-11 md:h-14" />

@@ -304,12 +304,20 @@ function CreateTeam() {
       <section className="relative isolate overflow-hidden border-b border-border bg-primary py-14 text-primary-foreground md:py-20">
         <div className="cup-pitch-lines absolute inset-0 opacity-20" aria-hidden="true" />
         <div className="container relative z-10 font-cup-body">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            The prize money
-          </p>
-          <h2 className="font-cup-display text-3xl leading-tight md:text-4xl">
-            €1,400 across the day
-          </h2>
+          <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+            <div>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                The prize money
+              </p>
+              <h2 className="font-cup-display text-3xl leading-tight md:text-4xl">
+                €1,400 across the day
+              </h2>
+            </div>
+            <p className="font-cup-display text-5xl font-bold uppercase leading-none tracking-tight text-accent sm:text-6xl md:text-7xl">
+              32 teams
+            </p>
+          </div>
+
           <div className="mt-10 grid gap-10 sm:grid-cols-3">
             {PRIZES.map((prize) => (
               <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
