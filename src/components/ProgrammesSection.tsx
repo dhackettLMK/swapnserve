@@ -66,8 +66,9 @@ const Hanger = ({ delay, left, top, duration }: { delay: number; left: string; t
 
 const RunwayModel = () => (
   <motion.div
-    className="absolute left-1/2 h-[110px] w-9 origin-bottom -translate-x-1/2 md:h-[128px]"
+    className="absolute left-1/2 h-[110px] w-9 origin-bottom md:h-[128px]"
     animate={{
+      x: "-50%",
       bottom: ["34%", "19%", "19%"],
       scale: [0.4, 1.04, 1.04],
       opacity: [0, 0.95, 0.95, 0],
