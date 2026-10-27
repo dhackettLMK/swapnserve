@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, ArrowRight, Clock, Medal, Timer, Trophy, Users } from "lucide-react";
 import CupLayout from "@/components/cup/CupLayout";
 import wordmark from "@/assets/swapnserve-wordmark-cup.png";
-import cupSpray from "@/assets/cup-spraypaint.png";
+import cupSpray from "@/assets/cup-spraypaint.webp";
 
 type Comp = "cup" | "plate";
 

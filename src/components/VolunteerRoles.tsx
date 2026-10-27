@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Send, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import cupSpraypaint from "@/assets/cup-spraypaint.png";
+import cupSpraypaint from "@/assets/cup-spraypaint.webp";
 import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 const VolunteerRoles = () => {
