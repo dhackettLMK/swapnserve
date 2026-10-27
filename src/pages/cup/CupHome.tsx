@@ -24,12 +24,12 @@ import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 import cupSpray from "@/assets/cup-spraypaint.webp";
 
 /** Prize money on the line, shown in the same gold spray-paint lettering as the Cup wordmark. */
-import PrizeAmount from "@/components/cup/PrizeAmount";
+import Banknote from "@/components/cup/Banknote";
 
 const PRIZES = [
-  { amount: "1,000", label: "Cup winners" },
-  { amount: "300", label: "Plate winners" },
-  { amount: "100", label: "Player of the tournament" },
+  { amount: "1,000", label: "Cup winners", serial: "SNS 001000" },
+  { amount: "300", label: "Plate winners", serial: "SNS 000300" },
+  { amount: "100", label: "Player of the tournament", serial: "SNS 000100" },
 ];
 
 
@@ -320,10 +320,7 @@ function CreateTeam() {
           <div className="mt-10 grid gap-10 sm:grid-cols-3">
             {PRIZES.map((prize) => (
               <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
-                <PrizeAmount value={prize.amount} className="text-6xl sm:text-6xl md:text-7xl lg:text-8xl" />
-                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground/80">
-                  {prize.label}
-                </p>
+                <Banknote value={prize.amount} label={prize.label} serial={prize.serial} />
               </div>
             ))}
           </div>

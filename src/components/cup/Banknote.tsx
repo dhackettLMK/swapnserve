@@ -39,7 +39,6 @@ const Banknote = ({ value, label, serial, className }: Props) => {
       </svg>
 
       <span className="absolute left-[5%] top-[7%] font-cup-display text-[7cqw] font-extrabold leading-none tracking-tight">{value}</span>
-      <span className="absolute bottom-[7%] right-[5%] font-cup-display text-[7cqw] font-extrabold leading-none tracking-tight">{value}</span>
 
       <div className="absolute left-[5%] top-[30%] max-w-[50%]">
         <p className="font-cup-display text-[4.6cqw] font-bold uppercase leading-none tracking-[0.08em]">Swap'n'Serve</p>
@@ -49,7 +48,7 @@ const Banknote = ({ value, label, serial, className }: Props) => {
 
       <div className="absolute right-[6%] top-1/2 flex -translate-y-1/2 items-start text-[hsl(var(--note-ink))]">
         <span className="mt-[1.6cqw] font-cup-display text-[7cqw] font-extrabold">€</span>
-        <span className="font-cup-display text-[19cqw] font-extrabold leading-none tracking-[-0.05em]" style={{ WebkitTextStroke: "0.25cqw hsl(var(--note-gold))" }}>
+        <span className="font-cup-display text-[15cqw] font-extrabold leading-none tracking-[-0.05em]" style={{ WebkitTextStroke: "0.25cqw hsl(var(--note-gold))" }}>
           {value}
         </span>
       </div>

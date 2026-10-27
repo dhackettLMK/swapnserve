@@ -12,6 +12,9 @@
 
 @layer base {
   :root {
+    --note-paper: 150 22% 93%;
+    --note-ink: 155 61% 23%;
+    --note-gold: 42 78% 52%;
     --background: 180 7% 97%;
     --foreground: 157 15% 17%;
 
