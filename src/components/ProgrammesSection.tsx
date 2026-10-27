@@ -70,7 +70,7 @@ const RunwayModel = () => (
     animate={{
       x: "-50%",
       bottom: ["34%", "19%", "19%", "19%"],
-      scale: [0.4, 1.04, 1.04, 1.04],
+      scale: [0.4, 0.9, 0.9, 0.9],
       opacity: [0, 0.95, 0.95, 0],
     }}
     transition={{ duration: 9, times: [0, 0.28, 0.92, 1], repeat: Infinity, ease: "linear" }}
@@ -104,7 +104,7 @@ const RunwayModel = () => (
 );
 
 const Catwalk = () => (
-  <div aria-hidden="true" className="relative mt-7 h-32 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary md:h-40">
+  <div aria-hidden="true" className="relative mt-7 h-40 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary md:h-44">
     <div className="absolute inset-x-0 top-0 h-[38%]" style={{ background: "linear-gradient(180deg, hsl(var(--primary-foreground) / 0.06), hsl(var(--primary-foreground) / 0.01))" }} />
     <motion.div
       className="absolute left-1/2 top-[16%] h-12 w-16 -translate-x-1/2 rounded-t-full"
