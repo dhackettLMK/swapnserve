@@ -31,9 +31,9 @@ const InstagramSection = () => {
         >
           <motion.div
             whileHover={{ scale: 1.06 }}
-            className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[hsl(330,80%,60%)]/10 via-[hsl(270,60%,55%)]/10 to-[hsl(30,90%,55%)]/10 border border-[hsl(330,80%,60%)]/15 px-5 py-2 text-sm font-semibold text-foreground mb-5 cursor-default"
+            className="inline-flex items-center gap-2.5 rounded-full bg-muted border border-border px-5 py-2 text-sm font-semibold text-foreground mb-5 cursor-default"
           >
-            <Instagram size={18} className="text-[hsl(330,80%,60%)]" />
+            <Instagram size={18} className="text-primary" />
             @SwapNServe
           </motion.div>
           <h2 className="text-3xl md:text-4xl font-section font-bold text-foreground mb-4">
@@ -53,7 +53,7 @@ const InstagramSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5, type: "spring", stiffness: 100, damping: 15 }}
-              className="rounded-2xl overflow-hidden border border-border/40 shadow-sm bg-card"
+              className="rounded-lg overflow-hidden border border-border/40 shadow-sm bg-card"
             >
               <div className="overflow-hidden" style={{ height: 480 }}>
                 <iframe
@@ -85,7 +85,7 @@ const InstagramSection = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[hsl(330,80%,60%)] via-[hsl(270,60%,55%)] to-[hsl(30,90%,55%)] text-white px-7 py-3.5 text-sm font-bold shadow-lg hover:shadow-xl transition-shadow"
+            className="inline-flex items-center gap-2.5 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm font-bold shadow-lg hover:shadow-sm transition-shadow"
           >
             <Instagram size={18} />
             Follow @SwapNServe

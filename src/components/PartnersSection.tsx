@@ -4,7 +4,6 @@ import { Handshake } from "lucide-react";
 const PartnersSection = () => {
   return (
     <section id="partners" className="py-20 md:py-28 bg-primary/5 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]" />
 
       <div className="container relative z-10">
         <motion.div
@@ -29,7 +28,7 @@ const PartnersSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto rounded-3xl border border-primary/15 bg-card p-8 md:p-12 text-center shadow-sm"
+          className="max-w-3xl mx-auto rounded-xl border border-primary/15 bg-card p-8 md:p-12 text-center shadow-sm"
         >
           <motion.div
             whileHover={{ scale: 1.1, rotate: 5 }}

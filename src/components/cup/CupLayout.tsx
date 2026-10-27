@@ -10,7 +10,7 @@ const CupLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <PaymentTestModeBanner />
-      <header className="sticky top-0 z-40 border-b border-primary-foreground/10 bg-primary/95 text-primary-foreground backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-primary-foreground/10 bg-secondary/95 text-primary-foreground backdrop-blur-md">
         <div className="container flex h-16 items-center justify-between gap-2">
           <Link to="/" className="flex shrink-0 items-center gap-2 sm:gap-3">
             <img

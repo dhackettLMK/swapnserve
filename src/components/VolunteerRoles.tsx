@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Send, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import cupSpraypaint from "@/assets/cup-spraypaint.png";
 import wordmark from "@/assets/swapnserve-wordmark-cup.png";
@@ -30,9 +31,6 @@ const VolunteerRoles = () => {
       id="volunteer"
       className="py-20 md:py-28 bg-primary relative overflow-hidden"
     >
-      {/* Decorative blobs */}
-      <div className="absolute top-10 left-0 w-72 h-72 bg-white/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-[80px]" />
 
       <div className="container relative z-10">
         <motion.div
@@ -42,13 +40,13 @@ const VolunteerRoles = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="inline-block rounded-full bg-white/15 text-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
+          <span className="inline-block rounded-full bg-primary-foreground/15 text-primary-foreground px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Join the Team
           </span>
-          <h2 className="text-3xl md:text-5xl font-section font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-5xl font-section font-bold text-primary-foreground mb-4">
             Want to Volunteer?
           </h2>
-          <p className="text-white/75 text-lg max-w-xl mx-auto">
+          <p className="text-primary-foreground/75 text-lg max-w-xl mx-auto">
             Every pair of hands makes a difference. Drop us a quick note and
             we'll be in touch.
           </p>
@@ -60,11 +58,11 @@ const VolunteerRoles = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-xl mx-auto rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md p-6 md:p-8 shadow-xl shadow-black/10"
+          className="max-w-xl mx-auto rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 backdrop-blur-md p-6 md:p-8 shadow-sm shadow-refined"
         >
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-1.5">
+              <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">
                 Your name
               </label>
               <input
@@ -73,11 +71,11 @@ const VolunteerRoles = () => {
                 onChange={(e) => setName(e.target.value)}
                 maxLength={100}
                 placeholder="Jane Doe"
-                className="w-full rounded-2xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/60 focus:border-transparent transition"
+                className="w-full rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 px-4 py-3 text-primary-foreground placeholder:text-primary-foreground/40 focus:outline-none focus:ring-2 focus:ring-secondary/60 focus:border-transparent transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-1.5">
+              <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">
                 Email
               </label>
               <input
@@ -86,11 +84,11 @@ const VolunteerRoles = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 maxLength={255}
                 placeholder="you@example.com"
-                className="w-full rounded-2xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/60 focus:border-transparent transition"
+                className="w-full rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 px-4 py-3 text-primary-foreground placeholder:text-primary-foreground/40 focus:outline-none focus:ring-2 focus:ring-secondary/60 focus:border-transparent transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-1.5">
+              <label className="block text-sm font-medium text-primary-foreground/80 mb-1.5">
                 Tell us a bit about yourself
               </label>
               <textarea
@@ -99,24 +97,22 @@ const VolunteerRoles = () => {
                 maxLength={1000}
                 rows={4}
                 placeholder="Availability, interests, anything you'd like us to know…"
-                className="w-full rounded-2xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-secondary/60 focus:border-transparent transition resize-none"
+                className="w-full rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 px-4 py-3 text-primary-foreground placeholder:text-primary-foreground/40 focus:outline-none focus:ring-2 focus:ring-secondary/60 focus:border-transparent transition resize-none"
               />
             </div>
           </div>
 
-          <motion.button
+          <Button size="lg" variant="secondary"
             type="submit"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-base font-bold text-secondary-foreground shadow-xl shadow-secondary/25 transition-shadow hover:shadow-2xl hover:shadow-secondary/40"
+            className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-base font-bold text-secondary-foreground shadow-sm shadow-secondary/25 transition-shadow hover:shadow-sm hover:shadow-secondary/40"
           >
             <Send size={18} />
             Send Message
-          </motion.button>
+          </Button>
 
           <Link
             to="/cup?src=volunteer-teaser"
-            className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-3 font-cup-body text-sm font-semibold text-accent shadow-[0_0_30px_hsl(var(--accent)/0.12)] transition-all hover:bg-accent/15 hover:shadow-[0_0_40px_hsl(var(--accent)/0.2)]"
+            className="group mt-4 flex flex-wrap w-full items-center justify-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-3 font-cup-body text-sm font-semibold text-accent transition-all hover:bg-accent/15"
           >
             Next up:
             <img
@@ -127,12 +123,12 @@ const VolunteerRoles = () => {
             <img
               src={cupSpraypaint}
               alt="Cup"
-              className="h-5 -rotate-2 drop-shadow-[0_0_8px_hsl(var(--accent)/0.5)] transition-transform group-hover:scale-110"
+              className="h-5 -rotate-2 transition-transform group-hover:scale-110"
             />
             registration open
           </Link>
 
-          <p className="mt-4 text-xs text-white/50 text-center flex items-center justify-center gap-1.5">
+          <p className="mt-4 text-xs text-primary-foreground/50 text-center flex items-center justify-center gap-1.5">
             <Heart size={12} /> We only use your details to reply about
             volunteering.
           </p>

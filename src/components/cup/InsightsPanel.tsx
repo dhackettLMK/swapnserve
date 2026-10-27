@@ -7,7 +7,7 @@ import type { AdminListResponse } from "@/lib/cupTypes";
 const MAX_TEAMS = 32;
 const PRIZE_CENTS = 100000;
 const FEE_CENTS = 49; // per €10 payment
-const card = "rounded-2xl border border-border bg-card p-5 shadow-sm";
+const card = "border-t border-border py-6";
 
 function Bars({ data }: { data: { label: string; value: number }[] }) {
   const max = Math.max(1, ...data.map((d) => d.value));
