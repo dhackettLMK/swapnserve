@@ -116,9 +116,44 @@ const HackathonCard = () => (
   </motion.article>
 );
 
-const Hanger = ({ delay, left, top, duration }: { delay: number; left: string; top: string; duration: number }) => (
-  <motion.div aria-hidden="true" className="pointer-events-none absolute opacity-25 transition-opacity duration-500 group-hover:opacity-50" style={{ left, top }} animate={{ y: [0, -12, 0], rotate: [0, 5, -5, 0] }} transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}>
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" strokeLinecap="round"><path d="M6 9l6-3 6 3" /><path d="M12 6V3" /><path d="M6 9v10a2 2 0 002 2h8a2 2 0 002-2V9" /></svg>
+const RAIL_GARMENTS = [
+  (x: number) => `M${x - 8} 76 L${x - 14} 82 L${x - 11} 86 L${x - 9} 84 L${x - 9} 106 L${x + 9} 106 L${x + 9} 84 L${x + 11} 86 L${x + 14} 82 L${x + 8} 76 Q${x} 80 ${x - 8} 76 Z`,
+  (x: number) => `M${x - 7} 76 L${x + 7} 76 L${x + 5} 88 L${x + 10} 110 L${x - 10} 110 L${x - 5} 88 Z`,
+  (x: number) => `M${x - 7} 76 L${x + 7} 76 L${x + 6} 86 L${x + 5} 108 L${x + 1} 108 L${x} 90 L${x - 1} 108 L${x - 5} 108 L${x - 6} 86 Z`,
+];
+
+type Garment = "jersey" | "dress" | "jacket";
+
+const GARMENT_SHAPES: Record<Garment, { body: string; detail: string }> = {
+  jersey: {
+    body: "M16 23 L11 25 L7 34 L12 36 L14 32 L14 52 L34 52 L34 32 L36 36 L41 34 L37 25 L32 23 C29 27 19 27 16 23 Z",
+    detail: "M18 30 H30",
+  },
+  dress: {
+    body: "M17 23 L31 23 L28 36 L33 58 L15 58 L20 36 Z",
+    detail: "M20 36 H28",
+  },
+  jacket: {
+    body: "M16 23 L10 27 L12 56 L36 56 L38 27 L32 23 L24 32 Z",
+    detail: "M13 42 H35",
+  },
+};
+
+const Hanger = ({ delay, left, top, duration, garment }: { delay: number; left: string; top: string; duration: number; garment: Garment }) => (
+  <motion.div aria-hidden="true" className="pointer-events-none absolute opacity-25 transition-opacity duration-500 group-hover:opacity-45" style={{ left, top }} animate={{ y: [0, -12, 0], rotate: [0, 5, -5, 0] }} transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}>
+    <svg width="46" height="66" viewBox="0 0 48 64" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M24 12 V7.6 C24 4.5 25.9 3.1 27.7 3.7 C29.3 4.3 29.5 6.2 28.3 7.1" />
+      <path d="M24 12 L10 22 H38 Z" />
+      <path d={GARMENT_SHAPES[garment].body} fill="hsl(var(--accent) / 0.08)" />
+      <path d={GARMENT_SHAPES[garment].detail} strokeWidth="1" opacity="0.7" />
+      {garment === "jersey" && <text x="24" y="46" textAnchor="middle" fontSize="13" fill="hsl(var(--accent))" stroke="none">3</text>}
+      {garment === "jacket" && (
+        <>
+          <circle cx="24" cy="37" r="1" fill="hsl(var(--accent))" stroke="none" />
+          <circle cx="24" cy="48" r="1" fill="hsl(var(--accent))" stroke="none" />
+        </>
+      )}
+    </svg>
   </motion.div>
 );
 
@@ -273,12 +308,17 @@ const SwapCard = () => (
     <svg viewBox="0 0 400 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.12]">
       <g stroke="hsl(var(--primary-foreground))" strokeWidth="2" strokeLinecap="round" fill="none">
         <line x1="40" y1="60" x2="360" y2="60" /><line x1="40" y1="60" x2="40" y2="260" /><line x1="360" y1="60" x2="360" y2="260" />
-        {[80, 130, 180, 230, 280, 330].map((x) => <path key={x} d={`M${x} 60 L${x} 75 M${x - 10} 75 Q${x} 65 ${x + 10} 75`} />)}
+        {[80, 130, 180, 230, 280, 330].map((x, i) => (
+          <g key={x}>
+            <path d={`M${x} 60 L${x} 75 M${x - 10} 75 Q${x} 65 ${x + 10} 75`} />
+            <path d={RAIL_GARMENTS[i % 3](x)} />
+          </g>
+        ))}
       </g>
     </svg>
-    <Hanger delay={0} left="72%" top="12%" duration={5} />
-    <Hanger delay={1.5} left="86%" top="48%" duration={6} />
-    <Hanger delay={3} left="60%" top="70%" duration={7} />
+    <Hanger delay={0} left="72%" top="10%" duration={5} garment="jersey" />
+    <Hanger delay={1.5} left="86%" top="44%" duration={6} garment="dress" />
+    <Hanger delay={3} left="58%" top="70%" duration={7} garment="jacket" />
     <motion.div aria-hidden="true" className="pointer-events-none absolute right-[12%] top-[30%]" animate={{ x: [0, 30, 0], opacity: [0.2, 0.6, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}><ArrowLeftRight size={26} className="text-accent" /></motion.div>
     <motion.div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30" style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.45), transparent 70%)" }} animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
     <motion.div aria-hidden="true" className="pointer-events-none absolute top-0 h-full w-[40%] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--accent) / 0.25), transparent)" }} animate={{ left: ["-40%", "100%"] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }} />
