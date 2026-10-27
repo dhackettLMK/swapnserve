@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 import cupSpray from "@/assets/cup-spraypaint.webp";
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 
-import PrizeAmount from "@/components/cup/PrizeAmount";
+import Banknote from "@/components/cup/Banknote";
 
 const PRIZES = [
-  { amount: "1,000", label: "Cup winners" },
-  { amount: "300", label: "Plate winners" },
-  { amount: "100", label: "Player of the tournament" },
+  { amount: "1,000", label: "Cup winners", serial: "SNS 001000" },
+  { amount: "300", label: "Plate winners", serial: "SNS 000300" },
+  { amount: "100", label: "Player of the tournament", serial: "SNS 000100" },
 ];
 
 
@@ -116,12 +116,11 @@ export default function ProgrammesSection() {
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
                 <p className="font-cup-display text-4xl font-bold uppercase leading-none tracking-tight text-primary-foreground md:text-5xl">32 <span className="text-accent">teams</span></p>
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid gap-3 sm:grid-cols-3">
 
                 {PRIZES.map((prize) => (
                   <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
-                    <PrizeAmount value={prize.amount} className="text-[1.6rem] sm:text-4xl md:text-5xl" />
-                    <p className="mt-3 text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-primary-foreground/80">{prize.label}</p>
+                    <Banknote value={prize.amount} label={prize.label} serial={prize.serial} />
                   </div>
                 ))}
               </div>
