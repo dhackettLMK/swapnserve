@@ -40,123 +40,106 @@ const Cursor = () => (
   <motion.span aria-hidden="true" className="ml-1 inline-block h-[14px] w-[7px] bg-accent align-middle" animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
 );
 
-const IDEA_RAYS = [-160, -120, -90, -60, -20, 180, 0];
+const RIVER_Y = 138;
 
-const Person = ({ cx, shirt, hair, style, bob }: { cx: number; shirt: string; hair: string; style: "long" | "bun" | "short"; bob: number }) => (
-  <g>
-    <rect x={cx - 21} y={104} width={42} height={40} rx={7} fill="hsl(var(--primary-foreground) / 0.05)" />
-    <motion.g animate={{ y: [0, -1.6, 0] }} transition={{ duration: bob, repeat: Infinity, ease: "easeInOut" }}>
-      <path d={`M${cx - 18} 144 v-25 a18 18 0 0 1 36 0 v25 z`} fill={shirt} />
-      <path d={`M${cx - 16} 119 q-7 10 -3 21`} fill="none" stroke={shirt} strokeWidth={6} strokeLinecap="round" />
-      <path d={`M${cx + 16} 119 q7 10 3 21`} fill="none" stroke={shirt} strokeWidth={6} strokeLinecap="round" />
-      {style === "long" && <rect x={cx - 12.5} y={79} width={25} height={28} rx={11} fill={hair} />}
-      <circle cx={cx} cy={87} r={11.5} fill="hsl(var(--primary-foreground) / 0.88)" />
-      <path d={`M${cx - 11.5} 87 a11.5 11.5 0 0 1 23 0`} fill="none" stroke={hair} strokeWidth={6} strokeLinecap="round" />
-      {style === "bun" && <circle cx={cx} cy={73} r={4.5} fill={hair} />}
-    </motion.g>
-  </g>
-);
+const BUILDINGS = [
+  { x: 12, w: 34, h: 46 },
+  { x: 50, w: 22, h: 62 },
+  { x: 76, w: 30, h: 34 },
+  { x: 110, w: 26, h: 78 },
+  { x: 140, w: 34, h: 50 },
+  { x: 178, w: 20, h: 66 },
+  { x: 202, w: 36, h: 40 },
+  { x: 242, w: 24, h: 72 },
+  { x: 270, w: 32, h: 44 },
+  { x: 306, w: 22, h: 58 },
+  { x: 332, w: 30, h: 36 },
+  { x: 366, w: 26, h: 52 },
+  { x: 396, w: 18, h: 30 },
+];
 
-const Laptop = ({ cx, delay }: { cx: number; delay: number }) => (
-  <g>
-    <rect x={cx - 17} y={110} width={34} height={23} rx={2} fill="hsl(var(--primary) / 0.92)" stroke="hsl(var(--accent) / 0.45)" strokeWidth={1} />
-    <rect x={cx - 13} y={114} width={26} height={15} rx={1} fill="hsl(var(--accent) / 0.13)" />
-    {[0, 1, 2].map((i) => (
-      <motion.rect key={i} x={cx - 10} y={117 + i * 3.6} width={16 - i * 4} height={1.8} rx={0.9} fill="hsl(var(--accent) / 0.85)" animate={{ opacity: [0.15, 0.9, 0.15] }} transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: delay + i * 0.45 }} />
-    ))}
-    <polygon points={`${cx - 23},141 ${cx + 23},141 ${cx + 18},133 ${cx - 18},133`} fill="hsl(var(--primary-foreground) / 0.16)" stroke="hsl(var(--accent) / 0.3)" strokeWidth={0.8} />
-    {[-10, 4].map((dx, i) => (
-      <motion.rect key={i} x={cx + dx} y={134} width={6} height={3.4} rx={1.7} fill="hsl(var(--primary-foreground) / 0.9)" animate={{ y: [0, -1.4, 0] }} transition={{ duration: 0.42 + i * 0.13, repeat: Infinity, ease: "easeInOut", delay: delay + i * 0.2 }} />
-    ))}
-  </g>
-);
+const STARS = [
+  { x: 30, y: 18 }, { x: 88, y: 30 }, { x: 150, y: 14 }, { x: 210, y: 26 },
+  { x: 268, y: 16 }, { x: 318, y: 34 }, { x: 400, y: 44 }, { x: 120, y: 44 },
+  { x: 240, y: 46 }, { x: 350, y: 52 },
+];
 
-const Mug = ({ x, delay }: { x: number; delay: number }) => (
-  <g>
-    <path d={`M${x + 5} 131 a3.5 3.5 0 0 1 0 6`} fill="none" stroke="hsl(var(--accent) / 0.7)" strokeWidth={1.4} />
-    <rect x={x - 5} y={129} width={10} height={11} rx={1.5} fill="hsl(var(--accent) / 0.75)" />
-    {[0, 1].map((i) => (
-      <motion.path key={i} d={`M${x - 2 + i * 4} 127 q2 -3 0 -6`} fill="none" stroke="hsl(var(--primary-foreground) / 0.55)" strokeWidth={1.2} strokeLinecap="round" animate={{ y: [0, -8], opacity: [0, 0.7, 0] }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut", delay: delay + i * 0.9 }} />
-    ))}
-  </g>
-);
+const CityScene = () => {
+  const windows = useMemo(() => BUILDINGS.flatMap((b, bi) => {
+    const cols = Math.max(1, Math.floor((b.w - 8) / 8));
+    const rows = Math.max(1, Math.floor((b.h - 12) / 11));
+    const out: { x: number; y: number; i: number; lit: boolean }[] = [];
+    for (let c = 0; c < cols; c++) {
+      for (let r = 0; r < rows; r++) {
+        const i = bi * 97 + c * 7 + r * 13;
+        out.push({ x: b.x + 5 + c * 8, y: RIVER_Y - b.h + 8 + r * 11, i, lit: i % 11 < 6 });
+      }
+    }
+    return out;
+  }), []);
 
-const TeamScene = () => (
-  <div aria-hidden="true" className="relative mt-6 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary-foreground/[0.03] px-2 pb-2 pt-3 md:px-3">
-    <motion.div className="pointer-events-none absolute -inset-10" style={{ background: "radial-gradient(circle at 50% 45%, hsl(var(--accent) / 0.18), transparent 65%)" }} animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
-    <svg viewBox="0 0 420 176" className="relative h-auto w-full" fill="none">
-      {/* clock */}
-      <circle cx={48} cy={32} r={11} fill="hsl(var(--primary-foreground) / 0.05)" stroke="hsl(var(--accent) / 0.35)" strokeWidth={1} />
-      <motion.line x1={48} y1={32} x2={48} y2={24} stroke="hsl(var(--accent) / 0.85)" strokeWidth={1.4} strokeLinecap="round" animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} style={{ transformBox: "fill-box", transformOrigin: "bottom center" }} />
-      {/* idea board */}
-      <rect x={152} y={16} width={116} height={48} rx={3} fill="hsl(var(--primary-foreground) / 0.05)" stroke="hsl(var(--accent) / 0.3)" strokeWidth={1} />
-      <path d="M160 46 h44 M160 52 h28" stroke="hsl(var(--accent) / 0.3)" strokeWidth={1.4} strokeLinecap="round" />
-      {[
-        { x: 160, y: 24, c: "hsl(var(--accent) / 0.75)" },
-        { x: 178, y: 30, c: "hsl(var(--primary-foreground) / 0.6)" },
-        { x: 196, y: 22, c: "hsl(var(--accent) / 0.5)" },
-        { x: 214, y: 28, c: "hsl(var(--primary-foreground) / 0.45)" },
-        { x: 232, y: 24, c: "hsl(var(--accent) / 0.85)" },
-      ].map((n, i) => (
-        <motion.rect key={i} x={n.x} y={n.y} width={12} height={12} rx={1.5} fill={n.c} animate={{ scale: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }} transition={{ duration: 10, repeat: Infinity, times: [0, 0.1, 0.85, 1], delay: i * 1.6 }} style={{ transformBox: "fill-box", transformOrigin: "center" }} />
-      ))}
-      {/* chat bubble */}
-      <motion.g animate={{ opacity: [0, 0, 1, 1, 0], y: [5, 5, 0, 0, 5] }} transition={{ duration: 9, repeat: Infinity, times: [0, 0.08, 0.18, 0.72, 0.85] }}>
-        <rect x={72} y={42} width={46} height={18} rx={7} fill="hsl(var(--primary-foreground) / 0.1)" stroke="hsl(var(--accent) / 0.35)" strokeWidth={1} />
-        <polygon points="88,60 98,60 90,68" fill="hsl(var(--primary-foreground) / 0.1)" />
-        {[0, 1, 2].map((i) => (
-          <motion.circle key={i} cx={84 + i * 10} cy={51} r={2} fill="hsl(var(--accent) / 0.85)" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.1, repeat: Infinity, delay: i * 0.25 }} />
+  return (
+    <div aria-hidden="true" className="relative mt-6 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary-foreground/[0.03] px-2 pb-2 pt-3 md:px-3">
+      <motion.div className="pointer-events-none absolute -inset-10" style={{ background: "radial-gradient(circle at 50% 30%, hsl(var(--accent) / 0.16), transparent 65%)" }} animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
+      <svg viewBox="0 0 420 176" className="relative h-auto w-full" fill="none">
+        <circle cx={372} cy={26} r={20} fill="hsl(var(--accent) / 0.07)" />
+        <circle cx={372} cy={26} r={9} fill="hsl(var(--accent) / 0.8)" />
+        {STARS.map((s, i) => (
+          <motion.circle key={i} cx={s.x} cy={s.y} r={1.4} fill="hsl(var(--accent) / 0.8)" animate={{ opacity: [0.15, 0.9, 0.15] }} transition={{ duration: 3 + (i % 4), repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }} />
         ))}
-      </motion.g>
-      {/* lightbulb moment */}
-      <motion.g animate={{ opacity: [0, 0, 1, 1, 0], scale: [0.6, 0.6, 1.15, 1, 0.6] }} transition={{ duration: 9, repeat: Infinity, times: [0, 0.45, 0.55, 0.8, 0.92], delay: 1.2 }} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
-        <circle cx={325} cy={58} r={6} fill="hsl(var(--accent) / 0.9)" />
-        <rect x={323} y={64} width={4} height={3} rx={1} fill="hsl(var(--accent) / 0.6)" />
-        {IDEA_RAYS.map((a) => {
-          const r = (a * Math.PI) / 180;
-          return <line key={a} x1={325 + Math.cos(r) * 9} y1={58 + Math.sin(r) * 9} x2={325 + Math.cos(r) * 13} y2={58 + Math.sin(r) * 13} stroke="hsl(var(--accent) / 0.8)" strokeWidth={1.4} strokeLinecap="round" />;
-        })}
-      </motion.g>
-      {/* paper plane */}
-      <motion.g animate={{ x: [-30, 450], y: [0, -8, 5, -4] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}>
-        <polygon points="0,22 22,13 9,28" fill="hsl(var(--primary-foreground) / 0.45)" />
-        <path d="M0 22 L9 28" stroke="hsl(var(--accent) / 0.6)" strokeWidth={1} />
-      </motion.g>
-      {/* the team */}
-      <Person cx={95} shirt="hsl(var(--primary-foreground) / 0.22)" hair="hsl(var(--primary) / 0.85)" style="long" bob={2.6} />
-      <Person cx={210} shirt="hsl(var(--accent) / 0.55)" hair="hsl(var(--primary-foreground) / 0.45)" style="bun" bob={3.1} />
-      <Person cx={325} shirt="hsl(var(--accent) / 0.28)" hair="hsl(var(--primary) / 0.9)" style="short" bob={2.9} />
-      {/* table */}
-      <rect x={6} y={140} width={408} height={9} rx={3} fill="hsl(var(--primary-foreground) / 0.1)" />
-      <rect x={6} y={140} width={408} height={1.4} fill="hsl(var(--accent) / 0.5)" />
-      <Laptop cx={95} delay={0.2} />
-      <Laptop cx={210} delay={1.1} />
-      <Laptop cx={325} delay={0.7} />
-      <Mug x={150} delay={0.4} />
-      <Mug x={268} delay={1.6} />
-      {/* plant */}
-      <motion.g animate={{ rotate: [-3, 3, -3] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} style={{ transformBox: "fill-box", transformOrigin: "bottom center" }}>
-        <path d="M401 132 q-9 -12 -4 -22" stroke="hsl(var(--accent) / 0.6)" strokeWidth={1.8} strokeLinecap="round" fill="none" />
-        <path d="M401 132 q9 -10 5 -20" stroke="hsl(var(--accent) / 0.45)" strokeWidth={1.8} strokeLinecap="round" fill="none" />
-        <path d="M401 132 q0 -14 0 -18" stroke="hsl(var(--primary-foreground) / 0.35)" strokeWidth={1.8} strokeLinecap="round" fill="none" />
-      </motion.g>
-      <polygon points="394,140 410,140 407,131 397,131" fill="hsl(var(--primary-foreground) / 0.14)" stroke="hsl(var(--accent) / 0.35)" strokeWidth={0.8} />
-      {/* drifting ideas */}
-      {[
-        { x: 150, y: 120, kind: "plus", d: 7, delay: 0.5 },
-        { x: 265, y: 116, kind: "ring", d: 8, delay: 3 },
-        { x: 372, y: 122, kind: "star", d: 7.5, delay: 5 },
-      ].map((s, i) => (
-        <motion.g key={i} animate={{ y: [0, -34], opacity: [0, 0.8, 0] }} transition={{ duration: s.d, repeat: Infinity, ease: "easeOut", delay: s.delay }}>
-          {s.kind === "plus" && <path d={`M${s.x - 4} ${s.y} h8 M${s.x} ${s.y - 4} v8`} stroke="hsl(var(--accent) / 0.7)" strokeWidth={1.6} strokeLinecap="round" />}
-          {s.kind === "ring" && <circle cx={s.x} cy={s.y} r={4} stroke="hsl(var(--accent) / 0.6)" strokeWidth={1.6} />}
-          {s.kind === "star" && <path d={`M${s.x} ${s.y - 5} l1.6 3.4 3.7 0.5 -2.7 2.6 0.7 3.7 -3.3 -1.8 -3.3 1.8 0.7 -3.7 -2.7 -2.6 3.7 -0.5 z`} fill="hsl(var(--accent) / 0.7)" />}
-        </motion.g>
-      ))}
-    </svg>
-    <div className="relative mt-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-primary-foreground/45">people &middot; ideas &middot; coffee</div>
-  </div>
-);
+        {BUILDINGS.map((b, i) => (
+          <rect key={i} x={b.x} y={RIVER_Y - b.h} width={b.w} height={b.h} fill="hsl(var(--primary-foreground) / 0.06)" stroke="hsl(var(--accent) / 0.22)" strokeWidth={1} />
+        ))}
+        <path d={`M240 ${RIVER_Y - 72} l26 0 l-13 -13 z`} fill="hsl(var(--primary-foreground) / 0.08)" stroke="hsl(var(--accent) / 0.3)" strokeWidth={1} />
+        <line x1={123} y1={RIVER_Y - 78} x2={123} y2={RIVER_Y - 94} stroke="hsl(var(--accent) / 0.45)" strokeWidth={1.4} strokeLinecap="round" />
+        <line x1={61} y1={RIVER_Y - 62} x2={61} y2={RIVER_Y - 74} stroke="hsl(var(--accent) / 0.4)" strokeWidth={1.2} strokeLinecap="round" />
+        <motion.circle cx={123} cy={RIVER_Y - 96} r={2} fill="hsl(var(--accent) / 0.95)" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.circle cx={61} cy={RIVER_Y - 76} r={1.6} fill="hsl(var(--accent) / 0.85)" animate={{ opacity: [0.2, 0.95, 0.2] }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }} />
+        {windows.map((wd) => wd.i % 3 === 0 && wd.lit ? (
+          <motion.rect key={wd.i} x={wd.x} y={wd.y} width={3.5} height={4.5} rx={0.6} fill="hsl(var(--accent) / 0.9)" animate={{ opacity: [0.15, 1, 0.15] }} transition={{ duration: 2.5 + (wd.i % 4), repeat: Infinity, ease: "easeInOut", delay: (wd.i % 9) * 0.5 }} />
+        ) : (
+          <rect key={wd.i} x={wd.x} y={wd.y} width={3.5} height={4.5} rx={0.6} fill={wd.lit ? "hsl(var(--accent) / 0.3)" : "hsl(var(--primary-foreground) / 0.08)"} />
+        ))}
+        <rect x={0} y={RIVER_Y} width={420} height={38} fill="hsl(var(--primary-foreground) / 0.04)" />
+        <rect x={0} y={RIVER_Y} width={420} height={1.4} fill="hsl(var(--accent) / 0.45)" />
+        <rect x={100} y={145} width={220} height={3.5} rx={1.5} fill="hsl(var(--accent) / 0.35)" />
+        {[108, 160, 212, 264].map((ax) => (
+          <path key={ax} d={`M${ax} 148 q 26 20 52 0`} fill="none" stroke="hsl(var(--accent) / 0.4)" strokeWidth={2} />
+        ))}
+        {[118, 168, 218, 268].map((lx, i) => (
+          <g key={lx}>
+            <line x1={lx} y1={145} x2={lx} y2={138} stroke="hsl(var(--accent) / 0.4)" strokeWidth={1.2} />
+            <motion.circle cx={lx} cy={136} r={2.2} fill="hsl(var(--accent) / 0.9)" animate={{ opacity: [0.35, 1, 0.35] }} transition={{ duration: 3 + i * 0.7, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }} />
+          </g>
+        ))}
+        {[64, 122, 190, 250, 316, 378].map((rx, i) => (
+          <motion.line key={rx} x1={rx} y1={152} x2={rx} y2={168} stroke="hsl(var(--accent) / 0.18)" strokeWidth={2.5} strokeLinecap="round" animate={{ opacity: [0.08, 0.3, 0.08], y: [0, 2, 0] }} transition={{ duration: 4 + i * 0.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }} />
+        ))}
+        {[
+          { x: 40, y: 150, w: 26, d: 5, delay: 0 },
+          { x: 120, y: 162, w: 18, d: 6.5, delay: 1.2 },
+          { x: 210, y: 156, w: 30, d: 5.5, delay: 2.4 },
+          { x: 300, y: 166, w: 22, d: 7, delay: 0.6 },
+          { x: 356, y: 152, w: 16, d: 6, delay: 3 },
+          { x: 70, y: 170, w: 20, d: 6.8, delay: 1.8 },
+        ].map((s, i) => (
+          <motion.line key={i} x1={s.x} y1={s.y} x2={s.x + s.w} y2={s.y} stroke="hsl(var(--accent) / 0.35)" strokeWidth={1.2} strokeLinecap="round" animate={{ x: [0, 14, 0], opacity: [0.15, 0.6, 0.15] }} transition={{ duration: s.d, repeat: Infinity, ease: "easeInOut", delay: s.delay }} />
+        ))}
+        {[
+          { x: 64, d: 8, delay: 0 },
+          { x: 190, d: 9.5, delay: 2.6 },
+          { x: 300, d: 8.5, delay: 5 },
+        ].map((o, i) => (
+          <motion.g key={i} animate={{ y: [0, -76], opacity: [0, 0.9, 0] }} transition={{ duration: o.d, repeat: Infinity, ease: "easeOut", delay: o.delay }}>
+            <circle cx={o.x} cy={128} r={3} fill="hsl(var(--accent) / 0.9)" />
+            <line x1={o.x} y1={131} x2={o.x} y2={140} stroke="hsl(var(--accent) / 0.35)" strokeWidth={1.4} strokeLinecap="round" />
+          </motion.g>
+        ))}
+      </svg>
+      <div className="relative mt-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-primary-foreground/45">built for limerick</div>
+    </div>
+  );
+};
 
 const HackathonCard = () => (
   <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
@@ -168,7 +151,7 @@ const HackathonCard = () => (
       <h3 className="mb-2 text-xl font-semibold transition-all group-hover:[text-shadow:_2px_0_0_hsl(var(--accent)/0.8),_-2px_0_0_hsl(var(--primary)/0.8)] md:text-2xl">Swap'n'Serve Hackathon</h3>
       <div className="mb-4 flex items-center font-mono text-[12px] text-accent/90"><Terminal size={12} className="mr-1.5" /><span className="opacity-70">$</span><span className="ml-1.5">status --coming-soon</span><Cursor /></div>
       <p className="text-sm leading-relaxed text-primary-foreground/85">Teams build digital solutions to real problems facing Limerick, then pitch to a panel of judges for a cash prize. The aim is to bring the concept of a computer science hackathon into a more mainstream view and include a range of sectors such as Marketing , Finance &amp; Engineering students &amp; graduates into the space to solve these problems , compete and collaborate. Hopefully this may spark new start-ups, Employers will be present reviewing the talent and if suitable will be offering opportunities such as Internships, Placements &amp; Grants. Ultimately these teams will be competing for major cash prizes or valuable items like laptop's.</p>
-      <TeamScene />
+      <CityScene />
       <div className="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
         <span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-semibold text-accent">{"</>"} Real Limerick problems</span>
         <span className="rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5">Open to all skill levels</span>
