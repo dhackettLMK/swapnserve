@@ -317,7 +317,10 @@ function CreateTeam() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-10 sm:grid-cols-3">
+        </div>
+
+        <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 font-cup-body sm:px-8">
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {PRIZES.map((prize) => (
               <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
                 <Banknote value={prize.amount} label={prize.label} serial={prize.serial} />

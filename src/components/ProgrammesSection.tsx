@@ -99,7 +99,7 @@ export default function ProgrammesSection() {
           </div>
           <p className="max-w-lg text-base leading-relaxed text-muted-foreground">One umbrella, three pillars. Each programme reaches a different part of Limerick: grassroots, talent and enterprise, all under one mission.</p>
         </div>
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
+        <div className="flex flex-col gap-8">
           <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex min-w-0 flex-col rounded-xl bg-primary p-6 text-primary-foreground md:p-10">
             <div className="mb-10 flex items-center justify-between border-b border-primary-foreground/20 pb-4 text-xs font-semibold">
               <span className="flex items-center gap-2"><Trophy size={16} /> 01 / Community football</span>
@@ -110,13 +110,13 @@ export default function ProgrammesSection() {
               <img src={cupWordmark} alt="Swap'n'Serve" className="h-auto w-64 max-w-full" />
               <img src={cupSpray} alt="Cup" className="ml-auto h-16 w-auto" />
             </div>
-            <p className="mb-5 text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with €1,400 in prize money. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
+            <p className="mb-5 max-w-3xl text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with €1,400 in prize money. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
             <div className="mb-8 border-y border-primary-foreground/20 py-6">
               <div className="mb-5 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
                 <p className="font-cup-display text-4xl font-bold uppercase leading-none tracking-tight text-primary-foreground md:text-5xl">32 <span className="text-accent">teams</span></p>
               </div>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-3">
 
                 {PRIZES.map((prize) => (
                   <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
@@ -134,7 +134,7 @@ export default function ProgrammesSection() {
             </div>
             <Link to="/cup/format" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/80 hover:text-primary-foreground">View the tournament <ArrowRight size={15} /></Link>
           </motion.article>
-          <div className="flex min-w-0 flex-col gap-6">
+          <div className="grid min-w-0 gap-6 md:grid-cols-2">
             <HackathonCard />
             <SwapCard />
           </div>
