@@ -16,6 +16,7 @@ const chips = [
 ];
 
 const HeroSection = () => {
+  const [donateOpen, setDonateOpen] = useState(false);
   return (
     <section className="relative min-h-[640px] overflow-hidden md:min-h-[720px]">
       <div className="absolute inset-0 bg-primary">
@@ -80,10 +81,16 @@ const HeroSection = () => {
                 <CupButtonBrand wordmarkClass="h-5" cupClass="h-7" />
               </Link>
             </Button>
-            <Button asChild variant="ghost" size="lg" className="border border-primary-foreground/35 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-              <a href="https://www.gofundme.com/f/swapnserve-2">Make a Donation</a>
+            <Button
+              variant="ghost"
+              size="lg"
+              className="border border-primary-foreground/35 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              onClick={() => setDonateOpen(true)}
+            >
+              Make a Donation
             </Button>
           </motion.div>
+          <DonateDialog open={donateOpen} onClose={() => setDonateOpen(false)} source="hero" />
 
           <div className="mb-4 md:mb-8" />
 
