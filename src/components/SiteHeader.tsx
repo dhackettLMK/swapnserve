@@ -47,9 +47,9 @@ const SiteHeader = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
       <div
-        className={`mx-auto max-w-[1400px] rounded-xl border border-primary-foreground/20 bg-primary/95 backdrop-blur-xl text-primary-foreground transition-all duration-300 ${
-          scrolled ? "shadow-refined" : "shadow-sm"
-        }`}
+        className={`mx-auto max-w-[1400px] rounded-xl border border-primary-foreground/20 backdrop-blur-xl text-primary-foreground transition-all duration-300 ${
+          mobileOpen ? "bg-primary" : "bg-primary/95"
+        } ${scrolled ? "shadow-refined" : "shadow-sm"}`}
       >
         <div className="flex h-16 items-center justify-between px-4 md:h-[72px] md:px-6">
           <a href="#" className="flex items-center">
@@ -82,7 +82,7 @@ const SiteHeader = () => {
             <Link
               to="/cup?src=header"
               aria-label="Sign Up to the Cup"
-              className="ml-3 inline-flex items-center rounded-full bg-secondary px-4 py-2 ring-1 ring-primary-foreground/20 transition-transform hover:scale-[1.02]"
+              className="ml-3 inline-flex items-center rounded-full bg-secondary px-4 py-2 ring-1 ring-accent/70 shadow-sm transition-transform hover:scale-[1.02]"
             >
               <CupButtonBrand wordmarkClass="h-3" cupClass="h-4" />
             </Link>
@@ -133,7 +133,7 @@ const SiteHeader = () => {
                   to="/cup?src=header-mobile"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Sign Up to the Swap'n'Serve Cup"
-                  className="mt-3 flex items-center justify-center rounded-xl bg-secondary px-3 py-3 ring-1 ring-primary-foreground/20"
+                  className="mt-3 flex items-center justify-center rounded-xl bg-secondary px-3 py-3 ring-1 ring-accent/70"
                 >
                   <CupButtonBrand wordmarkClass="h-3.5" cupClass="h-4" />
                 </Link>
