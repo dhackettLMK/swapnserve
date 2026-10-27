@@ -193,12 +193,13 @@ const Catwalk = () => (
     {Array.from({ length: 6 }).map((_, i) => (
       <span key={`cr${i}`} className="absolute h-1.5 w-1.5 rounded-full bg-primary-foreground/20" style={{ right: `${2 + i * 3.4}%`, bottom: `${16 + (i % 3) * 5}%` }} />
     ))}
-    {Array.from({ length: 4 }).map((_, i) => (
+    {Array.from({ length: 5 }).map((_, i) => (
       <motion.span
         key={`f${i}`}
-        className={`absolute top-[30%] h-1.5 w-1.5 rounded-full bg-primary-foreground ${i < 2 ? "left-[9%]" : "right-[9%]"}`}
-        animate={{ opacity: [0, 1, 0], scale: [0.4, 1.6, 0.4] }}
-        transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 2.2 + i * 0.5, delay: i * 0.7, ease: "easeOut" }}
+        className={`absolute h-1.5 w-1.5 rounded-full bg-primary-foreground ${i % 2 ? "right-[8%]" : "left-[8%]"}`}
+        style={{ top: `${22 + (i % 3) * 7}%` }}
+        animate={{ opacity: [0, 0, 1, 0, 0], scale: [0.4, 0.4, 1.8, 0.4, 0.4] }}
+        transition={{ duration: 9, times: [0, 0.24 + i * 0.03, 0.28 + i * 0.03, 0.32 + i * 0.03, 1], repeat: Infinity, ease: "easeOut" }}
       />
     ))}
     <RunwayModel />
