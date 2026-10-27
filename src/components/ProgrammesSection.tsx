@@ -308,12 +308,17 @@ const SwapCard = () => (
     <svg viewBox="0 0 400 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.12]">
       <g stroke="hsl(var(--primary-foreground))" strokeWidth="2" strokeLinecap="round" fill="none">
         <line x1="40" y1="60" x2="360" y2="60" /><line x1="40" y1="60" x2="40" y2="260" /><line x1="360" y1="60" x2="360" y2="260" />
-        {[80, 130, 180, 230, 280, 330].map((x) => <path key={x} d={`M${x} 60 L${x} 75 M${x - 10} 75 Q${x} 65 ${x + 10} 75`} />)}
+        {[80, 130, 180, 230, 280, 330].map((x, i) => (
+          <g key={x}>
+            <path d={`M${x} 60 L${x} 75 M${x - 10} 75 Q${x} 65 ${x + 10} 75`} />
+            <path d={RAIL_GARMENTS[i % 3](x)} />
+          </g>
+        ))}
       </g>
     </svg>
-    <Hanger delay={0} left="72%" top="12%" duration={5} />
-    <Hanger delay={1.5} left="86%" top="48%" duration={6} />
-    <Hanger delay={3} left="60%" top="70%" duration={7} />
+    <Hanger delay={0} left="72%" top="10%" duration={5} garment="jersey" />
+    <Hanger delay={1.5} left="86%" top="44%" duration={6} garment="dress" />
+    <Hanger delay={3} left="58%" top="70%" duration={7} garment="jacket" />
     <motion.div aria-hidden="true" className="pointer-events-none absolute right-[12%] top-[30%]" animate={{ x: [0, 30, 0], opacity: [0.2, 0.6, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}><ArrowLeftRight size={26} className="text-accent" /></motion.div>
     <motion.div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30" style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.45), transparent 70%)" }} animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
     <motion.div aria-hidden="true" className="pointer-events-none absolute top-0 h-full w-[40%] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--accent) / 0.25), transparent)" }} animate={{ left: ["-40%", "100%"] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }} />
