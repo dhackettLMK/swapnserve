@@ -22,9 +22,9 @@ import type { Payment } from "@/lib/cupTypes";
 const DEPOSIT_CENTS = TEAM_PRICE_CENTS / 7;
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 import cupSpray from "@/assets/cup-spraypaint.webp";
-import prizeCup from "@/assets/prize-1000-spraypaint.webp";
-import prizePlate from "@/assets/prize-300-spraypaint.webp";
-import prizePlayer from "@/assets/prize-100-spraypaint.webp";
+import prizeCup from "@/assets/prize-1000.svg";
+import prizePlate from "@/assets/prize-300.svg";
+import prizePlayer from "@/assets/prize-100.svg";
 
 /** Prize money on the line, shown in the same gold spray-paint lettering as the Cup wordmark. */
 const PRIZES = [
