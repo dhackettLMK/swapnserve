@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowLeftRight, ArrowRight, Code, Shirt, Terminal, Trophy, UserPlus } from "lucide-react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import cupSpray from "@/assets/cup-spraypaint.webp";
@@ -40,6 +40,77 @@ const Cursor = () => (
   <motion.span aria-hidden="true" className="ml-1 inline-block h-[14px] w-[7px] bg-accent align-middle" animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
 );
 
+type Tok = [string, string];
+
+const CODE: Tok[][] = [
+  [["// real problems, one weekend", "text-primary-foreground/35"]],
+  [["import", "text-accent"], [" { city } ", "text-primary-foreground/70"], ["from", "text-accent"], [" \"limerick\"", "text-primary-foreground/85"]],
+  [["const", "text-accent"], [" team ", "text-primary-foreground/70"], ["= ", "text-primary-foreground/45"], ["[\"you\", \"me\", \"us\"]", "text-primary-foreground/85"]],
+  [["async function", "text-accent"], [" ship", "text-primary-foreground/70"], ["(", "text-primary-foreground/45"], ["problem", "text-primary-foreground/70"], [") {", "text-primary-foreground/45"]],
+  [["  return ", "text-primary-foreground/70"], ["await", "text-accent"], [" build(city, team)", "text-primary-foreground/70"]],
+  [["}", "text-primary-foreground/45"]],
+];
+
+const HackScene = () => {
+  const [cycle, setCycle] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setCycle((c) => c + 1), 14000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  return (
+    <div aria-hidden="true" className="relative mt-6 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary-foreground/[0.03] p-3 md:p-4">
+      <motion.div className="pointer-events-none absolute -inset-10" style={{ background: "radial-gradient(circle at 50% 45%, hsl(var(--accent) / 0.2), transparent 65%)" }} animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+      {[
+        { g: "</>", left: "5%", top: "16%", d: 7 },
+        { g: "{}", left: "89%", top: "24%", d: 9 },
+        { g: "01", left: "9%", top: "76%", d: 8 },
+        { g: "#", left: "84%", top: "72%", d: 10 },
+      ].map((f) => (
+        <motion.span key={f.g} className="pointer-events-none absolute font-mono text-[10px] text-accent/35" style={{ left: f.left, top: f.top }} animate={{ y: [0, -10, 0], opacity: [0.15, 0.45, 0.15] }} transition={{ duration: f.d, repeat: Infinity, ease: "easeInOut" }}>{f.g}</motion.span>
+      ))}
+      <div key={cycle} className="relative">
+        <div className="overflow-hidden rounded-md border border-primary-foreground/15 bg-primary/70">
+          <div className="flex items-center gap-1.5 border-b border-primary-foreground/10 px-2.5 py-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent/70" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground/25" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground/15" />
+            <span className="ml-2 font-mono text-[9px] text-primary-foreground/45">solve-limerick.tsx</span>
+            <span className="ml-auto flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent/80"><span className="h-1 w-1 rounded-full bg-accent" />live</span>
+          </div>
+          <div className="px-2.5 py-2 font-mono text-[10px] leading-[1.55] md:text-[11px]">
+            {CODE.map((line, i) => (
+              <motion.span key={i} className="block whitespace-pre" initial={{ clipPath: "inset(0 100% 0 0)" }} animate={{ clipPath: "inset(0 0% 0 0)" }} transition={{ delay: 0.3 + i * 0.48, duration: 0.45, ease: "easeOut" }}>
+                {line.map(([t, c], j) => <span key={j} className={c}>{t}</span>)}
+              </motion.span>
+            ))}
+            <motion.span className="mt-1 block whitespace-pre" initial={{ clipPath: "inset(0 100% 0 0)" }} animate={{ clipPath: "inset(0 0% 0 0)" }} transition={{ delay: 3.4, duration: 0.9, ease: "easeOut" }}>
+              <span className="text-primary-foreground/40">$ </span><span className="text-primary-foreground/80">npm run ship</span>
+            </motion.span>
+            <motion.span className="block whitespace-pre text-accent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4.6, duration: 0.3 }}>
+              <span className="mr-1 inline-block h-1 w-1 rounded-full bg-accent align-middle" />built in 0.8s · shipped to Limerick
+            </motion.span>
+          </div>
+        </div>
+        <div className="mt-3 flex items-center gap-2">
+          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-primary-foreground/45">build</span>
+          <div className="h-1 flex-1 overflow-hidden rounded-full bg-primary-foreground/10">
+            <motion.div className="h-full rounded-full bg-accent" initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ delay: 0.6, duration: 3.4, ease: "easeInOut" }} />
+          </div>
+          <motion.span className="font-mono text-[9px] uppercase tracking-[0.14em] text-accent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4.6, duration: 0.3 }}>shipped</motion.span>
+        </div>
+        <div className="mt-3 flex justify-center gap-1">
+          {Array.from({ length: 14 }).map((_, i) => (
+            <span key={i} className="relative h-2 w-4 rounded-[2px] border border-primary-foreground/15 bg-primary-foreground/5">
+              <motion.span className="absolute inset-0 rounded-[2px] bg-accent" initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0] }} transition={{ duration: 0.4, delay: 0.5 + i * 0.2, repeat: Infinity, repeatDelay: 12 }} />
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HackathonCard = () => (
   <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
     <MatrixRain />
@@ -50,6 +121,7 @@ const HackathonCard = () => (
       <h3 className="mb-2 text-xl font-semibold transition-all group-hover:[text-shadow:_2px_0_0_hsl(var(--accent)/0.8),_-2px_0_0_hsl(var(--primary)/0.8)] md:text-2xl">Swap'n'Serve Hackathon</h3>
       <div className="mb-4 flex items-center font-mono text-[12px] text-accent/90"><Terminal size={12} className="mr-1.5" /><span className="opacity-70">$</span><span className="ml-1.5">status --coming-soon</span><Cursor /></div>
       <p className="text-sm leading-relaxed text-primary-foreground/85">Teams build digital solutions to real problems facing Limerick, then pitch to a panel of judges for a cash prize. The aim is to bring the concept of a computer science hackathon into a more mainstream view and include a range of sectors such as Marketing , Finance &amp; Engineering students &amp; graduates into the space to solve these problems , compete and collaborate. Hopefully this may spark new start-ups, Employers will be present reviewing the talent and if suitable will be offering opportunities such as Internships, Placements &amp; Grants. Ultimately these teams will be competing for major cash prizes or valuable items like laptop's.</p>
+      <HackScene />
       <div className="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
         <span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-semibold text-accent">{"</>"} Real Limerick problems</span>
         <span className="rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5">Open to all skill levels</span>
