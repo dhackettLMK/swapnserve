@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Recycle, Heart, Users, Leaf } from "lucide-react";
 import CupButtonBrand from "@/components/cup/CupButtonBrand";
+import DonateDialog from "@/components/DonateDialog";
 import heroBg from "@/assets/hero-community.jpg";
 import heroBgSmall from "@/assets/hero-community-sm.jpg";
 
