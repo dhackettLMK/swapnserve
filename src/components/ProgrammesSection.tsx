@@ -64,6 +64,28 @@ const Hanger = ({ delay, left, top, duration }: { delay: number; left: string; t
   </motion.div>
 );
 
+const Catwalk = () => (
+  <div aria-hidden="true" className="relative mt-7 h-16 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary-foreground/[0.04]">
+    <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(180deg, transparent, hsl(var(--primary-foreground) / 0.10))" }} />
+    <div className="absolute inset-x-0 bottom-[30%] h-px bg-primary-foreground/20" />
+    {Array.from({ length: 10 }).map((_, i) => (
+      <motion.span key={`l${i}`} className="absolute bottom-[30%] h-1 w-1 -translate-x-1/2 rounded-full bg-accent" style={{ left: `${(i + 0.5) * 10}%` }} animate={{ opacity: [0.2, 0.85, 0.2] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.16 }} />
+    ))}
+    <motion.div className="absolute bottom-[22%] h-14 w-20 opacity-40 blur-md transition-opacity duration-500 group-hover:opacity-75" style={{ background: "radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.55), transparent 70%)" }} animate={{ left: ["-14%", "102%"] }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }} />
+    {Array.from({ length: 4 }).map((_, i) => (
+      <motion.span key={`f${i}`} className="absolute top-2 h-1.5 w-1.5 rounded-full bg-primary-foreground" style={{ left: `${16 + i * 22}%` }} animate={{ opacity: [0, 1, 0], scale: [0.5, 1.4, 0.5] }} transition={{ duration: 0.45, repeat: Infinity, repeatDelay: 2.4 + i * 0.6, delay: i * 0.8, ease: "easeOut" }} />
+    ))}
+    <motion.div className="absolute bottom-[30%] h-[38px] w-[20px]" animate={{ left: ["-6%", "100%"], y: [0, -2, 0], rotate: [-2, 2, -2] }} transition={{ left: { duration: 12, repeat: Infinity, ease: "linear" }, y: { duration: 0.72, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 1.44, repeat: Infinity, ease: "easeInOut" } }}>
+      <svg viewBox="0 0 20 38" className="h-full w-full" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.3" strokeLinecap="round">
+        <circle cx="10" cy="4" r="3" fill="hsl(var(--accent))" stroke="none" />
+        <path d="M10 7 L6 28 L14 28 Z" fill="hsl(var(--accent))" fillOpacity="0.5" />
+        <path d="M10 7 L7 13 M10 7 L13 13" />
+        <path d="M8.5 28 L8 37 M11.5 28 L12 37" />
+      </svg>
+    </motion.div>
+  </div>
+);
+
 const SwapCard = () => (
   <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
     <svg viewBox="0 0 400 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.12]">
@@ -83,6 +105,7 @@ const SwapCard = () => (
         <span className="flex items-center gap-2 uppercase tracking-[0.16em] text-accent"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-accent" /></span>Coming Soon</span></div>
       <h3 className="mb-3 text-xl font-semibold md:text-2xl">Swap'N'Serve 3 &amp; Fashion Show</h3>
       <p className="text-sm leading-relaxed text-primary-foreground/85">Our flagship clothing redistribution event. Quality donated clothing, sorted by volunteers and offered at €1 per item or free where appropriate. No sign-up, no means testing. Every leftover piece is shared with local charities.<br /><br />We aim to deliver a new cool side project under this event&nbsp; by which as means of promotion we will use all of our donations as stock to facilitate a local fashion show, fully made out of donated second hand clothing.<br /><br />There will be lots of different opportunities for volunteers to make this come to life!</p>
+      <Catwalk />
       <a href="#volunteer" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-accent underline underline-offset-4 transition-colors hover:text-primary-foreground">Sign up here <ArrowRight size={15} /></a>
       <a href="#how-it-works" className="mt-7 inline-flex items-center gap-2 rounded-full border border-accent bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground">See how it works <ArrowRight size={15} /></a>
     </div>
