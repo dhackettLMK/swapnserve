@@ -76,9 +76,10 @@ const RunwayModel = () => (
     transition={{ duration: 9, times: [0, 0.28, 0.92, 1], repeat: Infinity, ease: "linear" }}
   >
     <motion.div
-      className="h-full w-full origin-bottom"
-      animate={{ rotate: [-2.5, 2.5, -2.5], y: [0, -1.5, 0] }}
-      transition={{ duration: 1.15, repeat: Infinity, ease: "easeInOut" }}
+      className="h-full w-full"
+      style={{ originY: "42%" }}
+      animate={{ rotate: [-3.5, 3.5, -3.5], y: [0, -1.5, 0] }}
+      transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
     >
       <svg viewBox="0 0 60 150" className="h-full w-full overflow-visible" fill="none">
         <defs>
@@ -88,15 +89,28 @@ const RunwayModel = () => (
           </linearGradient>
         </defs>
         <g fill="url(#gownGrad)">
-          <circle cx="33.5" cy="7" r="2.6" opacity="0.65" />
-          <ellipse cx="30" cy="11" rx="4.4" ry="5.2" />
-          <rect x="28.6" y="15.5" width="2.8" height="4" rx="1.2" />
-          <path d="M22.5 21.5 Q30 17.5 37.5 21.5 L36.2 45 Q30 48.5 23.8 45 Z" />
-          <path d="M23.8 45 Q19.5 68 13.5 95 Q11.5 101.5 15.5 102.5 L44.5 102.5 Q48.5 101.5 46.5 95 Q40.5 68 36.2 45 Q30 48.5 23.8 45 Z" />
-          <path d="M23 22 C17.5 30 17.5 39.5 22.5 46.5 L25.5 45.5 C20.5 39.5 20.5 31 25.5 23.5 Z" />
-          <path d="M37 22 C42.5 30.5 43.5 41 41.5 51 L38.5 51 C40.5 41 39 31.5 34.5 24 Z" />
-          <path d="M26 102.5 l-2.2 8.5 h3.2 l1.6 -6.5 z" />
-          <path d="M36 102.5 l-1.6 6.5 h3.2 l-2.2 -8.5 z" />
+          {/* flowing hair swept behind */}
+          <path d="M26.5 5 C33.5 2.5 37 7 36.5 14 C38.5 24 37.5 34 33 41 C34.5 30.5 33.5 20 31.5 13 C30 9.5 28 8.5 26.2 10 Z" />
+          {/* head + neck */}
+          <ellipse cx="30" cy="10.5" rx="3.6" ry="4.5" />
+          <rect x="28.7" y="14.5" width="2.6" height="3.8" rx="1.2" />
+          {/* fitted bodice to tiny waist */}
+          <path d="M22.5 20 Q30 16.5 37.5 20 L36.3 40.5 Q30 43.5 23.7 40.5 Z" />
+          {/* arm on hip */}
+          <path d="M23.5 20 C17.5 26.5 15.5 36.5 21 46 L24 45 C19.5 37 21 28.5 26 23 Z" />
+          {/* arm hanging, swept slightly back */}
+          <path d="M37 20 C42.5 27.5 44.5 38.5 43 48.5 L39.8 48 C41.3 38.5 39.5 29.5 35 22.5 Z" />
+          {/* curvy hips */}
+          <path d="M23.7 40.5 L36.3 40.5 Q39 47.5 37.5 55 Q30 59 22.5 55 Q21 47.5 23.7 40.5 Z" />
+          {/* bodycon skirt with front slit */}
+          <path d="M22.5 55 Q20.5 67 22 78 Q30 81.5 38 78 Q39.5 67 37.5 55 Q30 59 22.5 55 Z" />
+          {/* front leg striding */}
+          <path d="M25 80 C23.5 97 23 116 24 133 L27.6 133 C27 116 27.5 97 29 80 Z" />
+          {/* back leg extended behind */}
+          <path d="M33.5 80 C36 95 38 111 40.5 126 L44 125 C41.5 109 38.5 92 36.5 80 Z" />
+          {/* stilettos */}
+          <path d="M23 133 l-2.2 7 h3 l1.6 -5.5 z" />
+          <path d="M39.6 126 l-1.6 6.5 h3 l-1.4 -5.5 z" />
         </g>
       </svg>
     </motion.div>
