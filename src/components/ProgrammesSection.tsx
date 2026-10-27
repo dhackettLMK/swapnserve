@@ -140,11 +140,11 @@ const GARMENT_SHAPES: Record<Garment, { body: string; detail: string }> = {
 };
 
 const Hanger = ({ delay, left, top, duration, garment }: { delay: number; left: string; top: string; duration: number; garment: Garment }) => (
-  <motion.div aria-hidden="true" className="pointer-events-none absolute opacity-30 transition-opacity duration-500 group-hover:opacity-60" style={{ left, top }} animate={{ y: [0, -12, 0], rotate: [0, 5, -5, 0] }} transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}>
+  <motion.div aria-hidden="true" className="pointer-events-none absolute opacity-25 transition-opacity duration-500 group-hover:opacity-45" style={{ left, top }} animate={{ y: [0, -12, 0], rotate: [0, 5, -5, 0] }} transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}>
     <svg width="46" height="66" viewBox="0 0 48 64" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
       <path d="M24 12 V7.6 C24 4.5 25.9 3.1 27.7 3.7 C29.3 4.3 29.5 6.2 28.3 7.1" />
       <path d="M24 12 L10 22 H38 Z" />
-      <path d={GARMENT_SHAPES[garment].body} fill="hsl(var(--accent) / 0.12)" />
+      <path d={GARMENT_SHAPES[garment].body} fill="hsl(var(--accent) / 0.08)" />
       <path d={GARMENT_SHAPES[garment].detail} strokeWidth="1" opacity="0.7" />
       {garment === "jersey" && <text x="24" y="46" textAnchor="middle" fontSize="13" fill="hsl(var(--accent))" stroke="none">3</text>}
       {garment === "jacket" && (
