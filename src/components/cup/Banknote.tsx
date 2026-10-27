@@ -1,59 +1,84 @@
 import { useId } from "react";
 import { cn } from "@/lib/utils";
+import wordmark from "@/assets/swapnserve-wordmark-cup.png";
 
 type Props = { value: string; label: string; serial: string; className?: string };
 
 /**
- * Swap'n'Serve themed banknote for prize money. Pure markup and SVG so it stays
- * crisp at any size; everything scales with the note's width (container units).
+ * Swap'n'Serve prize banknote. Markup and SVG only, so it stays crisp at any size;
+ * all sizing uses container units relative to the note's width.
  */
 const Banknote = ({ value, label, serial, className }: Props) => {
   const id = useId().replace(/:/g, "");
+  const gold = "hsl(var(--note-gold))";
   return (
     <div
       className={cn(
-        "relative aspect-[2.1/1] w-full overflow-hidden rounded-md text-left bg-[hsl(var(--note-paper))] text-[hsl(var(--note-ink))] shadow-[0_18px_40px_-18px_hsl(var(--note-ink)/0.8)]",
+        "group relative aspect-[2/1] w-full overflow-hidden rounded-lg text-left shadow-[0_24px_48px_-24px_hsl(var(--note-shadow)/0.9)] ring-1 ring-[hsl(var(--note-gold)/0.45)] transition-transform duration-500 hover:-translate-y-1",
         className,
       )}
-      style={{ containerType: "inline-size" }}
+      style={{ containerType: "inline-size", background: "var(--note-bg)" }}
       role="img"
-      aria-label={`€${value} note, ${label}`}
+      aria-label={`€${value} Swap'n'Serve note, ${label}`}
     >
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 210 100" preserveAspectRatio="none" aria-hidden>
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 200 100" aria-hidden>
         <defs>
-          <pattern id={`g${id}`} width="7" height="7" patternUnits="userSpaceOnUse">
-            <circle cx="3.5" cy="3.5" r="3.2" fill="none" stroke="currentColor" strokeWidth="0.18" opacity="0.35" />
-          </pattern>
-          <radialGradient id={`w${id}`} cx="0.5" cy="0.5" r="0.5">
-            <stop offset="0" stopColor="hsl(var(--note-gold))" stopOpacity="0.35" />
-            <stop offset="1" stopColor="hsl(var(--note-gold))" stopOpacity="0" />
+          <linearGradient id={`f${id}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="hsl(var(--note-gold-light))" />
+            <stop offset="0.5" stopColor={gold} />
+            <stop offset="1" stopColor="hsl(var(--note-gold-deep))" />
+          </linearGradient>
+          <radialGradient id={`r${id}`} cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stopColor={gold} stopOpacity="0.22" />
+            <stop offset="1" stopColor={gold} stopOpacity="0" />
           </radialGradient>
         </defs>
-        <rect width="210" height="100" fill={`url(#g${id})`} />
-        <ellipse cx="160" cy="50" rx="44" ry="44" fill={`url(#w${id})`} />
-        {Array.from({ length: 9 }).map((_, i) => (
-          <ellipse key={i} cx="160" cy="50" rx={12 + i * 3.6} ry={12 + i * 3.6} fill="none" stroke="currentColor" strokeWidth="0.25" opacity="0.28" transform={`rotate(${i * 20} 160 50) scale(1 0.98)`} />
+        {/* fine engraved wave lines */}
+        {Array.from({ length: 14 }).map((_, i) => (
+          <path
+            key={i}
+            d={`M0 ${8 + i * 6.5} Q 50 ${2 + i * 6.5} 100 ${8 + i * 6.5} T 200 ${8 + i * 6.5}`}
+            fill="none"
+            stroke={gold}
+            strokeWidth="0.15"
+            opacity="0.22"
+          />
         ))}
-        <rect x="3" y="3" width="204" height="94" rx="4" fill="none" stroke="currentColor" strokeWidth="0.9" />
-        <rect x="5.5" y="5.5" width="199" height="89" rx="3" fill="none" stroke="hsl(var(--note-gold))" strokeWidth="0.5" strokeDasharray="1.4 0.8" />
+        {/* rosette */}
+        <circle cx="148" cy="50" r="46" fill={`url(#r${id})`} />
+        <g opacity="0.5" fill="none" stroke={`url(#f${id})`} strokeWidth="0.22">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <ellipse key={i} cx="148" cy="50" rx="34" ry="13" transform={`rotate(${i * 7.5} 148 50)`} />
+          ))}
+        </g>
+        <circle cx="148" cy="50" r="36" fill="none" stroke={gold} strokeWidth="0.3" opacity="0.6" />
+        <circle cx="148" cy="50" r="38" fill="none" stroke={gold} strokeWidth="0.15" strokeDasharray="0.6 0.9" opacity="0.7" />
+        {/* frame */}
+        <rect x="3.5" y="3.5" width="193" height="93" rx="2.5" fill="none" stroke={`url(#f${id})`} strokeWidth="0.6" />
+        <rect x="5.5" y="5.5" width="189" height="89" rx="1.5" fill="none" stroke={gold} strokeWidth="0.2" opacity="0.7" />
       </svg>
 
-      <span className="absolute left-[5%] top-[7%] font-cup-display text-[7cqw] font-extrabold leading-none tracking-tight">{value}</span>
+      {/* sheen on hover */}
+      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(105deg,transparent_40%,hsl(var(--note-gold-light)/0.18)_50%,transparent_60%)] transition-transform duration-1000 group-hover:translate-x-full" />
 
-      <div className="absolute left-[5%] top-[30%] max-w-[50%]">
-        <p className="font-cup-display text-[4.6cqw] font-bold uppercase leading-none tracking-[0.08em]">Swap'n'Serve</p>
-        <p className="mt-[1.2cqw] text-[2.4cqw] font-semibold uppercase tracking-[0.22em] opacity-70">Bank of Limerick</p>
-        <p className="mt-[4cqw] text-[3cqw] font-bold uppercase leading-tight tracking-[0.1em]">{label}</p>
+      <div className="absolute left-[7%] top-[13%] w-[38%]">
+        <img src={wordmark} alt="" className="h-auto w-full drop-shadow-[0_1px_1px_hsl(var(--note-shadow)/0.6)]" />
       </div>
 
-      <div className="absolute right-[6%] top-1/2 flex -translate-y-1/2 items-start text-[hsl(var(--note-ink))]">
-        <span className="mt-[1.6cqw] font-cup-display text-[7cqw] font-extrabold">€</span>
-        <span className="font-cup-display text-[15cqw] font-extrabold leading-none tracking-[-0.05em]" style={{ WebkitTextStroke: "0.25cqw hsl(var(--note-gold))" }}>
-          {value}
-        </span>
+      <div className="absolute bottom-[13%] left-[7%] max-w-[42%]">
+        <p className="text-[2.3cqw] font-semibold uppercase tracking-[0.3em] text-[hsl(var(--note-gold-light))]">Prize</p>
+        <p className="mt-[0.8cqw] font-cup-display text-[3.6cqw] font-bold uppercase leading-tight tracking-[0.06em] text-[hsl(var(--note-paper))]">
+          {label}
+        </p>
+        <p className="mt-[1.6cqw] font-mono text-[2.1cqw] tracking-[0.2em] text-[hsl(var(--note-gold)/0.8)]">{serial}</p>
       </div>
 
-      <span className="absolute bottom-[8%] left-[5%] font-mono text-[2.4cqw] tracking-[0.18em] opacity-60">{serial}</span>
+      <div className="absolute left-[74%] top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-start">
+        <span className="prize-gold mt-[1.4cqw] font-cup-display text-[6cqw] font-bold">€</span>
+        <span className="prize-gold font-cup-display text-[14cqw] font-extrabold leading-none tracking-[-0.05em]">{value}</span>
+      </div>
+
+      <span className="absolute right-[6%] top-[11%] font-cup-display text-[3.4cqw] font-bold text-[hsl(var(--note-gold-light)/0.85)]">{value}</span>
     </div>
   );
 };

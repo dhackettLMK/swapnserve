@@ -12,9 +12,12 @@
 
 @layer base {
   :root {
-    --note-paper: 150 22% 93%;
-    --note-ink: 155 61% 23%;
-    --note-gold: 42 78% 52%;
+    --note-paper: 150 22% 95%;
+    --note-gold: 43 74% 56%;
+    --note-gold-light: 46 90% 78%;
+    --note-gold-deep: 36 70% 36%;
+    --note-shadow: 160 40% 6%;
+    --note-bg: radial-gradient(120% 140% at 75% 50%, hsl(156 52% 22%) 0%, hsl(158 58% 13%) 60%, hsl(160 55% 9%) 100%);
     --background: 180 7% 97%;
     --foreground: 157 15% 17%;
 
