@@ -22,6 +22,17 @@ import type { Payment } from "@/lib/cupTypes";
 const DEPOSIT_CENTS = TEAM_PRICE_CENTS / 7;
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 import cupSpray from "@/assets/cup-spraypaint.png";
+import prizeCup from "@/assets/prize-1000-spraypaint.png";
+import prizePlate from "@/assets/prize-300-spraypaint.png";
+import prizePlayer from "@/assets/prize-100-spraypaint.png";
+
+/** Prize money on the line, shown in the same gold spray-paint lettering as the Cup wordmark. */
+const PRIZES = [
+  { image: prizeCup, amount: "€1,000", label: "Cup winners" },
+  { image: prizePlate, amount: "€300", label: "Plate winners" },
+  { image: prizePlayer, amount: "€100", label: "Player of the tournament" },
+];
+
 
 const PRIVACY_NOTE =
   "We only collect your name, email and phone to run the tournament and contact you about your team. Nothing else.";
@@ -208,8 +219,9 @@ function CreateTeam() {
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
               <span className="inline-flex items-center gap-2.5 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent shadow-refined">
-                <Trophy className="h-4 w-4" /> €1,000 winners' prize
+                <Trophy className="h-4 w-4" /> €1,400 in prize money
               </span>
+
               <span className="font-cup-body text-sm text-primary-foreground/65">
                 €10 per team member · 7 team members required
               </span>
@@ -289,7 +301,37 @@ function CreateTeam() {
         </div>
       </section>
 
+      <section className="relative isolate overflow-hidden border-b border-border bg-primary py-14 text-primary-foreground md:py-20">
+        <div className="cup-pitch-lines absolute inset-0 opacity-20" aria-hidden="true" />
+        <div className="container relative z-10 font-cup-body">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            The prize money
+          </p>
+          <h2 className="font-cup-display text-3xl leading-tight md:text-4xl">
+            €1,400 across the day
+          </h2>
+          <div className="mt-10 grid gap-10 sm:grid-cols-3">
+            {PRIZES.map((prize) => (
+              <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
+                <img
+                  src={prize.image}
+                  alt={prize.amount}
+                  loading="lazy"
+                  width={1408}
+                  height={608}
+                  className="h-16 w-auto max-w-full sm:h-20 md:h-24"
+                />
+                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground/80">
+                  {prize.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <SoloEntry />
+
 
       <section className="bg-card py-14 md:py-20">
         <div className="container font-cup-body">

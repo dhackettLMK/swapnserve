@@ -5,7 +5,9 @@ import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
 import type { AdminListResponse } from "@/lib/cupTypes";
 
 const MAX_TEAMS = 32;
-const PRIZE_CENTS = 100000;
+/** Total prize money on the line: €1,000 Cup, €300 Plate, €100 player of the tournament. */
+const PRIZE_CENTS = 140000;
+
 const FEE_CENTS = 49; // per €10 payment
 const card = "border-t border-border py-6";
 

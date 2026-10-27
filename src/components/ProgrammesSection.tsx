@@ -101,10 +101,11 @@ export default function ProgrammesSection() {
               <img src={cupWordmark} alt="Swap'n'Serve" className="h-auto w-64 max-w-full" />
               <img src={cupSpray} alt="Cup" className="ml-auto h-16 w-auto" />
             </div>
-            <p className="mb-5 text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with a €1,000 prize pot. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
+            <p className="mb-5 text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with €1,400 in prize money. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
             <div className="mb-8 grid grid-cols-2 gap-4 border-y border-primary-foreground/20 py-5">
-              <div><p className="text-2xl font-semibold text-accent">€1,000</p><p className="mt-1 text-xs text-primary-foreground/70">Winners' prize</p></div>
+              <div><p className="text-2xl font-semibold text-accent">€1,400</p><p className="mt-1 text-xs text-primary-foreground/70">Prize money</p></div>
               <div><p className="text-2xl font-semibold">5-a-side</p><p className="mt-1 text-xs text-primary-foreground/70">2 subs · rolling subs</p></div>
+
             </div>
             <p className="mb-6 text-sm text-primary-foreground/75">€10 per team member · 7 team members required</p>
             <div className="mt-auto flex flex-wrap gap-3">
