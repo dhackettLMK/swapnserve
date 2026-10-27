@@ -81,7 +81,7 @@ const SwapCard = () => (
     <div className="relative">
       <div className="mb-4 flex items-center justify-between gap-3 text-xs font-semibold"><span className="flex items-center gap-2 text-primary-foreground/70"><Shirt size={16} className="text-accent" /> 03</span>
         <span className="flex items-center gap-2 uppercase tracking-[0.16em] text-accent"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-accent" /></span>Coming Soon</span></div>
-      <h3 className="mb-3 text-xl font-semibold md:text-2xl">Swap'N'Serve 3</h3>
+      <h3 className="mb-3 text-xl font-semibold md:text-2xl">Swap'N'Serve 3 &amp; Fashion Show</h3>
       <p className="text-sm leading-relaxed text-primary-foreground/85">Our flagship clothing redistribution event. Quality donated clothing, sorted by volunteers and offered at €1 per item or free where appropriate. No sign-up, no means testing. Every leftover piece is shared with local charities.</p>
       <a href="#how-it-works" className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground">See how it works <ArrowRight size={15} /></a>
     </div>
