@@ -7,6 +7,8 @@
       "dependencies": {
         "@fontsource/barlow": "^5.3.0",
         "@fontsource/bebas-neue": "^5.3.0",
+        "@fontsource/manrope": "^5.3.0",
+        "@fontsource/sora": "^5.3.0",
         "@hookform/resolvers": "^3.10.0",
         "@radix-ui/react-accordion": "^1.2.11",
         "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -188,6 +190,10 @@
     "@fontsource/barlow": ["@fontsource/barlow@5.3.0", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/barlow/-/barlow-5.3.0.tgz", {}, "sha512-tGR0y6QObRtKv71MOth44222+mdNFM/ZWFWDV1VLzNbG4oK9PNRlyJzmkck4vHAi9ibHBXgt4SlY51amFP55CA=="],
 
     "@fontsource/bebas-neue": ["@fontsource/bebas-neue@5.3.0", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@fontsource/bebas-neue/-/bebas-neue-5.3.0.tgz", {}, "sha512-nCxMEb9Bg9sjNWm9TIOsvHKDMLRUfEZPWpLgYu6m9KavZZVSA/WoHzI5wROwqA+eNwEi/PNBAcB5Co7HA3S0Cw=="],
+
+    "@fontsource/manrope": ["@fontsource/manrope@5.3.0", "", {}, "sha512-obJ1Dv3+uCA6HlHgW8u4BGYxJR9In2HW7gjJhlflEvkrj1X1iSEwu0fToL+JYGC/FEKFfIz1sBuPduvcL2gIAA=="],
+
+    "@fontsource/sora": ["@fontsource/sora@5.3.0", "", {}, "sha512-SqW3OpKxxfKvxDLPlbdrWf2KooPfbd+W3jaYn483o+Y/JrmU87vjFPNptDqwP428c3vY+gnranLhjcbRaXB0Jw=="],
 
     "@hookform/resolvers": ["@hookform/resolvers@3.10.0", "", { "peerDependencies": { "react-hook-form": "^7.0.0" } }, "sha512-79Dv+3mDF7i+2ajj7SkypSKHhl1cbln1OGavqrsF7p6mbUv11xpqpacPsGDCTRvCSjEEIez2ef1NveSVL3b0Ag=="],
 
