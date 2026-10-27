@@ -12,9 +12,6 @@ const metrics = [
 const ImpactSnapshot = () => {
   return (
     <section id="impact" className="py-20 md:py-28 bg-primary relative overflow-hidden">
-      {/* Decorative blobs */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 left-10 w-64 h-64 bg-white/5 rounded-full blur-[80px]" />
 
       <div className="container relative z-10">
         <motion.div
@@ -22,15 +19,15 @@ const ImpactSnapshot = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-left mb-10"
         >
-          <span className="inline-block rounded-full bg-white/15 text-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
+          <span className="inline-block rounded-full bg-primary-foreground/15 text-primary-foreground px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-4">
             Making a Difference
           </span>
-          <h2 className="text-3xl md:text-4xl font-section font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-section font-bold text-primary-foreground mb-4">
             Our Impact So Far
           </h2>
-          <p className="text-white/70 text-lg max-w-xl mx-auto">
+          <p className="text-primary-foreground/70 text-lg max-w-xl mx-auto">
             Two events in. Aligned with the EU Strategy for Sustainable and Circular
             Textiles and UN SDG 12. Built by Limerick, for Limerick.
           </p>
@@ -45,28 +42,28 @@ const ImpactSnapshot = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
               whileHover={{ scale: 1.04, transition: { duration: 0.2 } }}
-              className={`rounded-3xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 text-center shadow-sm cursor-default transition-shadow hover:shadow-lg hover:shadow-white/5 ${
+              className={`rounded-xl border border-primary-foreground/15 bg-primary-foreground/10 backdrop-blur-sm p-6 text-center shadow-sm cursor-default transition-shadow hover:shadow-lg hover:shadow-primary-foreground/5 ${
                 i === 0
-                  ? "col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col justify-center items-center bg-white/15"
+                  ? "col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col justify-center items-center bg-primary-foreground/15"
                   : "lg:col-span-2"
               }`}
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                className={`mx-auto rounded-2xl bg-white/15 flex items-center justify-center mb-4 ${
+                className={`mx-auto rounded-lg bg-primary-foreground/15 flex items-center justify-center mb-4 ${
                   i === 0 ? "w-16 h-16 lg:w-20 lg:h-20" : "w-12 h-12"
                 }`}
               >
-                <m.icon size={i === 0 ? 36 : 24} className="text-white" />
+                <m.icon size={i === 0 ? 36 : 24} className="text-primary-foreground" />
               </motion.div>
               <div
-                className={`font-section font-bold text-white mb-1 ${
+                className={`font-section font-bold text-primary-foreground mb-1 ${
                   i === 0 ? "text-5xl lg:text-6xl" : "text-3xl md:text-4xl"
                 }`}
               >
                 {m.value}
               </div>
-              <div className={`font-medium text-white/80 ${i === 0 ? "text-base" : "text-sm"}`}>
+              <div className={`font-medium text-primary-foreground/80 ${i === 0 ? "text-base" : "text-sm"}`}>
                 {m.label}
               </div>
             </motion.div>
@@ -77,9 +74,9 @@ const ImpactSnapshot = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-sm text-white/60 mt-8 max-w-lg mx-auto text-center"
+          className="text-sm text-primary-foreground/60 mt-8 max-w-lg mx-auto text-center"
         >
-          <strong className="text-white/80">How we measure:</strong> All figures are self-reported and tracked by our volunteer
+          <strong className="text-primary-foreground/80">How we measure:</strong> All figures are self-reported and tracked by our volunteer
           team. We are working towards independent verification as we scale.
         </motion.p>
       </div>

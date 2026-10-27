@@ -252,16 +252,14 @@ export default function ThirtyUnderThirty() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-primary pb-20 pt-16 text-primary-foreground md:pb-28 md:pt-24">
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-secondary/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -left-20 h-96 w-96 rounded-full bg-primary-foreground/10 blur-3xl" />
-        <div className="container relative max-w-4xl text-center">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-secondary">
+        <div className="container relative max-w-5xl text-left">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             <Editable editing={e} value={content.eyebrow} onChange={(v) => set("eyebrow", v)} className="text-center" />
           </p>
-          <h1 className="font-display text-5xl leading-[0.95] md:text-7xl">
+          <h1 className="font-display text-4xl font-semibold leading-tight md:text-6xl">
             <Editable editing={e} value={content.title} onChange={(v) => set("title", v)} className="text-center font-display" />
           </h1>
-          <div className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-primary-foreground/80">
+          <div className="mt-6 max-w-2xl text-lg leading-relaxed text-primary-foreground/80">
             <Editable editing={e} multiline value={content.intro} onChange={(v) => set("intro", v)} />
           </div>
         </div>
@@ -274,7 +272,7 @@ export default function ThirtyUnderThirty() {
             photo={content.coverImage}
             name={content.title}
             editing={e}
-            className="aspect-[4/3] rounded-[2rem] shadow-xl"
+            className="aspect-[4/3] rounded-xl shadow-xl"
             onUpload={async (f) => { const url = await upload(f); if (url) set("coverImage", url); }}
             onRemove={() => set("coverImage", "")}
           />
@@ -303,7 +301,7 @@ export default function ThirtyUnderThirty() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {content.honourees.map((h, i) => (
-              <article key={h.id} className="group overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-sm transition-shadow hover:shadow-xl">
+              <article key={h.id} className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-xl">
                 <PhotoSlot
                   photo={h.photo}
                   name={h.name}
@@ -352,7 +350,7 @@ export default function ThirtyUnderThirty() {
                     { id: crypto.randomUUID(), name: "New honouree", age: "", role: "", bio: "", photo: "" },
                   ])
                 }
-                className="flex min-h-64 flex-col items-center justify-center gap-2 rounded-[1.75rem] border-2 border-dashed border-secondary/60 text-secondary hover:bg-secondary/5"
+                className="flex min-h-64 flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-secondary/60 text-secondary hover:bg-secondary/5"
               >
                 <Plus /> Add a person
               </button>
@@ -363,7 +361,7 @@ export default function ThirtyUnderThirty() {
 
       {/* Closing */}
       <section className="py-16 md:py-24">
-        <div className="container max-w-3xl rounded-[2.5rem] bg-primary px-6 py-14 text-center text-primary-foreground md:px-14">
+        <div className="container max-w-3xl rounded-xl bg-primary px-6 py-14 text-center text-primary-foreground md:px-14">
           <h2 className="font-display text-4xl md:text-5xl">
             <Editable editing={e} value={content.closingTitle} onChange={(v) => set("closingTitle", v)} className="text-center font-display" />
           </h2>
@@ -425,7 +423,7 @@ export default function ThirtyUnderThirty() {
           <form
             onClick={(ev) => ev.stopPropagation()}
             onSubmit={(ev) => { ev.preventDefault(); submitPass(); }}
-            className="w-full max-w-sm space-y-4 rounded-[1.75rem] bg-card p-6 shadow-2xl"
+            className="w-full max-w-sm space-y-4 rounded-xl bg-card p-6 shadow-2xl"
           >
             <h2 className="font-display text-2xl">Edit this page</h2>
             <Input type="password" inputMode="numeric" autoFocus placeholder="Passcode" value={passInput} onChange={(ev) => setPassInput(ev.target.value)} />

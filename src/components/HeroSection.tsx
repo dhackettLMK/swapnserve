@@ -15,7 +15,7 @@ const chips = [
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-[640px] overflow-hidden md:min-h-[720px]">
       <div className="absolute inset-0 bg-primary">
         <img
           src={heroBg}
@@ -29,35 +29,35 @@ const HeroSection = () => {
           width={1264}
           height={848}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/85 via-primary/75 to-primary/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-primary/65 to-secondary/90" />
       </div>
 
-      <div className="container relative z-10 flex min-h-screen items-center pt-28 pb-16 md:pt-32">
-        <div className="max-w-3xl">
+      <div className="container relative z-10 flex min-h-[640px] items-end pt-32 pb-14 md:min-h-[720px] md:pt-40 md:pb-20">
+        <div className="max-w-4xl">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-5 inline-flex rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground/90"
+            className="mb-5 inline-flex items-center gap-3 text-xs font-semibold uppercase text-primary-foreground/80"
           >
-            LIMERICK GRASSROOTS ORGANISATION ·
+            LIMERICK · COMMUNITY · OPPORTUNITY
           </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-6 text-balance font-display text-4xl font-bold leading-tight text-primary-foreground sm:text-5xl md:text-6xl"
+            className="mb-6 text-balance font-display text-4xl font-bold leading-tight text-primary-foreground sm:text-6xl md:text-7xl"
           >
-            An umbrella for the
-            <span className="block text-primary-foreground">Betterment of Limerick City.</span>
+            Swap'n'Serve
+            <span className="mt-3 block text-2xl font-medium text-primary-foreground/90 sm:text-3xl md:text-4xl">For the betterment of Limerick City.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-8 max-w-2xl text-base leading-relaxed text-primary-foreground/90 md:text-lg"
+            className="mb-8 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:text-lg"
           >
             Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025 by
             David Hackett. On the surface we are a community clothing event. Underneath, we
@@ -73,17 +73,14 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-5 flex flex-col gap-3 sm:flex-row"
           >
-            <Button variant="cta" size="lg" asChild className="min-w-[220px] rounded-full">
+            <Button variant="cta" size="lg" asChild className="min-w-[220px] rounded-lg">
               <Link to="/cup?src=hero" aria-label="Sign Up to the Swap'n'Serve Cup">
                 <CupButtonBrand wordmarkClass="h-5" cupClass="h-7" />
               </Link>
             </Button>
-            <a
-              href="https://www.gofundme.com/f/swapnserve-2"
-              className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-primary-foreground/35 bg-primary-foreground/10 px-6 py-3 text-base font-semibold text-primary-foreground transition-all hover:bg-primary-foreground/20 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Make a Donation
-            </a>
+            <Button asChild variant="ghost" size="lg" className="border border-primary-foreground/35 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+              <a href="https://www.gofundme.com/f/swapnserve-2">Make a Donation</a>
+            </Button>
           </motion.div>
 
           <div className="mb-8" />
@@ -92,7 +89,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap gap-2"
+            className="flex flex-wrap gap-x-6 gap-y-2 border-t border-primary-foreground/20 pt-5"
           >
             {chips.map((chip, i) => (
               <motion.span
@@ -101,7 +98,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.08 }}
                 whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center gap-1.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground/90 cursor-default"
+                className="inline-flex items-center gap-1.5 rounded-lg px-0 py-1.5 text-xs font-medium text-primary-foreground/90 cursor-default"
               >
                 <chip.icon size={13} />
                 {chip.label}
