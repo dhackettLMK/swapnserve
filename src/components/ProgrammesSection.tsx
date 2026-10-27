@@ -64,25 +64,97 @@ const Hanger = ({ delay, left, top, duration }: { delay: number; left: string; t
   </motion.div>
 );
 
-const Catwalk = () => (
-  <div aria-hidden="true" className="relative mt-7 h-16 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary-foreground/[0.04]">
-    <div className="absolute inset-x-0 bottom-0 h-[30%]" style={{ background: "linear-gradient(180deg, transparent, hsl(var(--primary-foreground) / 0.10))" }} />
-    <div className="absolute inset-x-0 bottom-[30%] h-px bg-primary-foreground/20" />
-    {Array.from({ length: 10 }).map((_, i) => (
-      <motion.span key={`l${i}`} className="absolute bottom-[30%] h-1 w-1 -translate-x-1/2 rounded-full bg-accent" style={{ left: `${(i + 0.5) * 10}%` }} animate={{ opacity: [0.2, 0.85, 0.2] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.16 }} />
-    ))}
-    <motion.div className="absolute bottom-[22%] h-14 w-20 opacity-40 blur-md transition-opacity duration-500 group-hover:opacity-75" style={{ background: "radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.55), transparent 70%)" }} animate={{ left: ["-14%", "102%"] }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }} />
-    {Array.from({ length: 4 }).map((_, i) => (
-      <motion.span key={`f${i}`} className="absolute top-2 h-1.5 w-1.5 rounded-full bg-primary-foreground" style={{ left: `${16 + i * 22}%` }} animate={{ opacity: [0, 1, 0], scale: [0.5, 1.4, 0.5] }} transition={{ duration: 0.45, repeat: Infinity, repeatDelay: 2.4 + i * 0.6, delay: i * 0.8, ease: "easeOut" }} />
-    ))}
-    <motion.div className="absolute bottom-[30%] h-[38px] w-[20px]" animate={{ left: ["-6%", "100%"], y: [0, -2, 0], rotate: [-2, 2, -2] }} transition={{ left: { duration: 12, repeat: Infinity, ease: "linear" }, y: { duration: 0.72, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 1.44, repeat: Infinity, ease: "easeInOut" } }}>
-      <svg viewBox="0 0 20 38" className="h-full w-full" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.3" strokeLinecap="round">
-        <circle cx="10" cy="4" r="3" fill="hsl(var(--accent))" stroke="none" />
-        <path d="M10 7 L6 28 L14 28 Z" fill="hsl(var(--accent))" fillOpacity="0.5" />
-        <path d="M10 7 L7 13 M10 7 L13 13" />
-        <path d="M8.5 28 L8 37 M11.5 28 L12 37" />
+const RunwayModel = () => (
+  <motion.div
+    className="absolute left-1/2 h-[110px] w-9 origin-bottom -translate-x-1/2 md:h-[128px]"
+    animate={{
+      bottom: ["34%", "19%", "19%"],
+      scale: [0.4, 1.04, 1.04],
+      opacity: [0, 0.95, 0.95, 0],
+    }}
+    transition={{ duration: 9, times: [0, 0.28, 0.92, 1], repeat: Infinity, ease: "linear" }}
+  >
+    <motion.div
+      className="h-full w-full origin-bottom"
+      animate={{ rotate: [-2.5, 2.5, -2.5], y: [0, -1.5, 0] }}
+      transition={{ duration: 1.15, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <svg viewBox="0 0 60 150" className="h-full w-full overflow-visible" fill="none">
+        <defs>
+          <linearGradient id="gownGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="hsl(var(--accent))" stopOpacity="0.95" />
+            <stop offset="1" stopColor="hsl(var(--accent))" stopOpacity="0.5" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#gownGrad)">
+          <circle cx="33.5" cy="7" r="2.6" opacity="0.65" />
+          <ellipse cx="30" cy="11" rx="4.4" ry="5.2" />
+          <rect x="28.6" y="15.5" width="2.8" height="4" rx="1.2" />
+          <path d="M22.5 21.5 Q30 17.5 37.5 21.5 L36.2 45 Q30 48.5 23.8 45 Z" />
+          <path d="M23.8 45 Q19.5 68 13.5 95 Q11.5 101.5 15.5 102.5 L44.5 102.5 Q48.5 101.5 46.5 95 Q40.5 68 36.2 45 Q30 48.5 23.8 45 Z" />
+          <path d="M23 22 C17.5 30 17.5 39.5 22.5 46.5 L25.5 45.5 C20.5 39.5 20.5 31 25.5 23.5 Z" />
+          <path d="M37 22 C42.5 30.5 43.5 41 41.5 51 L38.5 51 C40.5 41 39 31.5 34.5 24 Z" />
+          <path d="M26 102.5 l-2.2 8.5 h3.2 l1.6 -6.5 z" />
+          <path d="M36 102.5 l-1.6 6.5 h3.2 l-2.2 -8.5 z" />
+        </g>
       </svg>
     </motion.div>
+  </motion.div>
+);
+
+const Catwalk = () => (
+  <div aria-hidden="true" className="relative mt-7 h-32 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary md:h-40">
+    <div className="absolute inset-x-0 top-0 h-[38%]" style={{ background: "linear-gradient(180deg, hsl(var(--primary-foreground) / 0.06), hsl(var(--primary-foreground) / 0.01))" }} />
+    <motion.div
+      className="absolute left-1/2 top-[16%] h-12 w-16 -translate-x-1/2 rounded-t-full"
+      style={{ background: "radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.5), hsl(var(--accent) / 0.08) 60%, transparent 80%)" }}
+      animate={{ opacity: [0.55, 0.95, 0.55] }}
+      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <div
+      className="absolute inset-x-0 bottom-0 h-[62%]"
+      style={{
+        clipPath: "polygon(41% 0, 59% 0, 100% 100%, 0 100%)",
+        background: "linear-gradient(180deg, hsl(var(--primary-foreground) / 0.02), hsl(var(--primary-foreground) / 0.16))",
+      }}
+    />
+    <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 160" preserveAspectRatio="none" fill="none">
+      <path d="M164 60 L8 160" stroke="hsl(var(--accent) / 0.5)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+      <path d="M236 60 L392 160" stroke="hsl(var(--accent) / 0.5)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+      <path d="M200 60 L200 160" stroke="hsl(var(--primary-foreground) / 0.25)" strokeWidth="1" strokeDasharray="6 8" vectorEffect="non-scaling-stroke" />
+    </svg>
+    <motion.div
+      className="absolute -top-2 left-[4%] h-[135%] w-[46%] origin-top -rotate-12"
+      style={{ background: "linear-gradient(180deg, hsl(var(--accent) / 0.12), transparent 78%)", clipPath: "polygon(42% 0, 58% 0, 100% 100%, 0 100%)" }}
+      animate={{ opacity: [0.35, 0.75, 0.35] }}
+      transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div
+      className="absolute -top-2 right-[4%] h-[135%] w-[46%] origin-top rotate-12"
+      style={{ background: "linear-gradient(180deg, hsl(var(--accent) / 0.12), transparent 78%)", clipPath: "polygon(42% 0, 58% 0, 100% 100%, 0 100%)" }}
+      animate={{ opacity: [0.6, 0.3, 0.6] }}
+      transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <div className="absolute bottom-0 left-1/2 h-16 w-40 -translate-x-1/2" style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--accent) / 0.35), transparent 70%)" }} />
+    {Array.from({ length: 6 }).map((_, i) => (
+      <span key={`cl${i}`} className="absolute h-1.5 w-1.5 rounded-full bg-primary-foreground/20" style={{ left: `${2 + i * 3.4}%`, bottom: `${8 + (i % 3) * 5}%` }} />
+    ))}
+    {Array.from({ length: 6 }).map((_, i) => (
+      <span key={`cr${i}`} className="absolute h-1.5 w-1.5 rounded-full bg-primary-foreground/20" style={{ right: `${2 + i * 3.4}%`, bottom: `${16 + (i % 3) * 5}%` }} />
+    ))}
+    {Array.from({ length: 4 }).map((_, i) => (
+      <motion.span
+        key={`f${i}`}
+        className={`absolute top-[30%] h-1.5 w-1.5 rounded-full bg-primary-foreground ${i < 2 ? "left-[9%]" : "right-[9%]"}`}
+        animate={{ opacity: [0, 1, 0], scale: [0.4, 1.6, 0.4] }}
+        transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 2.2 + i * 0.5, delay: i * 0.7, ease: "easeOut" }}
+      />
+    ))}
+    <RunwayModel />
+    <div className="absolute inset-x-0 top-2.5 flex items-center justify-between px-3 text-[8px] font-semibold uppercase tracking-[0.3em] text-accent/80 md:text-[9px]">
+      <span>Swap'n'Serve · The Show</span>
+      <span>Vol. 03</span>
+    </div>
   </div>
 );
 
