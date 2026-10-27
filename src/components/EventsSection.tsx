@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
+import DonateDialog from "@/components/DonateDialog";
 
 const EventsSection = () => {
+  const [donateOpen, setDonateOpen] = useState(false);
   return (
     <section id="donate" className="py-20 md:py-28">
       <div className="container">
@@ -41,19 +44,22 @@ const EventsSection = () => {
               Make a Donation
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Support our work through our GoFundMe. Every contribution funds storage,
-              event logistics and the next chapter of Swap'n'Serve in Limerick.
+              Donate directly by card, any amount from €1. Every contribution funds
+              storage, event logistics and the next chapter of Swap'n'Serve in
+              Limerick, and more of it reaches us than through fundraising sites.
             </p>
 
-            <a
-              href="https://www.gofundme.com/f/swapnserve-2"
+            <button
+              type="button"
+              onClick={() => setDonateOpen(true)}
               className="inline-flex items-center rounded-full border border-primary bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
             >
-              Donate on GoFundMe
-            </a>
+              Make a Donation
+            </button>
           </motion.div>
         </div>
       </div>
+      <DonateDialog open={donateOpen} onClose={() => setDonateOpen(false)} source="donate-section" />
     </section>
   );
 };

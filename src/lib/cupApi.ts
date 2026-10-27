@@ -108,6 +108,17 @@ export const cupApi = {
     });
   },
 
+  donate: (input: { amount_cents: number; email?: string; signup_source?: string; returnUrl: string }) => {
+    const { returnUrl, ...rest } = input;
+    return invoke<{ clientSecret: string }>("create-checkout", {
+      mode: "donate",
+      ...rest,
+      ...getSignupContext(),
+      return_url: returnUrl,
+      environment: getStripeEnvironment(),
+    });
+  },
+
   confirmPayment: (sessionId: string) =>
     invoke<{ status: "paid" | "pending" | "unknown"; invite_token?: string | null; manage_token?: string | null }>("confirm-payment", {
       session_id: sessionId,

@@ -36,6 +36,46 @@ Deno.serve(async (req) => {
     const stripe = createStripeClient(env);
     const supabase = supabaseAdmin();
 
+    // Donations: a simple one-off card payment of any amount between €1 and
+    // €500. Nothing is stored in the database — the payment provider emails
+    // the receipt and the payment appears in the admin money breakdown.
+    if (mode === "donate") {
+      const amountCents = Math.floor(Number(body.amount_cents));
+      if (!Number.isFinite(amountCents) || amountCents < 100 || amountCents > 50000) {
+        return json({ error: "Donations must be between €1 and €500." }, 400);
+      }
+      const donorEmail = clean(body.email).slice(0, 200);
+      if (donorEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(donorEmail)) {
+        return json({ error: "Enter a valid email." }, 400);
+      }
+      const productName = "Swap'n'Serve donation";
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        ui_mode: "embedded_page",
+        return_url: returnUrl,
+        ...(donorEmail && { customer_email: donorEmail }),
+        line_items: [
+          {
+            quantity: 1,
+            price_data: {
+              currency: "eur",
+              unit_amount: amountCents,
+              product_data: { name: productName },
+            },
+          },
+        ],
+        payment_intent_data: { description: productName },
+        metadata: {
+          kind: "donation",
+          signup_source: clean(body.signup_source).slice(0, 40),
+          signup_app: clean(body.signup_app).slice(0, 30),
+          signup_device: clean(body.signup_device).slice(0, 30),
+          signup_referrer: clean(body.signup_referrer).slice(0, 60),
+        },
+      });
+      return json({ clientSecret: session.client_secret });
+    }
+
     // Pay-first entries: nothing is saved until the €10 is paid. Details ride
     // on the session and the player (and team) are created on fulfilment.
     if (mode === "solo" || mode === "new_team" || mode === "join") {
