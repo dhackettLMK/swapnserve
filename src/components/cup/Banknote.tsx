@@ -73,9 +73,9 @@ const Banknote = ({ value, label, serial, className }: Props) => {
         <p className="mt-[1.6cqw] font-mono text-[2.1cqw] tracking-[0.2em] text-[hsl(var(--note-gold)/0.8)]">{serial}</p>
       </div>
 
-      <div className="absolute left-[74%] top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-start">
+      <div className="absolute left-[71%] top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-start">
         <span className="prize-gold mt-[1.4cqw] font-cup-display text-[6cqw] font-bold">€</span>
-        <span className="prize-gold font-cup-display text-[14cqw] font-extrabold leading-none tracking-[-0.05em]">{value}</span>
+        <span className="prize-gold font-cup-display text-[13cqw] font-extrabold leading-none tracking-[-0.05em]">{value}</span>
       </div>
 
       <span className="absolute right-[6%] top-[11%] font-cup-display text-[3.4cqw] font-bold text-[hsl(var(--note-gold-light)/0.85)]">{value}</span>
