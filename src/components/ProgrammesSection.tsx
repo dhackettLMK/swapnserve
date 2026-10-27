@@ -48,7 +48,7 @@ export default function ProgrammesSection() {
           <div className="divide-y divide-border">
             {programmes.map((programme) => (
               <article key={programme.number} className="py-7 first:pt-0 last:pb-0">
-                <div className="mb-4 flex items-center justify-between gap-3 text-xs font-semibold text-muted-foreground"><span className="flex items-center gap-2"><programme.icon size={16} /> {programme.number}</span><span className={programme.status === "Coming Soon" ? "text-primary" : "text-muted-foreground"}>{programme.status}</span></div>
+                <div className="mb-4 flex items-center justify-between gap-3 text-xs font-semibold text-muted-foreground"><span className="flex items-center gap-2"><programme.icon size={16} /> {programme.number}</span><span className="text-muted-foreground">{programme.status}</span></div>
                 <h3 className="mb-3 text-xl font-semibold md:text-2xl">{programme.title}</h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">{programme.copy}</p>
                 {programme.href && <Button asChild variant="link" className="mt-3 h-auto px-0">{programme.href.startsWith("#") ? <a href={programme.href}>{programme.label}<ArrowRight /></a> : <Link to={programme.href}>{programme.label}<ArrowRight /></Link>}</Button>}

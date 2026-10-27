@@ -32,7 +32,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-primary/65 to-secondary/90" />
       </div>
 
-      <div className="container relative z-10 flex min-h-[640px] items-end pt-32 pb-14 md:min-h-[720px] md:pt-40 md:pb-20">
+      <div className="container relative z-10 flex min-h-[640px] items-end pt-28 pb-8 md:min-h-[720px] md:pt-40 md:pb-20">
         <div className="max-w-4xl">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -57,7 +57,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-8 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:text-lg"
+            className="mb-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:mb-8 md:text-lg"
           >
             Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025 by
             David Hackett. On the surface we are a community clothing event. Underneath, we
@@ -83,13 +83,13 @@ const HeroSection = () => {
             </Button>
           </motion.div>
 
-          <div className="mb-8" />
+          <div className="mb-4 md:mb-8" />
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap gap-x-6 gap-y-2 border-t border-primary-foreground/20 pt-5"
+            className="hidden flex-wrap gap-x-6 gap-y-2 border-t border-primary-foreground/20 pt-5 sm:flex"
           >
             {chips.map((chip, i) => (
               <motion.span
