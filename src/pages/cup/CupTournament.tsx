@@ -5,7 +5,7 @@ import CupLayout from "@/components/cup/CupLayout";
 import { ConfigNotice, KitDot } from "@/components/cup/CupUi";
 import { BracketView, GroupStandings } from "@/components/cup/TournamentView";
 import wordmark from "@/assets/swapnserve-wordmark-cup.png";
-import cupSpray from "@/assets/cup-spraypaint.png";
+import cupSpray from "@/assets/cup-spraypaint.webp";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi } from "@/lib/cupApi";
 import type { CupMatch, TournamentPublicResponse } from "@/lib/cupTypes";

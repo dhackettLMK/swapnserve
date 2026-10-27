@@ -21,10 +21,10 @@ import type { Payment } from "@/lib/cupTypes";
 /** Each player's share of the €70 entry fee. */
 const DEPOSIT_CENTS = TEAM_PRICE_CENTS / 7;
 import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
-import cupSpray from "@/assets/cup-spraypaint.png";
-import prizeCup from "@/assets/prize-1000-spraypaint.png";
-import prizePlate from "@/assets/prize-300-spraypaint.png";
-import prizePlayer from "@/assets/prize-100-spraypaint.png";
+import cupSpray from "@/assets/cup-spraypaint.webp";
+import prizeCup from "@/assets/prize-1000-spraypaint.webp";
+import prizePlate from "@/assets/prize-300-spraypaint.webp";
+import prizePlayer from "@/assets/prize-100-spraypaint.webp";
 
 /** Prize money on the line, shown in the same gold spray-paint lettering as the Cup wordmark. */
 const PRIZES = [

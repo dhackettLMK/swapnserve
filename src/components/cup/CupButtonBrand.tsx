@@ -1,5 +1,5 @@
 import wordmark from "@/assets/swapnserve-wordmark-cup.png";
-import cupSpraypaint from "@/assets/cup-spraypaint.png";
+import cupSpraypaint from "@/assets/cup-spraypaint.webp";
 
 interface CupButtonBrandProps {
   wordmarkClass?: string;

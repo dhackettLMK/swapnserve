@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Trophy } from "lucide-react";
 import logo from "@/assets/logo.png";
-import cupSpray from "@/assets/cup-spraypaint.png";
+import cupSpray from "@/assets/cup-spraypaint.webp";
 import SiteFooter from "@/components/SiteFooter";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
