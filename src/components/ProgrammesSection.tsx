@@ -32,18 +32,18 @@ const Cursor = () => (
 );
 
 const HackathonCard = () => (
-  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-foreground p-6 text-background md:p-8">
+  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
     <MatrixRain />
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-30 mix-blend-overlay" style={{ backgroundImage: "repeating-linear-gradient(0deg, hsl(var(--accent) / 0.08) 0px, hsl(var(--accent) / 0.08) 1px, transparent 1px, transparent 3px)" }} />
     {["left-3 top-3 border-l border-t", "right-3 top-3 border-r border-t", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map((c) => <div key={c} aria-hidden="true" className={`absolute h-3 w-3 border-accent/60 ${c}`} />)}
     <div className="relative">
-      <div className="mb-4 flex items-center justify-between gap-3 text-xs font-semibold text-background/60"><span className="flex items-center gap-2"><Code size={16} className="text-accent" /> 02</span></div>
+      <div className="mb-4 flex items-center justify-between gap-3 text-xs font-semibold text-primary-foreground/70"><span className="flex items-center gap-2"><Code size={16} className="text-accent" /> 02</span></div>
       <h3 className="mb-2 text-xl font-semibold transition-all group-hover:[text-shadow:_2px_0_0_hsl(var(--accent)/0.8),_-2px_0_0_hsl(var(--primary)/0.8)] md:text-2xl">Swap'n'Serve Hackathon</h3>
       <div className="mb-4 flex items-center font-mono text-[12px] text-accent/90"><Terminal size={12} className="mr-1.5" /><span className="opacity-70">$</span><span className="ml-1.5">status --coming-soon</span><Cursor /></div>
-      <p className="text-sm leading-relaxed text-background/80">Teams build digital solutions to real problems facing Limerick, then pitch to a panel of judges for a cash prize. Hosted at The Engine, Limerick's Local Enterprise Office, to develop skills and turn ideas into something tangible.</p>
+      <p className="text-sm leading-relaxed text-primary-foreground/85">Teams build digital solutions to real problems facing Limerick, then pitch to a panel of judges for a cash prize. Hosted at The Engine, Limerick's Local Enterprise Office, to develop skills and turn ideas into something tangible.</p>
       <div className="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
         <span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 font-semibold text-accent">{"</>"} Real Limerick problems</span>
-        <span className="rounded-full border border-background/25 bg-background/10 px-3 py-1.5">Open to all skill levels</span>
+        <span className="rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1.5">Open to all skill levels</span>
       </div>
     </div>
   </motion.article>
@@ -56,7 +56,7 @@ const Hanger = ({ delay, left, top, duration }: { delay: number; left: string; t
 );
 
 const SwapCard = () => (
-  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-primary to-foreground p-6 text-primary-foreground md:p-8">
+  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
     <svg viewBox="0 0 400 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.12]">
       <g stroke="hsl(var(--primary-foreground))" strokeWidth="2" strokeLinecap="round" fill="none">
         <line x1="40" y1="60" x2="360" y2="60" /><line x1="40" y1="60" x2="40" y2="260" /><line x1="360" y1="60" x2="360" y2="260" />
