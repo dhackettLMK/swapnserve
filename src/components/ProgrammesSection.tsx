@@ -112,27 +112,30 @@ export default function ProgrammesSection() {
             </div>
             <p className="mb-5 max-w-3xl text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with €1,400 in prize money. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
             <div className="mb-8 border-y border-primary-foreground/20 py-6">
-              <div className="mb-5 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
-                <p className="font-cup-display text-4xl font-bold uppercase leading-none tracking-tight text-primary-foreground md:text-5xl">32 <span className="text-accent">teams</span></p>
-              </div>
+              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
               <div className="grid gap-4 sm:grid-cols-3">
-
                 {PRIZES.map((prize) => (
                   <div key={prize.label} className="flex min-w-0 flex-col items-center text-center">
                     <Banknote value={prize.amount} label={prize.label} serial={prize.serial} />
                   </div>
                 ))}
               </div>
-              <p className="mt-5 text-xs text-primary-foreground/70">5-a-side · 2 subs · rolling subs</p>
             </div>
 
-            <p className="mb-6 text-sm text-primary-foreground/75">€10 per team member · 7 team members required</p>
-            <div className="mt-auto flex flex-wrap gap-3">
-              <Button asChild variant="secondary" size="lg"><Link to="/cup?src=programme-team">Register your team <ArrowRight /></Link></Button>
-              <Button asChild variant="ghost" size="lg" className="border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Link to="/cup?src=programme-solo#solo">Register as an individual <UserPlus /></Link></Button>
+            <div className="mt-auto flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
+              <div className="min-w-0">
+                <p className="mb-6 text-sm text-primary-foreground/75">€10 per team member · 7 team members required</p>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild variant="secondary" size="lg"><Link to="/cup?src=programme-team">Register your team <ArrowRight /></Link></Button>
+                  <Button asChild variant="ghost" size="lg" className="border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Link to="/cup?src=programme-solo#solo">Register as an individual <UserPlus /></Link></Button>
+                </div>
+                <Link to="/cup/format" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/80 hover:text-primary-foreground">View the tournament <ArrowRight size={15} /></Link>
+              </div>
+              <div className="min-w-0 text-right">
+                <p className="font-cup-display text-5xl font-bold uppercase leading-none tracking-tight text-primary-foreground md:text-6xl">32 <span className="text-accent">teams</span></p>
+                <p className="mt-3 text-xs text-primary-foreground/70">5-a-side · 2 subs · rolling subs</p>
+              </div>
             </div>
-            <Link to="/cup/format" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/80 hover:text-primary-foreground">View the tournament <ArrowRight size={15} /></Link>
           </motion.article>
           <div className="grid min-w-0 gap-6 md:grid-cols-2">
             <HackathonCard />
