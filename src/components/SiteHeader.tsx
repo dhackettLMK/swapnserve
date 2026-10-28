@@ -117,13 +117,6 @@ const SiteHeader = () => {
                   </a>
                 ))}
                 <Link
-                  to="/thirty-under-thirty"
-                  onClick={() => setMobileOpen(false)}
-                  className="block rounded-xl px-3 py-3 text-sm font-medium text-primary-foreground/80 hover:bg-primary-foreground/10"
-                >
-                  Meet the Talented People
-                </Link>
-                <Link
                   to="/cup?src=header-mobile"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Sign Up to the Swap'n'Serve Cup"
