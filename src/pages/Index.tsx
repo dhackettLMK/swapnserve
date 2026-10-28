@@ -5,6 +5,7 @@ import ProgrammesSection from "@/components/ProgrammesSection";
 import ImpactSnapshot from "@/components/ImpactSnapshot";
 import TimelineSection from "@/components/TimelineSection";
 import EventsSection from "@/components/EventsSection";
+import LendAHand from "@/components/LendAHand";
 import VolunteerRoles from "@/components/VolunteerRoles";
 import PartnersSection from "@/components/PartnersSection";
 import InstagramSection from "@/components/InstagramSection";
@@ -28,6 +29,7 @@ const Index = () => {
         <ImpactSnapshot />
         <TimelineSection />
         <EventsSection />
+        <LendAHand />
         <VolunteerRoles />
         <PartnersSection />
         <InstagramSection />
