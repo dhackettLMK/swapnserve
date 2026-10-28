@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Impact", href: "#impact" },
   { label: "Journey", href: "#timeline" },
   { label: "Donate", href: "#donate" },
-  { label: "Volunteer", href: "#volunteer" },
+  { label: "Volunteer", href: "/volunteer" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -37,7 +37,7 @@ const SiteHeader = () => {
     );
 
     navLinks.forEach((link) => {
-      const element = document.querySelector(link.href);
+      const element = link.href.startsWith("#") ? document.querySelector(link.href) : null;
       if (element) observer.observe(element);
     });
 
@@ -103,9 +103,9 @@ const SiteHeader = () => {
             >
               <div className="space-y-1">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
-                    href={link.href}
+                    to={link.href}
                     onClick={() => setMobileOpen(false)}
                     className={`block rounded-xl px-3 py-3 text-sm font-medium ${
                       activeSection === link.href
@@ -114,7 +114,7 @@ const SiteHeader = () => {
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
                 <Link
                   to="/cup?src=header-mobile"
