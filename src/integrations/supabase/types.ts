@@ -389,6 +389,42 @@ export type Database = {
         }
         Relationships: []
       }
+      volunteer_proposals: {
+        Row: {
+          age_group: string
+          consent: boolean
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          proposal: string
+          skills: string
+        }
+        Insert: {
+          age_group: string
+          consent: boolean
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          proposal: string
+          skills?: string
+        }
+        Update: {
+          age_group?: string
+          consent?: boolean
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          proposal?: string
+          skills?: string
+        }
+        Relationships: []
+      }
       volunteer_submissions: {
         Row: {
           age_group: string
@@ -440,6 +476,7 @@ export type Database = {
     }
     Functions: {
       submit_volunteer_application: { Args: { payload: Json }; Returns: string }
+      submit_volunteer_proposal: { Args: { payload: Json }; Returns: string }
     }
     Enums: {
       [_ in never]: never
