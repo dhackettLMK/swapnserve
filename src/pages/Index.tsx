@@ -2,7 +2,6 @@ import SiteHeader from "@/components/SiteHeader";
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import ProgrammesSection from "@/components/ProgrammesSection";
-import TalentedPeopleSection from "@/components/TalentedPeopleSection";
 import ImpactSnapshot from "@/components/ImpactSnapshot";
 import TimelineSection from "@/components/TimelineSection";
 import EventsSection from "@/components/EventsSection";
@@ -25,7 +24,6 @@ const Index = () => {
       <main id="main-content">
         <HeroSection />
         <ProgrammesSection />
-        <TalentedPeopleSection />
         <HowItWorks />
         <ImpactSnapshot />
         <TimelineSection />
