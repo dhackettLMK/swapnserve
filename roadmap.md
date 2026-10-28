@@ -1,8 +1,8 @@
 # Roadmap
 
 ## Volunteer sign-up
-- [ ] Create the /volunteer roles page and role-linked form.
-- [ ] Save validated submissions privately and verify submission on desktop and mobile.
+- [x] Create the /volunteer roles page and role-linked form.
+- [x] Save validated submissions privately and verify submission on desktop and mobile.
 
 ## Platinum redesign
 - [x] Apply platinum and green tokens and Sora/Manrope throughout all pages.
