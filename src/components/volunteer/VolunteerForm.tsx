@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
@@ -12,7 +12,8 @@ export default function VolunteerForm({ selectedRoles, onRolesChange }: { select
   const [complete, setComplete] = useState(false);
   const [failure, setFailure] = useState('');
   const applicationId = useRef(crypto.randomUUID());
-  const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<VolunteerValues>({ resolver: zodResolver(volunteerSchema), values: { full_name: '', email: '', phone: '', age_group: undefined as unknown as VolunteerValues['age_group'], roles: selectedRoles, availability: [], skills: '', garda_vetting: undefined as unknown as VolunteerValues['garda_vetting'], referral: undefined as unknown as VolunteerValues['referral'], consent: false as unknown as true }, resetOptions: { keepDirtyValues: true } });
+  const { register, handleSubmit, watch, setValue, formState: { errors, isSubmitting } } = useForm<VolunteerValues>({ resolver: zodResolver(volunteerSchema), defaultValues: { full_name: '', email: '', phone: '', roles: [], availability: [], skills: '' } });
+  useEffect(() => { setValue('roles', selectedRoles, { shouldValidate: selectedRoles.length > 0 }); }, [selectedRoles, setValue]);
   const inputClass = 'mt-2 w-full rounded-md border border-input bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring';
   const error = (key: keyof VolunteerValues) => errors[key] ? <p id={`${key}-error`} className="mt-2 text-sm text-destructive" role="alert">{errors[key]?.message}</p> : null;
   async function submit(values: VolunteerValues) {
