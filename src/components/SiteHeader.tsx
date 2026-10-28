@@ -74,12 +74,6 @@ const SiteHeader = () => {
               );
             })}
             <Link
-              to="/thirty-under-thirty"
-              className="rounded-full px-2.5 py-2 text-xs font-medium text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
-            >
-              Talented People
-            </Link>
-            <Link
               to="/cup?src=header"
               aria-label="Sign Up to the Cup"
               className="ml-3 inline-flex items-center rounded-full bg-secondary px-4 py-2 ring-1 ring-accent/70 shadow-sm transition-transform hover:scale-[1.02]"
