@@ -328,7 +328,7 @@ const SwapCard = () => (
       <h3 className="mb-3 text-xl font-semibold md:text-2xl">Swap'N'Serve 3 &amp; Fashion Show</h3>
       <p className="text-sm leading-relaxed text-primary-foreground/85">Our flagship clothing redistribution event. Quality donated clothing, sorted by volunteers and offered at €1 per item or free where appropriate. No sign-up, no means testing. Every leftover piece is shared with local charities.<br /><br />We aim to deliver a new cool side project under this event&nbsp; by which as means of promotion we will use all of our donations as stock to facilitate a local fashion show, fully made out of donated second hand clothing.<br /><br />There will be lots of different opportunities for volunteers to make this come to life!</p>
       <Catwalk />
-      <a href="#volunteer" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-accent underline underline-offset-4 transition-colors hover:text-primary-foreground">Sign up here <ArrowRight size={15} /></a>
+      <a href="/volunteer" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-accent underline underline-offset-4 transition-colors hover:text-primary-foreground">Sign up here <ArrowRight size={15} /></a>
       <a href="#how-it-works" className="mt-7 inline-flex items-center gap-2 rounded-full border border-accent bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground">See how it works <ArrowRight size={15} /></a>
     </div>
   </motion.article>

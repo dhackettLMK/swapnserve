@@ -41,3 +41,12 @@ export const volunteerSchema = z.object({
   referral: z.enum(referralOptions, { errorMap: () => ({ message: 'Choose how you heard about us.' }) }),
   consent: z.literal(true, { errorMap: () => ({ message: 'Please agree to being contacted about volunteering.' }) }),
 });
+export const proposalSchema = z.object({
+  full_name: z.string().trim().min(1, 'Enter your full name.').max(100),
+  email: z.string().trim().email('Enter a valid email address.').max(255),
+  phone: z.string().trim().max(30).regex(/^\+?[0-9 ()-]+$/, 'Enter a valid phone number.').refine(value => { const digits = value.replace(/\D/g, ''); return digits.length >= 7 && digits.length <= 15; }, 'Use a phone number with 7–15 digits.'),
+  age_group: z.enum(['18+', 'Under 18'], { errorMap: () => ({ message: 'Select your age group.' }) }),
+  skills: z.string().trim().max(2000),
+  proposal: z.string().trim().min(1, 'Tell us your idea.').max(2000),
+  consent: z.literal(true, { errorMap: () => ({ message: 'Please agree to being contacted about your idea.' }) }),
+});
