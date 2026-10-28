@@ -9,7 +9,6 @@ import CupHome from "./pages/cup/CupHome.tsx";
 import CupAdmin from "./pages/cup/CupAdmin.tsx";
 import CupTournament from "./pages/cup/CupTournament.tsx";
 import CupFormat from "./pages/cup/CupFormat.tsx";
-import ThirtyUnderThirty from "./pages/ThirtyUnderThirty.tsx";
 import PageViewTracker from "./components/PageViewTracker";
 
 const queryClient = new QueryClient();
