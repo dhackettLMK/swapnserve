@@ -389,12 +389,57 @@ export type Database = {
         }
         Relationships: []
       }
+      volunteer_submissions: {
+        Row: {
+          age_group: string
+          availability: string[]
+          consent: boolean
+          created_at: string
+          email: string
+          full_name: string
+          garda_vetting: string
+          id: string
+          phone: string
+          referral: string
+          roles: string[]
+          skills: string
+        }
+        Insert: {
+          age_group: string
+          availability: string[]
+          consent: boolean
+          created_at?: string
+          email: string
+          full_name: string
+          garda_vetting: string
+          id: string
+          phone: string
+          referral: string
+          roles: string[]
+          skills?: string
+        }
+        Update: {
+          age_group?: string
+          availability?: string[]
+          consent?: boolean
+          created_at?: string
+          email?: string
+          full_name?: string
+          garda_vetting?: string
+          id?: string
+          phone?: string
+          referral?: string
+          roles?: string[]
+          skills?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      submit_volunteer_application: { Args: { payload: Json }; Returns: string }
     }
     Enums: {
       [_ in never]: never

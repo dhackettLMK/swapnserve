@@ -1,5 +1,9 @@
 # Roadmap
 
+## Volunteer sign-up
+- [x] Create the /volunteer roles page and role-linked form.
+- [x] Save validated submissions privately and verify submission on desktop and mobile.
+
 ## Platinum redesign
 - [x] Apply platinum and green tokens and Sora/Manrope throughout all pages.
 - [x] Refine the homepage into an editorial magazine layout and simplify decorative treatments.

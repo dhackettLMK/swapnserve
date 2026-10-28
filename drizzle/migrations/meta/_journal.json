@@ -50,6 +50,13 @@
       "when": 1792449858433,
       "tag": "0006_signup_attribution",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793230838020,
+      "tag": "0007_volunteer_applications",
+      "breakpoints": true
     }
   ]
 }
