@@ -25,7 +25,7 @@ const SiteFooter = () => {
                 { label: "Our Impact", href: "#impact" },
                 { label: "Our Journey", href: "#timeline" },
                 { label: "Donate", href: "#donate" },
-                { label: "Volunteer", href: "#volunteer" },
+                { label: "Volunteer", href: "/volunteer" },
                 { label: "FAQ", href: "#faq" },
               ].map((link) => (
                 <motion.a

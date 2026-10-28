@@ -11,6 +11,7 @@ import CupTournament from "./pages/cup/CupTournament.tsx";
 import CupFormat from "./pages/cup/CupFormat.tsx";
 import PageViewTracker from "./components/PageViewTracker";
 import Volunteer from "./pages/Volunteer";
+import VolunteerPropose from "./pages/VolunteerPropose";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/volunteer" element={<Volunteer />} />
+          <Route path="/volunteer/propose" element={<VolunteerPropose />} />
           <Route path="/cup" element={<CupHome />} />
           <Route path="/admin" element={<CupAdmin />} />
           <Route path="/cup/admin" element={<CupAdmin />} />

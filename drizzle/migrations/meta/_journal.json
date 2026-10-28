@@ -57,6 +57,13 @@
       "when": 1793230838020,
       "tag": "0007_volunteer_applications",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793231690098,
+      "tag": "0008_volunteer_proposals",
+      "breakpoints": true
     }
   ]
 }
