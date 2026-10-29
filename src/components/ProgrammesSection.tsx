@@ -159,7 +159,7 @@ const Hanger = ({ delay, left, top, duration, garment }: { delay: number; left: 
 
 const RunwayModel = () => (
   <motion.div
-    className="absolute left-1/2 h-[110px] w-9 origin-bottom md:h-[128px]"
+    className="absolute left-1/2 h-[64%] w-[28%] origin-bottom"
     animate={{
       x: "-50%",
       bottom: ["34%", "19%", "19%", "19%"],
@@ -247,10 +247,10 @@ const RunwayModel = () => (
 );
 
 const Catwalk = () => (
-  <div aria-hidden="true" className="relative mt-7 h-40 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary md:h-44">
+  <div aria-hidden="true" className="relative mt-7 min-h-[16rem] flex-1 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary md:min-h-[22rem]">
     <div className="absolute inset-x-0 top-0 h-[38%]" style={{ background: "linear-gradient(180deg, hsl(var(--primary-foreground) / 0.06), hsl(var(--primary-foreground) / 0.01))" }} />
     <motion.div
-      className="absolute left-1/2 top-[16%] h-12 w-16 -translate-x-1/2 rounded-t-full"
+      className="absolute left-1/2 top-[16%] h-[16%] w-[24%] -translate-x-1/2 rounded-t-full"
       style={{ background: "radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.5), hsl(var(--accent) / 0.08) 60%, transparent 80%)" }}
       animate={{ opacity: [0.55, 0.95, 0.55] }}
       transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
@@ -279,7 +279,7 @@ const Catwalk = () => (
       animate={{ opacity: [0.6, 0.3, 0.6] }}
       transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
     />
-    <div className="absolute bottom-0 left-1/2 h-16 w-40 -translate-x-1/2" style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--accent) / 0.35), transparent 70%)" }} />
+    <div className="absolute bottom-0 left-1/2 h-[24%] w-[46%] -translate-x-1/2" style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--accent) / 0.35), transparent 70%)" }} />
     {Array.from({ length: 6 }).map((_, i) => (
       <span key={`cl${i}`} className="absolute h-1.5 w-1.5 rounded-full bg-primary-foreground/20" style={{ left: `${2 + i * 3.4}%`, bottom: `${8 + (i % 3) * 5}%` }} />
     ))}
@@ -296,7 +296,7 @@ const Catwalk = () => (
       />
     ))}
     <RunwayModel />
-    <div className="absolute inset-x-0 top-2.5 flex items-center justify-between px-3 text-[8px] font-semibold uppercase tracking-[0.3em] text-accent/80 md:text-[9px]">
+    <div className="absolute inset-x-0 top-2.5 flex items-center justify-between px-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-accent/80 md:text-[12px]">
       <span>Swap'n'Serve · The Show</span>
       <span>Vol. 03</span>
     </div>
