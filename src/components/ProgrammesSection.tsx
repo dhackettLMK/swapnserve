@@ -304,7 +304,7 @@ const Catwalk = () => (
 );
 
 const SwapCard = () => (
-  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
+  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} whileHover={{ y: -4 }} className="group relative flex min-w-0 flex-col overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
     <svg viewBox="0 0 400 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.12]">
       <g stroke="hsl(var(--primary-foreground))" strokeWidth="2" strokeLinecap="round" fill="none">
         <line x1="40" y1="60" x2="360" y2="60" /><line x1="40" y1="60" x2="40" y2="260" /><line x1="360" y1="60" x2="360" y2="260" />
@@ -322,8 +322,7 @@ const SwapCard = () => (
     <motion.div aria-hidden="true" className="pointer-events-none absolute right-[12%] top-[30%]" animate={{ x: [0, 30, 0], opacity: [0.2, 0.6, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}><ArrowLeftRight size={26} className="text-accent" /></motion.div>
     <motion.div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30" style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.45), transparent 70%)" }} animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
     <motion.div aria-hidden="true" className="pointer-events-none absolute top-0 h-full w-[40%] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--accent) / 0.25), transparent)" }} animate={{ left: ["-40%", "100%"] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }} />
-    <div className="relative">
-      <div className="mb-4 flex items-center justify-between gap-3 text-xs font-semibold"><span className="flex items-center gap-2 text-primary-foreground/70"><Shirt size={16} className="text-accent" /> 03</span>
+    <div className="relative flex h-full flex-col">
         <span className="flex items-center gap-2 uppercase tracking-[0.16em] text-accent"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-accent" /></span>Coming Soon</span></div>
       <h3 className="mb-3 text-xl font-semibold md:text-2xl">Swap'N'Serve 3 &amp; Fashion Show</h3>
       <p className="text-sm leading-relaxed text-primary-foreground/85">Our flagship clothing redistribution event. Quality donated clothing, sorted by volunteers and offered at €1 per item or free where appropriate. No sign-up, no means testing. Every leftover piece is shared with local charities.<br /><br />We aim to deliver a new cool side project under this event&nbsp; by which as means of promotion we will use all of our donations as stock to facilitate a local fashion show, fully made out of donated second hand clothing.<br /><br />There will be lots of different opportunities for volunteers to make this come to life!</p>
