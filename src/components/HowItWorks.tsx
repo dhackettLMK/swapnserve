@@ -77,7 +77,7 @@ const HowItWorks = () => {
             The Process
           </span>
           <h2 className="text-3xl md:text-5xl font-section font-bold text-foreground mb-4 heading-underline in-view">
-            How It Works
+            How the Swap'N'Serve clothing pop up process works
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             A simple, respectful process from donation to doorstep.
