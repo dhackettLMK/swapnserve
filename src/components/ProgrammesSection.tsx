@@ -159,7 +159,7 @@ const Hanger = ({ delay, left, top, duration, garment }: { delay: number; left: 
 
 const RunwayModel = () => (
   <motion.div
-    className="absolute left-1/2 h-[110px] w-9 origin-bottom md:h-[128px]"
+    className="absolute left-1/2 h-[64%] w-[28%] origin-bottom"
     animate={{
       x: "-50%",
       bottom: ["34%", "19%", "19%", "19%"],
@@ -247,10 +247,10 @@ const RunwayModel = () => (
 );
 
 const Catwalk = () => (
-  <div aria-hidden="true" className="relative mt-7 h-40 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary md:h-44">
+  <div aria-hidden="true" className="relative mt-7 min-h-[16rem] flex-1 overflow-hidden rounded-lg border border-primary-foreground/10 bg-primary md:min-h-[22rem]">
     <div className="absolute inset-x-0 top-0 h-[38%]" style={{ background: "linear-gradient(180deg, hsl(var(--primary-foreground) / 0.06), hsl(var(--primary-foreground) / 0.01))" }} />
     <motion.div
-      className="absolute left-1/2 top-[16%] h-12 w-16 -translate-x-1/2 rounded-t-full"
+      className="absolute left-1/2 top-[16%] h-[16%] w-[24%] -translate-x-1/2 rounded-t-full"
       style={{ background: "radial-gradient(ellipse at 50% 100%, hsl(var(--accent) / 0.5), hsl(var(--accent) / 0.08) 60%, transparent 80%)" }}
       animate={{ opacity: [0.55, 0.95, 0.55] }}
       transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
@@ -279,7 +279,7 @@ const Catwalk = () => (
       animate={{ opacity: [0.6, 0.3, 0.6] }}
       transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
     />
-    <div className="absolute bottom-0 left-1/2 h-16 w-40 -translate-x-1/2" style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--accent) / 0.35), transparent 70%)" }} />
+    <div className="absolute bottom-0 left-1/2 h-[24%] w-[46%] -translate-x-1/2" style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--accent) / 0.35), transparent 70%)" }} />
     {Array.from({ length: 6 }).map((_, i) => (
       <span key={`cl${i}`} className="absolute h-1.5 w-1.5 rounded-full bg-primary-foreground/20" style={{ left: `${2 + i * 3.4}%`, bottom: `${8 + (i % 3) * 5}%` }} />
     ))}
@@ -296,7 +296,7 @@ const Catwalk = () => (
       />
     ))}
     <RunwayModel />
-    <div className="absolute inset-x-0 top-2.5 flex items-center justify-between px-3 text-[8px] font-semibold uppercase tracking-[0.3em] text-accent/80 md:text-[9px]">
+    <div className="absolute inset-x-0 top-2.5 flex items-center justify-between px-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-accent/80 md:text-[12px]">
       <span>Swap'n'Serve · The Show</span>
       <span>Vol. 03</span>
     </div>
@@ -304,7 +304,7 @@ const Catwalk = () => (
 );
 
 const SwapCard = () => (
-  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} whileHover={{ y: -4 }} className="group relative overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
+  <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} whileHover={{ y: -4 }} className="group relative flex min-w-0 flex-col overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground md:p-8">
     <svg viewBox="0 0 400 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.12]">
       <g stroke="hsl(var(--primary-foreground))" strokeWidth="2" strokeLinecap="round" fill="none">
         <line x1="40" y1="60" x2="360" y2="60" /><line x1="40" y1="60" x2="40" y2="260" /><line x1="360" y1="60" x2="360" y2="260" />
@@ -322,7 +322,7 @@ const SwapCard = () => (
     <motion.div aria-hidden="true" className="pointer-events-none absolute right-[12%] top-[30%]" animate={{ x: [0, 30, 0], opacity: [0.2, 0.6, 0.2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}><ArrowLeftRight size={26} className="text-accent" /></motion.div>
     <motion.div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30" style={{ background: "radial-gradient(circle, hsl(var(--accent) / 0.45), transparent 70%)" }} animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
     <motion.div aria-hidden="true" className="pointer-events-none absolute top-0 h-full w-[40%] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--accent) / 0.25), transparent)" }} animate={{ left: ["-40%", "100%"] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }} />
-    <div className="relative">
+    <div className="relative flex h-full flex-col">
       <div className="mb-4 flex items-center justify-between gap-3 text-xs font-semibold"><span className="flex items-center gap-2 text-primary-foreground/70"><Shirt size={16} className="text-accent" /> 03</span>
         <span className="flex items-center gap-2 uppercase tracking-[0.16em] text-accent"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-accent" /></span>Coming Soon</span></div>
       <h3 className="mb-3 text-xl font-semibold md:text-2xl">Swap'N'Serve 3 &amp; Fashion Show</h3>
