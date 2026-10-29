@@ -10,9 +10,9 @@ import wordmarkClean from "@/assets/swapnserve-wordmark-clean.png";
 import Banknote from "@/components/cup/Banknote";
 
 const PRIZES = [
-  { amount: "1,000", label: "Cup winners", serial: "SNS 001000" },
-  { amount: "300", label: "Plate winners", serial: "SNS 000300" },
-  { amount: "100", label: "Player of the tournament", serial: "SNS 000100" },
+  { amount: "1,000", label: "Cup winners", serial: "SNS No. 0417" },
+  { amount: "300", label: "Plate winners", serial: "SNS No. 0628" },
+  { amount: "100", label: "Player of the tournament", serial: "SNS No. 0193" },
 ];
 
 
