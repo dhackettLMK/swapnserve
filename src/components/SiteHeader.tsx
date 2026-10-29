@@ -47,7 +47,7 @@ const SiteHeader = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
       <div
-        className={`mx-auto max-w-[1400px] rounded-xl border border-primary-foreground/20 backdrop-blur-xl text-primary-foreground transition-all duration-300 ${
+        className={`site-header-shell mx-auto rounded-xl border border-primary-foreground/20 backdrop-blur-xl text-primary-foreground transition-all duration-300 ${
           mobileOpen ? "bg-primary" : "bg-primary/95"
         } ${scrolled ? "shadow-refined" : "shadow-sm"}`}
       >

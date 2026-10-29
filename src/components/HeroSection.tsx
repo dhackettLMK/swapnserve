@@ -33,7 +33,7 @@ const HeroSection = () => {
       </div>
 
       <div className="container relative z-10 flex min-h-[640px] items-end pt-28 pb-8 md:min-h-[720px] md:pt-40 md:pb-20">
-        <div className="max-w-4xl">
+        <div className="max-w-4xl 2xl:max-w-5xl">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:mb-8 md:text-lg"
+            className="mb-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:mb-8 md:text-lg 2xl:max-w-3xl"
           >
             Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025, We are a non-profit where we use our operations as opportunities to connect in local youth talent with resources and a stage to develop and demonstrate their skills and opportunities to promote growth and widespread regeneration into Limerick city by approaching problems in a unique and innovative manner, a culture where hate is not tolerated in any form. We also host a range of world class events, you should come :)
           </motion.p>

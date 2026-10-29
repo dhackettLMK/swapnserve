@@ -4,6 +4,7 @@
 - Ten confirmed honouree photos are saved in the content row. Source references are in `src/assets/thirty/portrait-sources.json`; uncertain identities remain blank. The stored Assets CDN paths serve on swapnserve.com but the local preview does not proxy them, so bundled copies live in `src/assets/thirty/portraits/` and `src/lib/thirtyPortraits.ts` swaps them in by asset id; any place showing a honouree photo must pass it through `resolvePortrait`, and the content row stays the source of truth so the page editor can still replace either source.
 
 - Use the shared semantic colour and typography tokens for all public, Cup and organiser views; load fonts locally so the platinum redesign stays consistent without affecting payment or content logic.
+- Shared page containers and the floating header grow with desktop width up to 140rem; retain local text and form width limits so wide monitors gain space without stretching reading or payment controls.
 - Volunteer applications use a validation-constrained, rate-limited write-only database function; never expose public read access to applicant contact details.
 - Keep volunteer role names and client validation together in the volunteer module so role cards and form choices stay aligned; mirror allowed values in database validation.
 - Volunteer proposals ("Think we missed something?") save to `volunteer_proposals` via the write-only, rate-limited `submit_volunteer_proposal` function; same privacy rule as applications — no public read of contact details.
