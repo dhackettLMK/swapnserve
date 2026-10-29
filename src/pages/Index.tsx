@@ -6,7 +6,6 @@ import ImpactSnapshot from "@/components/ImpactSnapshot";
 import TimelineSection from "@/components/TimelineSection";
 import EventsSection from "@/components/EventsSection";
 import LendAHand from "@/components/LendAHand";
-import PartnersSection from "@/components/PartnersSection";
 import InstagramSection from "@/components/InstagramSection";
 import FaqSection from "@/components/FaqSection";
 import CtaBanner from "@/components/CtaBanner";
@@ -29,7 +28,6 @@ const Index = () => {
         <TimelineSection />
         <EventsSection />
         <LendAHand />
-        <PartnersSection />
         <InstagramSection />
         <FaqSection />
         <CtaBanner />
