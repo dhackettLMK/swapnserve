@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, CalendarDays, MapPin, ExternalLink } from "lucide-react";
 import PressLayout from "@/components/press/PressLayout";
@@ -29,6 +29,15 @@ const fadeUp = {
 
 const PressHome = () => {
   const [filter, setFilter] = useState<PersonCategory | "All">("All");
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [hash]);
+
   const people =
     filter === "All" ? PEOPLE : PEOPLE.filter((p) => p.category === filter);
 
