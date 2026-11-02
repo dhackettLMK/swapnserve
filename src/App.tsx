@@ -12,6 +12,13 @@ import CupFormat from "./pages/cup/CupFormat.tsx";
 import PageViewTracker from "./components/PageViewTracker";
 import Volunteer from "./pages/Volunteer";
 import VolunteerPropose from "./pages/VolunteerPropose";
+import PressHome from "./pages/press/PressHome";
+import PressPerson from "./pages/press/PressPerson";
+import PressBlog from "./pages/press/PressBlog";
+import PressArticle from "./pages/press/PressArticle";
+import PressCup from "./pages/press/PressCup";
+import PressKit from "./pages/press/PressKit";
+import PressAbout from "./pages/press/PressAbout";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +38,13 @@ const App = () => (
           <Route path="/cup/admin" element={<CupAdmin />} />
           <Route path="/cup/tournament" element={<CupTournament />} />
           <Route path="/cup/format" element={<CupFormat />} />
+          <Route path="/press" element={<PressHome />} />
+          <Route path="/press/people/:slug" element={<PressPerson />} />
+          <Route path="/press/blog" element={<PressBlog />} />
+          <Route path="/press/blog/:slug" element={<PressArticle />} />
+          <Route path="/press/cup" element={<PressCup />} />
+          <Route path="/press/kit" element={<PressKit />} />
+          <Route path="/press/about" element={<PressAbout />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
