@@ -5,6 +5,9 @@
 @import '@fontsource/manrope/500.css';
 @import '@fontsource/manrope/600.css';
 @import '@fontsource/manrope/700.css';
+@import '@fontsource/fraunces/400.css';
+@import '@fontsource/fraunces/600.css';
+@import '@fontsource/fraunces/400-italic.css';
 
 @tailwind base;
 @tailwind components;
@@ -122,6 +125,15 @@
 @layer utilities {
   .font-cup-display { font-family: var(--font-cup-display); letter-spacing: 0; }
   .font-cup-body { font-family: var(--font-cup-body); letter-spacing: 0; }
+  .font-press-serif { font-family: 'Fraunces', Georgia, serif; }
+}
+
+/* Press room: clean printing for /press/kit and article pages */
+@media print {
+  .no-print { display: none !important; }
+  .press-room { background: #fff !important; }
+  .press-room a { color: inherit; text-decoration: none; }
+  .press-room section, .press-room article { break-inside: avoid-page; }
 }
 
 .cup-pitch-lines {
