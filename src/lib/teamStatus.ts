@@ -47,21 +47,22 @@ export function paidTowardEntry(payments: readonly PaymentInput[]): number {
 /**
  * The team's registration status.
  *
- * - `registered` — full roster of 7 AND the €70 is fully paid. On this
- *   transition the team is auto-eligible to be seeded into the Cup.
- * - `draft` — freshly created: only the captain, nothing paid yet.
- * - `collecting` — anything in between (players joining and/or money coming in).
+ * - `registered` — the €70 entry fee is fully paid, however it was covered
+ *   (captain sponsors the whole team, seven individual €10s, or any mix).
+ *   Captains may sponsor teammates' places, so €70 paid is the registration
+ *   rule; a short roster never blocks a fully funded team.
+ * - `draft` — nothing paid yet.
+ * - `collecting` — money has come in but the €70 is not covered yet.
  */
 export function evaluateTeamStatus(
   _team: unknown,
-  players: readonly PlayerInput[],
+  _players: readonly PlayerInput[],
   payments: readonly PaymentInput[],
 ): TeamStatus {
-  const rosterCount = Math.min(players.length, ROSTER_SIZE);
   const paidCents = paidTowardEntry(payments);
 
-  if (rosterCount >= ROSTER_SIZE && paidCents >= TEAM_PRICE_CENTS) return "registered";
-  if (rosterCount <= 1 && paidCents === 0) return "draft";
+  if (paidCents >= TEAM_PRICE_CENTS) return "registered";
+  if (paidCents === 0) return "draft";
   return "collecting";
 }
 
