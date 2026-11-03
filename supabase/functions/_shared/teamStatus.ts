@@ -31,16 +31,19 @@ export function paidTowardEntry(payments: readonly PaymentInput[]): number {
   return Math.min(total, TEAM_PRICE_CENTS);
 }
 
+/**
+ * €70 fully paid is the registration rule: captains may sponsor teammates'
+ * places, so a short roster never blocks a fully funded team.
+ */
 export function evaluateTeamStatus(
   _team: unknown,
-  players: readonly PlayerInput[],
+  _players: readonly PlayerInput[],
   payments: readonly PaymentInput[],
 ): TeamStatus {
-  const rosterCount = Math.min(players.length, ROSTER_SIZE);
   const paidCents = paidTowardEntry(payments);
 
-  if (rosterCount >= ROSTER_SIZE && paidCents >= TEAM_PRICE_CENTS) return "registered";
-  if (rosterCount <= 1 && paidCents === 0) return "draft";
+  if (paidCents >= TEAM_PRICE_CENTS) return "registered";
+  if (paidCents === 0) return "draft";
   return "collecting";
 }
 
