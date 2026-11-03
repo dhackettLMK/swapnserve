@@ -23,20 +23,20 @@ describe("evaluateTeamStatus", () => {
     expect(evaluateTeamStatus(team, players(1), [])).toBe("draft");
   });
 
-  it("is collecting with a partial roster", () => {
-    expect(evaluateTeamStatus(team, players(4), [])).toBe("collecting");
-  });
-
-  it("is collecting when the roster is full but the fee is underpaid", () => {
+  it("is collecting when only part of the fee has been paid", () => {
     const payments = [paid(PRICE_PER_PLAYER_CENTS * 5)]; // €50 of €70
     expect(evaluateTeamStatus(team, players(ROSTER_SIZE), payments)).toBe("collecting");
   });
 
-  it("is collecting when fully paid but the roster is short", () => {
-    expect(evaluateTeamStatus(team, players(6), [paid(TEAM_PRICE_CENTS)])).toBe("collecting");
+  it("registers a fully paid team even when the roster is short (sponsored places)", () => {
+    expect(evaluateTeamStatus(team, players(4), [paid(TEAM_PRICE_CENTS)])).toBe("registered");
   });
 
-  it("registers exactly when roster is 7 and €70 is paid", () => {
+  it("registers on €70 paid alone, roster size is not a condition", () => {
+    expect(evaluateTeamStatus(team, players(1), [paid(7000)])).toBe("registered");
+  });
+
+  it("registers exactly when €70 is paid with a full roster", () => {
     expect(evaluateTeamStatus(team, players(ROSTER_SIZE), [paid(TEAM_PRICE_CENTS)])).toBe(
       "registered",
     );
