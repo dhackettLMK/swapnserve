@@ -13,19 +13,17 @@ export const KitDot = ({ colour, size = 12 }: { colour: string; size?: number })
 );
 
 const STATUS_LABEL: Record<TeamStatus, string> = {
-  draft: "Draft",
-  collecting: "Collecting",
-  registered: "Registered",
+  draft: "Not paid",
+  collecting: "Not fully paid",
+  registered: "Fully registered",
 };
 
-/** Colour-coded registration status pill. */
+/** Colour-coded registration status pill: green when fully paid, red otherwise. */
 export const StatusBadge = ({ status }: { status: TeamStatus }) => {
   const cls =
     status === "registered"
       ? "bg-success text-success-foreground"
-      : status === "collecting"
-        ? "bg-accent text-accent-foreground"
-        : "bg-muted text-muted-foreground";
+      : "bg-destructive text-destructive-foreground";
   return <Badge className={`${cls} border-transparent`}>{STATUS_LABEL[status]}</Badge>;
 };
 
