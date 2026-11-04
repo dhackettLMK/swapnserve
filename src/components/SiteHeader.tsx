@@ -102,20 +102,35 @@ const SiteHeader = () => {
               aria-label="Mobile navigation"
             >
               <div className="space-y-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`block rounded-xl px-3 py-3 text-sm font-medium ${
-                      activeSection === link.href
-                        ? "bg-primary-foreground text-primary"
-                        : "text-primary-foreground/80 hover:bg-primary-foreground/10"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {navLinks.map((link) =>
+                  link.href.startsWith("#") ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block rounded-xl px-3 py-3 text-sm font-medium ${
+                        activeSection === link.href
+                          ? "bg-primary-foreground text-primary"
+                          : "text-primary-foreground/80 hover:bg-primary-foreground/10"
+                      }`}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block rounded-xl px-3 py-3 text-sm font-medium ${
+                        activeSection === link.href
+                          ? "bg-primary-foreground text-primary"
+                          : "text-primary-foreground/80 hover:bg-primary-foreground/10"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
                 <Link
                   to="/cup?src=header-mobile"
                   onClick={() => setMobileOpen(false)}
