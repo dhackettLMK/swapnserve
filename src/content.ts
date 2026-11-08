@@ -9,6 +9,7 @@ import azeezatPhoto from "@/assets/press/azeezat-muniru.jpg.asset.json";
 import christopherPhoto from "@/assets/press/christopher-oconnor.jpg.asset.json";
 import excelPhoto from "@/assets/press/excel-ahmed.png.asset.json";
 import tameraPhoto from "@/assets/press/tamera-keogh.jpg.asset.json";
+import seanPhoto from "@/assets/press/sean-leddin.png.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -460,7 +461,8 @@ export const ARTICLES: Article[] = [
             "name": "Sean Leddin",
             "role": "Founder of Fíor Jewellery",
             "area": "South Circular Road",
-            "text": "Business experience is helping turn the plans into something tangible. Sean Leddin, from the South Circular Road, is the founder of Fíor Jewellery, an Irish-themed jewellery brand stocked across Ireland with a shop in the Crescent Shopping Centre. David credits Sean with financial support and advice on important decisions."
+            "text": "Business experience is helping turn the plans into something tangible. Sean Leddin, from the South Circular Road, is the founder of Fíor Jewellery, an Irish-themed jewellery brand stocked across Ireland with a shop in the Crescent Shopping Centre. David credits Sean with financial support and advice on important decisions.",
+            "photo": seanPhoto.url
       },
       {
             "name": "Jeff Chucks",
