@@ -10,3 +10,4 @@
 - Volunteer proposals ("Think we missed something?") save to `volunteer_proposals` via the write-only, rate-limited `submit_volunteer_proposal` function; same privacy rule as applications — no public read of contact details.
 - Group draw eligibility must derive from confirmed payments through the shared team-status evaluator, never cached team status, so it matches the organiser dashboard even for historical sponsored entries.
 - The homepage blog section reuses the press room's article content and article URLs rather than maintaining a separate list, keeping previews and full stories aligned.
+- The talent blog feature reads the existing saved content through the thirty function, with a bundled fallback; portrait resolution must preserve organiser replacements rather than matching by person name.

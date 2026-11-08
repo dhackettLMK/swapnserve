@@ -7,13 +7,13 @@ import { ARTICLES } from "@/content";
 const PressBlog = () => (
   <PressLayout>
     <PressSeo
-      title="Articles | Swap 'N' Serve Press Room"
-      description="Features and event write-ups from Swap 'N' Serve, ready for journalists covering Limerick."
+      title="Blog | Swap 'N' Serve"
+      description="Meet Limerick's talented people and read stories from Swap 'N' Serve's events and community projects."
       path="/press/blog"
     />
     <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Articles</p>
-      <h1 className="mt-3 font-press-serif text-4xl font-semibold tracking-tight md:text-5xl">From the press room</h1>
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Stories from Limerick</p>
+      <h1 className="mt-3 font-press-serif text-4xl font-semibold tracking-tight md:text-5xl">The Swap'N'Serve blog</h1>
       <div className="mt-10 space-y-6">
         {ARTICLES.map((a) => (
           <Link
