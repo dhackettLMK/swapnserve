@@ -1,0 +1,248 @@
+{
+  "intro": "Celebrating young people who are making Limerick a better place to live, work and grow up.",
+  "title": "Meet the talented people within Limerick City",
+  "ctaLink": "mailto:swapnserve@gmail.com?subject=Thirty%20Under%20Thirty%20nomination",
+  "eyebrow": "Swap'N'Serve presents",
+  "ctaLabel": "Nominate someone",
+  "aboutBody": "Meet the entrepreneurs, athletes, creatives and community voices recognised by Swap'N'Serve for their talent, ambition and contribution to Limerick.",
+  "honourees": [
+    {
+      "id": "h1",
+      "age": "20",
+      "bio": "Ryan is a 20-year-old entrepreneur who has already achieved more than many do in their entire careers. One of Ireland’s most promising entrepreneurs, he has the ambition to become one of the best in the world over the next five years.\n\nRyan completed a Y Combinator batch, the prestigious entrepreneur accelerator based in San Francisco, where participants receive $500,000 for 7% of their company. The other past Limerick participants highlighted here are the Collison brothers, who founded Stripe. Ryan founded Hoplite.\n\nhttps://app.hoplite.sh/\n\nhttps://www.linkedin.com/in/ryan-morrissey-834256271/",
+      "name": "Ryan Morrisey",
+      "role": "Entrepreneur",
+      "photo": "/__l5e/assets-v1/8d11e300-f900-4eb7-ae88-1d7dda08df5a/ryan-morrisey.jpg"
+    },
+    {
+      "id": "h2",
+      "age": "",
+      "bio": "Ben has 20,000 followers, four million views and 400,000 likes on TikTok. One of the purest and funniest people I have had the pleasure of meeting, he has the talent to run his own television show and become a national hero if given the right opportunities.\n\nhttps://www.tiktok.com/@benoshaugnessy",
+      "name": "Ben O’Shaugnessy",
+      "role": "Entertainer",
+      "photo": ""
+    },
+    {
+      "id": "h3",
+      "age": "",
+      "bio": "Darren is a centre-back for Treaty United who has been on trials with teams including Blackburn Rovers in England and Lecce FC in Italy. A kind and generous person, he is a great role model for the children who look up to him.\n\nhttps://treatyunitedfc.com/player/darren-nwankwo/",
+      "name": "Darren Nwankwo",
+      "role": "Footballer",
+      "photo": "/__l5e/assets-v1/9e0b8a08-1060-42fe-b554-5e3397e7988d/darren-nwankwo.jpg"
+    },
+    {
+      "id": "h4",
+      "age": "",
+      "bio": "An amazing local creative behind the design and manufacture of the Michael Jackson replica glove worn by the organiser.",
+      "name": "Tamera Keogh",
+      "role": "Arts Creator",
+      "photo": ""
+    },
+    {
+      "id": "h5",
+      "age": "",
+      "bio": "An incredibly hard-working aspiring entrepreneur who learnt to cut hair to fund his future ventures. Gearoid is exceptionally kind and dedicates his spare time to volunteering with Limerick Treaty Suicide Prevention.",
+      "name": "Gearoid Curtin",
+      "role": "Entrepreneur",
+      "photo": ""
+    },
+    {
+      "id": "h6",
+      "age": "",
+      "bio": "A hard-working young man who grew up playing for Limerick teams including Caherdavin Celtic, Limerick FC and Treaty United. His transfer to English Premier League academy Brighton & Hove Albion is a huge achievement.\n\nhttps://www.limerickleader.ie/sport/schoolboy-soccer/highly-rated-limerick-goalkeeper-excited-to-join-english-premier-league-club-6807787",
+      "name": "Michael Dike",
+      "role": "Footballer",
+      "photo": "/__l5e/assets-v1/c74baaab-aa14-4971-8f1d-c56a928209f6/michael-dike.jpg"
+    },
+    {
+      "id": "h7",
+      "age": "16",
+      "bio": "A 16-year-old entrepreneur who sells glow-in-the-dark hurling sliotars. For every pink ball he sells, Cathal donates one euro to Breast Cancer Ireland.\n\nhttps://www.limerickleader.ie/news/limerick-ty-student-overwhelmed-with-local-support-on-his-new-hurling-business-start-up-6590397",
+      "name": "Cathal McSweeney",
+      "role": "Entrepreneur",
+      "photo": ""
+    },
+    {
+      "id": "h8",
+      "age": "",
+      "bio": "Excel is a very talented musician who has achieved a great deal and released beautiful music and poetry. He also volunteers as a coach for his little brother’s football team at Regional United.\n\nhttps://www.live95fm.ie/news/entertainment/limerick-musician-needs-your-vote-as-new-local-hero-wildcard-award-announced/",
+      "name": "Excel Ahmed",
+      "role": "Musician",
+      "photo": "/__l5e/assets-v1/2abcd576-9990-40fa-b15e-87b5bfff6240/excel-ahmed.jpg"
+    },
+    {
+      "id": "h9",
+      "age": "",
+      "bio": "Oluchi has overcome multiple battles and hardships in her personal life, yet has remained resilient, kind and loving towards others. She is a core member of Swap'N'Serve.\n\nhttps://www.independent.ie/county/limerick/limerick-student-calls-for-reform-of-foster-care-system-after-childhood-in-care/a/146226370.html",
+      "name": "Oluchi Okoli",
+      "role": "Activist",
+      "photo": "/__l5e/assets-v1/2a34cdd7-1932-4ae0-a87b-17cc08e50cff/oluchi-okoli.jpg"
+    },
+    {
+      "id": "h10",
+      "age": "",
+      "bio": "A very talented footballer for local team Treaty United who also finds time to model.\n\nhttps://treatyunitedfc.com/player/richkov-boevi/",
+      "name": "Richkov Boevi",
+      "role": "Footballer",
+      "photo": "/__l5e/assets-v1/93cbbc6f-5866-4488-bed2-7b8cd68918ad/richkov-boevi.jpg"
+    },
+    {
+      "id": "h11",
+      "age": "",
+      "bio": "Ryan is a model who puts together excellent outfits, particularly within streetwear.",
+      "name": "Ryan Beni Dijopang",
+      "role": "Model",
+      "photo": "/__l5e/assets-v1/032f9468-21ab-4806-9af8-6895f39fce20/ryan-beni-dijopang.jpg"
+    },
+    {
+      "id": "h12",
+      "age": "",
+      "bio": "Christopher is an aspiring entrepreneur who is extremely ambitious and hard-working.",
+      "name": "Christopher Nwankwo",
+      "role": "Entrepreneur",
+      "photo": ""
+    },
+    {
+      "id": "h13",
+      "age": "",
+      "bio": "Known as Ahukatoofunny on TikTok, Ikeaka has over 100 million views, 100,000 followers and 12 million likes. He is a lovely, kind and generous young man.\n\nhttps://www.tiktok.com/@ahukatoofunny",
+      "name": "Ikeaka Akwajah",
+      "role": "Entertainer",
+      "photo": ""
+    },
+    {
+      "id": "h14",
+      "age": "",
+      "bio": "Pa owns Pa’s Chipper in Thomondgate. A great entertainer, he draws queues of people eager to try his food and have a conversation with him.\n\nHe runs boxing classes for young people in Limerick City and is exceptionally generous, giving out free food to people experiencing homelessness and to many customers, including myself.\n\nhttps://www.tripadvisor.ie/Restaurant_Review-g186621-d33594056-Reviews-Pa_s_Chipper-Limerick_County_Limerick.html",
+      "name": "Pa O’Halloran",
+      "role": "Entrepreneur",
+      "photo": ""
+    },
+    {
+      "id": "h15",
+      "age": "",
+      "bio": "A Southill local, Craig aims to improve his neighbourhood and the wider Limerick community. He hopes to study youth work in college and dedicate himself to bringing life back to Limerick.",
+      "name": "Craig Dawson",
+      "role": "Community Pillar",
+      "photo": ""
+    },
+    {
+      "id": "h16",
+      "age": "",
+      "bio": "Azeezat is one of the most talented individuals I have had the pleasure of meeting. She studies architecture at UL and, in her spare time, runs Aze’s Room, giving local creatives, musicians and poets an open mic and a place to share their skills and crafts with an audience.\n\nhttps://limerickvoice.com/arts-and-culture/azes-room-open-mic-limerick/",
+      "name": "Azeezat Muniru",
+      "role": "Community Pillar",
+      "photo": ""
+    },
+    {
+      "id": "h17",
+      "age": "",
+      "bio": "A hard-working Limerick man with the potential for a big career in boxing.\n\nhttps://www.irishmirror.ie/sport/other-sport/boxing/jason-quigley-excited-unbeaten-irish-37726287",
+      "name": "Kian Hedderman",
+      "role": "Boxer",
+      "photo": ""
+    },
+    {
+      "id": "h18",
+      "age": "",
+      "bio": "Cian is a hard-working entrepreneur with a great knack for sales. His fragrance company recently announced operations in the Crescent Shopping Centre.\n\nhttps://www.iradio.ie/podcasts/the-hub/business-spotlight-perfect-scent-4-u",
+      "name": "Cian Kirby",
+      "role": "Entrepreneur",
+      "photo": ""
+    },
+    {
+      "id": "h19",
+      "age": "",
+      "bio": "Cameron runs WDI, which handles sales outreach for construction companies.\n\nhttps://www.linkedin.com/in/camerondibenedetto",
+      "name": "Cameron Dibenneto",
+      "role": "Entrepreneur",
+      "photo": "/__l5e/assets-v1/86bbee1d-43d0-4843-9b0c-1598cd85e8c9/cameron-dibenneto.jpg"
+    },
+    {
+      "id": "h20",
+      "age": "",
+      "bio": "Often described as a gentleman, Lee has done a great deal for Limerick City, serving as an ambassador and an inspiration to young people. He volunteered with Limerick Treaty Suicide Prevention in his spare time.\n\nFollowing a serious injury, Lee deserves the city’s support as he recovers.\n\nhttps://www.limerickleader.ie/news/this-is-the-biggest-fight-of-his-life-limerick-boxer-lee-reeves-recovering-in-icu-following-major-operation-9247444",
+      "name": "Lee Reeves",
+      "role": "Boxer / Community Pillar",
+      "photo": ""
+    },
+    {
+      "id": "h21",
+      "age": "",
+      "bio": "Casey is responsible for the photograph featured in the article. He is very kind and always willing to help others, and also runs a clothing brand.\n\nhttps://www.linkedin.com/in/casey-van-rossum-tanyi-1b6108262/?isSelfProfile=false",
+      "name": "Casey Van Rossum",
+      "role": "Entrepreneur / Photographer",
+      "photo": ""
+    },
+    {
+      "id": "h22",
+      "age": "",
+      "bio": "A phenomenal runner and a big inspiration to people across Limerick. Ava became the youngest winner of the women’s national title at the Dublin Marathon in 2025, one of her many accomplishments.\n\nhttps://www.irishtimes.com/sport/athletics/2025/10/26/ava-crean-19-and-david-mcglynn-26-take-national-titles-at-dublin-marathon/",
+      "name": "Ava Crean",
+      "role": "Athlete",
+      "photo": "/__l5e/assets-v1/f60b4eb1-bd4a-4f72-b685-3a6e0304465f/ava-crean.jpg"
+    },
+    {
+      "id": "h23",
+      "age": "",
+      "bio": "Jeff is a phenomenally talented marketer with a great business mind. His last venture, Uptown Events, ran nightlife events for Limerick City’s party culture.\n\nhttps://www.eventbrite.com/e/bad-behavior-3-tickets-1587981378049?msockid=3683993a080764822f888fee09776583",
+      "name": "Jeff Chucks",
+      "role": "Entrepreneur",
+      "photo": ""
+    },
+    {
+      "id": "h24",
+      "age": "",
+      "bio": "Sean runs Fíor Jewellery, an Irish jewellery brand with achievements including opening operations in the Crescent Shopping Centre. He has been a great ally and supporter of Swap'N'Serve.\n\nhttps://ie.linkedin.com/in/sean-leddin-b0bb3a235",
+      "name": "Sean Leddin",
+      "role": "Entrepreneur",
+      "photo": "/__l5e/assets-v1/50a74999-90f3-44a9-86f5-1262975b4d3a/sean-leddin.jpg"
+    },
+    {
+      "id": "h25",
+      "age": "",
+      "bio": "Owen has achieved international success, with bookings across the world, including Paris, Rome and London. He works at fashion events, concerts and cultural events with some of the biggest stars, delivering work to an exceptional standard.\n\nhttps://www.linkedin.com/in/owen-talabi-a43b70245/?isSelfProfile=false\n\nhttps://www.instagram.com/ot.behindthescreen/",
+      "name": "Owen Talabi",
+      "role": "Videographer / Entrepreneur",
+      "photo": ""
+    },
+    {
+      "id": "h26",
+      "age": "",
+      "bio": "Extremely dedicated to fitness, Kieran and Jakub have put great effort into building a healthy community by hosting weekly run clubs and retreats.\n\nhttps://www.instagram.com/svrarun/reel/DbOjml_RSzY/",
+      "name": "Kieran Tracey & Jakub Kot",
+      "role": "Community Pillars",
+      "photo": ""
+    },
+    {
+      "id": "h27",
+      "age": "",
+      "bio": "A young, ambitious entrepreneur and athlete who hopes to attend university in the United States on a sports or academic scholarship. Toviel was one of Swap'N'Serve’s founding volunteers and continues to volunteer in its charity work.",
+      "name": "Toviel Oranu",
+      "role": "Entrepreneur / Athlete",
+      "photo": ""
+    },
+    {
+      "id": "h28",
+      "age": "",
+      "bio": "Two young brothers with talent in sport and academics, Mduduzi and Valentino have been brought up with an excellent sense of manners and respect. They have volunteered much of their spare time to their church and Swap'N'Serve, playing a fundamental part in the organisation’s growth.",
+      "name": "Mduduzi & Valentino Ncube",
+      "role": "Community Volunteers",
+      "photo": ""
+    },
+    {
+      "id": "h29",
+      "age": "",
+      "bio": "A UL student who has gathered a following on TikTok, where she speaks about youth entrepreneurship, marketing and travelling. A very talented young woman with a bright future.\n\nhttps://www.tiktok.com/@lifewthea?_r=1&_t=ZN-9AHN3jf6rDS",
+      "name": "Thea Shields",
+      "role": "Youth Entrepreneurship / Marketing / Travel",
+      "photo": ""
+    }
+  ],
+  "aboutTitle": "Celebrating Limerick’s young talent",
+  "coverImage": "",
+  "closingBody": "Tell us about them and we will be in touch.",
+  "closingTitle": "Know someone who deserves a place?",
+  "honoureesIntro": "Recognising the people shaping our city, each in their own way.",
+  "honoureesTitle": "Meet the honourees"
+}
