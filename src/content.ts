@@ -1,5 +1,6 @@
 import cupPeopleImage from "@/assets/limerick-cup-people.jpg.asset.json";
 import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
+import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
 
@@ -403,7 +404,8 @@ export const ARTICLES: Article[] = [
             "name": "Ben O'Shaughnessy",
             "role": "Entertainer",
             "area": "Rathbane",
-            "text": "Ben O'Shaughnessy, an entertainer from Rathbane, brings both a sense of humour and a substantial online audience. The press kit records 20,000 TikTok followers, four million views and 400,000 likes. David describes him as one of the funniest people he has met, with the potential to reach a much wider stage. For the Cup, Ben has been creating promotional videos and connecting the organisation with local restaurants and businesses."
+            "text": "Ben O'Shaughnessy, an entertainer from Rathbane, brings both a sense of humour and a substantial online audience. The press kit records 20,000 TikTok followers, four million views and 400,000 likes. David describes him as one of the funniest people he has met, with the potential to reach a much wider stage. For the Cup, Ben has been creating promotional videos and connecting the organisation with local restaurants and businesses.",
+            "photo": benOShaughnessyPhoto.url
       },
       {
             "name": "Ikeaka Akwajah",
