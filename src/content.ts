@@ -3,6 +3,7 @@ import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
+import jeffChucksPhoto from "@/assets/press/jeff-chucks.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -457,7 +458,8 @@ export const ARTICLES: Article[] = [
             "name": "Jeff Chucks",
             "role": "Entrepreneur & marketer",
             "area": "Limerick",
-            "text": "Entrepreneur and marketer Jeff Chucks, whose work includes Limerick nightlife venture Uptown Events, has also contributed financial support and marketing advice to Swap'N'Serve projects."
+            "text": "Entrepreneur and marketer Jeff Chucks, whose work includes Limerick nightlife venture Uptown Events, has also contributed financial support and marketing advice to Swap'N'Serve projects.",
+            "photo": jeffChucksPhoto.url
       },
       {
             "name": "Owen Talabi",
