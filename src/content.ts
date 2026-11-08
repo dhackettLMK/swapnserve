@@ -395,6 +395,7 @@ export interface Article {
   imageAlt?: string;
   peopleSections?: { name: string; role: string; area: string; text: string; photo?: string }[];
   closing?: string[];
+  sourceLink?: { label: string; url: string };
 }
 
 export const ARTICLES: Article[] = [
@@ -533,6 +534,24 @@ export const ARTICLES: Article[] = [
       "The Swap'N'Serve Cup takes place on Saturday 5 December 2026 at 3pm at Summerville Rovers F.C., 124 Ballinacurra Gardens, Ballinacurra (Weston), Limerick, V94 R98D. The football is 5-a-side, with seven members per team and entry at €10 per player. Food, live music, a poetry workshop and an open mic are planned alongside the tournament. Team and individual registration are available at swapnserve.com/cup.",
       "For David, the ambition reaches beyond one afternoon. As he puts it: \"The Cup is only the start. Huge change is coming to this city and young people are going to be the ones leading it, I'm here now.\""
 ],
+  },
+  {
+    slug: "limerick-leader-swapnserve-2-sustainability-event",
+    title: "In the news: Limerick Leader covers Swap'N'Serve 2",
+    date: "25 March 2026",
+    dateISO: "2026-03-25",
+    tag: "In the press",
+    standfirst: "The Limerick Leader reported on our second clothing swap and the community behind it, ahead of the event at The Life Centre on Henry Street.",
+    readingTime: "2 min read",
+    body: [
+      "Ahead of Swap'N'Serve 2, the Limerick Leader's Nick Rabbitts spoke to founder David Hackett, then 20 and from Raheen, about the event and why it matters to the city. The piece described a day geared towards tackling fast fashion, boosting sustainability and building stronger ties across Limerick.",
+      "It set out the simple model at the heart of every Swap'N'Serve: people donate clothing they no longer need, it is offered in a pop-up shop for just €1 per item to cover running costs, and any stock left over is shared equally among partner charities.",
+      "David told the paper the day was about bringing the community together and celebrating unity as a city, at a time of division over gender, race, sexuality and other differences. The article also credited the team behind the event, including Shalom Obiakor, photographer Casey van Rossum and lead volunteer Oluchi Blessing Okoli.",
+    ],
+    sourceLink: {
+      label: "Read the full article in the Limerick Leader",
+      url: "https://www.limerickleader.ie/news/business/limerick-entrepreneur-20-organises-major-sustainability-event-6598019",
+    },
   },
 ];
 
