@@ -1,3 +1,4 @@
+import pressLogo from "@/assets/swapnserve-wordmark-green-tight.png";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, Mail } from "lucide-react";
@@ -30,8 +31,9 @@ const PressNav = () => {
   return (
     <header className="no-print sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/press" className="font-press-serif text-lg font-semibold tracking-tight text-foreground">
-          Swap 'N' Serve <span className="text-primary">Press Room</span>
+        <Link to="/" aria-label="Swap'N'Serve press, back to the homepage" className="flex flex-col items-start leading-none">
+          <img src={pressLogo} alt="Swap'N'Serve" className="h-8 w-auto" />
+          <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.35em] text-primary">Press</span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex" aria-label="Press room">
           {links.map((l) => (
