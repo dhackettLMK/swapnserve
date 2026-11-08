@@ -571,6 +571,24 @@ export const ARTICLES: Article[] = [
       url: "https://www.ilovelimerick.ie/swap-n-serve-community-project/",
     },
   },
+  {
+    slug: "irish-independent-swapnserve-beyond-fashion",
+    title: "In the news: Irish Independent says Swap'N'Serve goes far beyond fashion",
+    date: "11 April 2026",
+    dateISO: "2026-04-11",
+    tag: "In the press",
+    standfirst: "On the morning of Swap'N'Serve 2, the Irish Independent looked at why our clothes event is about much more than what people wear.",
+    readingTime: "1 min read",
+    body: [
+      "On 11 April 2026, the day Swap'N'Serve returned to Limerick, the Irish Independent's Jasmin Griffin published a feature under the headline \"Focus of Limerick's Swap 'N' Serve clothes event goes far beyond mere fashion\".",
+      "The piece looked ahead to a steady flow of people through the doors of Abundant Life Church on Henry Street, where the event ran from 12pm to 5pm, and featured the team behind it, including event director David Hackett and outreach and partnership coordinator Shalom Obiakor.",
+      "That headline captures what Swap'N'Serve has always been about. Clothing is the starting point, but the real purpose is community: reducing waste, supporting people with dignity and bringing Limerick together.",
+    ],
+    sourceLink: {
+      label: "Read the full article in the Irish Independent",
+      url: "https://www.independent.ie/county/limerick/focus-of-limericks-swap-n-serve-clothes-event-goes-far-beyond-mere-fashion/a/145568026.html",
+    },
+  },
 ];
 
 export const PAST_COVERAGE = [
