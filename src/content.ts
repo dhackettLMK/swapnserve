@@ -2,6 +2,7 @@ import cupPeopleImage from "@/assets/limerick-cup-people.jpg.asset.json";
 import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
+import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -431,7 +432,8 @@ export const ARTICLES: Article[] = [
             "name": "Ryan Beni Dijopang",
             "role": "Model",
             "area": "Ballinacurra Weston",
-            "text": "Ballinacurra Weston's Ryan Beni Dijopang brings a different creative perspective: as a model with a strong eye for streetwear, he advises on styling and helps curate the project's visual identity."
+            "text": "Ballinacurra Weston's Ryan Beni Dijopang brings a different creative perspective: as a model with a strong eye for streetwear, he advises on styling and helps curate the project's visual identity.",
+            "photo": ryanBeniPhoto.url
       },
       {
             "name": "Excel Ahmed",
