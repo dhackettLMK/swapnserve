@@ -2,13 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ARTICLES } from "@/content";
-import communityPhoto from "@/assets/hero-community.jpg";
-import { useTalentContent } from "@/lib/thirtyApi";
-import { resolvePortrait } from "@/lib/thirtyPortraits";
 
 const BlogSection = () => {
-  const { data: content } = useTalentContent();
-  const portraits = content?.honourees.filter((person) => person.photo).slice(0, 4) ?? [];
   return (
   <section id="blog" aria-labelledby="blog-heading" className="border-y border-border bg-muted/25 py-20 md:py-28">
     <div className="container">
@@ -22,10 +17,10 @@ const BlogSection = () => {
           <Link to="/press/blog" onClick={() => window.scrollTo(0, 0)}>View all posts <ArrowRight aria-hidden="true" /></Link>
         </Button>
       </div>
-      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-        <Link to="/press/blog/meet-limericks-talented-people" onClick={() => window.scrollTo(0, 0)} aria-label="Meet the talented people within Limerick City" className="grid grid-cols-2 gap-2 self-center overflow-hidden rounded-lg">
-          {portraits.length ? portraits.map((person) => <img key={person.id} src={resolvePortrait(person.photo)} alt={person.name} loading="lazy" className="aspect-square w-full object-cover object-top" />) : <img src={communityPhoto} alt="Swap'N'Serve volunteers together at a Limerick clothing event" loading="lazy" className="col-span-2 aspect-[4/3] w-full object-cover" />}
-        </Link>
+      {ARTICLES.length === 0 ? (
+        <p className="border-t border-border pt-8 text-muted-foreground">New stories coming soon.</p>
+      ) : (
+      <div>
         <div className="flex flex-col justify-center divide-y divide-border">
           {ARTICLES.slice(0, 3).map((article) => (
             <article key={article.slug} className="py-7 first:pt-0 last:pb-0 lg:py-9">
@@ -43,6 +38,7 @@ const BlogSection = () => {
           ))}
         </div>
       </div>
+      )}
     </div>
   </section>
   );

@@ -8,13 +8,14 @@ const PressBlog = () => (
   <PressLayout>
     <PressSeo
       title="Blog | Swap 'N' Serve"
-      description="Meet Limerick's talented people and read stories from Swap 'N' Serve's events and community projects."
+      description="Stories from Swap 'N' Serve's events and community projects in Limerick."
       path="/press/blog"
     />
     <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Stories from Limerick</p>
       <h1 className="mt-3 font-press-serif text-4xl font-semibold tracking-tight md:text-5xl">The Swap'N'Serve blog</h1>
       <div className="mt-10 space-y-6">
+        {ARTICLES.length === 0 && <p className="border-t border-border pt-8 text-muted-foreground">New stories coming soon.</p>}
         {ARTICLES.map((a) => (
           <Link
             key={a.slug}
