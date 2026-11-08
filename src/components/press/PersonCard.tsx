@@ -1,3 +1,4 @@
+import { resolvePressPortrait } from "@/lib/pressPortraits";
 import { Link } from "react-router-dom";
 import type { Person } from "@/content";
 
@@ -15,12 +16,16 @@ const PersonCard = ({ person }: { person: Person }) => (
     to={`/press/people/${person.slug}`}
     className="group flex h-full flex-col rounded-xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-refined)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
   >
+    {person.photo ? (
+      <img src={resolvePressPortrait(person.photo)} alt={person.name} loading="lazy" className="aspect-square w-full rounded-lg object-cover object-top" />
+    ) : (
     <div
       className="flex aspect-square w-full items-center justify-center rounded-lg bg-primary/10 font-press-serif text-4xl font-semibold text-primary"
       aria-hidden
     >
       {initials(person.name)}
     </div>
+    )}
     <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.14em] text-primary">
       {person.role}
       {person.organiser ? " · Organiser" : ""}

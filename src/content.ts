@@ -109,6 +109,7 @@ export interface Person {
   roleInCup: string;
   links: PersonLink[];
   organiser?: boolean;
+  photo?: string;
 }
 
 export const PEOPLE: Person[] = [
@@ -129,6 +130,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "ben-oshaughnessy",
+    photo: benOShaughnessyPhoto.url,
     name: "Ben O'Shaughnessy",
     role: "Entertainer",
     area: "Rathbane",
@@ -144,6 +146,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "darren-nwankwo",
+    photo: darrenPhoto.url,
     name: "Darren Nwankwo",
     role: "Footballer",
     area: "Raheen",
@@ -163,6 +166,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "tamera-keogh",
+    photo: tameraPhoto.url,
     name: "Tamera Keogh",
     role: "Arts Creator",
     area: "Raheen",
@@ -177,6 +181,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "excel-ahmed",
+    photo: excelPhoto.url,
     name: "Excel Ahmed",
     role: "Musician",
     area: "Raheen",
@@ -196,6 +201,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "sean-leddin",
+    photo: seanPhoto.url,
     name: "Sean Leddin",
     role: "Founder & CEO, Fíor Jewellery",
     area: "South Circular Road",
@@ -215,6 +221,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "oluchi-okoli",
+    photo: oluchiPhoto.url,
     name: "Oluchi Okoli",
     role: "Activist",
     area: "Caherdavin",
@@ -235,6 +242,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "ryan-beni-dijopang",
+    photo: ryanBeniPhoto.url,
     name: "Ryan Beni Dijopang",
     role: "Model",
     area: "Ballinacurra Weston",
@@ -247,6 +255,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "ikeaka-akwajah",
+    photo: ikeakaPhoto.url,
     name: "Ikeaka Akwajah (\"Ahukatoofunny\")",
     role: "Entertainer",
     area: "Castletroy",
@@ -261,6 +270,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "craig-dawson",
+    photo: craigPhoto.url,
     name: "Craig Dawson",
     role: "Community Pillar",
     area: "Southill",
@@ -275,6 +285,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "azeezat-muniru",
+    photo: azeezatPhoto.url,
     name: "Azeezat Muniru",
     role: "Community Pillar",
     area: "Annacotty",
@@ -294,6 +305,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "chris-oconnor",
+    photo: christopherPhoto.url,
     name: "Chris O'Connor",
     role: "Volunteer",
     area: "Raheen",
@@ -312,6 +324,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "shekinah-makere",
+    photo: shekinahPhoto.url,
     name: "Shekinah Makere",
     role: "Aspiring Chef",
     area: "Raheen",
@@ -325,6 +338,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "ncube-brothers",
+    photo: ncubePhoto.url,
     name: "Mduduzi & Valentino Ncube",
     role: "Students",
     area: "Castletroy",
@@ -339,6 +353,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "jeff-chucks",
+    photo: jeffChucksPhoto.url,
     name: "Jeff Chucks",
     role: "Entrepreneur",
     area: "Limerick",
@@ -357,6 +372,7 @@ export const PEOPLE: Person[] = [
   },
   {
     slug: "owen-talabi",
+    photo: owenTalabiPhoto.url,
     name: "Owen Talabi",
     role: "Videographer & Entrepreneur",
     area: "Limerick",

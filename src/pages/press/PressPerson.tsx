@@ -1,3 +1,4 @@
+import { resolvePressPortrait } from "@/lib/pressPortraits";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import PressLayout from "@/components/press/PressLayout";
@@ -31,6 +32,9 @@ const PressPerson = () => {
           <ArrowLeft className="h-4 w-4" aria-hidden /> All people
         </Link>
 
+        {person.photo && (
+          <img src={resolvePressPortrait(person.photo)} alt={person.name} className="mt-8 aspect-[4/5] w-48 rounded-xl object-cover object-top" />
+        )}
         <p className="mt-8 text-xs font-bold uppercase tracking-[0.18em] text-primary">
           {person.role}
           {person.organiser ? " · Organiser" : ""}
