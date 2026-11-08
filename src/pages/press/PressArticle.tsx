@@ -5,6 +5,7 @@ import PressLayout from "@/components/press/PressLayout";
 import PressSeo from "@/components/press/PressSeo";
 import NotFound from "@/pages/NotFound";
 import { ARTICLES, CONTACT } from "@/content";
+import TalentProfiles from "@/components/press/TalentProfiles";
 
 const PressArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -39,7 +40,7 @@ const PressArticle = () => {
   return (
     <PressLayout>
       <PressSeo title={`${article.title} | Swap 'N' Serve`} description={article.standfirst} path={`/press/blog/${article.slug}`} jsonLd={jsonLd} />
-      <article className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
+      <article className={`mx-auto w-full px-4 py-14 sm:px-6 ${article.talentProfiles ? "max-w-6xl" : "max-w-3xl"}`}>
         <Link to="/press/blog" className="no-print inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
           <ArrowLeft className="h-4 w-4" aria-hidden /> All articles
         </Link>
@@ -118,6 +119,8 @@ const PressArticle = () => {
             </p>
           ))}
         </div>
+
+        {article.talentProfiles && <TalentProfiles />}
 
         <aside className="mt-12 rounded-xl border border-primary/25 bg-primary/5 p-6">
           <h2 className="font-press-serif text-xl font-semibold">Writing about this?</h2>
