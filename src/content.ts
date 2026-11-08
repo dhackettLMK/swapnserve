@@ -14,6 +14,7 @@ import craigPhoto from "@/assets/press/craig-dawson.jpg.asset.json";
 import celinePhoto from "@/assets/press/celine-ryan.jpg.asset.json";
 import oluchiPhoto from "@/assets/press/oluchi-okoli.png.asset.json";
 import ikeakaPhoto from "@/assets/press/ikeaka-akwajah.jpg.asset.json";
+import darrenPhoto from "@/assets/press/darren-nwankwo.webp.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -432,7 +433,8 @@ export const ARTICLES: Article[] = [
             "name": "Darren Nwankwo",
             "role": "Footballer",
             "area": "Raheen",
-            "text": "In football, Raheen's Darren Nwankwo plays centre back for Treaty United and has been on trial with Blackburn Rovers in England and Lecce in Italy. David values him not only as a player, but as a kind and generous role model for younger people. Darren has given his time to the Cup's logistics, promotion and marketing."
+            "text": "In football, Raheen's Darren Nwankwo plays centre back for Treaty United and has been on trial with Blackburn Rovers in England and Lecce in Italy. David values him not only as a player, but as a kind and generous role model for younger people. Darren has given his time to the Cup's logistics, promotion and marketing.",
+            "photo": darrenPhoto.url
       },
       {
             "name": "Tamera Keogh",
