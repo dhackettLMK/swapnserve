@@ -16,7 +16,7 @@ const PressBlog = () => (
       <h1 className="mt-3 font-press-serif text-4xl font-semibold tracking-tight md:text-5xl">The Swap'N'Serve blog</h1>
       <div className="mt-10 space-y-6">
         {ARTICLES.length === 0 && <p className="border-t border-border pt-8 text-muted-foreground">New stories coming soon.</p>}
-        {[...ARTICLES].sort((x, y) => x.dateISO.localeCompare(y.dateISO)).map((a) => (
+        {[...ARTICLES].sort((x, y) => y.dateISO.localeCompare(x.dateISO)).map((a) => (
           <Link
             key={a.slug}
             to={`/press/blog/${a.slug}`}
