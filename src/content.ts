@@ -371,9 +371,21 @@ export interface Article {
   readingTime: string;
   pullQuote?: string;
   body: string[];
+  talentProfiles?: boolean;
 }
 
 export const ARTICLES: Article[] = [
+  {
+    slug: "meet-limericks-talented-people",
+    title: "Meet the talented people within Limerick City",
+    date: "8 November 2026",
+    dateISO: "2026-11-08",
+    tag: "People",
+    standfirst: "Discover the entrepreneurs, athletes, creatives and community voices in Swap'N'Serve's Thirty Under Thirty selection.",
+    readingTime: "Meet the talent",
+    body: [],
+    talentProfiles: true,
+  },
   {
     slug: "limericks-hidden-talent",
     title: "Limerick's goldmine: the young people this city should already know",
