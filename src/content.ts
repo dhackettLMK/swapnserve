@@ -13,6 +13,7 @@ import seanPhoto from "@/assets/press/sean-leddin.png.asset.json";
 import craigPhoto from "@/assets/press/craig-dawson.jpg.asset.json";
 import celinePhoto from "@/assets/press/celine-ryan.jpg.asset.json";
 import oluchiPhoto from "@/assets/press/oluchi-okoli.png.asset.json";
+import ikeakaPhoto from "@/assets/press/ikeaka-akwajah.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -424,7 +425,8 @@ export const ARTICLES: Article[] = [
             "name": "Ikeaka Akwajah",
             "role": "Entertainer",
             "area": "Castletroy",
-            "text": "Another familiar face online is Castletroy's Ikeaka Akwajah, known on TikTok as Ahukatoofunny. With more than 100 million views, 100,000 followers and 12 million likes reported in the press kit, his reach speaks for itself. His support for Swap'N'Serve is practical too, helping with promotion and marketing so more people hear about the work being done."
+            "text": "Another familiar face online is Castletroy's Ikeaka Akwajah, known on TikTok as Ahukatoofunny. With more than 100 million views, 100,000 followers and 12 million likes reported in the press kit, his reach speaks for itself. His support for Swap'N'Serve is practical too, helping with promotion and marketing so more people hear about the work being done.",
+            "photo": ikeakaPhoto.url
       },
       {
             "name": "Darren Nwankwo",
