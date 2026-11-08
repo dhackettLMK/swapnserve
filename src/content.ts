@@ -553,6 +553,24 @@ export const ARTICLES: Article[] = [
       url: "https://www.limerickleader.ie/news/business/limerick-entrepreneur-20-organises-major-sustainability-event-6598019",
     },
   },
+  {
+    slug: "ilovelimerick-swapnserve-community-project",
+    title: "In the news: I Love Limerick on where Swap'N'Serve began",
+    date: "14 August 2025",
+    dateISO: "2025-08-14",
+    tag: "In the press",
+    standfirst: "Before our very first event, I Love Limerick shared the story of a youth-led project giving back to people in need, no questions asked.",
+    readingTime: "2 min read",
+    body: [
+      "In August 2025, I Love Limerick's Richard Lynch introduced Swap'N'Serve as a new community project led by a group of young people from Limerick with one clear goal: to give back and help those in need, no questions asked. The piece described a youth-led space promoting sustainability, reducing waste and connecting people in a positive way.",
+      "It covered our first event on 30 August 2025 at Abundant Life Christian Church on Henry Street, where clothes from warm jackets to everyday wear were handed out completely free. In the weeks beforehand, people donated clothing they no longer needed, and the team summed up the day simply: no money involved, just community support and sharing.",
+      "Event director David Hackett told the site the swap was more than an event, describing it as an example of how united the community can be and a project that is deeply personal to him, having grown up in Limerick City. It was where the Swap'N'Serve story started.",
+    ],
+    sourceLink: {
+      label: "Read the full article on I Love Limerick",
+      url: "https://www.ilovelimerick.ie/swap-n-serve-community-project/",
+    },
+  },
 ];
 
 export const PAST_COVERAGE = [
