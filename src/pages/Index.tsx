@@ -7,6 +7,7 @@ import TimelineSection from "@/components/TimelineSection";
 import EventsSection from "@/components/EventsSection";
 import LendAHand from "@/components/LendAHand";
 import InstagramSection from "@/components/InstagramSection";
+import BlogSection from "@/components/BlogSection";
 import FaqSection from "@/components/FaqSection";
 import CtaBanner from "@/components/CtaBanner";
 import SiteFooter from "@/components/SiteFooter";
@@ -28,6 +29,7 @@ const Index = () => {
         <TimelineSection />
         <EventsSection />
         <LendAHand />
+        <BlogSection />
         <InstagramSection />
         <FaqSection />
         <CtaBanner />
