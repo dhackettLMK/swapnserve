@@ -515,17 +515,10 @@ export const ARTICLES: Article[] = [
             "photo": shekinahPhoto.url
       },
       {
-            "name": "Mduduzi Ncube",
-            "role": "Student & volunteer",
+            "name": "Mduduzi & Valentino Ncube",
+            "role": "Students & volunteers",
             "area": "Castletroy",
-            "text": "Mduduzi brings strengths in sport and academics, alongside the time he gives to his church and Swap'N'Serve with his brother Valentino. David describes the brothers' volunteering as fundamental to the organisation's growth.",
-            "photo": ncubePhoto.url
-      },
-      {
-            "name": "Valentino Ncube",
-            "role": "Student & volunteer",
-            "area": "Castletroy",
-            "text": "Valentino volunteers with his church and Swap'N'Serve alongside his brother Mduduzi. With strengths in sport and academics, his contribution is rooted in giving his time, showing up and helping others.",
+            "text": "Brothers Mduduzi and Valentino Ncube bring strengths in sport and academics, alongside the time they give to their church and to Swap'N'Serve. Their contribution is rooted in giving their time, showing up and helping others, and David describes the brothers' volunteering as fundamental to the organisation's growth.",
             "photo": ncubePhoto.url
       }
 ],
