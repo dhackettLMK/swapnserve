@@ -1,3 +1,5 @@
+import cupPeopleImage from "@/assets/limerick-cup-people.jpg.asset.json";
+
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
 
 export const CONTACT = {
@@ -372,6 +374,8 @@ export interface Article {
   pullQuote?: string;
   body: string[];
   talentProfiles?: boolean;
+  image?: string;
+  imageAlt?: string;
 }
 
 export const ARTICLES: Article[] = [
@@ -381,6 +385,8 @@ export const ARTICLES: Article[] = [
     date: "8 November 2026",
     dateISO: "2026-11-08",
     tag: "People & community",
+    image: cupPeopleImage.url,
+    imageAlt: "The entertainers, athletes, creatives and community volunteers helping deliver the Swap'N'Serve Cup, pictured and named in the supplied press kit",
     standfirst: "Comedians, footballers, musicians, creatives and community volunteers are coming together to deliver the Swap'N'Serve Cup. For founder David Hackett, the event is a chance to show what Limerick's people can do when their talent is given a stage.",
     readingTime: "5 min read",
     pullQuote: "Every person involved in this event is from Limerick City. You do not have to leave here to find world-class people, you only have to look.",

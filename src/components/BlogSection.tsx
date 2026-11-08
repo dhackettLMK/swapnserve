@@ -24,6 +24,7 @@ const BlogSection = () => {
         <div className="flex flex-col justify-center divide-y divide-border">
           {ARTICLES.slice(0, 3).map((article) => (
             <article key={article.slug} className="py-7 first:pt-0 last:pb-0 lg:py-9">
+              {article.image && <Link to={`/press/blog/${article.slug}`} onClick={() => window.scrollTo(0, 0)} className="mb-6 block max-w-2xl"><img src={article.image} alt={article.imageAlt ?? article.title} loading="lazy" className="h-auto w-full rounded-lg" /></Link>}
               <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-muted-foreground">
                 <span className="uppercase text-primary">{article.tag}</span>
                 <time dateTime={article.dateISO}>{article.date}</time>
