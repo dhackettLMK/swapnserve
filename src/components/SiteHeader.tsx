@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Journey", href: "#timeline" },
   { label: "Donate", href: "#donate" },
   { label: "Volunteer", href: "/volunteer" },
+  { label: "Blog", href: "/press/blog" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -102,7 +103,7 @@ const SiteHeader = () => {
               aria-label="Mobile navigation"
             >
               <div className="space-y-1">
-                {[...navLinks, { label: "Blog", href: "/press/blog" }].map((link) =>
+                {navLinks.map((link) =>
                   link.href.startsWith("#") ? (
                     <a
                       key={link.href}
