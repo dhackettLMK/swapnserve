@@ -12,6 +12,7 @@ import tameraPhoto from "@/assets/press/tamera-keogh.jpg.asset.json";
 import seanPhoto from "@/assets/press/sean-leddin.png.asset.json";
 import craigPhoto from "@/assets/press/craig-dawson.jpg.asset.json";
 import celinePhoto from "@/assets/press/celine-ryan.jpg.asset.json";
+import oluchiPhoto from "@/assets/press/oluchi-okoli.png.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -484,7 +485,8 @@ export const ARTICLES: Article[] = [
             "name": "Oluchi Okoli",
             "role": "Activist & community volunteer",
             "area": "Caherdavin",
-            "text": "The organisation also depends on people whose contribution cannot be measured in followers or business milestones. Caherdavin's Oluchi Okoli is a core member of Swap'N'Serve and helped connect the Tusla group with its previous project. Having spoken publicly about reform of the foster care system, she brings advocacy, care and a commitment to making the organisation work well for others."
+            "text": "The organisation also depends on people whose contribution cannot be measured in followers or business milestones. Caherdavin's Oluchi Okoli is a core member of Swap'N'Serve and helped connect the Tusla group with its previous project. Having spoken publicly about reform of the foster care system, she brings advocacy, care and a commitment to making the organisation work well for others.",
+            "photo": oluchiPhoto.url
       },
       {
             "name": "Craig Dawson",
