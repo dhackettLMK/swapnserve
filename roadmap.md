@@ -1,8 +1,8 @@
 # Roadmap
 
 ## Talent blog feature
-- [ ] Add the saved talented people profiles to the existing blog and homepage blog section.
-- [ ] Verify the article, portraits and mobile layout.
+- [x] Add the saved talented people profiles to the existing blog and homepage blog section.
+- [x] Verify the article, portraits and mobile layout.
 
 ## Volunteer sign-up
 - [x] Create the /volunteer roles page and role-linked form.

@@ -23,8 +23,8 @@ const BlogSection = () => {
         </Button>
       </div>
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-        <Link to="/press/blog/meet-limericks-talented-people" onClick={() => window.scrollTo(0, 0)} aria-label="Meet the talented people within Limerick City" className="grid grid-cols-2 gap-2 overflow-hidden rounded-lg">
-          {portraits.length ? portraits.map((person) => <img key={person.id} src={resolvePortrait(person.photo)} alt={person.name} loading="lazy" className="aspect-square h-full max-h-[280px] w-full object-cover object-top" />) : <img src={communityPhoto} alt="Swap'N'Serve volunteers together at a Limerick clothing event" loading="lazy" className="col-span-2 aspect-[4/3] w-full object-cover" />}
+        <Link to="/press/blog/meet-limericks-talented-people" onClick={() => window.scrollTo(0, 0)} aria-label="Meet the talented people within Limerick City" className="grid grid-cols-2 gap-2 self-center overflow-hidden rounded-lg">
+          {portraits.length ? portraits.map((person) => <img key={person.id} src={resolvePortrait(person.photo)} alt={person.name} loading="lazy" className="aspect-square w-full object-cover object-top" />) : <img src={communityPhoto} alt="Swap'N'Serve volunteers together at a Limerick clothing event" loading="lazy" className="col-span-2 aspect-[4/3] w-full object-cover" />}
         </Link>
         <div className="flex flex-col justify-center divide-y divide-border">
           {ARTICLES.slice(0, 3).map((article) => (
