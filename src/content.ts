@@ -6,6 +6,7 @@ import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
 import jeffChucksPhoto from "@/assets/press/jeff-chucks.jpg.asset.json";
 import shekinahPhoto from "@/assets/press/shekinah-makere.jpg.asset.json";
 import azeezatPhoto from "@/assets/press/azeezat-muniru.jpg.asset.json";
+import christopherPhoto from "@/assets/press/christopher-oconnor.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -487,7 +488,8 @@ export const ARTICLES: Article[] = [
             "name": "Chris O'Connor",
             "role": "Runner & community volunteer",
             "area": "Raheen",
-            "text": "Chris O'Connor, from Raheen, also gives his free time to the organisation's logistics. His commitment to community volunteering sits alongside personal running achievements, including marathons and a run from Limerick to his father's grave in Cork."
+            "text": "Chris O'Connor, from Raheen, also gives his free time to the organisation's logistics. His commitment to community volunteering sits alongside personal running achievements, including marathons and a run from Limerick to his father's grave in Cork.",
+            "photo": christopherPhoto.url
       },
       {
             "name": "Shekinah Makere",
