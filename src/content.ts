@@ -4,6 +4,7 @@ import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
 import jeffChucksPhoto from "@/assets/press/jeff-chucks.jpg.asset.json";
+import shekinahPhoto from "@/assets/press/shekinah-makere.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -490,7 +491,8 @@ export const ARTICLES: Article[] = [
             "name": "Shekinah Makere",
             "role": "Aspiring chef",
             "area": "Raheen",
-            "text": "For Shekinah Makere, a young aspiring chef from Raheen, the Cup is an opportunity to take on greater responsibility. She has volunteered with the organisation since Swap'N'Serve 2 and will help cater food at the event, putting her passion for cooking into practice. Her longer-term ambition is to open a restaurant in Limerick."
+            "text": "For Shekinah Makere, a young aspiring chef from Raheen, the Cup is an opportunity to take on greater responsibility. She has volunteered with the organisation since Swap'N'Serve 2 and will help cater food at the event, putting her passion for cooking into practice. Her longer-term ambition is to open a restaurant in Limerick.",
+            "photo": shekinahPhoto.url
       },
       {
             "name": "Mduduzi Ncube",
