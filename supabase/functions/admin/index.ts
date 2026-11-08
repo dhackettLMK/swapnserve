@@ -6,6 +6,7 @@ import type { SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.45.4
 import { json, preflight } from "../_shared/cors.ts";
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
 import { summariseTeam, type PaymentInput } from "../_shared/teamStatus.ts";
+import { registeredTeamIds } from "../_shared/registeredTeams.ts";
 import { createStripeClient, type StripeEnv } from "../_shared/stripe.ts";
 import {
   drawGroups,
@@ -236,11 +237,14 @@ Deno.serve(async (req) => {
       const qualifiersPerGroup = Number(body.qualifiers_per_group) || 2;
       const seed = Number(body.seed) || Math.floor(Math.random() * 1_000_000) + 1;
 
-      const { data: registered } = await supabase
-        .from("teams")
-        .select("id")
-        .eq("status", "registered");
-      const teamIds = (registered ?? []).map((t) => t.id as string);
+      const [teamsResult, paymentsResult] = await Promise.all([
+        supabase.from("teams").select("id, status"),
+        supabase.from("payments").select("team_id, status, amount_cents"),
+      ]);
+      if (teamsResult.error || paymentsResult.error) {
+        return json({ error: "Could not verify team payments. No draw was changed." }, 503);
+      }
+      const teamIds = registeredTeamIds(teamsResult.data ?? [], paymentsResult.data ?? []);
       if (teamIds.length < 2) {
         return json({ error: "Need at least 2 registered teams to draw groups." }, 409);
       }
