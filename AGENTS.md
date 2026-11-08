@@ -8,3 +8,4 @@
 - Volunteer applications use a validation-constrained, rate-limited write-only database function; never expose public read access to applicant contact details.
 - Keep volunteer role names and client validation together in the volunteer module so role cards and form choices stay aligned; mirror allowed values in database validation.
 - Volunteer proposals ("Think we missed something?") save to `volunteer_proposals` via the write-only, rate-limited `submit_volunteer_proposal` function; same privacy rule as applications — no public read of contact details.
+- Group draw eligibility must derive from confirmed payments through the shared team-status evaluator, never cached team status, so it matches the organiser dashboard even for historical sponsored entries.
