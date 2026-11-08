@@ -1,3 +1,6 @@
+import cupPeopleImage from "@/assets/limerick-cup-people.jpg.asset.json";
+import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
+
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
 
 export const CONTACT = {
@@ -372,9 +375,44 @@ export interface Article {
   pullQuote?: string;
   body: string[];
   talentProfiles?: boolean;
+  image?: string;
+  imageAlt?: string;
 }
 
-export const ARTICLES: Article[] = [];
+export const ARTICLES: Article[] = [
+  {
+    slug: "limericks-talent-behind-the-swapnserve-cup",
+    title: "Made in Limerick: the people behind the Swap'N'Serve Cup",
+    date: "8 November 2026",
+    dateISO: "2026-11-08",
+    tag: "People & community",
+    image: import.meta.env.DEV ? cupPeoplePreview : cupPeopleImage.url,
+    imageAlt: "The entertainers, athletes, creatives and community volunteers helping deliver the Swap'N'Serve Cup, pictured and named in the supplied press kit",
+    standfirst: "Comedians, footballers, musicians, creatives and community volunteers are coming together to deliver the Swap'N'Serve Cup. For founder David Hackett, the event is a chance to show what Limerick's people can do when their talent is given a stage.",
+    readingTime: "5 min read",
+    pullQuote: "Every person involved in this event is from Limerick City. You do not have to leave here to find world-class people, you only have to look.",
+    body: [
+      "Limerick does not need to look elsewhere for talent. It needs to give the people already here the resources, recognition and opportunities to put that talent to work. That is the idea driving David Hackett, the 20-year-old entrepreneur from Raheen behind Swap'N'Serve, and the community event he is bringing to the city this December.",
+      "On Saturday 5 December 2026, the Swap'N'Serve Cup will bring football, food, live music and poetry to Summerville Rovers F.C. in Ballinacurra. But behind the tournament is another story: the local people helping to make it happen. Their contribution goes far beyond appearing on a poster. They are shaping the promotion, organising the day, creating its visual identity and sharing their skills with the wider community.",
+      "Swap'N'Serve's flagship clothing redistribution events are part of a broader ambition to create positive change in Limerick. The Cup carries that approach into a different setting, bringing people together against hate and discrimination while giving local talent a platform. This is a look at the people helping to deliver it.",
+      "Ben O'Shaughnessy, an entertainer from Rathbane, brings both a sense of humour and a substantial online audience. The press kit records 20,000 TikTok followers, four million views and 400,000 likes. David describes him as one of the funniest people he has met, with the potential to reach a much wider stage. For the Cup, Ben has been creating promotional videos and connecting the organisation with local restaurants and businesses.",
+      "Another familiar face online is Castletroy's Ikeaka Akwajah, known on TikTok as Ahukatoofunny. With more than 100 million views, 100,000 followers and 12 million likes reported in the press kit, his reach speaks for itself. His support for Swap'N'Serve is practical too, helping with promotion and marketing so more people hear about the work being done.",
+      "In football, Raheen's Darren Nwankwo plays centre back for Treaty United and has been on trial with Blackburn Rovers in England and Lecce in Italy. David values him not only as a player, but as a kind and generous role model for younger people. Darren has given his time to the Cup's logistics, promotion and marketing.",
+      "The creative work behind an event is often less visible than the finished result. Tamera Keogh, a local arts creator from Raheen, designed and made the Michael Jackson replica glove featured in David's press photographs. Her contribution is a reminder of the craftsmanship and imagination already present in the city. Ballinacurra Weston's Ryan Beni Dijopang brings a different creative perspective: as a model with a strong eye for streetwear, he advises on styling and helps curate the project's visual identity.",
+      "Raheen musician and poet Excel Ahmed will perform on the day, alongside helping with logistics and event organisation. His community involvement extends beyond music: he also volunteers as a coach for his younger brother's football team at Regional United. The press kit highlights his recognition through Live 95's New Local Hero wildcard award coverage, but the Cup offers another opportunity for people to experience his work in person.",
+      "Azeezat Muniru, from Annacotty, studies Architecture at the University of Limerick and runs Aze's Room, an open mic that gives local musicians, poets and other creatives a place to perform. She is bringing that experience to the Cup's poetry workshop and open mic. It is a natural fit for an event built around giving people space to share what they can do.",
+      "Business experience is helping turn the plans into something tangible. Sean Leddin, from the South Circular Road, is the founder of Fíor Jewellery, an Irish-themed jewellery brand stocked across Ireland with a shop in the Crescent Shopping Centre. David credits Sean with financial support and advice on important decisions. Entrepreneur and marketer Jeff Chucks, whose work includes Limerick nightlife venture Uptown Events, has also contributed financial support and marketing advice to Swap'N'Serve projects.",
+      "Videographer and entrepreneur Owen Talabi will help produce the media assets for the Cup campaign. His work has taken him to Paris, Rome and London for fashion events, concerts and cultural projects. Bringing that experience into a Limerick community event shows how local connections can put professional creative skills to work close to home.",
+      "The organisation also depends on people whose contribution cannot be measured in followers or business milestones. Caherdavin's Oluchi Okoli is a core member of Swap'N'Serve and helped connect the Tusla group with its previous project. Having spoken publicly about reform of the foster care system, she brings advocacy, care and a commitment to making the organisation work well for others.",
+      "Southill's Craig Dawson volunteers in his community and hopes to study youth work, with an ambition to help improve life in Southill and across Limerick. He is supporting the Cup's logistics and event management. Chris O'Connor, from Raheen, also gives his free time to the organisation's logistics. His commitment to community volunteering sits alongside personal running achievements, including marathons and a run from Limerick to his father's grave in Cork.",
+      "For Shekinah Makere, a young aspiring chef from Raheen, the Cup is an opportunity to take on greater responsibility. She has volunteered with the organisation since Swap'N'Serve 2 and will help cater food at the event, putting her passion for cooking into practice. Her longer-term ambition is to open a restaurant in Limerick.",
+      "Castletroy brothers Mduduzi and Valentino Ncube bring their own strengths in sport and academics, alongside the time they give to their church and Swap'N'Serve. David describes their volunteering as fundamental to the organisation's growth. Their contribution, like that of many people on this team, is rooted in showing up and helping others.",
+      "Together, these people show what David means when he calls Limerick a goldmine of talent. Some already have large audiences or international experience. Others are building their skills through study, volunteering and their first opportunities to take responsibility. The Cup brings those different experiences together, with local people helping to deliver an event for their own city.",
+      "The Swap'N'Serve Cup takes place on Saturday 5 December 2026 at 3pm at Summerville Rovers F.C., 124 Ballinacurra Gardens, Ballinacurra (Weston), Limerick, V94 R98D. The football is 5-a-side, with seven members per team and entry at €10 per player. Food, live music, a poetry workshop and an open mic are planned alongside the tournament. Team and individual registration are available at swapnserve.com/cup.",
+      "For David, the ambition reaches beyond one afternoon. As he puts it: \"The Cup is only the start. Huge change is coming to this city and young people are going to be the ones leading it, I'm here now.\"",
+    ],
+  },
+];
 
 export const PAST_COVERAGE = [
   {

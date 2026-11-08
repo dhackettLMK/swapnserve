@@ -59,6 +59,13 @@ const PressArticle = () => {
           By <span className="text-primary">David Hackett</span>
         </p>
 
+        {article.image && (
+          <figure className="mt-8">
+            <img src={article.image} alt={article.imageAlt ?? article.title} className="h-auto w-full rounded-lg" />
+            <figcaption className="mt-3 text-sm text-muted-foreground">The people behind the Cup. Photo collage supplied by Swap'N'Serve.</figcaption>
+          </figure>
+        )}
+
         <div className="no-print mt-6 flex flex-wrap items-center gap-2" aria-label="Share this article">
           <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             <Share2 className="h-3.5 w-3.5" aria-hidden /> Share
