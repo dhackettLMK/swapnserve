@@ -1,4 +1,4 @@
-import cupPeopleImage from "@/assets/limerick-cup-people.jpg.asset.json";
+import cupPeopleImage from "@/assets/limerick-cup-people-v2.jpg.asset.json";
 import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
@@ -11,6 +11,7 @@ import excelPhoto from "@/assets/press/excel-ahmed.png.asset.json";
 import tameraPhoto from "@/assets/press/tamera-keogh.jpg.asset.json";
 import seanPhoto from "@/assets/press/sean-leddin.png.asset.json";
 import craigPhoto from "@/assets/press/craig-dawson.jpg.asset.json";
+import celinePhoto from "@/assets/press/celine-ryan.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -498,6 +499,13 @@ export const ARTICLES: Article[] = [
             "area": "Raheen",
             "text": "Chris O'Connor, from Raheen, also gives his free time to the organisation's logistics. His commitment to community volunteering sits alongside personal running achievements, including marathons and a run from Limerick to his father's grave in Cork.",
             "photo": christopherPhoto.url
+      },
+      {
+            "name": "Celine Ryan",
+            "role": "Lecturer, Shannon Hotel Management",
+            "area": "Limerick",
+            "text": "Celine Ryan, a lecturer in Shannon Hotel Management, has been a fundamental support for Swap'N'Serve in many ways, from connecting the organisation with the wider college programme to the consistent favours that keep things moving. Her tremendous civic pride in Limerick City runs through everything she does.",
+            "photo": celinePhoto.url
       },
       {
             "name": "Shekinah Makere",
