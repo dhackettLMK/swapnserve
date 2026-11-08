@@ -10,6 +10,7 @@ import christopherPhoto from "@/assets/press/christopher-oconnor.jpg.asset.json"
 import excelPhoto from "@/assets/press/excel-ahmed.png.asset.json";
 import tameraPhoto from "@/assets/press/tamera-keogh.jpg.asset.json";
 import seanPhoto from "@/assets/press/sean-leddin.png.asset.json";
+import craigPhoto from "@/assets/press/craig-dawson.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -488,7 +489,8 @@ export const ARTICLES: Article[] = [
             "name": "Craig Dawson",
             "role": "Community volunteer",
             "area": "Southill",
-            "text": "Southill's Craig Dawson volunteers in his community and hopes to study youth work, with an ambition to help improve life in Southill and across Limerick. He is supporting the Cup's logistics and event management."
+            "text": "Southill's Craig Dawson volunteers in his community and hopes to study youth work, with an ambition to help improve life in Southill and across Limerick. He is supporting the Cup's logistics and event management.",
+            "photo": craigPhoto.url
       },
       {
             "name": "Chris O'Connor",
