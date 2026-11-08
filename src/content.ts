@@ -374,59 +374,7 @@ export interface Article {
   talentProfiles?: boolean;
 }
 
-export const ARTICLES: Article[] = [
-  {
-    slug: "meet-limericks-talented-people",
-    title: "Meet the talented people within Limerick City",
-    date: "8 November 2026",
-    dateISO: "2026-11-08",
-    tag: "People",
-    standfirst: "Discover the entrepreneurs, athletes, creatives and community voices in Swap'N'Serve's Thirty Under Thirty selection.",
-    readingTime: "Meet the talent",
-    body: [],
-    talentProfiles: true,
-  },
-  {
-    slug: "limericks-hidden-talent",
-    title: "Limerick's goldmine: the young people this city should already know",
-    date: "2 November 2026",
-    dateISO: "2026-11-02",
-    tag: "Feature",
-    standfirst: STANDFIRST,
-    readingTime: "4 min read",
-    pullQuote:
-      "Limerick is sitting on a goldmine of talent that is overlooked and underequipped. Swap 'N' Serve exists to change that.",
-    body: [
-      "Limerick City is sitting on a goldmine of young talent that nobody is backing. That is the argument David Hackett has been making since he founded Swap 'N' Serve, a youth-led community nonprofit that collects and redistributes clothing for free, in August 2025. The 20-year-old from Raheen was the first in his family to go to college, left after one year to build full-time, and became the first Web Summit Scholar from Limerick and Munster.",
-      "His point is not abstract. Since its first event, Swap 'N' Serve has redistributed over 2,500 clothing items with the help of more than 85 volunteers and 600 attendees across two events, working with partners including the University of Limerick, TUS, Tusla and local charities. Now, for his next event, he has put 17 young Limerick people to work, and he wants the city to know their names.",
-      "Start with the entertainers. Ben O'Shaughnessy, from Rathbane, is a TikTok comedian with 20,000 followers, 4 million views and 400,000 likes. David believes that, given the right opportunities, Ben could run his own TV show and become a national hero. Ikeaka Akwajah, from Castletroy, performs as Ahukatoofunny and has passed 100 million views, 100,000 followers and 12 million likes on TikTok.",
-      "In sport, Darren Nwankwo from Raheen plays centre back for Treaty United and has been on trial with Blackburn Rovers in England and Lecce in Italy. David describes him as a lovely, kind, generous person and a great role model for the kids who look up to him.",
-      "Music and arts run deep through the group. Excel Ahmed, a musician and poet from Raheen, was nominated for Live 95's 'New Local Hero' wildcard award and volunteers as a coach for his little brother's team at Regional United; he will perform live on the day. Tamera Keogh, also from Raheen, designed and made the Michael Jackson replica glove David wears in his press photos. Ryan Beni Dijopang, a streetwear model from Ballinacurra Weston, is shaping the visual aesthetic of the whole project. And Azeezat Muniru, an Architecture student at the University of Limerick from Annacotty, runs Aze's Room, an open mic that gives local creatives, musicians and poets a stage and an audience. She will run the poetry workshop and open mic at the Cup.",
-      "In business and media, Sean Leddin from the South Circular Road founded Fíor Jewellery, an Irish-themed jewellery brand stocked across Ireland with its own shop in the Crescent Shopping Centre, reported as a €1m business. Jeff Chucks is the marketer behind Uptown Events, a Limerick nightlife brand. Owen Talabi is booked internationally, including in Paris, Rome and London, to film fashion events, concerts and cultural events with some of the biggest names in the world, and is producing the media assets for the whole Cup campaign.",
-      "The community names matter just as much. Oluchi Okoli, from Caherdavin, has spoken publicly about reforming the foster care system and brought the Tusla group into the last Swap 'N' Serve project. Craig Dawson volunteers widely in Southill and plans to study youth work so he can help bring life back to Limerick. Chris O'Connor, from Raheen, has run multiple marathons since his father passed away, run from Limerick to his father's grave in Cork, and committed himself to community volunteering, including cleaning up Limerick's road signs. Shekinah Makere, a teenage volunteer from Raheen, has been with Swap 'N' Serve since its second event, dreams of opening her own restaurant, and will cater the food on the day. Mduduzi and Valentino Ncube, two brothers from Castletroy who are talented in sport and academics, give much of their spare time to their church and to Swap 'N' Serve.",
-      "All of it converges on Saturday 5 December 2026, when the Swap 'N' Serve Cup takes over Summerville Rovers F.C. in Ballinacurra. The 5-a-side tournament, with teams of 7 at €10 per player, comes with food, live music, a poetry workshop and an open mic, uniting Limerick against hate and discrimination. Over €2,500 will be given back to the community: a €1,500 cash prize for the winning team and €1,000 in donated equipment for the host club, with all proceeds funding the next free clothing event.",
-      "Every person helping to deliver it is from Limerick. For David, that is the whole point. \"The Cup is only the start. Huge change is coming to this city and young people are going to be the ones leading it. I'm here now.\"",
-    ],
-  },
-  {
-    slug: "swap-n-serve-cup-2026",
-    title: "The Swap 'N' Serve Cup: €2,500 back into Limerick on 5 December",
-    date: "2 November 2026",
-    dateISO: "2026-11-02",
-    tag: "Event",
-    standfirst:
-      "A 5-a-side community football tournament with food, live music and entertainment, uniting Limerick against hate and discrimination.",
-    readingTime: "2 min read",
-    body: [
-      "Swap 'N' Serve, the youth-led community nonprofit founded in Limerick in August 2025 by 20-year-old David Hackett, has announced the Swap 'N' Serve Cup, a 5-a-side community football tournament taking place on Saturday 5 December 2026 at 3pm at Summerville Rovers F.C., 124 Ballinacurra Gardens, Ballinacurra (Weston), Limerick, V94 R98D.",
-      "The tournament unites Limerick against hate and discrimination, and over €2,500 will be given back to the community. The winning team takes a €1,500 cash prize, while €1,000 in donated equipment goes to the host club. Teams of 7 enter at €10 per player, with all proceeds funding the next free clothing event.",
-      "The day is built as more than a football tournament. Alongside the football there will be food, live music from local performers, a poetry workshop and an open mic, with entertainment running throughout.",
-      "Swap 'N' Serve has form for drawing a crowd. Across two events it has redistributed over 2,500 clothing items, supported by more than 85 volunteers and 600 attendees, with partners including the University of Limerick, TUS, Tusla and local charities.",
-      "Every person helping to deliver the Cup is from Limerick City, from the catering to the media campaign to the performances on the day.",
-      "Teams can enter now at swapnserve.com/cup. Media are welcome on the day, with interviews and photos available on request; contact David Hackett at d.hackett2005@gmail.com.",
-    ],
-  },
-];
+export const ARTICLES: Article[] = [];
 
 export const PAST_COVERAGE = [
   {
