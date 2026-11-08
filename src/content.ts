@@ -15,6 +15,7 @@ import celinePhoto from "@/assets/press/celine-ryan.jpg.asset.json";
 import oluchiPhoto from "@/assets/press/oluchi-okoli.png.asset.json";
 import ikeakaPhoto from "@/assets/press/ikeaka-akwajah.jpg.asset.json";
 import darrenPhoto from "@/assets/press/darren-nwankwo.webp.asset.json";
+import davidPhoto from "@/assets/press/david-hackett.png.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -127,6 +128,7 @@ export const PEOPLE: Person[] = [
     roleInCup: "Organiser of the Swap 'N' Serve Cup.",
     links: [],
     organiser: true,
+    photo: davidPhoto.url,
   },
   {
     slug: "ben-oshaughnessy",
