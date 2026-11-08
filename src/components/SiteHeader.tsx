@@ -102,7 +102,7 @@ const SiteHeader = () => {
               aria-label="Mobile navigation"
             >
               <div className="space-y-1">
-                {navLinks.map((link) =>
+                {[...navLinks, { label: "Blog", href: "/press/blog" }].map((link) =>
                   link.href.startsWith("#") ? (
                     <a
                       key={link.href}
