@@ -152,6 +152,14 @@ const PressArticle = () => {
 
         {article.closing && <div className="mt-10 space-y-6">{article.closing.map((paragraph) => <p key={paragraph} className="text-lg leading-relaxed text-foreground/90">{paragraph}</p>)}</div>}
 
+        {article.sourceLink && (
+          <p className="mt-10">
+            <a href={article.sourceLink.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+              {article.sourceLink.label} <span aria-hidden>→</span>
+            </a>
+          </p>
+        )}
+
         {article.talentProfiles && <TalentProfiles />}
 
         <aside className="mt-12 rounded-xl border border-primary/25 bg-primary/5 p-6">
