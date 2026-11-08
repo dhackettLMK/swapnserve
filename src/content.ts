@@ -1,5 +1,6 @@
 import cupPeopleImage from "@/assets/limerick-cup-people.jpg.asset.json";
 import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
+import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -489,13 +490,15 @@ export const ARTICLES: Article[] = [
             "name": "Mduduzi Ncube",
             "role": "Student & volunteer",
             "area": "Castletroy",
-            "text": "Mduduzi brings strengths in sport and academics, alongside the time he gives to his church and Swap'N'Serve with his brother Valentino. David describes the brothers' volunteering as fundamental to the organisation's growth."
+            "text": "Mduduzi brings strengths in sport and academics, alongside the time he gives to his church and Swap'N'Serve with his brother Valentino. David describes the brothers' volunteering as fundamental to the organisation's growth.",
+            "photo": ncubePhoto.url
       },
       {
             "name": "Valentino Ncube",
             "role": "Student & volunteer",
             "area": "Castletroy",
-            "text": "Valentino volunteers with his church and Swap'N'Serve alongside his brother Mduduzi. With strengths in sport and academics, his contribution is rooted in giving his time, showing up and helping others."
+            "text": "Valentino volunteers with his church and Swap'N'Serve alongside his brother Mduduzi. With strengths in sport and academics, his contribution is rooted in giving his time, showing up and helping others.",
+            "photo": ncubePhoto.url
       }
 ],
     closing: [
