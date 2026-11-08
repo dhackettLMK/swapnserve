@@ -8,6 +8,7 @@ import shekinahPhoto from "@/assets/press/shekinah-makere.jpg.asset.json";
 import azeezatPhoto from "@/assets/press/azeezat-muniru.jpg.asset.json";
 import christopherPhoto from "@/assets/press/christopher-oconnor.jpg.asset.json";
 import excelPhoto from "@/assets/press/excel-ahmed.png.asset.json";
+import tameraPhoto from "@/assets/press/tamera-keogh.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -431,7 +432,8 @@ export const ARTICLES: Article[] = [
             "name": "Tamera Keogh",
             "role": "Arts creator",
             "area": "Raheen",
-            "text": "The creative work behind an event is often less visible than the finished result. Tamera Keogh, a local arts creator from Raheen, designed and made the Michael Jackson replica glove featured in David's press photographs. Her contribution is a reminder of the craftsmanship and imagination already present in the city."
+            "text": "The creative work behind an event is often less visible than the finished result. Tamera Keogh, a local arts creator from Raheen, designed and made the Michael Jackson replica glove featured in David's press photographs. Her contribution is a reminder of the craftsmanship and imagination already present in the city.",
+            "photo": tameraPhoto.url
       },
       {
             "name": "Ryan Beni Dijopang",
