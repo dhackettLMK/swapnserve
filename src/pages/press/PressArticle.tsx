@@ -6,6 +6,7 @@ import PressSeo from "@/components/press/PressSeo";
 import NotFound from "@/pages/NotFound";
 import { ARTICLES, CONTACT } from "@/content";
 import TalentProfiles from "@/components/press/TalentProfiles";
+import { resolvePressPortrait } from "@/lib/pressPortraits";
 
 const PressArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -132,7 +133,7 @@ const PressArticle = () => {
             {article.peopleSections.map((person, index) => (
               <section key={person.name} aria-label={person.name} className="grid gap-6 py-9 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8">
                 {person.photo ? (
-                  <img src={person.photo} alt={person.name} loading="lazy" className="aspect-[4/5] w-36 rounded-lg object-cover object-top" />
+                  <img src={resolvePressPortrait(person.photo)} alt={person.name} loading="lazy" className="aspect-[4/5] w-36 rounded-lg object-cover object-top" />
                 ) : (
                   <div aria-hidden="true" className="flex aspect-[4/5] w-36 items-center justify-center rounded-lg border border-border bg-muted text-3xl font-semibold text-primary/40">
                     {person.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}
