@@ -589,6 +589,24 @@ export const ARTICLES: Article[] = [
       url: "https://www.independent.ie/county/limerick/focus-of-limericks-swap-n-serve-clothes-event-goes-far-beyond-mere-fashion/a/145568026.html",
     },
   },
+  {
+    slug: "limerick-leader-swapnserve-cup-showcase-talent",
+    title: "In the news: Limerick Leader on the Swap'N'Serve Cup",
+    date: "31 October 2026",
+    dateISO: "2026-10-31",
+    tag: "In the press",
+    standfirst: "The Limerick Leader's Business Leader spoke to David Hackett about the Swap'N'Serve Cup and his search for talent in every corner of Limerick.",
+    readingTime: "2 min read",
+    body: [
+      "In October 2026, the Limerick Leader's Nick Rabbitts reported on the Swap'N'Serve Cup, the football tournament coming to Summerville Rovers' home ground in Ballinacurra on Saturday 5 December, organised to highlight the talent Limerick has both on the pitch and in business. The paper noted the 15 up-and-coming local talents helping to deliver it, including footballer Darren Nwankwo, musician Excel Ahmed and arts creator Tamera Keogh.",
+      "David told Business Leader: \"I'm hyper-obsessed around Limerick and the potential it possesses. I am hoping to unlock it.\" Describing his own unconventional route, without an accelerator programme, work placement or college, he said it is about finding people \"in these little corners of life that other people aren't looking in.\"",
+      "The article also mentioned David's place as the only Limerick student selected for Web Summit in Portugal, his hospitality software NexEire, prize money secured from local businesses and benefactors, and a planned donation to host club Summerville Rovers. Proceeds from the Cup will help fund the next Swap'N'Serve clothing event in the spring.",
+    ],
+    sourceLink: {
+      label: "Read the full article in the Limerick Leader",
+      url: "https://www.limerickleader.ie/news/business/limerick-entrepreneur-is-on-a-winner-with-contest-9317092",
+    },
+  },
 ];
 
 export const PAST_COVERAGE = [
