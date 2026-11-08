@@ -1,6 +1,7 @@
 import cupPeopleImage from "@/assets/limerick-cup-people.jpg.asset.json";
 import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
+import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -460,7 +461,8 @@ export const ARTICLES: Article[] = [
             "name": "Owen Talabi",
             "role": "Videographer & entrepreneur",
             "area": "Limerick",
-            "text": "Videographer and entrepreneur Owen Talabi will help produce the media assets for the Cup campaign. His work has taken him to Paris, Rome and London for fashion events, concerts and cultural projects. Bringing that experience into a Limerick community event shows how local connections can put professional creative skills to work close to home."
+            "text": "Videographer and entrepreneur Owen Talabi will help produce the media assets for the Cup campaign. His work has taken him to Paris, Rome and London for fashion events, concerts and cultural projects. Bringing that experience into a Limerick community event shows how local connections can put professional creative skills to work close to home.",
+            "photo": owenTalabiPhoto.url
       },
       {
             "name": "Oluchi Okoli",
