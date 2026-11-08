@@ -35,7 +35,7 @@ const PressArticle = () => {
     mainEntityOfPage: url,
   };
 
-  const mid = Math.ceil(article.body.length / 2);
+  const mid = article.peopleSections ? article.body.length : Math.ceil(article.body.length / 2);
 
   return (
     <PressLayout>
@@ -126,6 +126,30 @@ const PressArticle = () => {
             </p>
           ))}
         </div>
+
+        {article.peopleSections && (
+          <div className="mt-12 divide-y divide-border border-y border-border">
+            {article.peopleSections.map((person, index) => (
+              <section key={person.name} aria-label={person.name} className="grid gap-6 py-9 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8">
+                {person.photo ? (
+                  <img src={person.photo} alt={person.name} loading="lazy" className="aspect-[4/5] w-36 rounded-lg object-cover object-top" />
+                ) : (
+                  <div aria-hidden="true" className="flex aspect-[4/5] w-36 items-center justify-center rounded-lg border border-border bg-muted text-3xl font-semibold text-primary/40">
+                    {person.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <p className="mb-2 text-xs font-semibold uppercase text-primary">{String(index + 1).padStart(2, "0")} · {person.role}</p>
+                  <h2 className="text-2xl font-semibold text-foreground">{person.name}</h2>
+                  <p className="mt-2 text-sm text-muted-foreground">{person.area}</p>
+                  <p className="mt-4 text-base leading-relaxed text-foreground/90">{person.text}</p>
+                </div>
+              </section>
+            ))}
+          </div>
+        )}
+
+        {article.closing && <div className="mt-10 space-y-6">{article.closing.map((paragraph) => <p key={paragraph} className="text-lg leading-relaxed text-foreground/90">{paragraph}</p>)}</div>}
 
         {article.talentProfiles && <TalentProfiles />}
 
