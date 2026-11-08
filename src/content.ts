@@ -5,6 +5,7 @@ import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
 import jeffChucksPhoto from "@/assets/press/jeff-chucks.jpg.asset.json";
 import shekinahPhoto from "@/assets/press/shekinah-makere.jpg.asset.json";
+import azeezatPhoto from "@/assets/press/azeezat-muniru.jpg.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -447,7 +448,8 @@ export const ARTICLES: Article[] = [
             "name": "Azeezat Muniru",
             "role": "Architecture student & founder of Aze’s Room",
             "area": "Annacotty",
-            "text": "Azeezat Muniru, from Annacotty, studies Architecture at the University of Limerick and runs Aze's Room, an open mic that gives local musicians, poets and other creatives a place to perform. She is bringing that experience to the Cup's poetry workshop and open mic. It is a natural fit for an event built around giving people space to share what they can do."
+            "text": "Azeezat Muniru, from Annacotty, studies Architecture at the University of Limerick and runs Aze's Room, an open mic that gives local musicians, poets and other creatives a place to perform. She is bringing that experience to the Cup's poetry workshop and open mic. It is a natural fit for an event built around giving people space to share what they can do.",
+            "photo": azeezatPhoto.url
       },
       {
             "name": "Sean Leddin",
