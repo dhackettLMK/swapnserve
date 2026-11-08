@@ -7,6 +7,7 @@ import jeffChucksPhoto from "@/assets/press/jeff-chucks.jpg.asset.json";
 import shekinahPhoto from "@/assets/press/shekinah-makere.jpg.asset.json";
 import azeezatPhoto from "@/assets/press/azeezat-muniru.jpg.asset.json";
 import christopherPhoto from "@/assets/press/christopher-oconnor.jpg.asset.json";
+import excelPhoto from "@/assets/press/excel-ahmed.png.asset.json";
 import benOShaughnessyPhoto from "@/assets/press/ben-oshaughnessy.jpg.asset.json";
 
 // Press room content for Swap 'N' Serve. All copy is final: edit facts here only.
@@ -443,7 +444,8 @@ export const ARTICLES: Article[] = [
             "name": "Excel Ahmed",
             "role": "Musician & poet",
             "area": "Raheen",
-            "text": "Raheen musician and poet Excel Ahmed will perform on the day, alongside helping with logistics and event organisation. His community involvement extends beyond music: he also volunteers as a coach for his younger brother's football team at Regional United. The press kit highlights his recognition through Live 95's New Local Hero wildcard award coverage, but the Cup offers another opportunity for people to experience his work in person."
+            "text": "Raheen musician and poet Excel Ahmed will perform on the day, alongside helping with logistics and event organisation. His community involvement extends beyond music: he also volunteers as a coach for his younger brother's football team at Regional United. The press kit highlights his recognition through Live 95's New Local Hero wildcard award coverage, but the Cup offers another opportunity for people to experience his work in person.",
+            "photo": excelPhoto.url
       },
       {
             "name": "Azeezat Muniru",
