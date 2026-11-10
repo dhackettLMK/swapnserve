@@ -1,4 +1,4 @@
-import cupPeopleImage from "@/assets/limerick-cup-people-v3.jpg";
+import cupPeopleImage from "@/assets/limerick-cup-people-v4.jpg";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
