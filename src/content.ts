@@ -1,5 +1,4 @@
-import cupPeopleImage from "@/assets/limerick-cup-people-v2.jpg.asset.json";
-import cupPeoplePreview from "@/assets/limerick-cup-people.webp";
+import cupPeopleImage from "@/assets/limerick-cup-people-v3.jpg";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
@@ -423,8 +422,8 @@ export const ARTICLES: Article[] = [
     date: "8 November 2026",
     dateISO: "2026-11-08",
     tag: "People & community",
-    image: import.meta.env.DEV ? cupPeoplePreview : cupPeopleImage.url,
-    imageAlt: "The entertainers, athletes, creatives and community volunteers helping deliver the Swap'N'Serve Cup, pictured and named in the supplied press kit",
+    image: cupPeopleImage,
+    imageAlt: "The people helping deliver the Swap'N'Serve Cup, including Celine Ryan and Jon Harrison, pictured and named in the thank-you collage",
     standfirst: "Comedians, footballers, musicians, creatives and community volunteers are coming together to deliver the Swap'N'Serve Cup. For founder David Hackett, the event is a chance to show what Limerick's people can do when their talent is given a stage.",
     readingTime: "5 min read",
     pullQuote: "Every person involved in this event is from Limerick City. You do not have to leave here to find world-class people, you only have to look.",
