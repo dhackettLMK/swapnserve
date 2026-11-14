@@ -64,6 +64,13 @@
       "when": 1793231690098,
       "tag": "0008_volunteer_proposals",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1794621837386,
+      "tag": "0009_restrict_page_view_submissions",
+      "breakpoints": true
     }
   ]
 }
