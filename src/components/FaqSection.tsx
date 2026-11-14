@@ -5,11 +5,32 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { MISSION_SUMMARY } from "@/content/mission";
 
 const faqs = [
   {
     q: "What is Swap'n'Serve?",
-    a: "Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025 by David Hackett. On the surface we are a community clothing event where quality items are offered for €1 or free. Underneath, we are an umbrella for upskilling, financial relief, circular textiles and tackling antisocial tension across the city.",
+    a: MISSION_SUMMARY,
+  },
+  {
+    q: "Is Swap'N'Serve only about clothing events?",
+    a: "No. Clothing redistribution is our flagship event, but we are an umbrella organisation for the betterment of Limerick City. Our projects bring together community support, sport, creativity, enterprise and upskilling to address financial and social tensions, employment barriers and overlooked talent.",
+  },
+  {
+    q: "What change are you working towards in Limerick?",
+    a: "We want to celebrate the city's strengths while challenging the conditions that hold people back. Our ambition is to contribute to social, economic, political and cultural regeneration over the next five years and beyond, including stronger trust between communities, civil servants and the council. This is a long-term purpose, not a promise that any single project can solve every problem.",
+  },
+  {
+    q: "Do I need experience or qualifications to get involved?",
+    a: "Not necessarily. We believe people without major experience or accolades deserve opportunities to learn and a stage to demonstrate their talents. A fresh perspective can lead to real change. Some roles have specific responsibilities or requirements, but you can also propose an idea based on your own skills or interests through our volunteer page.",
+  },
+  {
+    q: "What values guide your work?",
+    a: "We work with dignity and without judgement or ill intent. We aim for excellence, creativity and work that makes a lasting difference, rather than safe, repeatable efforts. We challenge complacency and unnecessary bureaucracy, take thoughtful risks and treat learning from failure as seriously as success.",
+  },
+  {
+    q: "How do you approach transparency and responsibility?",
+    a: "We believe we owe the people of Limerick clear, honest information about what we do and who we work with, including when things go wrong. We must not hide behind lies, jargon or bureaucracy. We aim to recruit responsible people and build strong departments so the organisation can outlive any one person's talents and protect the future we are working towards.",
   },
   {
     q: "Who can attend the clothing events?",
@@ -33,7 +54,7 @@ const faqs = [
   },
   {
     q: "How can I volunteer?",
-    a: "Head to the 'Want to Volunteer?' section above and fill out the short form, or email us directly at swapnserve@gmail.com. No prior experience is required. Past volunteers have come from secondary schools, colleges and across the city.",
+    a: "Open the volunteer page using 'Want to Volunteer' at the top of the website, explore the open roles and apply through the 'Join the team' form. If you have a skill, interest or proposal that does not fit an existing role, use 'Think we missed something?' to share it. We welcome people who want to learn, take responsibility and help create positive change in Limerick.",
   },
   {
     q: "Do you collect personal data?",

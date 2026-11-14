@@ -5,16 +5,19 @@ import { Recycle, Heart, Users, Leaf } from "lucide-react";
 import CupButtonBrand from "@/components/cup/CupButtonBrand";
 import heroBg from "@/assets/hero-community.jpg";
 import heroBgSmall from "@/assets/hero-community-sm.jpg";
+import { MISSION_SUMMARY } from "@/content/mission";
+import OfficialStatement from "@/components/OfficialStatement";
 
 const chips = [
   { label: "Youth-led, Limerick-born", icon: Users },
-  { label: "Circular textiles", icon: Recycle },
-  { label: "Aligned with UN SDG 12", icon: Leaf },
-  { label: "No cost. No sign-up. No questions.", icon: Heart },
+  { label: "Community-led projects", icon: Recycle },
+  { label: "Lasting regeneration", icon: Leaf },
+  { label: "Opportunity without judgement", icon: Heart },
 ];
 
 const HeroSection = () => {
   return (
+    <>
     <section className="relative min-h-[640px] overflow-hidden md:min-h-[720px]">
       <div className="absolute inset-0 bg-primary">
         <img
@@ -59,8 +62,12 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/90 md:mb-8 md:text-lg 2xl:max-w-3xl"
           >
-            Swap'n'Serve is a Limerick-based grassroots organisation, founded in 2025, We are a non-profit where we use our operations as opportunities to connect in local youth talent with resources and a stage to develop and demonstrate their skills and opportunities to promote growth and widespread regeneration into Limerick city by approaching problems in a unique and innovative manner, a culture where hate is not tolerated in any form. We also host a range of world class events, you should come :)
+            {MISSION_SUMMARY}
           </motion.p>
+
+          <Button asChild variant="link" className="mb-6 h-auto whitespace-normal p-0 text-left text-primary-foreground underline underline-offset-4 hover:text-primary-foreground/80">
+            <a href="#official-statement">Read our official statement</a>
+          </Button>
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -110,6 +117,8 @@ const HeroSection = () => {
         </div>
       </div>
     </section>
+    <OfficialStatement />
+    </>
   );
 };
 

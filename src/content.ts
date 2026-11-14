@@ -1,4 +1,5 @@
 import cupPeopleImage from "@/assets/limerick-cup-people-v4.jpg";
+import { MISSION_SUMMARY } from "@/content/mission";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
@@ -39,7 +40,7 @@ export const STORY_IN_BRIEF = [
 ];
 
 export const BOILERPLATE =
-  "Swap 'N' Serve is a youth-led community nonprofit in Limerick, founded in August 2025 by David Hackett. It runs free clothing redistribution events and community projects, and has redistributed over 2,500 clothing items with the help of 85+ volunteers and 600+ attendees across two events. Its partners include the University of Limerick, TUS, Tusla and local charities.";
+  MISSION_SUMMARY;
 
 export const KEY_FACTS = [
   "Over €2,500 given back: €1,500 cash prize for the winning team and €1,000 in donated equipment for the host club",

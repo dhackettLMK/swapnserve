@@ -13,3 +13,4 @@
 - Press-kit blog profiles use structured per-person sections with optional photo fields in the shared article content, so individual portraits can be added without rebuilding the article layout.
 - Blog portrait fields store Lovable Assets CDN URLs as the editable source of truth; because the local preview cannot serve those paths, keep a same-named bundled copy in `src/assets/press/portraits/` and render every blog portrait through `resolvePressPortrait` so the preview and the published site both show the photo.
 - The talent blog feature reads the existing saved content through the thirty function, with a bundled fallback; portrait resolution must preserve organiser replacements rather than matching by person name.
+- Keep the verbatim official statement and shared organisation summary in the mission content module so homepage, FAQs and press boilerplate stay aligned without altering historical reporting.

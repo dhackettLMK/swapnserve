@@ -1,5 +1,10 @@
 # Roadmap
 
+## Official statement
+- [x] Add the exact signed manifesto near the top of the homepage.
+- [x] Align organisation summaries, programme introduction, volunteer introduction and FAQs with the manifesto.
+- [x] Verify the statement, FAQs and desktop/mobile layout.
+
 ## Talent blog feature
 - [x] Add the saved talented people profiles to the existing blog and homepage blog section.
 - [x] Verify the article, portraits and mobile layout.

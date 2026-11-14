@@ -343,7 +343,7 @@ export default function ProgrammesSection() {
             <p className="mb-3 text-xs font-semibold uppercase text-primary">Our programmes</p>
             <h2 className="max-w-xl font-section text-3xl font-semibold leading-tight md:text-4xl">Built for the betterment of Limerick</h2>
           </div>
-          <p className="max-w-lg text-base leading-relaxed text-muted-foreground">One umbrella, three pillars. Each programme reaches a different part of Limerick: grassroots, talent and enterprise, all under one mission.</p>
+          <p className="max-w-lg text-base leading-relaxed text-muted-foreground">One umbrella, a shared purpose. Our programmes give overlooked talent opportunities, resources and a stage, bringing community support, creativity and enterprise together to build lasting change in Limerick.</p>
         </div>
         <div className="flex flex-col gap-8">
           <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex min-w-0 flex-col rounded-xl bg-primary p-6 text-primary-foreground md:p-10">
