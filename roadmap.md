@@ -1,5 +1,10 @@
 # Roadmap
 
+## Close individual Cup registration
+- [x] Remove the empty Free Agents team to leave one team place available.
+- [x] Remove individual registration and block new individual checkouts.
+- [x] Verify the remaining team count, public pages and closed checkout.
+
 ## Official statement
 - [x] Add the exact signed manifesto near the top of the homepage.
 - [x] Align organisation summaries, programme introduction, volunteer introduction and FAQs with the manifesto.

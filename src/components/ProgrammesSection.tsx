@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeftRight, ArrowRight, Code, Shirt, Terminal, Trophy, UserPlus } from "lucide-react";
+import { ArrowLeftRight, ArrowRight, Code, Shirt, Terminal, Trophy } from "lucide-react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -373,7 +373,6 @@ export default function ProgrammesSection() {
                 <p className="mb-6 text-sm text-primary-foreground/75">€10 per team member · 7 team members required</p>
                 <div className="flex flex-wrap gap-3">
                   <Button asChild variant="secondary" size="lg"><Link to="/cup?src=programme-team">Register your team <ArrowRight /></Link></Button>
-                  <Button asChild variant="ghost" size="lg" className="border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><Link to="/cup?src=programme-solo#solo">Register as an individual <UserPlus /></Link></Button>
                 </div>
                 <Link to="/cup/format" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/80 hover:text-primary-foreground">View the tournament <ArrowRight size={15} /></Link>
               </div>

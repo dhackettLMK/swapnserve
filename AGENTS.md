@@ -15,3 +15,4 @@
 - The talent blog feature reads the existing saved content through the thirty function, with a bundled fallback; portrait resolution must preserve organiser replacements rather than matching by person name.
 - Keep the verbatim official statement and shared organisation summary in the mission content module so homepage, FAQs and press boilerplate stay aligned without altering historical reporting.
 - Anonymous page-view submissions are write-only, with database validation of bounded site paths and random UUID visitor IDs; grant public inserts only on those two columns so IDs and timestamps remain server-controlled.
+- Enforce closed entry modes before creating checkout sessions, while retaining fulfilment for previously paid sessions so registration changes never discard existing payments.
