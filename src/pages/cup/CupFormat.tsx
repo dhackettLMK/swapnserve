@@ -81,6 +81,7 @@ function MatchCard({
     <button
       type="button"
       onClick={onSelect}
+      aria-label={`Match ${match.no}: ${match.a} vs ${match.b}`}
       className={`w-full rounded-2xl border border-primary-foreground/15 bg-primary-foreground/[0.06] p-3 text-left backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-foreground/10 ${
         selected ? `ring-2 ${accentRing}` : ""
       }`}

@@ -98,7 +98,7 @@ function CreateTeam() {
                 className="cup-wordmark mx-auto -mt-3 w-2/5 max-w-[240px] -rotate-2 lg:ml-auto lg:mr-6"
               />
             </div>
-            <h1 className="sr-only">The Swap'n'Serve Cup</h1>
+            <h1 className="sr-only">The Swap'n'Serve Cup: Limerick 5-a-side football tournament</h1>
             <p className="mt-5 max-w-xl font-cup-body text-lg leading-relaxed text-primary-foreground/75 lg:text-xl">
               A community tournament with permanent goals left for the local
               community after the final whistle.
