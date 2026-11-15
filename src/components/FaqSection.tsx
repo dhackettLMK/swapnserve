@@ -6,8 +6,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MISSION_SUMMARY } from "@/content/mission";
+import { CUP_SPECTATOR_INVITATION } from "@/content/cup";
 
 const faqs = [
+  {
+    q: "Can I still register for the Swap'N'Serve Cup?",
+    a: `No, the Cup is SOLD OUT and all team places are filled. ${CUP_SPECTATOR_INVITATION}`,
+  },
   {
     q: "What is Swap'n'Serve?",
     a: MISSION_SUMMARY,

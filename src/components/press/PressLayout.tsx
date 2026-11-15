@@ -2,10 +2,14 @@ import type { ReactNode } from "react";
 import { Mail } from "lucide-react";
 import PressNav from "./PressNav";
 import { CONTACT } from "@/content";
+import { CupSoldOut } from "@/components/cup/CupSoldOut";
+import { CUP_SPECTATOR_INVITATION } from "@/content/cup";
+import { Link } from "react-router-dom";
 
 const PressLayout = ({ children }: { children: ReactNode }) => (
   <div className="press-room min-h-screen bg-background font-body text-foreground">
     <PressNav />
+    <section className="border-b border-border bg-muted/25"><div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-5 px-4 py-8 sm:px-6"><CupSoldOut /><div className="min-w-0 flex-1 basis-64"><p className="font-semibold">Swap'N'Serve Cup</p><p className="mt-2 text-sm leading-relaxed">{CUP_SPECTATOR_INVITATION}</p><Link to="/cup" className="mt-3 inline-block text-sm font-semibold text-primary underline underline-offset-4">Come down and watch</Link></div></div></section>
     <main>{children}</main>
     <footer className="border-t border-border bg-card">
       <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-4 px-4 py-10 sm:px-6 md:flex-row md:items-center">

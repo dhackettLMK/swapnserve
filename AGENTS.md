@@ -16,3 +16,4 @@
 - Keep the verbatim official statement and shared organisation summary in the mission content module so homepage, FAQs and press boilerplate stay aligned without altering historical reporting.
 - Anonymous page-view submissions are write-only, with database validation of bounded site paths and random UUID visitor IDs; grant public inserts only on those two columns so IDs and timestamps remain server-controlled.
 - Enforce closed entry modes before creating checkout sessions, while retaining fulfilment for previously paid sessions so registration changes never discard existing payments.
+- Share the Cup sold-out notice and spectator invitation across promotions and Cup pages; closing team capacity must preserve existing squad management, payments and prepaid roster completion.

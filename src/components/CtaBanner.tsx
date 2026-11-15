@@ -16,11 +16,10 @@ const CtaBanner = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-5xl font-section font-bold text-primary-foreground mb-6">
-            Lend a Hand in Limerick.
+            Come down for the Cup.
           </h2>
           <p className="text-lg text-primary-foreground/80 max-w-xl mx-auto mb-8">
-            Whether you have an hour or a day, your time supports families across the city. Join
-            the Swap'n'Serve volunteer team.
+            Team places are sold out, but we would love you to come and watch. Enjoy free food, live local musicians and poets, and cheer on the teams.
           </p>
           <motion.div
             whileHover={{ scale: 1.04 }}
@@ -29,7 +28,7 @@ const CtaBanner = () => {
           >
             <Link
               to="/cup?src=cta-banner"
-              aria-label="Sign Up to the Swap'n'Serve Cup"
+              aria-label="Cup sold out. Come down and watch"
               className="inline-flex items-center gap-3 rounded-full bg-secondary px-8 py-4 shadow-sm shadow-secondary/25 transition-shadow hover:shadow-sm hover:shadow-secondary/40"
             >
               <CupButtonBrand wordmarkClass="h-5" cupClass="h-7" />

@@ -1,5 +1,6 @@
 import cupPeopleImage from "@/assets/limerick-cup-people-v4.jpg";
 import { MISSION_SUMMARY } from "@/content/mission";
+import { CUP_SPECTATOR_INVITATION } from "@/content/cup";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
 import owenTalabiPhoto from "@/assets/press/owen-talabi.jpg.asset.json";
 import ryanBeniPhoto from "@/assets/press/ryan-beni.jpg.asset.json";
@@ -72,10 +73,10 @@ export const CUP_EVENT = {
   date: "Saturday 5 December 2026, 3pm",
   dateISO: "2026-12-05T15:00:00+00:00",
   where: "Summerville Rovers F.C., 124 Ballinacurra Gardens, Ballinacurra (Weston), Limerick, V94 R98D",
-  enter: "swapnserve.com/cup (teams of 7, €10 per player)",
+  enter: `SOLD OUT. ${CUP_SPECTATOR_INVITATION}`,
   prizes: "€1,500 cash for the winning team and €1,000 in donated equipment for the host club",
   media: "Media welcome on the day, with interviews and photos available on request",
-  programme: ["Football", "Food", "Live music", "Poetry workshop", "Open mic"],
+  programme: ["Football", "Free food", "Live local musicians", "Local poets", "Open mic"],
 };
 
 export type PersonCategory =
@@ -549,7 +550,7 @@ export const ARTICLES: Article[] = [
 ],
     closing: [
       "Together, these people show what David means when he calls Limerick a goldmine of talent. Some already have large audiences or international experience. Others are building their skills through study, volunteering and their first opportunities to take responsibility. The Cup brings those different experiences together, with local people helping to deliver an event for their own city.",
-      "The Swap'N'Serve Cup takes place on Saturday 5 December 2026 at 3pm at Summerville Rovers F.C., 124 Ballinacurra Gardens, Ballinacurra (Weston), Limerick, V94 R98D. The football is 5-a-side, with seven members per team and entry at €10 per player. Food, live music, a poetry workshop and an open mic are planned alongside the tournament. Team and individual registration are available at swapnserve.com/cup.",
+      `The Swap'N'Serve Cup takes place on Saturday 5 December 2026 at 3pm at Summerville Rovers F.C., 124 Ballinacurra Gardens, Ballinacurra (Weston), Limerick, V94 R98D. The football is 5-a-side, with seven members per team. ${CUP_SPECTATOR_INVITATION} Find the event details at swapnserve.com/cup.`,
       "For David, the ambition reaches beyond one afternoon. As he puts it: \"The Cup is only the start. Huge change is coming to this city and young people are going to be the ones leading it, I'm here now.\""
 ],
   },

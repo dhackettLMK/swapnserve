@@ -25,6 +25,7 @@ import cupSpray from "@/assets/cup-spraypaint.webp";
 
 /** Prize money on the line, shown in the same gold spray-paint lettering as the Cup wordmark. */
 import Banknote from "@/components/cup/Banknote";
+import { CupSpectatorInvitation } from "@/components/cup/CupSoldOut";
 
 const PRIZES = [
   { amount: "1,000", label: "Cup winners", serial: "SNS No. 0417" },
@@ -68,30 +69,6 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
 /* -------------------------------------------------------------------------- */
 
 function CreateTeam() {
-  const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [captainName, setCaptainName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  /** Captain's €10 deposit, opened as soon as the team row exists. */
-  const [deposit, setDeposit] = useState<CheckoutInput | null>(null);
-  const [manageToken, setManageToken] = useState<string | null>(null);
-
-  // Nothing is saved until the captain's €10 goes through.
-  const create = {
-    isPending: false,
-    mutate: () =>
-      setDeposit({
-        mode: "new_team",
-        team_name: name,
-        full_name: captainName,
-        email,
-        phone,
-        signup_source: getSignupSource(),
-        returnUrl: `${window.location.origin}/cup?entry_paid=1`,
-      }),
-  };
-
   const eventFacts = [
     { icon: CalendarDays, label: "Date", value: "5 December" },
     { icon: Clock3, label: "Kick-off", value: "2pm until completion" },
@@ -146,44 +123,11 @@ function CreateTeam() {
           </div>
 
 
-          <form
-            id="register"
-            className="cup-register-form w-full min-w-0 max-w-xl scroll-mt-24 space-y-5 justify-self-center rounded-xl border border-border bg-card p-6 text-card-foreground shadow-refined md:p-8 lg:justify-self-end"
-            onSubmit={(e) => {
-              e.preventDefault();
-              create.mutate();
-            }}
-          >
-            <div className="font-cup-body">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Registration</p>
-              <h2 className="mt-1 font-cup-display text-3xl leading-tight text-foreground">Register your team</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Your captain creates the team and pays their own €10 as a deposit to hold the place. We then provide a private link to invite the remaining six players and arrange the rest of the payment.
-              </p>
-            </div>
-            <div className="space-y-2 font-cup-body">
-              <Label htmlFor="team-name">Team name</Label>
-              <Input id="team-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="For example, Shannonside Rovers" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="space-y-2 font-cup-body">
-                <Label htmlFor="captain-name">Captain name</Label>
-                <Input id="captain-name" value={captainName} onChange={(e) => setCaptainName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
-              </div>
-              <div className="space-y-2 font-cup-body">
-                <Label htmlFor="captain-phone">Captain phone</Label>
-                <Input id="captain-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
-              </div>
-            </div>
-            <div className="space-y-2 font-cup-body">
-              <Label htmlFor="captain-email">Captain email</Label>
-              <Input id="captain-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="We'll send the private team link here" required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
-            </div>
-            <p className="font-cup-body text-xs leading-relaxed text-muted-foreground">{PRIVACY_NOTE}</p>
-            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" disabled={create.isPending}>
-              {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team · pay your €10 deposit
-            </Button>
-          </form>
+          <div id="register" className="w-full max-w-xl justify-self-center text-primary-foreground lg:justify-self-end">
+            <CupSpectatorInvitation />
+            <p className="mt-6 font-cup-body text-lg font-semibold">5 December · Summerville Rovers FC Astro</p>
+            <p className="mt-2 font-cup-body text-sm text-primary-foreground/75">124 Ballinacurra Gardens, Ballinacurra Weston, Limerick, V94 R98D</p>
+          </div>
         </div>
       </section>
 
@@ -246,12 +190,7 @@ function CreateTeam() {
         </div>
       </section>
 
-      <CupCheckoutDialog
-        checkout={deposit}
-        onClose={() => {
-          setDeposit(null);
-        }}
-      />
+
     </div>
   );
 }

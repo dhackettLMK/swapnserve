@@ -76,7 +76,7 @@ const HeroSection = () => {
             className="mb-5 flex flex-col gap-3 sm:flex-row"
           >
             <Button variant="cta" size="lg" asChild className="min-w-[220px] rounded-lg">
-              <Link to="/cup?src=hero" aria-label="Sign Up to the Swap'n'Serve Cup">
+              <Link to="/cup?src=hero" aria-label="Cup sold out. Come down and watch">
                 <CupButtonBrand wordmarkClass="h-5" cupClass="h-7" />
               </Link>
             </Button>

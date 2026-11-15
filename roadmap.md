@@ -1,5 +1,10 @@
 # Roadmap
 
+## Sold-out Cup
+- [x] Mark Cup promotions and pages SOLD OUT and invite spectators for free food, local musicians and poets.
+- [x] Close new team checkouts without disrupting existing squads or paid sessions.
+- [x] Verify desktop/mobile notices and entry closure.
+
 ## Close individual Cup registration
 - [x] Remove the empty Free Agents team to leave one team place available.
 - [x] Remove individual registration and block new individual checkouts.

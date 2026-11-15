@@ -8,6 +8,8 @@ import cupWordmark from "@/assets/swapnserve-wordmark-cup.png";
 import wordmarkClean from "@/assets/swapnserve-wordmark-clean.png";
 
 import Banknote from "@/components/cup/Banknote";
+import { CupSoldOut } from "@/components/cup/CupSoldOut";
+import { CUP_SPECTATOR_INVITATION } from "@/content/cup";
 
 const PRIZES = [
   { amount: "1,000", label: "Cup winners", serial: "SNS No. 0417" },
@@ -349,14 +351,16 @@ export default function ProgrammesSection() {
           <motion.article initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex min-w-0 flex-col rounded-xl bg-primary p-6 text-primary-foreground md:p-10">
             <div className="mb-10 flex items-center justify-between border-b border-primary-foreground/20 pb-4 text-xs font-semibold">
               <span className="flex items-center gap-2"><Trophy size={16} /> 01 / Community football</span>
-              <span className="text-accent">Registration open</span>
+              <span className="text-accent">Spectators welcome</span>
             </div>
             <h3 className="sr-only">Swap'n'Serve Cup</h3>
             <div className="mb-8 w-fit">
               <img src={cupWordmark} alt="Swap'n'Serve" className="h-auto w-64 max-w-full" />
               <img src={cupSpray} alt="Cup" className="ml-auto h-16 w-auto" />
             </div>
+            <div className="mb-6"><CupSoldOut /></div>
             <p className="mb-5 max-w-3xl text-lg leading-relaxed text-primary-foreground/90">A 5-a-side community football tournament with €1,400 in prize money. Built to unite the city across every background and fund future Swap'N'Serve projects.</p>
+            <p className="mb-8 max-w-3xl text-lg leading-relaxed text-primary-foreground/90">{CUP_SPECTATOR_INVITATION}</p>
             <div className="mb-8 border-y border-primary-foreground/20 py-6">
               <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-accent">The prize money</p>
               <div className="grid gap-4 sm:grid-cols-3">
@@ -370,9 +374,9 @@ export default function ProgrammesSection() {
 
             <div className="mt-auto flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
               <div className="min-w-0">
-                <p className="mb-6 text-sm text-primary-foreground/75">€10 per team member · 7 team members required</p>
+                <p className="mb-6 text-sm text-primary-foreground/75">All team places filled. Spectators welcome.</p>
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild variant="secondary" size="lg"><Link to="/cup?src=programme-team">Register your team <ArrowRight /></Link></Button>
+                  <Button asChild variant="secondary" size="lg"><Link to="/cup?src=programme-team">Come down and watch <ArrowRight /></Link></Button>
                 </div>
                 <Link to="/cup/format" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/80 hover:text-primary-foreground">View the tournament <ArrowRight size={15} /></Link>
               </div>
