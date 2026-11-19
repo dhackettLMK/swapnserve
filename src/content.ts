@@ -1,4 +1,4 @@
-import cupPeopleImage from "@/assets/limerick-cup-people-v4.jpg";
+import cupPeopleImage from "@/assets/limerick-cup-people-v5.jpg";
 import { MISSION_SUMMARY } from "@/content/mission";
 import { CUP_SPECTATOR_INVITATION } from "@/content/cup";
 import ncubePhoto from "@/assets/press/mduduzi-valentino-ncube.jpg.asset.json";
