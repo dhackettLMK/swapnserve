@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Receipt, Share2, Trophy, Users } from "lucide-react";
+import { CalendarDays, Check, Clock3, Copy, Loader2, MapPin, Receipt, Share2, Trophy, UserPlus, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,7 +15,7 @@ import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
 import { CupAssistant } from "@/components/cup/CupAssistant";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
-import { captureSignupSource, getSignupSource } from "@/lib/signupSource";
+import { captureSignupSource, getSignupSource, setSignupSource } from "@/lib/signupSource";
 import type { Payment } from "@/lib/cupTypes";
 
 /** Each player's share of the €70 entry fee. */
@@ -60,6 +60,96 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
     >
       {copied ? <Check size={14} /> : <Copy size={14} />} {label}
     </Button>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Create a team                                                             */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*  Solo entry: placed at random into a mixed squad                           */
+/* -------------------------------------------------------------------------- */
+
+function SoloEntry() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [checkout, setCheckout] = useState<CheckoutInput | null>(null);
+
+  const startPayment = () =>
+    setCheckout({
+      mode: "solo",
+      full_name: fullName,
+      email,
+      phone,
+      signup_source: getSignupSource() ?? undefined,
+      returnUrl: `${window.location.origin}/cup?entry_paid=1`,
+    });
+
+  return (
+    <section id="solo" className="scroll-mt-24 border-b border-border bg-background py-14 md:py-20">
+      <CupCheckoutDialog checkout={checkout} onClose={() => setCheckout(null)} />
+      <div className="container grid items-center gap-10 font-cup-body lg:grid-cols-[1fr_0.9fr]">
+        <div>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
+            No team? No problem
+          </p>
+          <h2 className="font-cup-display text-3xl leading-tight text-foreground md:text-5xl">
+            Sign up on your own and make new friends
+          </h2>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Sign up as an individual and we put you into a mixed squad with other players who
+            entered on their own. You turn up, meet six new team mates, and play the full day
+            together. It is the easiest way to meet people in Limerick through football.
+          </p>
+          <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
+            {[
+              "Placed at random into a Free Agents squad of seven",
+              "Same €10 as everyone else, same two guaranteed games",
+              "We send your squad details and a group chat link before the day",
+            ].map((line) => (
+              <li key={line} className="flex items-start gap-3">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" />
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {(
+          <form
+            className="w-full min-w-0 space-y-5 rounded-xl border border-border bg-card p-6 shadow-refined md:p-8"
+            onSubmit={(e) => {
+              e.preventDefault();
+              startPayment();
+            }}
+          >
+            <h3 className="font-cup-display text-3xl leading-none text-foreground">
+              Join as an individual
+            </h3>
+            <div className="space-y-2">
+              <Label htmlFor="solo-name">Full name</Label>
+              <Input id="solo-name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="solo-phone">Phone</Label>
+              <Input id="solo-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="solo-email">Email</Label>
+              <Input id="solo-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-12 rounded-xl bg-background px-4 focus-visible:ring-ring" />
+            </div>
+            <p className="text-xs leading-relaxed text-muted-foreground">You are placed in a squad once your €10 is paid. {PRIVACY_NOTE}</p>
+            <Button type="submit" size="lg" className="cup-primary-cta h-13 w-full rounded-full bg-primary font-cup-body text-base font-bold text-primary-foreground hover:bg-primary/90" >
+              <UserPlus /> Pay €10 and join a squad
+            </Button>
+          </form>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -142,6 +232,13 @@ function CreateTeam() {
               >
                 View the tournament format
               </Link>
+              <a
+                href="#solo"
+                onClick={() => setSignupSource("cup-page-solo")}
+                className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 font-cup-body text-sm font-semibold text-accent transition-colors hover:bg-accent/20"
+              >
+                <UserPlus className="h-4 w-4" /> No team? Sign up on your own
+              </a>
             </div>
           </div>
 
@@ -233,6 +330,7 @@ function CreateTeam() {
         </div>
       </section>
 
+      <SoloEntry />
 
 
       <section className="bg-card py-14 md:py-20">
@@ -946,6 +1044,16 @@ const CupHome = () => {
   useEffect(() => {
     captureSignupSource();
   }, []);
+
+  // Deep links such as /cup#solo scroll straight to individual registration.
+  useEffect(() => {
+    if (manageToken || inviteToken) return;
+    if (window.location.hash !== "#solo") return;
+    const t = window.setTimeout(() => {
+      document.getElementById("solo")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+    return () => window.clearTimeout(t);
+  }, [manageToken, inviteToken]);
 
   const entryPaid = searchParams.get("entry_paid") === "1";
   const view = useMemo(() => {

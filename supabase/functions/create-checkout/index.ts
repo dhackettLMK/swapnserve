@@ -8,7 +8,6 @@
 // on the site — we return a clientSecret, never a redirect URL.
 import { json, preflight } from "../_shared/cors.ts";
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
-import { entryRegistrationError } from "../_shared/registration.ts";
 import { createStripeClient, type StripeEnv } from "../_shared/stripe.ts";
 import {
   PRICE_PER_PLAYER_CENTS,
@@ -26,8 +25,6 @@ Deno.serve(async (req) => {
     const body = await req.json().catch(() => ({}));
     const env: StripeEnv = body.environment === "live" ? "live" : "sandbox";
     const mode = clean(body.mode); // "full" | "player" | "shares"
-    const registrationError = entryRegistrationError(mode);
-    if (registrationError) return json({ error: registrationError }, 410);
     const shares = Math.max(1, Math.min(7, Math.floor(Number(body.shares) || 1)));
     const manageToken = clean(body.manage_token);
     const inviteToken = clean(body.invite_token);
@@ -81,7 +78,7 @@ Deno.serve(async (req) => {
 
     // Pay-first entries: nothing is saved until the €10 is paid. Details ride
     // on the session and the player (and team) are created on fulfilment.
-    if (mode === "new_team" || mode === "join") {
+    if (mode === "solo" || mode === "new_team" || mode === "join") {
       const fullName = clean(body.full_name).slice(0, 100);
       const email = clean(body.email).slice(0, 200);
       const phone = clean(body.phone).slice(0, 40);
