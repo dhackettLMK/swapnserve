@@ -4,7 +4,6 @@ import PressLayout from "@/components/press/PressLayout";
 import PressSeo from "@/components/press/PressSeo";
 import CopyButton from "@/components/press/CopyButton";
 import { CONTACT, CUP_EVENT } from "@/content";
-import { CupSpectatorInvitation } from "@/components/cup/CupSoldOut";
 
 const programmeIcons = [Trophy, Utensils, Music, Mic, Mic];
 
@@ -35,7 +34,6 @@ const PressCup = () => {
       <div className="mx-auto w-full max-w-3xl px-4 py-14 sm:px-6">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">The event</p>
         <h1 className="mt-3 font-press-serif text-4xl font-semibold tracking-tight md:text-6xl">{CUP_EVENT.name}</h1>
-        <div className="mt-8"><CupSpectatorInvitation /></div>
         <p className="mt-5 text-lg leading-relaxed text-foreground/85">
           {CUP_EVENT.what.charAt(0).toUpperCase() + CUP_EVENT.what.slice(1)}.
         </p>
@@ -65,7 +63,7 @@ const PressCup = () => {
           <div className="flex items-start gap-3">
             <Users className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
             <div>
-              <dt className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Spectators welcome</dt>
+              <dt className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Enter a team</dt>
               <dd className="text-base font-medium">{CUP_EVENT.enter}</dd>
             </div>
           </div>
@@ -97,11 +95,11 @@ const PressCup = () => {
               to="/cup"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Come down and watch <ArrowRight className="h-4 w-4" aria-hidden />
+              Enter a team <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
             <CopyButton
               label="Copy event details"
-              text={`${CUP_EVENT.name}: ${CUP_EVENT.what}. ${CUP_EVENT.date}, ${CUP_EVENT.where}. Prizes: ${CUP_EVENT.prizes}. ${CUP_EVENT.enter}. ${CUP_EVENT.media}.`}
+              text={`${CUP_EVENT.name}: ${CUP_EVENT.what}. ${CUP_EVENT.date}, ${CUP_EVENT.where}. Prizes: ${CUP_EVENT.prizes}. Enter a team: ${CUP_EVENT.enter}. ${CUP_EVENT.media}.`}
             />
           </div>
         </div>

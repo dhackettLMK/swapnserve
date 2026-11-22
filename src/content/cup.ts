@@ -1,1 +1,0 @@
-export const CUP_SPECTATOR_INVITATION = "Team places are sold out, but we'd love you to come down and watch! Join us for free food, live local musicians and poets, and cheer on the teams.";

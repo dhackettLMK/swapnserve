@@ -4,7 +4,6 @@ import logo from "@/assets/logo.png";
 import cupSpray from "@/assets/cup-spraypaint.webp";
 import SiteFooter from "@/components/SiteFooter";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
-import { CupSpectatorInvitation } from "./CupSoldOut";
 
 /** Shared shell for the Cup pages with a native header, footer and back-to-site link. */
 const CupLayout = ({ children }: { children: React.ReactNode }) => {
@@ -30,7 +29,7 @@ const CupLayout = ({ children }: { children: React.ReactNode }) => {
               to="/cup"
               className="rounded-full px-2.5 py-2 transition-colors hover:bg-primary-foreground/10 sm:px-3"
             >
-              Come watch
+              Register
             </Link>
             <Link
               to="/cup/format"
@@ -47,10 +46,7 @@ const CupLayout = ({ children }: { children: React.ReactNode }) => {
           </nav>
         </div>
       </header>
-      <main className="flex-1">
-        <section className="border-b border-border bg-background py-8 text-foreground"><div className="container"><CupSpectatorInvitation /></div></section>
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>
   );

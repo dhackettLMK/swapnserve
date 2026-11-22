@@ -502,7 +502,7 @@ const CupFormat = () => {
             to="/cup#register"
             className="cup-primary-cta mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-cup-body text-sm font-bold uppercase tracking-[0.14em] text-accent-foreground"
           >
-            Come down and watch <ArrowRight size={16} />
+            Register your team <ArrowRight size={16} />
           </Link>
         </div>
       </section>

@@ -246,7 +246,7 @@ const PressHome = () => {
                 </Link>
                 <CopyButton
                   label="Copy event summary"
-                  text={`${CUP_EVENT.name}: ${CUP_EVENT.what}. ${CUP_EVENT.date}, ${CUP_EVENT.where}. Prizes: ${CUP_EVENT.prizes}. ${CUP_EVENT.enter}. ${CUP_EVENT.media}.`}
+                  text={`${CUP_EVENT.name}: ${CUP_EVENT.what}. ${CUP_EVENT.date}, ${CUP_EVENT.where}. Prizes: ${CUP_EVENT.prizes}. Enter a team: ${CUP_EVENT.enter}. ${CUP_EVENT.media}.`}
                 />
               </div>
             </div>
