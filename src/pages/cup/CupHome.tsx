@@ -121,7 +121,6 @@ function SoloEntry() {
           </ul>
         </div>
 
-        {(
           {capacity?.free_agents_full ? (
             <CupWaitlist />
           ) : (
@@ -153,7 +152,6 @@ function SoloEntry() {
             </Button>
           </form>
           )}
-        )}
       </div>
     </section>
   );
