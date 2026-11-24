@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      cup_waitlist: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          team_name: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          team_name?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          team_name?: string
+        }
+        Relationships: []
+      }
       entry_claims: {
         Row: {
           created_at: string

@@ -13,6 +13,7 @@ import { KitDot, StatusBadge, ConfigNotice } from "@/components/cup/CupUi";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { cupApi, type CheckoutInput } from "@/lib/cupApi";
 import { CupCheckoutDialog } from "@/components/cup/CupCheckoutDialog";
+import { CupWaitlist } from "@/components/cup/CupWaitlist";
 import { CupAssistant } from "@/components/cup/CupAssistant";
 import { formatEuros, TEAM_PRICE_CENTS } from "@/lib/teamStatus";
 import { captureSignupSource, getSignupSource, setSignupSource } from "@/lib/signupSource";
@@ -72,6 +73,7 @@ function CopyButton({ value, label = "Copy" }: { value: string; label?: string }
 /* -------------------------------------------------------------------------- */
 
 function SoloEntry() {
+  const { data: capacity } = useQuery({ queryKey: ["cup-capacity"], queryFn: cupApi.capacity, enabled: isSupabaseConfigured });
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [fullName, setFullName] = useState("");
@@ -120,6 +122,9 @@ function SoloEntry() {
         </div>
 
         {(
+          {capacity?.free_agents_full ? (
+            <CupWaitlist />
+          ) : (
           <form
             className="w-full min-w-0 space-y-5 rounded-xl border border-border bg-card p-6 shadow-refined md:p-8"
             onSubmit={(e) => {
@@ -147,6 +152,7 @@ function SoloEntry() {
               <UserPlus /> Pay €10 and join a squad
             </Button>
           </form>
+          )}
         )}
       </div>
     </section>
@@ -158,6 +164,7 @@ function SoloEntry() {
 /* -------------------------------------------------------------------------- */
 
 function CreateTeam() {
+  const { data: capacity } = useQuery({ queryKey: ["cup-capacity"], queryFn: cupApi.capacity, enabled: isSupabaseConfigured });
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [captainName, setCaptainName] = useState("");
@@ -243,6 +250,9 @@ function CreateTeam() {
           </div>
 
 
+          {capacity?.teams_full ? (
+            <CupWaitlist id="register" className="justify-self-center lg:justify-self-end" />
+          ) : (
           <form
             id="register"
             className="cup-register-form w-full min-w-0 max-w-xl scroll-mt-24 space-y-5 justify-self-center rounded-xl border border-border bg-card p-6 text-card-foreground shadow-refined md:p-8 lg:justify-self-end"
@@ -281,6 +291,7 @@ function CreateTeam() {
               {create.isPending ? <Loader2 className="animate-spin" /> : <Trophy />} Create team · pay your €10 deposit
             </Button>
           </form>
+          )}
         </div>
       </section>
 

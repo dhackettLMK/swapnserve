@@ -10,6 +10,7 @@ import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
 import { generateToken } from "../_shared/tokens.ts";
 import { recomputeTeamStatus } from "../_shared/recompute.ts";
 import { summariseTeam } from "../_shared/teamStatus.ts";
+import { getCapacity } from "../_shared/capacity.ts";
 
 const KIT_COLOURS = ["Blue", "Red", "Green", "Black", "White", "Yellow"];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,6 +43,23 @@ Deno.serve(async (req) => {
     const body = await req.json().catch(() => ({}));
     const action = clean(body.action);
     const supabase = supabaseAdmin();
+
+    if (action === "capacity") {
+      return json(await getCapacity(supabase));
+    }
+
+    if (action === "waitlist") {
+      const fullName = clean(body.full_name).slice(0, 100);
+      const email = clean(body.email).slice(0, 200).toLowerCase();
+      const phone = clean(body.phone).slice(0, 40);
+      const teamName = clean(body.team_name).slice(0, 60);
+      if (fullName.length < 2) return json({ error: "Enter your full name." }, 400);
+      if (!EMAIL_RE.test(email)) return json({ error: "Enter a valid email." }, 400);
+      if (phone.length < 5) return json({ error: "Enter a valid phone number." }, 400);
+      const { error } = await supabase.from("cup_waitlist").insert({ full_name: fullName, email, phone, team_name: teamName });
+      if (error && error.code !== "23505") throw error;
+      return json({ ok: true });
+    }
 
     if (action === "create") {
       // Teams are only created once the captain's €10 is paid (create-checkout "new_team").

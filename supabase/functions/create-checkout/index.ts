@@ -19,6 +19,7 @@ function clean(v: unknown): string {
   return typeof v === "string" ? v.trim() : "";
 }
 
+import { getCapacity } from "../_shared/capacity.ts";
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return preflight();
   try {
@@ -95,11 +96,13 @@ Deno.serve(async (req) => {
       };
       let productName = "Swap'n'Serve Cup - individual entry";
 
+      if (mode === "solo" && (await getCapacity(supabase)).free_agents_full) {
+        return json({ error: "The Swap'N'Serve Cup is full. Please join the waiting list." }, 410);
+      }
       if (mode === "new_team") {
         const teamName = clean(body.team_name).slice(0, 60);
         if (teamName.length < 2) return json({ error: "Team name is too short." }, 400);
-        const { count: teamCount } = await supabase.from("teams").select("id", { count: "exact", head: true });
-        if ((teamCount ?? 0) >= 32) return json({ error: "The Swap'N'Serve Cup is full. All 32 team places are taken." }, 410);
+        if ((await getCapacity(supabase)).teams_full) return json({ error: "The Swap'N'Serve Cup is full. All 32 team places are taken." }, 410);
         const { data: taken } = await supabase.from("teams").select("id").eq("name", teamName).maybeSingle();
         if (taken) return json({ error: "That team name is already taken." }, 409);
         metadata.team_name = teamName;

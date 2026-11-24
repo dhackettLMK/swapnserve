@@ -69,6 +69,10 @@ async function invoke<T>(
 }
 
 export const cupApi = {
+  capacity: () =>
+    invoke<{ teams: number; teams_full: boolean; free_agents_full: boolean }>("team", { action: "capacity" }),
+  joinWaitlist: (input: { full_name: string; email: string; phone: string; team_name?: string }) =>
+    invoke<{ ok: true }>("team", { action: "waitlist", ...input }),
   createTeam: (input: {
     name: string;
     kit_colour: string;
