@@ -154,7 +154,23 @@ export const cupApi = {
         { action: "money", environment: getStripeEnvironment() },
         { "x-admin-token": token },
       ),
+    volunteers: (token: string) =>
+      invoke<VolunteersResponse>("admin", { action: "volunteers" }, { "x-admin-token": token }),
     reset: (token: string) =>
       invoke<{ ok: true }>("admin", { action: "reset" }, { "x-admin-token": token }),
   },
 };
+
+export interface VolunteerApplication {
+  id: string; full_name: string; email: string; phone: string; age_group: string;
+  roles: string[]; availability: string[]; skills: string; garda_vetting: string;
+  referral: string; created_at: string;
+}
+export interface VolunteerProposal {
+  id: string; full_name: string; email: string; phone: string; age_group: string;
+  skills: string; proposal: string; created_at: string;
+}
+export interface VolunteersResponse {
+  applications: VolunteerApplication[];
+  proposals: VolunteerProposal[];
+}

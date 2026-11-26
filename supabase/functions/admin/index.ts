@@ -112,6 +112,15 @@ Deno.serve(async (req) => {
       });
     }
 
+    // ---------------------------------------------------------- volunteers
+    if (action === "volunteers") {
+      const { data: applications } = await supabase
+        .from("volunteer_submissions").select("*").order("created_at", { ascending: false });
+      const { data: proposals } = await supabase
+        .from("volunteer_proposals").select("*").order("created_at", { ascending: false });
+      return json({ applications: applications ?? [], proposals: proposals ?? [] });
+    }
+
     // ---------------------------------------------------------------- list
     if (action === "list") {
       const { data: teams } = await supabase.from("teams").select("*").order("created_at");
